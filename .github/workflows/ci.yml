@@ -1,0 +1,159 @@
+name: CI — Test + Eval Gate
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ── Job 1: Lint + Format ───────────────────────────────────────────────────
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install linting deps
+        run: pip install black ruff
+
+      - name: Run black
+        run: black --check .
+
+      - name: Run ruff
+        run: ruff check .
+
+  # ── Job 2: Unit + Integration Tests ────────────────────────────────────────
+  test:
+    name: Unit & Integration Tests
+    runs-on: ubuntu-latest
+    needs: lint
+
+    services:
+      qdrant:
+        image: qdrant/qdrant:v1.11.3
+        ports:
+          - 6333:6333
+        options: >-
+          --health-cmd "curl -f http://localhost:6333/healthz"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 3s
+          --health-retries 5
+
+    env:
+      QDRANT_URL: http://localhost:6333
+      REDIS_URL: redis://localhost:6379
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      LLM_MODEL: llama-3.1-70b-versatile
+      LLM_PROVIDER: groq
+      EMBEDDING_MODEL: sentence-transformers/all-MiniLM-L6-v2
+      ENVIRONMENT: ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m spacy download en_core_web_lg
+
+      - name: Run unit + integration tests
+        run: pytest tests/unit tests/integration -v --cov=. --cov-report=xml
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4
+        with:
+          file: coverage.xml
+
+  # ── Job 3: RAG Eval Gate ────────────────────────────────────────────────────
+  eval:
+    name: RAG Evaluation Gate
+    runs-on: ubuntu-latest
+    needs: test
+    # Only run on PRs to main to save API costs
+    if: github.event_name == 'pull_request' && github.base_ref == 'main'
+
+    services:
+      qdrant:
+        image: qdrant/qdrant:v1.11.3
+        ports:
+          - 6333:6333
+        options: >-
+          --health-cmd "curl -f http://localhost:6333/healthz"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis:7.4-alpine
+        ports:
+          - 6379:6379
+
+    env:
+      QDRANT_URL: http://localhost:6333
+      REDIS_URL: redis://localhost:6379
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      LANGFUSE_PUBLIC_KEY: ${{ secrets.LANGFUSE_PUBLIC_KEY }}
+      LANGFUSE_SECRET_KEY: ${{ secrets.LANGFUSE_SECRET_KEY }}
+      DEEPEVAL_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+      FAITHFULNESS_THRESHOLD: "0.75"
+      CONTEXTUAL_PRECISION_THRESHOLD: "0.70"
+      ANSWER_RELEVANCY_THRESHOLD: "0.75"
+      EMBEDDING_MODEL: sentence-transformers/all-MiniLM-L6-v2
+      ENVIRONMENT: ci
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          python -m spacy download en_core_web_lg
+
+      - name: Load golden dataset into Qdrant
+        run: python scripts/ingest.py --sample-only
+
+      - name: Run DeepEval RAG quality gate
+        run: deepeval test run tests/eval/test_rag_quality.py -v
+
+      - name: Upload eval results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results-${{ github.sha }}
+          path: eval_results.json
