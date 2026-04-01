@@ -64,7 +64,7 @@ def _get_bm25_index():
             for r in records
         ]
         tokenized = [doc["text"].lower().split() for doc in _bm25_corpus]
-        _bm25_index = BM25Okapi(tokenized)
+        _bm25_index = BM25Okapi(tokenized) if tokenized else None
         logger.info(f"BM25 index built with {len(_bm25_corpus)} documents")
     return _bm25_index, _bm25_corpus
 
@@ -81,13 +81,16 @@ async def hybrid_search(query: str, top_k: int = 20) -> list[dict]:
 
     # BM25 retrieval
     bm25, corpus = _get_bm25_index()
-    tokenized_query = query.lower().split()
-    bm25_scores = bm25.get_scores(tokenized_query)
-    top_bm25_indices = np.argsort(bm25_scores)[::-1][:top_k]
-    bm25_results = [
-        {**corpus[i], "score": float(bm25_scores[i])}
-        for i in top_bm25_indices
-    ]
+    if bm25 is not None and corpus:
+        tokenized_query = query.lower().split()
+        bm25_scores = bm25.get_scores(tokenized_query)
+        top_bm25_indices = np.argsort(bm25_scores)[::-1][:top_k]
+        bm25_results = [
+            {**corpus[i], "score": float(bm25_scores[i])}
+            for i in top_bm25_indices
+        ]
+    else:
+        bm25_results = []
 
     # RRF fusion
     fused = reciprocal_rank_fusion([dense_results, bm25_results])
