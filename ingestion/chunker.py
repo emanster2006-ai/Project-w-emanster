@@ -16,7 +16,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Chunk sizes: parent → child → grandchild
-CHUNK_SIZES = [2048, 512, 128]
+CHUNK_SIZES = [2048, 512, 256]
 
 
 def build_hierarchical_parser() -> HierarchicalNodeParser:

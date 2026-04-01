@@ -5,7 +5,6 @@ Downloads from HuggingFace hub, parses PDF SEC filings, injects metadata.
 
 from datasets import load_dataset
 from llama_index.core import Document
-from unstructured.partition.pdf import partition_pdf
 import os
 import tempfile
 import logging
@@ -34,16 +33,19 @@ def load_financebench(limit: int | None = None) -> tuple[list[Document], list[di
         # Build metadata payload — injected into every chunk
         metadata = {
             "company": row.get("company"),
-            "ticker": row.get("ticker"),
-            "year": str(row.get("fiscal_year", "")),
+            "year": str(row.get("doc_period", "")),
             "filing_type": row.get("doc_type", "10-K"),
             "question": row.get("question"),        # for golden dataset
             "answer": row.get("answer"),
             "source": row.get("doc_name", ""),
         }
 
-        doc_text = row.get("evidence_text") or row.get("page_text") or ""
-        if not doc_text.strip():
+        # evidence is a list of dicts with evidence_text key
+        evidence_list = row.get("evidence") or []
+        doc_text = " ".join(
+            e.get("evidence_text", "") for e in evidence_list if e.get("evidence_text")
+        ).strip()
+        if not doc_text:
             continue
 
         doc = Document(text=doc_text, metadata=metadata)
