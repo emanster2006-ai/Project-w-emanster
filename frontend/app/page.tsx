@@ -1,4 +1,6 @@
 import QueryInterface from "./components/QueryInterface";
+import StatusBadge from "./components/StatusBadge";
+import { Suspense } from "react";
 
 export default function Home() {
   return (
@@ -26,7 +28,9 @@ export default function Home() {
           </span>
         </div>
         <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-muted)" }}>
-          <span>HyDE + RRF + CrossEncoder</span>
+          <Suspense fallback={null}>
+            <StatusBadge />
+          </Suspense>
           <a
             href="https://github.com/ErikEllis-git/Project-w-emanster"
             target="_blank"
