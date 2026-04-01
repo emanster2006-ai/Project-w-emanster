@@ -33,7 +33,7 @@ def anonymize(text: str) -> tuple[str, dict]:
     """
     analyzer, anonymizer = _get_engines()
 
-    results = analyzer.analyze(text=text, language="en")
+    results = analyzer.analyze(text=text, language="en", score_threshold=0.4)
     if not results:
         return text, {}
 
