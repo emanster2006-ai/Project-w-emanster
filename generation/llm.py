@@ -26,7 +26,10 @@ def get_llm_client():
         if provider == "groq":
             _client = Groq(api_key=os.getenv("GROQ_API_KEY"))
         else:
-            _client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+            _client = OpenAI(
+                api_key=os.getenv("OPENAI_API_KEY"),
+                base_url=os.getenv("OPENAI_BASE_URL") or None,
+            )
         logger.info(f"LLM client initialized: {provider}")
     return _client
 
@@ -57,7 +60,7 @@ async def generate_answer(question: str, context_chunks: list[dict]) -> str:
     if provider == "groq":
         client = instructor.from_groq(raw_client, mode=instructor.Mode.JSON)
     else:
-        client = instructor.from_openai(raw_client)
+        client = instructor.from_openai(raw_client, mode=instructor.Mode.JSON)
 
     response = client.chat.completions.create(
         model=os.getenv("LLM_MODEL", "llama-3.1-70b-versatile"),

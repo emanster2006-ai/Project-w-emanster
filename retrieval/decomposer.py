@@ -26,7 +26,11 @@ async def decompose_query(question: str) -> list[str] | None:
     Returns list of sub-questions, or None if question is already atomic.
     """
     raw_client = get_llm_client()
-    client = instructor.from_groq(raw_client)  # or instructor.from_openai()
+    provider = os.getenv("LLM_PROVIDER", "groq")
+    if provider == "groq":
+        client = instructor.from_groq(raw_client, mode=instructor.Mode.JSON)
+    else:
+        client = instructor.from_openai(raw_client, mode=instructor.Mode.JSON)
 
     result = client.chat.completions.create(
         model=os.getenv("LLM_MODEL", "llama-3.1-70b-versatile"),
