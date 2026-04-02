@@ -16,7 +16,7 @@ async function fetchHealth(): Promise<HealthData | null> {
       process.env.NEXT_PUBLIC_API_URL
         ? `${process.env.NEXT_PUBLIC_API_URL}/health`
         : "http://localhost:8000/health",
-      { next: { revalidate: 30 }, signal: AbortSignal.timeout(3000) }
+      { cache: "no-store", signal: AbortSignal.timeout(3000) }
     );
     if (!res.ok) return null;
     return res.json();
