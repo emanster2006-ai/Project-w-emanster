@@ -1,15 +1,11 @@
 """
 FinanceBench document loader.
-Downloads from HuggingFace hub, parses PDF SEC filings, injects metadata.
+Downloads FinanceBench rows from HuggingFace and injects metadata.
 """
 
 from datasets import load_dataset
 from llama_index.core import Document
-from unstructured.partition.pdf import partition_pdf
-import os
-import tempfile
 import logging
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 

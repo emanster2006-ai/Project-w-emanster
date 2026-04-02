@@ -39,7 +39,6 @@ scipy==1.14.1               # bootstrapping for A/B tests
 langfuse==2.53.0
 
 # ── Ingestion ─────────────────────────────────────────────────────────────────
-unstructured[pdf,local-inference]==0.15.13
 huggingface-hub==0.25.2
 datasets==3.0.1             # for FinanceBench download
 
