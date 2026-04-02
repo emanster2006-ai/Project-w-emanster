@@ -11,11 +11,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
-
-# Download spacy model for presidio NER
-RUN /install/bin/python -m spacy download en_core_web_lg
+COPY requirements-runtime.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements-runtime.txt
 
 # ── Stage 2: Runtime ────────────────────────────────────────────────────────
 FROM python:3.11-slim AS runtime
