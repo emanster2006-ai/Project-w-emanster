@@ -1,11 +1,14 @@
 """Unit tests for hierarchical chunker."""
-import pytest
+
 from llama_index.core import Document
-from ingestion.chunker import chunk_documents, inject_metadata
+
+from ingestion.chunker import chunk_documents
 
 
 def test_chunker_produces_nodes():
-    docs = [Document(text="Apple Inc. reported revenue of $394 billion in FY2022. " * 50)]
+    docs = [
+        Document(text="Apple Inc. reported revenue of $394 billion in FY2022. " * 50)
+    ]
     nodes = chunk_documents(docs)
     assert len(nodes) > 0
 

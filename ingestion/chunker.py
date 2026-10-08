@@ -3,15 +3,15 @@ Hierarchical chunking for SEC 10-K filings.
 Standard character-overlap chunking shreds financial tables — this doesn't.
 """
 
+import logging
+import re
+from typing import Any
+
+from llama_index.core import Document
 from llama_index.core.node_parser import (
     HierarchicalNodeParser,
-    SentenceSplitter,
 )
-from llama_index.core import Document
 from llama_index.core.schema import BaseNode
-from typing import Any
-import re
-import logging
 
 logger = logging.getLogger(__name__)
 

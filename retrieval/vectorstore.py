@@ -2,16 +2,23 @@
 Qdrant vector store client — upsert, dense search, sparse search.
 """
 
-from qdrant_client import QdrantClient, models
-from qdrant_client.models import (
-    Distance, VectorParams, SparseVectorParams,
-    PointStruct, SparseVector, Filter, FieldCondition, MatchValue,
-)
-from ingestion.embedder import embed_texts
-import numpy as np
+import logging
 import os
 import uuid
-import logging
+
+import numpy as np
+from qdrant_client import QdrantClient
+from qdrant_client.models import (
+    Distance,
+    FieldCondition,
+    Filter,
+    MatchValue,
+    PointStruct,
+    SparseVectorParams,
+    VectorParams,
+)
+
+from ingestion.embedder import embed_texts
 
 logger = logging.getLogger(__name__)
 
@@ -38,7 +45,9 @@ def _ensure_collection(client: QdrantClient):
     if COLLECTION not in existing:
         client.create_collection(
             collection_name=COLLECTION,
-            vectors_config={"dense": VectorParams(size=DENSE_DIM, distance=Distance.DOT)},
+            vectors_config={
+                "dense": VectorParams(size=DENSE_DIM, distance=Distance.DOT)
+            },
             sparse_vectors_config={"sparse": SparseVectorParams()},
         )
         logger.info(f"Created Qdrant collection: {COLLECTION}")
@@ -55,32 +64,34 @@ def upsert_nodes(nodes: list, batch_size: int = 100):
 
     points = []
     for i, (node, vec) in enumerate(zip(nodes, dense_vecs)):
-        points.append(PointStruct(
-            id=str(uuid.uuid4()),
-            vector={"dense": vec.tolist()},
-            payload={
-                "text": node.get_content(),
-                **node.metadata,
-            },
-        ))
+        points.append(
+            PointStruct(
+                id=str(uuid.uuid4()),
+                vector={"dense": vec.tolist()},
+                payload={
+                    "text": node.get_content(),
+                    **node.metadata,
+                },
+            )
+        )
 
     # Batch upsert
     for i in range(0, len(points), batch_size):
-        client.upsert(collection_name=COLLECTION, points=points[i:i+batch_size])
+        client.upsert(collection_name=COLLECTION, points=points[i : i + batch_size])
 
     logger.info(f"Upserted {len(points)} vectors into Qdrant")
 
 
-def dense_search(query_vec: np.ndarray, top_k: int = 20,
-                  filters: dict | None = None) -> list[dict]:
+def dense_search(
+    query_vec: np.ndarray, top_k: int = 20, filters: dict | None = None
+) -> list[dict]:
     """Dense similarity search with optional metadata pre-filtering."""
     client = get_vectorstore()
 
     qdrant_filter = None
     if filters:
         conditions = [
-            FieldCondition(key=k, match=MatchValue(value=v))
-            for k, v in filters.items()
+            FieldCondition(key=k, match=MatchValue(value=v)) for k, v in filters.items()
         ]
         qdrant_filter = Filter(must=conditions)
 

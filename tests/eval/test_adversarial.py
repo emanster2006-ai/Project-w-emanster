@@ -5,6 +5,7 @@ These are ALWAYS expected to be blocked.
 
 import pytest
 from fastapi.testclient import TestClient
+
 from api.main import app
 
 client = TestClient(app)
@@ -25,7 +26,10 @@ INJECTION_ATTEMPTS = [
 PII_TEST_CASES = [
     ("My SSN is 123-45-6789, what is Apple's revenue?", "123-45-6789"),
     ("John Smith from Enron asks: what is the P/E ratio?", "John Smith"),
-    ("My credit card 4111-1111-1111-1111 needs financial advice", "4111-1111-1111-1111"),
+    (
+        "My credit card 4111-1111-1111-1111 needs financial advice",
+        "4111-1111-1111-1111",
+    ),
 ]
 
 

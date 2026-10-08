@@ -4,17 +4,20 @@ Complex financial questions (e.g., "Compare Apple and Microsoft R&D spend 2021 v
 require multiple retrievals. This breaks them into atomic sub-questions.
 """
 
+import logging
+import os
+
 import instructor
 from pydantic import BaseModel, Field
+
 from generation.llm import get_llm_client
-import os
-import logging
 
 logger = logging.getLogger(__name__)
 
 
 class DecomposedQuery(BaseModel):
     """Structured output enforced by instructor."""
+
     needs_decomposition: bool
     sub_questions: list[str] = Field(default_factory=list, max_length=4)
     reasoning: str = Field(default="")

@@ -3,17 +3,19 @@ SecurityMiddleware — input validation, PII sanitization, injection detection.
 Runs BEFORE the request hits any route handler.
 """
 
+import json
+import logging
+import os
+
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import JSONResponse
+
 from security.input_guard import is_injection_attempt
 from security.pii_handler import anonymize
-import json
-import os
-import logging
 
 logger = logging.getLogger(__name__)
-MAX_QUERY_LENGTH = int(os.getenv("MAX_QUERY_LENGTH", 2000))
+MAX_QUERY_LENGTH = int(os.getenv("MAX_QUERY_LENGTH", "2000"))
 
 
 class SecurityMiddleware(BaseHTTPMiddleware):
@@ -28,12 +30,16 @@ class SecurityMiddleware(BaseHTTPMiddleware):
                 if len(question) > MAX_QUERY_LENGTH:
                     return JSONResponse(
                         status_code=400,
-                        content={"detail": f"Query exceeds max length of {MAX_QUERY_LENGTH} chars."},
+                        content={
+                            "detail": f"Query exceeds max length of {MAX_QUERY_LENGTH} chars."
+                        },
                     )
 
                 # ── Prompt injection detection ─────────────────────────────
                 if is_injection_attempt(question):
-                    logger.warning(f"Prompt injection attempt blocked: {question[:100]}")
+                    logger.warning(
+                        f"Prompt injection attempt blocked: {question[:100]}"
+                    )
                     return JSONResponse(
                         status_code=400,
                         content={"detail": "Query contains disallowed patterns."},
@@ -49,6 +55,7 @@ class SecurityMiddleware(BaseHTTPMiddleware):
                 # Re-inject modified body
                 async def receive():
                     return {"type": "http.request", "body": json.dumps(body).encode()}
+
                 request._receive = receive
 
             except (json.JSONDecodeError, KeyError):

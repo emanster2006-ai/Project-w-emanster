@@ -4,12 +4,14 @@ This is what production RAG systems actually use.
 Reciprocal Rank Fusion (RRF) formula: score = sum(1 / (k + rank_i)) where k=60
 """
 
-from retrieval.vectorstore import dense_search, get_vectorstore
-from ingestion.embedder import embed_texts
-from rank_bm25 import BM25Okapi
-import numpy as np
-import os
 import logging
+import os
+
+import numpy as np
+from rank_bm25 import BM25Okapi
+
+from ingestion.embedder import embed_texts
+from retrieval.vectorstore import dense_search, get_vectorstore
 
 logger = logging.getLogger(__name__)
 
@@ -33,10 +35,7 @@ def reciprocal_rank_fusion(
             items[key] = item
 
     sorted_keys = sorted(scores, key=lambda k: scores[k], reverse=True)
-    return [
-        {**items[key], "score": scores[key]}
-        for key in sorted_keys
-    ]
+    return [{**items[key], "score": scores[key]} for key in sorted_keys]
 
 
 # Module-level BM25 index (rebuilt on first call, then cached)
@@ -60,8 +59,7 @@ def _get_bm25_index():
             with_vectors=False,
         )
         _bm25_corpus = [
-            {"text": r.payload.get("text", ""), "metadata": r.payload}
-            for r in records
+            {"text": r.payload.get("text", ""), "metadata": r.payload} for r in records
         ]
         tokenized = [doc["text"].lower().split() for doc in _bm25_corpus]
         _bm25_index = BM25Okapi(tokenized) if tokenized else None
@@ -86,8 +84,7 @@ async def hybrid_search(query: str, top_k: int = 20) -> list[dict]:
         bm25_scores = bm25.get_scores(tokenized_query)
         top_bm25_indices = np.argsort(bm25_scores)[::-1][:top_k]
         bm25_results = [
-            {**corpus[i], "score": float(bm25_scores[i])}
-            for i in top_bm25_indices
+            {**corpus[i], "score": float(bm25_scores[i])} for i in top_bm25_indices
         ]
     else:
         bm25_results = []

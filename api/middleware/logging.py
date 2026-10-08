@@ -1,9 +1,11 @@
 """Structured JSON request logging middleware."""
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.requests import Request
+
+import json
 import logging
 import time
-import json
+
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(message)s")
