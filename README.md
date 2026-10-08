@@ -3,9 +3,11 @@
 **Evaluation-first RAG platform with OWASP LLM security guardrails.**  
 Answers complex multi-hop financial questions from SEC 10-K filings with measurably better accuracy than naive RAG.
 
-[![CI](https://github.com/ErikEllis-git/Project-w-emanster/actions/workflows/ci.yml/badge.svg)](https://github.com/ErikEllis-git/Project-w-emanster/actions/workflows/ci.yml)
+[![CI](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml/badge.svg)](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+> **Status:** The backend, security guardrails, and evaluation framework are on `main`. The Next.js frontend lives on the `feat/frontend` branch. A/B benchmark numbers below are populated by running `make ab-test`.
 
 ---
 
@@ -73,7 +75,7 @@ User Query
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/ErikEllis-git/Project-w-emanster.git
+git clone https://github.com/emanster2006-ai/Project-w-emanster.git
 cd Project-w-emanster
 make setup                   # install deps + spaCy model
 cp .env.example .env         # add your API keys (Groq is free)
