@@ -13,14 +13,13 @@ import json
 import logging
 import os
 import time
-from dataclasses import dataclass, field, asdict
+from dataclasses import asdict, dataclass, field
 from pathlib import Path
 
 from deepeval.metrics import (
-    FaithfulnessMetric,
-    ContextualPrecisionMetric,
-    ContextualRecallMetric,
     AnswerRelevancyMetric,
+    ContextualPrecisionMetric,
+    FaithfulnessMetric,
 )
 from deepeval.test_case import LLMTestCase
 
@@ -30,9 +29,9 @@ GOLDEN_DATASET_PATH = Path("evaluation/golden_dataset.json")
 RESULTS_PATH = Path("evaluation/eval_results.json")
 
 JUDGE_MODEL = os.getenv("EVAL_JUDGE_MODEL", "gpt-4o-mini")
-FAITHFULNESS_THRESHOLD = float(os.getenv("FAITHFULNESS_THRESHOLD", 0.75))
-PRECISION_THRESHOLD = float(os.getenv("CONTEXTUAL_PRECISION_THRESHOLD", 0.70))
-RELEVANCY_THRESHOLD = float(os.getenv("ANSWER_RELEVANCY_THRESHOLD", 0.75))
+FAITHFULNESS_THRESHOLD = float(os.getenv("FAITHFULNESS_THRESHOLD", "0.75"))
+PRECISION_THRESHOLD = float(os.getenv("CONTEXTUAL_PRECISION_THRESHOLD", "0.70"))
+RELEVANCY_THRESHOLD = float(os.getenv("ANSWER_RELEVANCY_THRESHOLD", "0.75"))
 
 
 @dataclass
@@ -61,9 +60,15 @@ class HarnessResult:
 class EvalHarness:
     def __init__(self):
         self.metrics = [
-            FaithfulnessMetric(threshold=FAITHFULNESS_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
-            ContextualPrecisionMetric(threshold=PRECISION_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
-            AnswerRelevancyMetric(threshold=RELEVANCY_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
+            FaithfulnessMetric(
+                threshold=FAITHFULNESS_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
+            ContextualPrecisionMetric(
+                threshold=PRECISION_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
+            AnswerRelevancyMetric(
+                threshold=RELEVANCY_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
         ]
 
     def _load_golden(self, n: int) -> list[dict]:
@@ -77,10 +82,10 @@ class EvalHarness:
 
     def _run_pipeline(self, question: str) -> tuple[str, list[dict], float]:
         """Run the full RAG pipeline synchronously for eval."""
-        from retrieval.hybrid import hybrid_search
-        from retrieval.reranker import rerank
-        from retrieval.hyde import generate_hypothetical_doc
         from generation.llm import generate_answer
+        from retrieval.hybrid import hybrid_search
+        from retrieval.hyde import generate_hypothetical_doc
+        from retrieval.reranker import rerank
 
         start = time.time()
 
@@ -127,33 +132,42 @@ class EvalHarness:
                     and r_metric.score >= RELEVANCY_THRESHOLD
                 )
 
-                question_results.append(QuestionResult(
-                    question=question,
-                    answer=answer,
-                    expected_answer=expected,
-                    retrieval_context=context_texts,
-                    faithfulness=f_metric.score,
-                    contextual_precision=p_metric.score,
-                    answer_relevancy=r_metric.score,
-                    latency_ms=latency_ms,
-                    passed=passed,
-                ))
+                question_results.append(
+                    QuestionResult(
+                        question=question,
+                        answer=answer,
+                        expected_answer=expected,
+                        retrieval_context=context_texts,
+                        faithfulness=f_metric.score,
+                        contextual_precision=p_metric.score,
+                        answer_relevancy=r_metric.score,
+                        latency_ms=latency_ms,
+                        passed=passed,
+                    )
+                )
 
-            except Exception as e:
+            except Exception as e:  # noqa: BLE001
                 logger.error(f"Failed on question {i+1}: {e}")
-                question_results.append(QuestionResult(
-                    question=question,
-                    answer="ERROR",
-                    expected_answer=expected,
-                    retrieval_context=[],
-                    passed=False,
-                ))
+                question_results.append(
+                    QuestionResult(
+                        question=question,
+                        answer="ERROR",
+                        expected_answer=expected,
+                        retrieval_context=[],
+                        passed=False,
+                    )
+                )
 
         result = HarnessResult(
             n_questions=len(question_results),
-            mean_faithfulness=sum(q.faithfulness for q in question_results) / len(question_results),
-            mean_contextual_precision=sum(q.contextual_precision for q in question_results) / len(question_results),
-            mean_answer_relevancy=sum(q.answer_relevancy for q in question_results) / len(question_results),
+            mean_faithfulness=sum(q.faithfulness for q in question_results)
+            / len(question_results),
+            mean_contextual_precision=sum(
+                q.contextual_precision for q in question_results
+            )
+            / len(question_results),
+            mean_answer_relevancy=sum(q.answer_relevancy for q in question_results)
+            / len(question_results),
             pass_rate=sum(q.passed for q in question_results) / len(question_results),
             questions=question_results,
         )

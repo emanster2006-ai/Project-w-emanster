@@ -1,5 +1,7 @@
 """Unit tests for prompt injection detection."""
+
 import pytest
+
 from security.input_guard import is_injection_attempt
 
 SHOULD_BLOCK = [

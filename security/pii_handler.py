@@ -3,10 +3,11 @@ PII anonymization and rehydration using Microsoft Presidio.
 OWASP LLM06 mitigation — zero data leakage to external LLM APIs.
 """
 
+import logging
+
 from presidio_analyzer import AnalyzerEngine
 from presidio_anonymizer import AnonymizerEngine
 from presidio_anonymizer.entities import OperatorConfig
-import logging
 
 logger = logging.getLogger(__name__)
 
@@ -45,7 +46,7 @@ def anonymize(text: str) -> tuple[str, dict]:
         entity_type = result.entity_type
         counter = counters.get(entity_type, 0)
         token = f"<{entity_type}_{counter}>"
-        original_value = text[result.start:result.end]
+        original_value = text[result.start : result.end]
         pii_mapping[token] = original_value
         counters[entity_type] = counter + 1
         operator_config[entity_type] = OperatorConfig("replace", {"new_value": token})

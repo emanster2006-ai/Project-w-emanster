@@ -5,20 +5,25 @@ Run: python scripts/run_ab_test.py
 """
 
 import json
-import numpy as np
 import os
 import sys
 
+import numpy as np
+
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
+
 load_dotenv()
 
 import logging
+
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 
-def bootstrap_ci(scores: list[float], n_bootstrap: int = 1000, ci: float = 0.95) -> tuple:
+def bootstrap_ci(
+    scores: list[float], n_bootstrap: int = 1000, ci: float = 0.95
+) -> tuple:
     """Compute bootstrap confidence interval for a list of scores."""
     arr = np.array(scores)
     bootstrap_means = [
@@ -31,17 +36,20 @@ def bootstrap_ci(scores: list[float], n_bootstrap: int = 1000, ci: float = 0.95)
 
 
 CONFIGURATIONS = [
-    {"name": "baseline_dense_only",       "hyde": False, "rerank": False, "hybrid": False},
-    {"name": "dense_plus_rerank",          "hyde": False, "rerank": True,  "hybrid": False},
-    {"name": "hybrid_only",                "hyde": False, "rerank": False, "hybrid": True},
-    {"name": "hybrid_plus_rerank",         "hyde": False, "rerank": True,  "hybrid": True},
-    {"name": "hyde_plus_hybrid_rerank",    "hyde": True,  "rerank": True,  "hybrid": True},
+    {"name": "baseline_dense_only", "hyde": False, "rerank": False, "hybrid": False},
+    {"name": "dense_plus_rerank", "hyde": False, "rerank": True, "hybrid": False},
+    {"name": "hybrid_only", "hyde": False, "rerank": False, "hybrid": True},
+    {"name": "hybrid_plus_rerank", "hyde": False, "rerank": True, "hybrid": True},
+    {"name": "hyde_plus_hybrid_rerank", "hyde": True, "rerank": True, "hybrid": True},
 ]
 
 
 def run_ab_test():
-    from deepeval import evaluate
-    from deepeval.metrics import FaithfulnessMetric, ContextualPrecisionMetric, AnswerRelevancyMetric
+    from deepeval.metrics import (
+        AnswerRelevancyMetric,
+        ContextualPrecisionMetric,
+        FaithfulnessMetric,
+    )
     from deepeval.test_case import LLMTestCase
 
     with open("evaluation/golden_dataset.json") as f:
@@ -64,11 +72,11 @@ def run_ab_test():
         for item in sample:
             # Inline sync query for A/B test (not streaming)
             import asyncio
-            from retrieval.vectorstore import get_vectorstore
-            from retrieval.hybrid import hybrid_search
-            from retrieval.reranker import rerank
-            from retrieval.hyde import generate_hypothetical_doc
+
             from generation.llm import generate_answer
+            from retrieval.hybrid import hybrid_search
+            from retrieval.hyde import generate_hypothetical_doc
+            from retrieval.reranker import rerank
 
             question = item["question"]
             query = question
@@ -81,6 +89,7 @@ def run_ab_test():
             else:
                 from ingestion.embedder import embed_texts
                 from retrieval.vectorstore import dense_search
+
                 vec = embed_texts([query], normalize=True)[0]
                 chunks = dense_search(vec, top_k=20)
 
@@ -129,17 +138,23 @@ def run_ab_test():
     with open("evaluation/ab_test_results.json", "w") as f:
         json.dump(results_summary, f, indent=2)
 
-    print("\n" + "="*60)
+    print("\n" + "=" * 60)
     print("A/B TEST RESULTS SUMMARY")
-    print("="*60)
+    print("=" * 60)
     for r in results_summary:
         print(f"\n{r['config']}:")
-        print(f"  Faithfulness:    {r['faithfulness']['mean']:.3f} "
-              f"[{r['faithfulness']['ci_95'][0]:.3f}, {r['faithfulness']['ci_95'][1]:.3f}]")
-        print(f"  Precision:       {r['contextual_precision']['mean']:.3f} "
-              f"[{r['contextual_precision']['ci_95'][0]:.3f}, {r['contextual_precision']['ci_95'][1]:.3f}]")
-        print(f"  Relevancy:       {r['answer_relevancy']['mean']:.3f} "
-              f"[{r['answer_relevancy']['ci_95'][0]:.3f}, {r['answer_relevancy']['ci_95'][1]:.3f}]")
+        print(
+            f"  Faithfulness:    {r['faithfulness']['mean']:.3f} "
+            f"[{r['faithfulness']['ci_95'][0]:.3f}, {r['faithfulness']['ci_95'][1]:.3f}]"
+        )
+        print(
+            f"  Precision:       {r['contextual_precision']['mean']:.3f} "
+            f"[{r['contextual_precision']['ci_95'][0]:.3f}, {r['contextual_precision']['ci_95'][1]:.3f}]"
+        )
+        print(
+            f"  Relevancy:       {r['answer_relevancy']['mean']:.3f} "
+            f"[{r['answer_relevancy']['ci_95'][0]:.3f}, {r['answer_relevancy']['ci_95'][1]:.3f}]"
+        )
 
 
 if __name__ == "__main__":

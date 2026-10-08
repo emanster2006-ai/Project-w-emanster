@@ -4,8 +4,9 @@ Takes top_k=20 candidates from hybrid search, scores each against query,
 returns top_k=5 final chunks for LLM context.
 """
 
-from sentence_transformers import CrossEncoder
 import logging
+
+from sentence_transformers import CrossEncoder
 
 logger = logging.getLogger(__name__)
 

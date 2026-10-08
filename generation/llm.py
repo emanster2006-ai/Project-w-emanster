@@ -3,19 +3,18 @@ LLM client wrapper — supports Groq (primary) and OpenAI (fallback).
 All prompts are loaded from Jinja2 templates in generation/prompts/.
 """
 
-from groq import Groq
-from openai import OpenAI
-from jinja2 import Environment, FileSystemLoader
-import os
 import logging
+import os
+
+from groq import Groq
+from jinja2 import Environment, FileSystemLoader
+from openai import OpenAI
 
 logger = logging.getLogger(__name__)
 
 _client = None
 _jinja_env = Environment(
-    loader=FileSystemLoader(
-        os.path.join(os.path.dirname(__file__), "prompts")
-    )
+    loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "prompts"))
 )
 
 
@@ -40,6 +39,7 @@ async def generate_answer(question: str, context_chunks: list[dict]) -> str:
     Uses instructor-validated output schema (FinancialRAGResponse).
     """
     import instructor
+
     from security.output_guard import FinancialRAGResponse
 
     context_text = "\n\n---\n\n".join(

@@ -3,10 +3,9 @@ Output validation using instructor + Pydantic.
 OWASP LLM02 mitigation — enforces structured, schema-compliant LLM outputs.
 """
 
-import instructor
-from pydantic import BaseModel, Field, field_validator
-import re
 import logging
+
+from pydantic import BaseModel, Field, field_validator
 
 logger = logging.getLogger(__name__)
 
@@ -16,11 +15,11 @@ class FinancialRAGResponse(BaseModel):
     Schema that all LLM outputs must conform to.
     instructor re-prompts automatically if the LLM fails to comply.
     """
+
     answer: str = Field(..., description="Direct answer to the financial question")
     confidence: str = Field(..., pattern="^(high|medium|low)$")
     requires_professional_advice: bool = Field(
-        default=False,
-        description="True if question requires CPA/financial advisor"
+        default=False, description="True if question requires CPA/financial advisor"
     )
 
     @field_validator("answer")

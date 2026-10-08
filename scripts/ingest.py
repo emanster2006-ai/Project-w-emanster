@@ -7,12 +7,13 @@ Run: python scripts/ingest.py
 
 import argparse
 import logging
-import sys
 import os
+import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
@@ -20,10 +21,11 @@ logger = logging.getLogger(__name__)
 
 
 def run_ingestion(source: str = "financebench", limit: int | None = None):
-    from ingestion.loader import load_financebench
-    from ingestion.chunker import chunk_documents
-    from retrieval.vectorstore import upsert_nodes
     import json
+
+    from ingestion.chunker import chunk_documents
+    from ingestion.loader import load_financebench
+    from retrieval.vectorstore import upsert_nodes
 
     logger.info(f"Starting ingestion: source={source}, limit={limit}")
 
@@ -51,8 +53,12 @@ def run_ingestion(source: str = "financebench", limit: int | None = None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Ingest FinanceBench into Qdrant")
-    parser.add_argument("--limit", type=int, default=None, help="Max documents to ingest")
-    parser.add_argument("--sample-only", action="store_true", help="Ingest 50 docs (for CI)")
+    parser.add_argument(
+        "--limit", type=int, default=None, help="Max documents to ingest"
+    )
+    parser.add_argument(
+        "--sample-only", action="store_true", help="Ingest 50 docs (for CI)"
+    )
     args = parser.parse_args()
 
     limit = 50 if args.sample_only else args.limit

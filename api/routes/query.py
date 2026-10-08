@@ -3,15 +3,14 @@
 Handles multi-hop decomposition, HyDE, hybrid retrieval, reranking, and streaming.
 """
 
-from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import StreamingResponse
+import logging
+import os
+import time
+
+from fastapi import APIRouter, HTTPException, Request
 from pydantic import BaseModel, Field
 from slowapi import Limiter
 from slowapi.util import get_remote_address
-import time
-import os
-import json
-import logging
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -44,7 +43,7 @@ class QueryResponse(BaseModel):
 
 
 @router.post("/query")
-@limiter.limit(f"{os.getenv('RATE_LIMIT_PER_MINUTE', 20)}/minute")
+@limiter.limit(f"{os.getenv('RATE_LIMIT_PER_MINUTE', "20")}/minute")
 async def query(request: Request, body: QueryRequest):
     """
     Full RAG pipeline:
@@ -60,12 +59,12 @@ async def query(request: Request, body: QueryRequest):
     10. Langfuse trace logging
     """
     from api.middleware.cache import check_cache, set_cache
-    from retrieval.vectorstore import get_vectorstore
-    from retrieval.reranker import rerank
+    from generation.llm import generate_answer
+    from retrieval.decomposer import decompose_query
     from retrieval.hybrid import hybrid_search
     from retrieval.hyde import generate_hypothetical_doc
-    from retrieval.decomposer import decompose_query
-    from generation.llm import generate_answer
+    from retrieval.reranker import rerank
+    from retrieval.vectorstore import get_vectorstore
     from security.pii_handler import rehydrate
 
     start = time.time()
@@ -103,16 +102,18 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 4. Hybrid retrieval + RRF fusion ───────────────────────────────
         span = trace.span(name="retrieval")
-        vs = get_vectorstore()
+        get_vectorstore()
         all_chunks = []
         for rq in retrieval_queries:
-            chunks = await hybrid_search(rq, top_k=int(os.getenv("TOP_K_RETRIEVE", 20)))
+            chunks = await hybrid_search(
+                rq, top_k=int(os.getenv("TOP_K_RETRIEVE", "20"))
+            )
             all_chunks.extend(chunks)
         span.end(output={"chunks_retrieved": len(all_chunks)})
 
         # ── 5. CrossEncoder reranking ──────────────────────────────────────
         span = trace.span(name="reranking")
-        top_k = body.top_k or int(os.getenv("TOP_K_RERANK", 5))
+        top_k = body.top_k or int(os.getenv("TOP_K_RERANK", "5"))
         reranked_chunks = rerank(body.question, all_chunks, top_k=top_k)
         span.end(output={"chunks_after_rerank": len(reranked_chunks)})
 
@@ -122,7 +123,6 @@ async def query(request: Request, body: QueryRequest):
         span.end(output={"answer_length": len(answer)})
 
         # ── 7. Rehydrate PII tokens ───────────────────────────────────────
-        sanitized_question = request.state.sanitized_question
         if hasattr(request.state, "pii_mapping") and request.state.pii_mapping:
             answer = rehydrate(answer, request.state.pii_mapping)
 
@@ -155,6 +155,6 @@ async def query(request: Request, body: QueryRequest):
         return result
 
     except Exception as e:
-        logger.error(f"Query failed: {e}", exc_info=True)
+        logger.exception("Query failed")
         trace.update(level="ERROR", status_message=str(e))
         raise HTTPException(status_code=500, detail="Query processing failed")

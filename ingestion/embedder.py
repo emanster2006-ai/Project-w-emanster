@@ -4,10 +4,11 @@ L2-normalized vectors enable dot product as a proxy for cosine similarity,
 which is significantly faster at scale (no sqrt needed per comparison).
 """
 
-from sentence_transformers import SentenceTransformer
-import numpy as np
-import os
 import logging
+import os
+
+import numpy as np
+from sentence_transformers import SentenceTransformer
 
 logger = logging.getLogger(__name__)
 
@@ -17,7 +18,9 @@ _embedder = None
 def get_embedder() -> SentenceTransformer:
     global _embedder
     if _embedder is None:
-        model_name = os.getenv("EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2")
+        model_name = os.getenv(
+            "EMBEDDING_MODEL", "sentence-transformers/all-MiniLM-L6-v2"
+        )
         _embedder = SentenceTransformer(model_name)
         logger.info(f"Loaded embedding model: {model_name}")
     return _embedder

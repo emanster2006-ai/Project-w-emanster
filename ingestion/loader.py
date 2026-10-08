@@ -3,12 +3,10 @@ FinanceBench document loader.
 Downloads from HuggingFace hub, parses PDF SEC filings, injects metadata.
 """
 
+import logging
+
 from datasets import load_dataset
 from llama_index.core import Document
-import os
-import tempfile
-import logging
-from pathlib import Path
 
 logger = logging.getLogger(__name__)
 
@@ -35,7 +33,7 @@ def load_financebench(limit: int | None = None) -> tuple[list[Document], list[di
             "company": row.get("company"),
             "year": str(row.get("doc_period", "")),
             "filing_type": row.get("doc_type", "10-K"),
-            "question": row.get("question"),        # for golden dataset
+            "question": row.get("question"),  # for golden dataset
             "answer": row.get("answer"),
             "source": row.get("doc_name", ""),
         }
@@ -53,13 +51,15 @@ def load_financebench(limit: int | None = None) -> tuple[list[Document], list[di
 
         # Collect Q&A pairs for golden dataset
         if row.get("question") and row.get("answer"):
-            qa_pairs.append({
-                "question": row["question"],
-                "answer": row["answer"],
-                "company": metadata["company"],
-                "year": metadata["year"],
-                "source": metadata["source"],
-            })
+            qa_pairs.append(
+                {
+                    "question": row["question"],
+                    "answer": row["answer"],
+                    "company": metadata["company"],
+                    "year": metadata["year"],
+                    "source": metadata["source"],
+                }
+            )
 
     logger.info(f"Loaded {len(documents)} documents, {len(qa_pairs)} QA pairs")
     return documents, qa_pairs

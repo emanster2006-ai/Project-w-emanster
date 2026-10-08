@@ -6,14 +6,17 @@ Works because: ideal answers are long and semantically rich, closer to
 what's actually stored in the document corpus than a short question.
 """
 
-from jinja2 import Environment, FileSystemLoader
-import os
 import logging
+import os
+
+from jinja2 import Environment, FileSystemLoader
 
 logger = logging.getLogger(__name__)
 
 _jinja_env = Environment(
-    loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "..", "generation", "prompts"))
+    loader=FileSystemLoader(
+        os.path.join(os.path.dirname(__file__), "..", "generation", "prompts")
+    )
 )
 
 

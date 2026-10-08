@@ -2,10 +2,13 @@
 SecureRAG — FastAPI Application Entry Point
 """
 
+import logging
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from langfuse import Langfuse
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
@@ -13,9 +16,6 @@ from slowapi.util import get_remote_address
 from api.middleware.logging import LoggingMiddleware
 from api.middleware.security import SecurityMiddleware
 from api.routes import health, ingest, query
-from langfuse import Langfuse
-import logging
-import os
 
 logger = logging.getLogger(__name__)
 
@@ -28,10 +28,12 @@ async def lifespan(app: FastAPI):
     logger.info("SecureRAG API starting up...")
 
     from ingestion.embedder import get_embedder
+
     get_embedder()
     logger.info("Embedding model loaded")
 
     from retrieval.vectorstore import get_vectorstore
+
     get_vectorstore()
     logger.info(f"Qdrant connected — collection: {os.getenv('QDRANT_COLLECTION_NAME')}")
 

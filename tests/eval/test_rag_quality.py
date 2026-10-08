@@ -3,24 +3,22 @@ DeepEval RAG quality gate — runs in CI on every PR to main.
 Build FAILS if scores drop below thresholds in .env.
 """
 
-import pytest
+import asyncio
 import json
 import os
-import asyncio
+
+import pytest
 from deepeval import assert_test
 from deepeval.metrics import (
-    FaithfulnessMetric,
-    ContextualPrecisionMetric,
-    ContextualRecallMetric,
     AnswerRelevancyMetric,
+    ContextualPrecisionMetric,
+    FaithfulnessMetric,
 )
 from deepeval.test_case import LLMTestCase
-from deepeval.dataset import EvaluationDataset
 
-
-FAITHFULNESS_THRESHOLD = float(os.getenv("FAITHFULNESS_THRESHOLD", 0.75))
-PRECISION_THRESHOLD = float(os.getenv("CONTEXTUAL_PRECISION_THRESHOLD", 0.70))
-RELEVANCY_THRESHOLD = float(os.getenv("ANSWER_RELEVANCY_THRESHOLD", 0.75))
+FAITHFULNESS_THRESHOLD = float(os.getenv("FAITHFULNESS_THRESHOLD", "0.75"))
+PRECISION_THRESHOLD = float(os.getenv("CONTEXTUAL_PRECISION_THRESHOLD", "0.70"))
+RELEVANCY_THRESHOLD = float(os.getenv("ANSWER_RELEVANCY_THRESHOLD", "0.75"))
 
 
 def load_test_cases(n: int = 10) -> list[LLMTestCase]:
@@ -32,10 +30,10 @@ def load_test_cases(n: int = 10) -> list[LLMTestCase]:
     test_cases = []
 
     for item in sample:
-        from retrieval.hybrid import hybrid_search
-        from retrieval.reranker import rerank
-        from retrieval.hyde import generate_hypothetical_doc
         from generation.llm import generate_answer
+        from retrieval.hybrid import hybrid_search
+        from retrieval.hyde import generate_hypothetical_doc
+        from retrieval.reranker import rerank
 
         question = item["question"]
 
@@ -45,12 +43,14 @@ def load_test_cases(n: int = 10) -> list[LLMTestCase]:
         reranked = rerank(question, chunks, top_k=5)
         answer = asyncio.run(generate_answer(question, reranked))
 
-        test_cases.append(LLMTestCase(
-            input=question,
-            actual_output=answer,
-            expected_output=item.get("answer", ""),
-            retrieval_context=[c["text"] for c in reranked],
-        ))
+        test_cases.append(
+            LLMTestCase(
+                input=question,
+                actual_output=answer,
+                expected_output=item.get("answer", ""),
+                retrieval_context=[c["text"] for c in reranked],
+            )
+        )
 
     return test_cases
 
