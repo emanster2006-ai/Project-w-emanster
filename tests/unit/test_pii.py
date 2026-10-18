@@ -60,3 +60,10 @@ def test_repeated_value_reuses_token_and_overlap_keeps_best(monkeypatch):
     sanitized, mapping = anonymize(text)
     assert sanitized == "<PERSON_0> wrote to <PERSON_0>"
     assert rehydrate(sanitized, mapping) == text
+
+
+def test_fiscal_periods_and_regions_not_masked():
+    text = "How did Netflix revenue in Europe change from 2020 to 2022?"
+    sanitized, mapping = anonymize(text)
+    assert sanitized == text
+    assert mapping == {}

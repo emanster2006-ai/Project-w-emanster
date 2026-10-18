@@ -10,6 +10,25 @@ logger = logging.getLogger(__name__)
 
 _analyzer = None
 
+# Presidio's default set also masks DATE_TIME, LOCATION and NRP, which wipes
+# out fiscal years, quarters and regions from financial questions and hurts
+# retrieval. Only mask entities that identify a person or account.
+PII_ENTITIES = [
+    "PERSON",
+    "EMAIL_ADDRESS",
+    "PHONE_NUMBER",
+    "CREDIT_CARD",
+    "US_SSN",
+    "US_ITIN",
+    "US_PASSPORT",
+    "US_DRIVER_LICENSE",
+    "US_BANK_NUMBER",
+    "IBAN_CODE",
+    "IP_ADDRESS",
+    "CRYPTO",
+    "MEDICAL_LICENSE",
+]
+
 
 def _get_analyzer() -> AnalyzerEngine:
     global _analyzer
@@ -29,7 +48,9 @@ def anonymize(text: str) -> tuple[str, dict]:
     """
     analyzer = _get_analyzer()
 
-    results = analyzer.analyze(text=text, language="en", score_threshold=0.4)
+    results = analyzer.analyze(
+        text=text, language="en", entities=PII_ENTITIES, score_threshold=0.4
+    )
     if not results:
         return text, {}
 
