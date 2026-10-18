@@ -27,6 +27,9 @@ INJECTION_PATTERNS = [
     r"(show|repeat|output|display)\s+(me\s+)?(your\s+|the\s+)?(system\s+|initial\s+|hidden\s+)(prompt|instructions|message)",
     r"(do\s+not|don'?t)\s+follow\s+(your\s+|the\s+)?(previous|prior|above|system)",
     r"(bypass|disable)\s+(your\s+|the\s+)?(safety|guardrails?|filters?|restrictions?)",
+    r"what\s+(is|are)\s+your\s+(system\s+)?(prompt|instructions)",
+    r"disregard\s+(your\s+|the\s+|all\s+)?(previous|prior|above)\s+(context|instructions|rules)",
+    r"\b(launder(ing)?\s+money|insider\s+trading\s+(tips|advice)|evade\s+taxes)\b",  # harmful finance
     r"<\|?(im_start|im_end|system)\|?>",  # chat-template control tokens
 ]
 
