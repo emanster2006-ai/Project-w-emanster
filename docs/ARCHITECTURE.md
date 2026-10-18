@@ -1,192 +1,45 @@
-# Architecture
+# SecureRAG architecture
 
-## System Overview
+SecureRAG is an experimental financial QA system. See [engineering decisions](ENGINEERING_DECISIONS.md) for tradeoffs and [benchmark protocol](BENCHMARKS.md) for evidence limits. Team ownership is recorded in the README.
 
-SecureRAG is a production-grade RAG (Retrieval-Augmented Generation) API designed specifically for SEC 10-K financial filings. It answers complex multi-hop financial questions with citations, while enforcing OWASP LLM Top 10 security controls at every stage.
-
-```
-                        ┌─────────────────┐
-                        │   Next.js 15    │  localhost:3000
-                        │   Frontend      │
-                        └────────┬────────┘
-                                 │ POST /api/v1/query
-                        ┌────────▼────────┐
-                        │   FastAPI API   │  localhost:8000
-                        │                 │
-                        │ SecurityMiddleware
-                        │  ├─ injection   │  regex + blocklist
-                        │  └─ PII strip   │  Presidio
-                        │                 │
-                        │  Rate Limiter   │  slowapi (20 req/min)
-                        └────────┬────────┘
-                                 │
-              ┌──────────────────▼──────────────────┐
-              │           Query Pipeline             │
-              │                                      │
-              │  1. Semantic cache (Redis)            │
-              │     cosine sim >= 0.92 => return      │
-              │                                      │
-              │  2. Query decomposition               │
-              │     instructor -> DecomposedQuery    │
-              │     (sub-questions for multi-hop)    │
-              │                                      │
-              │  3. HyDE expansion                   │
-              │     LLM -> hypothetical answer text  │
-              │     embed that instead of question   │
-              │                                      │
-              │  4. Hybrid retrieval                 │
-              │     dense: SentenceTransformers      │
-              │     BM25:  rank-bm25                 │
-              │     Fuse:  RRF (k=60)       top-20  │
-              │                                      │
-              │  5. CrossEncoder reranking            │
-              │     ms-marco-MiniLM-L-6-v2   top-5  │
-              │                                      │
-              │  6. LLM generation                   │
-              │     Groq llama-3.1-70b               │
-              │     instructor + Pydantic schema     │
-              │     auto-retry on schema failure     │
-              │                                      │
-              │  7. PII rehydration                  │
-              │     restore Presidio tokens          │
-              │                                      │
-              │  8. Langfuse trace                   │
-              └─────────────────────────────────────┘
-                                 │
-              ┌──────────────────┴────────────────────┐
-              │                                        │
-    ┌─────────▼──────────┐              ┌─────────────▼──────────┐
-    │   Qdrant           │              │   Redis                 │
-    │   Vector DB        │              │   Semantic cache        │
-    │   Dense + Sparse   │              │   TTL: 1 hour           │
-    └────────────────────┘              └────────────────────────┘
+```mermaid
+flowchart TD
+    Frontend[Next.js frontend] -->|Query proxy| API[FastAPI]
+    API --> Guard[Validate input / regex guard / detected PII anonymization]
+    Guard --> Cache{Eligible semantic cache hit?}
+    Cache -->|No| Decompose[Optional query decomposition]
+    Decompose --> HyDE[Optional hypothetical-document expansion]
+    HyDE --> Retrieve[Dense + BM25 retrieval / reciprocal rank fusion]
+    Retrieve --> Rerank[CrossEncoder reranking]
+    Rerank --> Generate[LLM structured generation]
+    Generate --> Output[Output validation / response rehydration]
+    Cache -->|Yes| Output
+    Output --> Frontend
+    Evidence[FinanceBench evidence snippets] --> Chunk[Hierarchical chunks / metadata]
+    Chunk --> Embed[SentenceTransformer embeddings]
+    Embed --> Qdrant[(Qdrant)]
+    Qdrant --> Retrieve
 ```
 
----
+## Runtime boundaries
 
-## Component Design
+- `api/`: middleware, payload validation, query/ingestion routes, semantic cache, and optional tracing. The health endpoint reports API liveness, not end-to-end retrieval readiness.
+- `ingestion/`: downloads FinanceBench evidence snippets, chunks them at multiple sizes, embeds text, and writes vectors/payloads. Gold questions/answers are stored separately for evaluation.
+- `retrieval/`: embeds queries, combines dense results with an in-memory BM25 index, optionally generates HyDE/decomposed queries, and reranks candidates. The BM25 index is cached per process and requires a restart after corpus changes. Its current scroll is bounded to 10,000 records; larger-corpus completeness is not established.
+- `generation/`: provider clients and templates with Instructor/Pydantic structured response validation. Schema validation is not a guarantee of financial correctness.
+- `security/`: regex input checks, Presidio anonymization/rehydration, and output validators. These are experimental controls, not proof against arbitrary prompt injection or PII leakage.
+- `frontend/`: Next.js query UI, source-context expansion, and API liveness badge. A production build is not proof that a deployed provider-backed query succeeds.
 
-### SecurityMiddleware
+The API uses Qdrant for vectors and Redis for the semantic cache. PII-bearing responses are excluded from the shared cache; sanitized text is used for retrieval/generation and answer tracing. Presidio detection can miss entities. The choice of cache threshold is configuration, not a published accuracy measurement.
 
-Runs before every route. Two responsibilities:
+## Evaluation
 
-1. **Injection detection** — `security/input_guard.py` checks 15+ regex patterns covering: ignore-previous-instructions, persona hijacking (DAN, jailbreak), system prompt extraction, Llama format injection, XSS in query. Returns 400 if matched.
+Ordinary CI runs lint/format, backend unit/integration tests, and frontend lint/build. Live DeepEval evaluation is an explicit workflow dispatch requiring provider keys; it does not run on every PR.
 
-2. **PII anonymization** — `security/pii_handler.py` uses Presidio to detect and replace PII entities (SSN, credit cards, names, emails) with deterministic tokens (`<PERSON_0>`, `<US_SSN_0>`). The mapping is stored in `request.state.pii_mapping` for rehydration after generation. No raw PII reaches the LLM or Qdrant.
+The A/B runner compares five retrieval configurations on one seeded sample with the HTTP cache and decomposition bypassed. It preserves every attempt and its failures, dataset/corpus hashes, model/package metadata, answers, context, judge reasons, and successful-sample bootstrap intervals. See `scripts/run_ab_test.py` and `evaluation/benchmark.py`.
 
-### Ingestion Pipeline
+No comparative results have been published. Current evidence snippets do not establish full-filing performance, and LLM judge metrics do not prove numerical financial accuracy. Synthetic/tuning questions must remain separate from the held-out comparison.
 
-```
-HuggingFace (PatronusAI/financebench)
-    |
-    v
-loader.py          load_financebench()
-    |              Downloads dataset, extracts evidence_text + metadata
-    |              (company, ticker, fiscal_year, doc_type)
-    v
-chunker.py         chunk_documents()
-    |              HierarchicalNodeParser: 2048 / 512 / 128 token levels
-    |              Detects SEC section headers (ITEM 1A. RISK FACTORS, etc.)
-    |              Injects company/year/section into every node's metadata
-    v
-embedder.py        embed_texts()
-    |              SentenceTransformers all-MiniLM-L6-v2
-    |              L2-normalized -> dot product = cosine similarity
-    v
-vectorstore.py     upsert_nodes()
-                   Qdrant collection with dense + sparse vector support
-                   Batched upsert (100 per request)
-```
+## Infrastructure status
 
-**Why hierarchical chunking?** SEC 10-K filings contain tables (income statements, balance sheets) that naive sentence splitting destroys mid-row. The three-level hierarchy lets retrieval find the exact row (128 tokens) while keeping the full table as context (2048 tokens parent node).
-
-### Retrieval: Hybrid + RRF
-
-Dense and sparse retrieval are complementary:
-- **Dense (semantic)** — good at paraphrases, synonyms, conceptual queries
-- **BM25 (lexical)** — good at exact terms: ticker symbols, financial figures, section names
-
-RRF formula: `score = sum(1 / (k + rank_i))` across all ranked lists. `k=60` is the standard constant that reduces the gap between rank 1 and rank 2, preventing any single list from dominating.
-
-### HyDE
-
-Short questions are often semantically far from the long passages stored in the corpus. HyDE bridges this by asking the LLM to write a hypothetical answer, then embedding that. The hypothetical answer uses the same vocabulary and style as the 10-K passage it describes.
-
-The hypothetical doc is only used for embedding/retrieval — it is never shown to the user.
-
-### CrossEncoder Reranking
-
-Bi-encoder similarity (used in dense retrieval) computes embeddings for query and document independently — fast but less accurate. The CrossEncoder sees the full `(query, chunk)` pair together, giving access to interaction signals. This significantly improves precision at the cost of latency on the top-20 candidates only (not all corpus documents).
-
-Model: `cross-encoder/ms-marco-MiniLM-L-6-v2` — lightweight but highly accurate for passage ranking.
-
-### Query Decomposition
-
-Complex questions requiring multiple lookups (e.g., *"Compare Apple and Microsoft R&D 2020-2022"*) are detected and decomposed via a structured LLM call. The `instructor` library enforces the `DecomposedQuery` Pydantic schema — if the LLM returns malformed output, instructor auto-retries.
-
-Each sub-question is retrieved independently. All chunks are merged into a single pool before reranking, and the original question is used for reranking (not the sub-questions).
-
-### Semantic Cache
-
-Redis stores: `cache:emb:{md5(query)}` -> embedding bytes, `cache:resp:{md5(query)}` -> JSON response.
-
-On each request, the incoming query embedding is compared against all cached embeddings using dot product (valid for L2-normalized vectors). Threshold 0.92 was chosen empirically — below this, paraphrases with different intent start matching.
-
-### Output Validation
-
-`instructor` wraps the Groq client and enforces `FinancialRAGResponse`:
-- `answer: str` — the actual answer
-- `confidence: "high" | "medium" | "low"`
-- `requires_professional_advice: bool`
-
-A `field_validator` catches common hallucination signals ("as an AI", "I don't have access to") and raises a `ValueError`, causing instructor to retry with the LLM.
-
----
-
-## Infrastructure
-
-### Docker Compose (local)
-
-| Service | Image | Port |
-|---------|-------|------|
-| Qdrant | qdrant/qdrant:v1.11.3 | 6333 (REST), 6334 (gRPC) |
-| Redis | redis:7.4-alpine | 6379 |
-| API | local Dockerfile | 8000 |
-
-All services have healthchecks. The API container waits for both Qdrant and Redis to be healthy before starting.
-
-### Production (planned)
-
-| Component | Provider |
-|-----------|---------|
-| API | Fly.io (Docker container) |
-| Frontend | Vercel |
-| Qdrant | Qdrant Cloud or Fly.io volume |
-| Redis | Upstash Redis |
-| Tracing | Langfuse Cloud |
-
----
-
-## Evaluation Architecture
-
-```
-Golden Dataset (100 Q&A pairs)
-  60%  FinanceBench ground truth (real SEC data)
-  40%  Ragas-synthesized multi-hop questions
-
-EvalHarness (evaluation/harness.py)
-  -> runs full pipeline per question
-  -> scores with DeepEval metrics (judge: gpt-4o-mini)
-  -> persists results to evaluation/metrics_history.json
-
-A/B Test Runner (scripts/run_ab_test.py)
-  -> 5 PipelineConfig variants
-  -> 20 questions per config
-  -> bootstrapped 95% CI on each metric
-  -> saves to evaluation/ab_test_results.json
-
-CI Quality Gate (.github/workflows/ci.yml)
-  -> runs on every PR to main
-  -> deepeval test run tests/eval/test_rag_quality.py
-  -> build FAILS if any threshold violated
-```
+Local Compose describes API, Qdrant, and Redis services. Frontend hosting configuration and a Fly.io API configuration exist in the repository; the complete live deployment was not verified in this update. Provider/model availability, ingestion, corpus freshness, and actual end-to-end responses must be checked before treating the system as a working hosted demo.
