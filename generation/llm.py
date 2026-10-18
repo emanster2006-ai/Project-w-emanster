@@ -9,6 +9,8 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import logging
 
+from security.grounding import ungrounded_numbers
+
 logger = logging.getLogger(__name__)
 
 _client = None
@@ -70,5 +72,9 @@ async def generate_answer(question: str, context_chunks: list[dict]) -> str:
         max_tokens=1000,
         max_retries=2,  # instructor auto-retries if schema validation fails
     )
+
+    missing = ungrounded_numbers(response.answer, context_chunks)
+    if missing:
+        logger.warning(f"Answer figures not found in retrieved context: {missing}")
 
     return response.answer
