@@ -103,7 +103,7 @@ scripts/        ingest.py, generate_golden_dataset.py, run_ab_test.py
 
 - Full RAG pipeline: injection guard → PII anonymization → embed → hybrid search (dense + BM25 + RRF) → CrossEncoder rerank → LLM → cited answer
 - 1445 chunks from 150 real SEC 10-K filings ingested into Qdrant
-- 22/22 unit tests passing
+- Unit, integration and deterministic API contract tests run in CI (see `.github/workflows/ci.yml`)
 - Semantic cache (Redis), rate limiting, Langfuse tracing (optional)
 
 ## What still needs building
