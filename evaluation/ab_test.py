@@ -38,27 +38,37 @@ class PipelineConfig:
 PIPELINE_CONFIGS = [
     PipelineConfig(
         name="baseline_dense_only",
-        hyde=False, rerank=False, hybrid=False,
+        hyde=False,
+        rerank=False,
+        hybrid=False,
         description="Naive RAG: dense retrieval only, no reranking, no HyDE",
     ),
     PipelineConfig(
         name="dense_plus_rerank",
-        hyde=False, rerank=True, hybrid=False,
+        hyde=False,
+        rerank=True,
+        hybrid=False,
         description="Dense retrieval + CrossEncoder reranking",
     ),
     PipelineConfig(
         name="hybrid_only",
-        hyde=False, rerank=False, hybrid=True,
+        hyde=False,
+        rerank=False,
+        hybrid=True,
         description="Hybrid (dense + BM25 + RRF), no reranking",
     ),
     PipelineConfig(
         name="hybrid_plus_rerank",
-        hyde=False, rerank=True, hybrid=True,
+        hyde=False,
+        rerank=True,
+        hybrid=True,
         description="Hybrid retrieval + CrossEncoder reranking",
     ),
     PipelineConfig(
         name="hyde_plus_hybrid_rerank",
-        hyde=True, rerank=True, hybrid=True,
+        hyde=True,
+        rerank=True,
+        hybrid=True,
         description="Full stack: HyDE + hybrid retrieval + CrossEncoder reranking",
     ),
 ]

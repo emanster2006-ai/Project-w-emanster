@@ -1,5 +1,6 @@
-from fastapi import APIRouter, HTTPException, BackgroundTasks
-from pydantic import BaseModel
+from fastapi import APIRouter, BackgroundTasks
+from pydantic import BaseModel, Field
+from typing import Literal
 import logging
 
 logger = logging.getLogger(__name__)
@@ -7,8 +8,8 @@ router = APIRouter()
 
 
 class IngestRequest(BaseModel):
-    source: str = "financebench"
-    limit: int | None = None  # None = ingest all
+    source: Literal["financebench"] = "financebench"
+    limit: int | None = Field(default=None, ge=1)  # None = ingest all
 
 
 class IngestResponse(BaseModel):
@@ -24,6 +25,7 @@ async def ingest(body: IngestRequest, background_tasks: BackgroundTasks):
     Downloads FinanceBench, chunks, embeds, and upserts into Qdrant.
     """
     from scripts.ingest import run_ingestion
+
     background_tasks.add_task(run_ingestion, source=body.source, limit=body.limit)
     return IngestResponse(
         status="queued",

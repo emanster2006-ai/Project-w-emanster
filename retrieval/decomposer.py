@@ -15,6 +15,7 @@ logger = logging.getLogger(__name__)
 
 class DecomposedQuery(BaseModel):
     """Structured output enforced by instructor."""
+
     needs_decomposition: bool
     sub_questions: list[str] = Field(default_factory=list, max_length=4)
     reasoning: str = Field(default="")

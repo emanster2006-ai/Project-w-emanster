@@ -1,4 +1,5 @@
 """Structured JSON request logging middleware."""
+
 from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 import logging

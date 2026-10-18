@@ -1,5 +1,5 @@
 """Unit tests for PII anonymization and rehydration."""
-import pytest
+
 from security.pii_handler import anonymize, rehydrate
 
 

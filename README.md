@@ -1,13 +1,13 @@
 # SecureRAG
 
 **Evaluation-first RAG platform with OWASP LLM security guardrails.**  
-Answers complex multi-hop financial questions from SEC 10-K filings with measurably better accuracy than naive RAG.
+An experimental system for financial questions over SEC filing evidence. Comparative accuracy has not yet been established.
 
 [![CI](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml/badge.svg)](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Status:** The backend, security guardrails, and evaluation framework are on `main`. The Next.js frontend lives on the `feat/frontend` branch. A/B benchmark numbers below are populated by running `make ab-test`.
+> **Status:** The backend, security guardrails, and evaluation framework are on `main`. The Next.js frontend is included under `frontend/` in this branch. A/B benchmark numbers below are populated by running `make ab-test`.
 
 ---
 
@@ -34,7 +34,7 @@ User Query
 └──────────────┬──────────────────────────────────────┘
                │
     ┌──────────▼──────────┐
-    │  Semantic Cache      │  Redis — cosine sim ≥ 0.92 skips LLM
+    │  Semantic Cache      │  Redis — cosine sim ≥ 0.92 skips LLM (non-PII queries)
     └──────────┬──────────┘
                │ miss
     ┌──────────▼──────────┐
@@ -71,6 +71,10 @@ User Query
 
 ---
 
+## Portfolio and ownership
+
+This is a team project. Emmanuel focuses on the frontend, API integration, deployment, and CI/CD. Erik focuses on retrieval, evaluation, and ML. No numerical improvement is claimed until reproducible measurements are published.
+
 ## Quick Start
 
 ```bash
@@ -102,13 +106,23 @@ curl -X POST http://localhost:8000/api/v1/query \
 
 ---
 
+## Frontend
+
+With the API running on port 8000, run `cd frontend && npm ci && npm run dev`, then open http://localhost:3000. For a hosted API, set the server-side `API_URL` environment variable when building Next.js. `npm run lint` and `npm run build` validate the frontend. Hosting configuration is preparation, not proof of a working deployment.
+
+## Verification
+
+`python -m pip install -r requirements-test.txt` followed by `python -m pytest tests/integration tests/unit/test_input_guard.py -q` runs deterministic HTTP boundary tests without API keys or model downloads. They use real FastAPI routes and security middleware, substituting ML providers, PII adapters, retrieval, and cache. They verify sanitized inputs reach the model, personal data is excluded from shared cache, invalid requests are rejected, and background ingestion receives validated parameters. They do not measure real retrieval quality or Presidio accuracy.
+
+`requirements-unit.txt` adds real chunker and Presidio tests (install `en_core_web_lg` too); the full `requirements.txt` is needed for live evaluation. Ordinary CI runs deterministic contract tests, all unit tests, lint, and frontend build. Provider-backed evaluation is opt-in because it needs credentials, a corpus, and paid judge calls. See [benchmark protocol](docs/BENCHMARKS.md).
+
 ## RAG Pipeline
 
 ### Hybrid Retrieval + RRF
-Dense semantic search (SentenceTransformers `all-MiniLM-L6-v2`) fused with BM25 lexical search using Reciprocal Rank Fusion (`score = Σ 1/(60 + rank)`). Outperforms either method alone, especially on ticker symbols and financial figures that dense retrieval misses.
+Dense semantic search (SentenceTransformers `all-MiniLM-L6-v2`) fused with BM25 lexical search using Reciprocal Rank Fusion (`score = Σ 1/(60 + rank)`). Designed to combine lexical and semantic matches; its benefit on this dataset still needs measurement.
 
 ### HyDE (Hypothetical Document Embeddings)
-Instead of embedding the short user question, the LLM generates a hypothetical ideal answer and *that* gets embedded. The hypothetical answer is semantically similar to what's actually in the corpus — significantly improving recall on complex questions.
+Instead of embedding the short user question, the LLM generates a hypothetical ideal answer and *that* gets embedded. The hypothetical answer is semantically similar to what's actually in the corpus — intended to improve recall; its effect on this dataset has not yet been measured.
 
 ### CrossEncoder Reranking
 After retrieving 20 candidates, a `cross-encoder/ms-marco-MiniLM-L-6-v2` model scores each `(query, chunk)` pair jointly. Unlike bi-encoder similarity, the cross-encoder sees both at once, giving much more accurate relevance scores. Top 5 go to the LLM.
@@ -132,13 +146,13 @@ Redis stores query embeddings. On each request, the incoming query is compared t
 | LLM02 Insecure Output | `instructor` + Pydantic schema validation, auto-retry | `security/output_guard.py` → `FinancialRAGResponse` |
 | LLM06 Sensitive Info Disclosure | Presidio PII anonymization before LLM, rehydration after | `security/pii_handler.py` |
 
-Adversarial test coverage: 10 injection attempts + 3 PII cases + rate limit test — all enforced in CI.
+Pattern-based injection checks have unit coverage. PII and live adversarial evaluation require the full ML dependencies; these controls are experimental and do not establish comprehensive prompt-injection protection.
 
 ---
 
 ## Evaluation
 
-CI enforces quality thresholds on every PR to `main`. Build fails if scores drop below:
+Live evaluation is explicitly dispatched with `run_live_evaluation` and requires provider keys; it is not a required automatic PR check. The workflow is configured with these quality thresholds. Successful live evaluation has not been verified; these are targets, not measured results:
 
 | Metric | Threshold | Judge Model |
 |--------|-----------|-------------|
@@ -161,7 +175,7 @@ CI enforces quality thresholds on every PR to `main`. Build fails if scores drop
 *Results populated after running `make ab-test`. See `evaluation/ab_test_results.json`.*
 
 ### Golden Dataset
-100 Q&A pairs: real FinanceBench ground truth + Ragas-synthesized multi-hop questions.
+Golden-dataset generation is provided, but no generated golden dataset or benchmark result is committed. The synthetic generation path still needs end-to-end verification.
 
 ```bash
 make golden     # generate synthetic Q&A pairs via Ragas
@@ -187,8 +201,8 @@ make ab-test    # run A/B pipeline comparison
 | Eval | DeepEval + Ragas + SciPy (bootstrap CI) |
 | Tracing | Langfuse |
 | Ingestion | unstructured[pdf] + HuggingFace datasets |
-| Frontend | Next.js 15 + Tailwind CSS |
-| Deploy | Vercel (frontend) + Fly.io (API) |
+| Frontend | Next.js 16 + Tailwind CSS |
+| Deploy | Vercel / Fly.io configuration (deployment not independently verified) |
 | CI | GitHub Actions |
 
 ---
@@ -284,3 +298,4 @@ Full interactive docs at `http://localhost:8000/docs` after `make dev`.
   "sub_questions": null
 }
 ```
+

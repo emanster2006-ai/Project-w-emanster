@@ -11,11 +11,9 @@ from deepeval import assert_test
 from deepeval.metrics import (
     FaithfulnessMetric,
     ContextualPrecisionMetric,
-    ContextualRecallMetric,
     AnswerRelevancyMetric,
 )
 from deepeval.test_case import LLMTestCase
-from deepeval.dataset import EvaluationDataset
 
 
 FAITHFULNESS_THRESHOLD = float(os.getenv("FAITHFULNESS_THRESHOLD", 0.75))
@@ -45,12 +43,14 @@ def load_test_cases(n: int = 10) -> list[LLMTestCase]:
         reranked = rerank(question, chunks, top_k=5)
         answer = asyncio.run(generate_answer(question, reranked))
 
-        test_cases.append(LLMTestCase(
-            input=question,
-            actual_output=answer,
-            expected_output=item.get("answer", ""),
-            retrieval_context=[c["text"] for c in reranked],
-        ))
+        test_cases.append(
+            LLMTestCase(
+                input=question,
+                actual_output=answer,
+                expected_output=item.get("answer", ""),
+                retrieval_context=[c["text"] for c in reranked],
+            )
+        )
 
     return test_cases
 

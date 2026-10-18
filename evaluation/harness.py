@@ -19,7 +19,6 @@ from pathlib import Path
 from deepeval.metrics import (
     FaithfulnessMetric,
     ContextualPrecisionMetric,
-    ContextualRecallMetric,
     AnswerRelevancyMetric,
 )
 from deepeval.test_case import LLMTestCase
@@ -61,9 +60,15 @@ class HarnessResult:
 class EvalHarness:
     def __init__(self):
         self.metrics = [
-            FaithfulnessMetric(threshold=FAITHFULNESS_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
-            ContextualPrecisionMetric(threshold=PRECISION_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
-            AnswerRelevancyMetric(threshold=RELEVANCY_THRESHOLD, model=JUDGE_MODEL, include_reason=True),
+            FaithfulnessMetric(
+                threshold=FAITHFULNESS_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
+            ContextualPrecisionMetric(
+                threshold=PRECISION_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
+            AnswerRelevancyMetric(
+                threshold=RELEVANCY_THRESHOLD, model=JUDGE_MODEL, include_reason=True
+            ),
         ]
 
     def _load_golden(self, n: int) -> list[dict]:
@@ -127,33 +132,42 @@ class EvalHarness:
                     and r_metric.score >= RELEVANCY_THRESHOLD
                 )
 
-                question_results.append(QuestionResult(
-                    question=question,
-                    answer=answer,
-                    expected_answer=expected,
-                    retrieval_context=context_texts,
-                    faithfulness=f_metric.score,
-                    contextual_precision=p_metric.score,
-                    answer_relevancy=r_metric.score,
-                    latency_ms=latency_ms,
-                    passed=passed,
-                ))
+                question_results.append(
+                    QuestionResult(
+                        question=question,
+                        answer=answer,
+                        expected_answer=expected,
+                        retrieval_context=context_texts,
+                        faithfulness=f_metric.score,
+                        contextual_precision=p_metric.score,
+                        answer_relevancy=r_metric.score,
+                        latency_ms=latency_ms,
+                        passed=passed,
+                    )
+                )
 
             except Exception as e:
                 logger.error(f"Failed on question {i+1}: {e}")
-                question_results.append(QuestionResult(
-                    question=question,
-                    answer="ERROR",
-                    expected_answer=expected,
-                    retrieval_context=[],
-                    passed=False,
-                ))
+                question_results.append(
+                    QuestionResult(
+                        question=question,
+                        answer="ERROR",
+                        expected_answer=expected,
+                        retrieval_context=[],
+                        passed=False,
+                    )
+                )
 
         result = HarnessResult(
             n_questions=len(question_results),
-            mean_faithfulness=sum(q.faithfulness for q in question_results) / len(question_results),
-            mean_contextual_precision=sum(q.contextual_precision for q in question_results) / len(question_results),
-            mean_answer_relevancy=sum(q.answer_relevancy for q in question_results) / len(question_results),
+            mean_faithfulness=sum(q.faithfulness for q in question_results)
+            / len(question_results),
+            mean_contextual_precision=sum(
+                q.contextual_precision for q in question_results
+            )
+            / len(question_results),
+            mean_answer_relevancy=sum(q.answer_relevancy for q in question_results)
+            / len(question_results),
             pass_rate=sum(q.passed for q in question_results) / len(question_results),
             questions=question_results,
         )

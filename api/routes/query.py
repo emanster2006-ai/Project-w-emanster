@@ -4,13 +4,11 @@ Handles multi-hop decomposition, HyDE, hybrid retrieval, reranking, and streamin
 """
 
 from fastapi import APIRouter, Request, HTTPException
-from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from slowapi import Limiter
 from slowapi.util import get_remote_address
 import time
 import os
-import json
 import logging
 
 logger = logging.getLogger(__name__)
@@ -60,7 +58,6 @@ async def query(request: Request, body: QueryRequest):
     10. Langfuse trace logging
     """
     from api.middleware.cache import check_cache, set_cache
-    from retrieval.vectorstore import get_vectorstore
     from retrieval.reranker import rerank
     from retrieval.hybrid import hybrid_search
     from retrieval.hyde import generate_hypothetical_doc
@@ -68,13 +65,15 @@ async def query(request: Request, body: QueryRequest):
     from generation.llm import generate_answer
     from security.pii_handler import rehydrate
 
+    question = getattr(request.state, "sanitized_question", body.question)
+    pii_mapping = getattr(request.state, "pii_mapping", {})
     start = time.time()
     langfuse = request.app.state.langfuse
-    trace = langfuse.trace(name="rag_query", input={"question": body.question})
+    trace = langfuse.trace(name="rag_query", input={"question": question})
 
     try:
         # ── 1. Semantic cache ──────────────────────────────────────────────
-        cached = await check_cache(body.question)
+        cached = None if pii_mapping else await check_cache(question)
         if cached:
             logger.info("Cache hit for query")
             cached["cached"] = True
@@ -82,10 +81,10 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 2. Query decomposition ─────────────────────────────────────────
         sub_questions = None
-        queries_to_run = [body.question]
+        queries_to_run = [question]
         if body.use_decomposition:
             span = trace.span(name="decomposition")
-            sub_questions = await decompose_query(body.question)
+            sub_questions = await decompose_query(question)
             if sub_questions and len(sub_questions) > 1:
                 queries_to_run = sub_questions
             span.end(output={"sub_questions": sub_questions})
@@ -103,7 +102,6 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 4. Hybrid retrieval + RRF fusion ───────────────────────────────
         span = trace.span(name="retrieval")
-        vs = get_vectorstore()
         all_chunks = []
         for rq in retrieval_queries:
             chunks = await hybrid_search(rq, top_k=int(os.getenv("TOP_K_RETRIEVE", 20)))
@@ -113,16 +111,17 @@ async def query(request: Request, body: QueryRequest):
         # ── 5. CrossEncoder reranking ──────────────────────────────────────
         span = trace.span(name="reranking")
         top_k = body.top_k or int(os.getenv("TOP_K_RERANK", 5))
-        reranked_chunks = rerank(body.question, all_chunks, top_k=top_k)
+        reranked_chunks = rerank(question, all_chunks, top_k=top_k)
         span.end(output={"chunks_after_rerank": len(reranked_chunks)})
 
         # ── 6. LLM generation ──────────────────────────────────────────────
         span = trace.span(name="generation")
-        answer = await generate_answer(body.question, reranked_chunks)
+        answer = await generate_answer(question, reranked_chunks)
         span.end(output={"answer_length": len(answer)})
 
+        sanitized_answer = answer
+
         # ── 7. Rehydrate PII tokens ───────────────────────────────────────
-        sanitized_question = request.state.sanitized_question
         if hasattr(request.state, "pii_mapping") and request.state.pii_mapping:
             answer = rehydrate(answer, request.state.pii_mapping)
 
@@ -139,7 +138,7 @@ async def query(request: Request, body: QueryRequest):
         ]
 
         latency_ms = (time.time() - start) * 1000
-        trace.update(output={"answer": answer, "latency_ms": latency_ms})
+        trace.update(output={"answer": sanitized_answer, "latency_ms": latency_ms})
 
         result = QueryResponse(
             answer=answer,
@@ -150,7 +149,8 @@ async def query(request: Request, body: QueryRequest):
         )
 
         # ── 8. Cache the result ───────────────────────────────────────────
-        await set_cache(body.question, result.model_dump())
+        if not pii_mapping:
+            await set_cache(question, result.model_dump())
 
         return result
 
