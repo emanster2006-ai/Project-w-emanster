@@ -21,4 +21,4 @@ them before using this code with sensitive data.
 
 ## Known limitations of the input guard
 
-`security/input_guard.py` is pattern-based. It normalizes Unicode (NFKC), strips zero-width characters and collapses whitespace before matching, so simple obfuscation is caught. It does **not** reliably catch paraphrased injections, other languages, base64/rot13 encodings, or indirect injection hidden in ingested documents. Treat it as one layer; no block-rate figure has been measured yet.
+`security/input_guard.py` is pattern-based. It normalizes Unicode (NFKC), strips zero-width characters and collapses whitespace before matching, so simple obfuscation is caught. It does **not** reliably catch paraphrased injections, other languages, base64/rot13 encodings, or indirect injection hidden in ingested documents. Treat it as one layer; on a small unseen attack set it blocked 1 of 8 (see `docs/BENCHMARKS.md`).

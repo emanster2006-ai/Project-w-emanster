@@ -3,6 +3,8 @@ Prompt injection detection — pattern-based + keyword blocklist.
 OWASP LLM01 mitigation.
 """
 
+import base64
+import binascii
 import re
 import unicodedata
 
@@ -33,7 +35,29 @@ INJECTION_PATTERNS = [
     r"<\|?(im_start|im_end|system)\|?>",  # chat-template control tokens
 ]
 
+# Same attack in other common languages (fr/es/de)
+INJECTION_PATTERNS += [
+    r"ignor(ez|e|a|ar)\s+(toutes\s+)?(les\s+|todas\s+las\s+|las\s+)?(instructions|instrucciones)\s+(pr[ée]c[ée]dentes|anteriores)",
+    r"ignorier(e|en)\s+(alle\s+)?(vorherigen|bisherigen)\s+(anweisungen|instruktionen)",
+]
+
 _compiled = [re.compile(p, re.IGNORECASE) for p in INJECTION_PATTERNS]
+
+# Second layer: an attack usually pairs a directive verb with a reference to
+# the assistant's own rules/prompt. Either alone is common in benign queries.
+_DIRECTIVE = re.compile(
+    r"\b(pretend|translate|repeat|start your (reply|answer|response)|from now on"
+    r"|answer freely|without any (restrictions|rules|limits))\b",
+    re.IGNORECASE,
+)
+_SELF_REF = re.compile(
+    r"\b(earlier|previous|prior|hidden|secret|initial|original|given before)\b.{0,40}"
+    r"\b(rules?|setup|prompt|instructions?|text|message|conversation)\b"
+    r"|\byou (answer|respond|reply|are)\b.{0,30}\b(without|no)\b.{0,15}\b(restrictions?|rules?|limits?)\b"
+    r"|\bthe text you were given\b",
+    re.IGNORECASE,
+)
+_B64_TOKEN = re.compile(r"[A-Za-z0-9+/]{16,}={0,2}")
 
 
 # Zero-width / invisible characters used to split keywords past regexes
@@ -53,7 +77,25 @@ def is_injection_attempt(query: str) -> bool:
     other languages can still get through (see SECURITY.md).
     """
     query = _normalize(query)
-    for pattern in _compiled:
-        if pattern.search(query):
-            return True
-    return False
+    return _matches(query) or any(_matches(d) for d in _decoded_base64(query))
+
+
+def _matches(text: str) -> bool:
+    if any(p.search(text) for p in _compiled):
+        return True
+    return bool(_DIRECTIVE.search(text) and _SELF_REF.search(text))
+
+
+def _decoded_base64(text: str) -> list[str]:
+    """Decode base64-looking tokens so encoded payloads get the same checks."""
+    decoded = []
+    for token in _B64_TOKEN.findall(text):
+        try:
+            decoded.append(
+                base64.b64decode(token + "=" * (-len(token) % 4), validate=True).decode(
+                    "utf-8"
+                )
+            )
+        except (binascii.Error, UnicodeDecodeError, ValueError):
+            continue
+    return decoded

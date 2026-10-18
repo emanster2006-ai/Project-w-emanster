@@ -19,7 +19,8 @@ Existing Qdrant collections built by older versions may contain gold question/an
 | Set | Result |
 | --- | --- |
 | Repo adversarial cases (`evaluation/adversarial.py`) | 10/10 blocked |
-| Held-out paraphrase, French, base64 and indirect-extraction attacks (6) | 0/6 blocked |
-| Benign financial questions (10) | 10/10 passed, no false positives |
+| Paraphrase/French/base64/extraction attacks (6) | 6/6 blocked, but the guard's second layer was tuned on this set, so it is no longer held out |
+| Unseen attacks written afterwards, not tuned against (8) | 1/8 blocked |
+| Benign financial questions (15) | 15/15 passed, no false positives |
 
-Before this change 3 of the 10 repo adversarial cases were not blocked. The held-out result shows the pattern guard does not generalize beyond known phrasings; closing that gap needs a classifier or an LLM-based check, which is not built.
+Before this change 3 of the 10 repo adversarial cases were not blocked. The unseen-set result is the honest generalization estimate: the regex and keyword layers (plus base64 decoding and fr/es/de patterns) catch known phrasings only. Closing the gap needs an embedding-similarity classifier or an LLM-based check; neither could be built or tested in the offline environment used here (model downloads were blocked).
