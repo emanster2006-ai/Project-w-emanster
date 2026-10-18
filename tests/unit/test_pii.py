@@ -23,3 +23,40 @@ def test_clean_text_unchanged():
     sanitized, mapping = anonymize(text)
     assert len(mapping) == 0
     assert sanitized == text
+
+
+class _Hit:
+    def __init__(self, entity_type, start, end, score=0.9):
+        self.entity_type, self.start, self.end, self.score = (
+            entity_type,
+            start,
+            end,
+            score,
+        )
+
+
+def _stub_analyzer(monkeypatch, hits):
+    class Stub:
+        def analyze(self, **_):
+            return hits
+
+    monkeypatch.setattr("security.pii_handler._get_analyzer", lambda: Stub())
+
+
+def test_two_entities_of_same_type_roundtrip(monkeypatch):
+    text = "Alice Jones and Bob Lee asked about revenue"
+    _stub_analyzer(monkeypatch, [_Hit("PERSON", 0, 11), _Hit("PERSON", 16, 23)])
+    sanitized, mapping = anonymize(text)
+    assert sanitized == "<PERSON_0> and <PERSON_1> asked about revenue"
+    assert rehydrate(sanitized, mapping) == text
+
+
+def test_repeated_value_reuses_token_and_overlap_keeps_best(monkeypatch):
+    text = "Bob wrote to Bob"
+    _stub_analyzer(
+        monkeypatch,
+        [_Hit("PERSON", 0, 3), _Hit("PERSON", 13, 16), _Hit("LOCATION", 0, 3, 0.5)],
+    )
+    sanitized, mapping = anonymize(text)
+    assert sanitized == "<PERSON_0> wrote to <PERSON_0>"
+    assert rehydrate(sanitized, mapping) == text
