@@ -99,20 +99,12 @@ scripts/        ingest.py, generate_golden_dataset.py, run_ab_test.py
 
 ---
 
-## What works right now
+## Current evidence and remaining work
 
-- Full RAG pipeline: injection guard → PII anonymization → embed → hybrid search (dense + BM25 + RRF) → CrossEncoder rerank → LLM → cited answer
-- 1445 chunks from 150 real SEC 10-K filings ingested into Qdrant
-- 22/22 unit tests passing
-- Semantic cache (Redis), rate limiting, Langfuse tracing (optional)
-
-## What still needs building
-
-- Frontend (Next.js 15) — Emmanuel's area
-- Fly.io deployment
-- CI/CD GitHub Actions quality gate (DeepEval thresholds)
-- Golden dataset generation (`make golden`)
-- A/B test results (table in README is placeholder)
+- Backend and Next.js frontend are on main; ordinary CI covers backend tests, frontend lint/build, and Python checks.
+- Earlier local corpus counts are historical observations, not a reproducibility guarantee. Build a new evidence-only Qdrant collection for evaluation.
+- No published comparative benchmark results or verified complete hosted deployment. Provider-backed evaluation requires configured generation/judge keys and a currently available model.
+- `docs/BENCHMARKS.md` describes the artifact runner and remaining verification. `docs/ENGINEERING_DECISIONS.md` records tradeoffs.
 
 ---
 
@@ -129,3 +121,9 @@ scripts/        ingest.py, generate_golden_dataset.py, run_ab_test.py
 ## Portfolio verification update — 2026-10-18 UTC
 
 The existing frontend has been brought forward from feat/frontend into this review branch. Deterministic route/guard tests pass (30 cases) using requirements-test.txt; these substitute external services and do not measure live retrieval or PII detection quality. Formatting and lint pass. The frontend passes lint and production build. All 36 unit/integration tests also pass locally with requirements-unit.txt and en_core_web_lg. Full live-provider dependency installation, evaluation, and deployment are not yet verified here. Golden answers/questions have been removed from document metadata to prevent evaluation leakage. Public benchmark improvement claims must wait for recorded measurements.
+
+## Benchmark artifact update — 2026-10-18 UTC
+
+The comparison runner now records seeded question/configuration selection, dataset/corpus hashes, revision/model/package metadata, every attempt (including failures), retrieved context, judge explanations, and successful-sample bootstrap intervals. It rejects known gold metadata in collection payloads and refuses to overwrite earlier run directories. Time includes judging; token/cost metrics are unavailable. Sampling seeds do not make model outputs deterministic.
+
+Validation: all 44 unit/integration tests passed locally, including the new artifact failure/invalid-score checks; black and ruff pass. No provider-backed benchmark was run because generation/judge keys were not configured in the workspace. No comparative accuracy or latency claims are supported by these tests. Architecture documentation was corrected to describe the current evidence-snippet loader, optional live CI gate, and implementation limits.

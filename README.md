@@ -75,6 +75,12 @@ User Query
 
 This is a team project. Emmanuel focuses on the frontend, API integration, deployment, and CI/CD. Erik focuses on retrieval, evaluation, and ML. No numerical improvement is claimed until reproducible measurements are published.
 
+## Inspect the evidence
+
+- [Benchmark protocol, artifacts, and current limitations](docs/BENCHMARKS.md)
+- [Engineering decisions and tradeoffs](docs/ENGINEERING_DECISIONS.md)
+- [Public portfolio case study](https://github.com/emanster2006-ai/emanster2006-ai/blob/main/projects/secure-rag.md)
+
 ## Quick Start
 
 ```bash

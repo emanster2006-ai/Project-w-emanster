@@ -28,3 +28,6 @@ models/
 # Misc
 *.log
 .DS_Store
+
+# Generated benchmark artifacts: review before publishing
+evaluation/runs/
