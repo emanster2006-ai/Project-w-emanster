@@ -13,9 +13,7 @@ logger = logging.getLogger(__name__)
 
 _client = None
 _jinja_env = Environment(
-    loader=FileSystemLoader(
-        os.path.join(os.path.dirname(__file__), "prompts")
-    )
+    loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "prompts"))
 )
 
 

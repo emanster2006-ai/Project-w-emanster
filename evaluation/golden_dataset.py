@@ -49,14 +49,16 @@ def load_golden_dataset(path: Path = GOLDEN_DATASET_PATH) -> list[GoldenItem]:
             skipped += 1
             continue
 
-        items.append(GoldenItem(
-            question=q,
-            answer=a,
-            company=row.get("company"),
-            year=row.get("year"),
-            source=row.get("source"),
-            question_type=row.get("evolution_type", "factual"),
-        ))
+        items.append(
+            GoldenItem(
+                question=q,
+                answer=a,
+                company=row.get("company"),
+                year=row.get("year"),
+                source=row.get("source"),
+                question_type=row.get("evolution_type", "factual"),
+            )
+        )
 
     logger.info(f"Loaded {len(items)} golden items (skipped {skipped} incomplete)")
     return items
@@ -107,6 +109,10 @@ def dataset_stats() -> dict:
         "total": len(items),
         "by_type": by_type,
         "unique_companies": len(companies),
-        "avg_question_length": sum(len(i.question) for i in items) / len(items) if items else 0,
-        "avg_answer_length": sum(len(i.answer) for i in items) / len(items) if items else 0,
+        "avg_question_length": (
+            sum(len(i.question) for i in items) / len(items) if items else 0
+        ),
+        "avg_answer_length": (
+            sum(len(i.answer) for i in items) / len(items) if items else 0
+        ),
     }

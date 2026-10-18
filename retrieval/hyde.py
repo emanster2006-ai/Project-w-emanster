@@ -13,7 +13,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 _jinja_env = Environment(
-    loader=FileSystemLoader(os.path.join(os.path.dirname(__file__), "..", "generation", "prompts"))
+    loader=FileSystemLoader(
+        os.path.join(os.path.dirname(__file__), "..", "generation", "prompts")
+    )
 )
 
 

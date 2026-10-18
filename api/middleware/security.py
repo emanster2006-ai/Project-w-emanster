@@ -22,18 +22,24 @@ class SecurityMiddleware(BaseHTTPMiddleware):
             try:
                 body_bytes = await request.body()
                 body = json.loads(body_bytes)
-                question = body.get("question", "")
+                if not isinstance(body, dict) or not isinstance(
+                    body.get("question"), str
+                ):
+                    return await call_next(request)
+                question = body["question"]
 
                 # ── Length cap ─────────────────────────────────────────────
                 if len(question) > MAX_QUERY_LENGTH:
                     return JSONResponse(
                         status_code=400,
-                        content={"detail": f"Query exceeds max length of {MAX_QUERY_LENGTH} chars."},
+                        content={
+                            "detail": f"Query exceeds max length of {MAX_QUERY_LENGTH} chars."
+                        },
                     )
 
                 # ── Prompt injection detection ─────────────────────────────
                 if is_injection_attempt(question):
-                    logger.warning(f"Prompt injection attempt blocked: {question[:100]}")
+                    logger.warning("Prompt injection attempt blocked")
                     return JSONResponse(
                         status_code=400,
                         content={"detail": "Query contains disallowed patterns."},
@@ -41,15 +47,9 @@ class SecurityMiddleware(BaseHTTPMiddleware):
 
                 # ── PII anonymization ──────────────────────────────────────
                 sanitized, pii_mapping = anonymize(question)
-                body["question"] = sanitized
                 request.state.sanitized_question = sanitized
                 request.state.pii_mapping = pii_mapping
                 request.state.original_question = question
-
-                # Re-inject modified body
-                async def receive():
-                    return {"type": "http.request", "body": json.dumps(body).encode()}
-                request._receive = receive
 
             except (json.JSONDecodeError, KeyError):
                 pass  # let FastAPI handle malformed JSON

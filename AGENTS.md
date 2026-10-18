@@ -123,3 +123,9 @@ scripts/        ingest.py, generate_golden_dataset.py, run_ab_test.py
 - Instructor is used for structured outputs — always use `mode=instructor.Mode.JSON` (not TOOLS)
 - Presidio score threshold is 0.4 — below that is treated as not-PII
 - BM25 index is built lazily on first query and cached in memory — restart API after re-ingesting
+
+
+
+## Portfolio verification update — 2026-10-18 UTC
+
+The existing frontend has been brought forward from feat/frontend into this review branch. Deterministic route/guard tests pass (30 cases) using requirements-test.txt; these substitute external services and do not measure live retrieval or PII detection quality. Formatting and lint pass. The frontend passes lint and production build. All 36 unit/integration tests also pass locally with requirements-unit.txt and en_core_web_lg. Full live-provider dependency installation, evaluation, and deployment are not yet verified here. Golden answers/questions have been removed from document metadata to prevent evaluation leakage. Public benchmark improvement claims must wait for recorded measurements.
