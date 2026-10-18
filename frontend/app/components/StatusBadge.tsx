@@ -1,13 +1,6 @@
 // Server component — fetched at request time, no client JS
-interface DepStatus {
-  qdrant: string;
-  redis: string;
-  embedder: string;
-}
-
 interface HealthData {
   status: string;
-  dependencies: DepStatus;
 }
 
 async function fetchHealth(): Promise<HealthData | null> {
@@ -35,13 +28,12 @@ export default async function StatusBadge() {
         style={{ borderColor: "var(--border)", color: "var(--text-muted)" }}
       >
         <span className="w-1.5 h-1.5 rounded-full bg-zinc-500" />
-        API offline
+        API unavailable
       </span>
     );
   }
 
   const isOk = health.status === "ok";
-  const deps = health.dependencies;
 
   return (
     <div className="flex items-center gap-2">
@@ -53,20 +45,10 @@ export default async function StatusBadge() {
           className="w-1.5 h-1.5 rounded-full"
           style={{ background: isOk ? "#22c55e" : "#eab308" }}
         />
-        {isOk ? "All systems operational" : "Degraded"}
+        {isOk ? "API available" : "Degraded"}
       </span>
 
-      {!isOk && (
-        <span className="text-xs hidden sm:flex gap-2" style={{ color: "var(--text-muted)" }}>
-          {Object.entries(deps).map(([key, val]) =>
-            val !== "ok" ? (
-              <span key={key} className="text-yellow-500">
-                {key} down
-              </span>
-            ) : null
-          )}
-        </span>
-      )}
+
     </div>
   );
 }
