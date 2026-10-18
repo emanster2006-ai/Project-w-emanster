@@ -28,10 +28,12 @@ async def lifespan(app: FastAPI):
     logger.info("SecureRAG API starting up...")
 
     from ingestion.embedder import get_embedder
+
     get_embedder()
     logger.info("Embedding model loaded")
 
     from retrieval.vectorstore import get_vectorstore
+
     get_vectorstore()
     logger.info(f"Qdrant connected — collection: {os.getenv('QDRANT_COLLECTION_NAME')}")
 

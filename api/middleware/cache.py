@@ -29,6 +29,7 @@ async def get_redis():
 
 def _embed_query(query: str) -> np.ndarray:
     from ingestion.embedder import get_embedder
+
     embedder = get_embedder()
     vec = embedder.encode([query], normalize_embeddings=True)[0]
     return vec
@@ -50,7 +51,9 @@ async def check_cache(query: str) -> dict | None:
             if cached_emb_bytes is None:
                 continue
             cached_vec = np.frombuffer(cached_emb_bytes, dtype=np.float32)
-            sim = float(np.dot(query_vec, cached_vec))  # dot product = cosine (normalized)
+            sim = float(
+                np.dot(query_vec, cached_vec)
+            )  # dot product = cosine (normalized)
             if sim > best_sim:
                 best_sim = sim
                 best_key = key

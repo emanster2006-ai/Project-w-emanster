@@ -11,6 +11,7 @@ import logging
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 from dotenv import load_dotenv
+
 load_dotenv()
 
 logging.basicConfig(level=logging.INFO)
@@ -21,7 +22,6 @@ def generate_golden_dataset(n_questions: int = 100):
     from ragas.testset.generator import TestsetGenerator
     from ragas.testset.evolutions import simple, reasoning, multi_context
     from langchain_openai import ChatOpenAI, OpenAIEmbeddings
-    from llama_index.core import SimpleDirectoryReader
 
     logger.info(f"Generating {n_questions} golden Q&A pairs via Ragas...")
 
@@ -34,11 +34,14 @@ def generate_golden_dataset(n_questions: int = 100):
     from llama_index.core import Document as LIDoc
 
     docs = [
-        LIDoc(text=p.get("answer", ""), metadata={
-            "question": p["question"],
-            "company": p.get("company"),
-            "year": p.get("year"),
-        })
+        LIDoc(
+            text=p.get("answer", ""),
+            metadata={
+                "question": p["question"],
+                "company": p.get("company"),
+                "year": p.get("year"),
+            },
+        )
         for p in raw_pairs[:200]  # use first 200 as source material
     ]
 
@@ -68,12 +71,15 @@ def generate_golden_dataset(n_questions: int = 100):
     with open("evaluation/golden_dataset.json", "w") as f:
         json.dump(golden, f, indent=2)
 
-    logger.info(f"Saved {len(golden)} golden Q&A pairs to evaluation/golden_dataset.json")
+    logger.info(
+        f"Saved {len(golden)} golden Q&A pairs to evaluation/golden_dataset.json"
+    )
     return golden
 
 
 if __name__ == "__main__":
     import argparse
+
     parser = argparse.ArgumentParser()
     parser.add_argument("--n", type=int, default=100)
     args = parser.parse_args()
