@@ -13,6 +13,7 @@ from qdrant_client.models import (
     MatchValue,
 )
 from ingestion.embedder import embed_texts
+from retrieval.context import contextualize
 import numpy as np
 import os
 import uuid
@@ -57,7 +58,7 @@ def upsert_nodes(nodes: list, batch_size: int = 100):
     Generates dense embeddings; sparse vectors populated separately in hybrid.py
     """
     client = get_vectorstore()
-    texts = [n.get_content() for n in nodes]
+    texts = [contextualize(n.get_content(), n.metadata) for n in nodes]
     dense_vecs = embed_texts(texts, normalize=True)  # L2 normalized
 
     points = []

@@ -27,7 +27,9 @@ A real answer from the local stack (`make dev` plus a 10-filing FinanceBench sam
 
 ![SecureRAG frontend answering a question about 3M's 2018 capital expenditure with cited sources](docs/images/frontend-answer.png)
 
-**Caveats.** This is one cherry-picked success on a tiny corpus, not a benchmark. With the frontend's default settings (HyDE and decomposition on) the same question returned the right answer in 3 of 6 repeated runs and "Insufficient context" in the other 3. Source badges show the raw reranker score, not a percentage. See [docs/BENCHMARKS.md](docs/BENCHMARKS.md) for the evaluation protocol; no comparative results are published.
+**Caveats.** This screenshot is one successful answer on a 10-filing sample, not a benchmark. Retrieval is measured (see below), but end-to-end answer quality is not: before the latest changes, this same question answered correctly in 3 of 6 runs with the then-default settings and said "Insufficient context" in the other 3, and the latest code has only a handful of real-model runs because the free Groq tier's daily token cap (200,000 tokens) ran out during testing. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
+
+**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **90.0%** (135/150) with company/period chunk headers, up from 70.0% (105/150) without. Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 Before the stack is running, the frontend shows an "API unavailable" badge:
 
@@ -294,7 +296,7 @@ Full interactive docs at `http://localhost:8000/docs` after `make dev`.
 {
   "question": "What was Apple's revenue in FY2022?",
   "top_k": 5,
-  "use_hyde": true,
+  "use_hyde": false,
   "use_decomposition": true
 }
 ```
@@ -319,3 +321,8 @@ Full interactive docs at `http://localhost:8000/docs` after `make dev`.
 }
 ```
 
+**POST `/api/v1/ingest`** (operator only)
+
+Requires `Authorization: Bearer $INGEST_API_KEY`. With no `INGEST_API_KEY` configured the endpoint is disabled (503). Only one ingestion may run at a time (409 otherwise). Each run adds a full copy of the corpus, so point `QDRANT_COLLECTION_NAME` at a fresh collection instead of re-running into an existing one.
+
+**Errors:** `400` blocked or oversized query, `422` invalid request, `429` rate limited (this API's limiter, or the model provider's quota; includes `Retry-After`), `500` any other failure.

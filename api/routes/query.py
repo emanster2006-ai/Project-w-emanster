@@ -19,7 +19,9 @@ limiter = Limiter(key_func=get_remote_address)
 class QueryRequest(BaseModel):
     question: str = Field(..., min_length=3, max_length=2000)
     top_k: int = Field(default=5, ge=1, le=20)
-    use_hyde: bool = Field(default=True)
+    use_hyde: bool = Field(
+        default=False
+    )  # no measured retrieval gain; costs a model call
     use_decomposition: bool = Field(default=True)
     stream: bool = Field(default=True)
 
@@ -73,7 +75,13 @@ async def query(request: Request, body: QueryRequest):
 
     try:
         # ── 1. Semantic cache ──────────────────────────────────────────────
-        cached = None if pii_mapping else await check_cache(question)
+        cached = (
+            None
+            if pii_mapping
+            else await check_cache(
+                question, body.use_hyde, body.use_decomposition, body.top_k or 5
+            )
+        )
         if cached:
             logger.info("Cache hit for query")
             cached["cached"] = True
@@ -86,19 +94,26 @@ async def query(request: Request, body: QueryRequest):
             span = trace.span(name="decomposition")
             sub_questions = await decompose_query(question)
             if sub_questions and len(sub_questions) > 1:
-                queries_to_run = sub_questions
+                # Keep the original question too: sub-questions alone can drop the
+                # company, year or metric that the full question carries.
+                queries_to_run = [question, *sub_questions]
             span.end(output={"sub_questions": sub_questions})
 
         # ── 3. HyDE expansion ──────────────────────────────────────────────
-        retrieval_queries = []
+        # Always retrieve with the real question(s); HyDE passages are an addition, not a
+        # replacement, so entity and year terms in the question cannot be diluted away.
+        retrieval_queries = list(queries_to_run)
         if body.use_hyde:
             span = trace.span(name="hyde")
             for q in queries_to_run:
                 hypo_doc = await generate_hypothetical_doc(q)
-                retrieval_queries.append(hypo_doc)
-            span.end(output={"hyde_docs_generated": len(retrieval_queries)})
-        else:
-            retrieval_queries = queries_to_run
+                if hypo_doc:
+                    retrieval_queries.append(hypo_doc)
+            span.end(
+                output={
+                    "hyde_docs_generated": len(retrieval_queries) - len(queries_to_run)
+                }
+            )
 
         # ── 4. Hybrid retrieval + RRF fusion ───────────────────────────────
         span = trace.span(name="retrieval")
@@ -107,6 +122,17 @@ async def query(request: Request, body: QueryRequest):
             chunks = await hybrid_search(rq, top_k=int(os.getenv("TOP_K_RETRIEVE", 20)))
             all_chunks.extend(chunks)
         span.end(output={"chunks_retrieved": len(all_chunks)})
+
+        # The same chunk is usually returned by several queries; keep one copy so
+        # duplicates cannot crowd distinct evidence out of the top-k.
+        seen: set[str] = set()
+        unique_chunks = []
+        for c in all_chunks:
+            key = c["text"]
+            if key not in seen:
+                seen.add(key)
+                unique_chunks.append(c)
+        all_chunks = unique_chunks
 
         # ── 5. CrossEncoder reranking ──────────────────────────────────────
         span = trace.span(name="reranking")
@@ -150,11 +176,25 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 8. Cache the result ───────────────────────────────────────────
         if not pii_mapping:
-            await set_cache(question, result.model_dump())
+            await set_cache(
+                question,
+                result.model_dump(),
+                body.use_hyde,
+                body.use_decomposition,
+                body.top_k or 5,
+            )
 
         return result
 
     except Exception as e:
         logger.error(f"Query failed: {e}", exc_info=True)
         trace.update(level="ERROR", status_message=str(e))
+        from api.errors import is_rate_limited
+
+        if is_rate_limited(e):
+            raise HTTPException(
+                status_code=429,
+                detail="The language model is rate limited. Please retry shortly.",
+                headers={"Retry-After": "60"},
+            )
         raise HTTPException(status_code=500, detail="Query processing failed")

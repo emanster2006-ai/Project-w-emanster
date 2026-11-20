@@ -13,6 +13,7 @@ help:
 	@echo "  make eval      Run RAG evaluation harness (DeepEval)"
 	@echo "  make eval-adv  Run adversarial red-team evaluation"
 	@echo "  make ab-test   Run A/B pipeline comparison"
+	@echo "  make retrieval-bench  Retrieval recall benchmark (no API keys needed)"
 	@echo "  make lint      Run ruff linter"
 	@echo "  make format    Auto-format with black + ruff"
 	@echo "  make clean     Remove cache + temp files"
@@ -61,6 +62,9 @@ eval-adv:
 
 ab-test:
 	python scripts/run_ab_test.py
+
+retrieval-bench:
+	python scripts/retrieval_benchmark.py
 
 # ── Code Quality ──────────────────────────────────────────────────────────────
 lint:
