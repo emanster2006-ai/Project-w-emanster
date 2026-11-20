@@ -59,6 +59,7 @@ def endpoint(monkeypatch):
 
     monkeypatch.setattr(security, "anonymize", services.anonymize)
     query.limiter.reset()
+    ingest._running = False
     app = FastAPI()
     app.state.limiter = query.limiter
     app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)

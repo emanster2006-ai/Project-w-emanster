@@ -48,7 +48,7 @@ export async function submitQuery(
     signal,
     body: JSON.stringify({
       question,
-      use_hyde: true,
+      use_hyde: false,
       use_decomposition: true,
       top_k: 5,
     }),

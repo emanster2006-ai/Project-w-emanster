@@ -9,6 +9,7 @@ from jinja2 import Environment, FileSystemLoader
 import os
 import logging
 
+from generation.reasoning import reasoning_options
 from security.grounding import ungrounded_numbers
 
 logger = logging.getLogger(__name__)
@@ -71,6 +72,7 @@ async def generate_answer(question: str, context_chunks: list[dict]) -> str:
         ],
         max_tokens=1000,
         max_retries=2,  # instructor auto-retries if schema validation fails
+        **reasoning_options(os.getenv("LLM_REASONING_EFFORT", "medium")),
     )
 
     missing = ungrounded_numbers(response.answer, context_chunks)

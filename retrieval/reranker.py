@@ -5,11 +5,13 @@ returns top_k=5 final chunks for LLM context.
 """
 
 from sentence_transformers import CrossEncoder
+from retrieval.context import contextualize
 import logging
+import os
 
 logger = logging.getLogger(__name__)
 
-MODEL_NAME = "cross-encoder/ms-marco-MiniLM-L-6-v2"
+MODEL_NAME = os.getenv("RERANKER_MODEL", "cross-encoder/ms-marco-MiniLM-L-6-v2")
 _reranker = None
 
 
@@ -31,7 +33,9 @@ def rerank(query: str, chunks: list[dict], top_k: int = 5) -> list[dict]:
         return []
 
     reranker = get_reranker()
-    pairs = [(query, chunk["text"]) for chunk in chunks]
+    pairs = [
+        (query, contextualize(chunk["text"], chunk.get("metadata"))) for chunk in chunks
+    ]
     scores = reranker.predict(pairs)
 
     scored = sorted(
