@@ -169,4 +169,12 @@ async def query(request: Request, body: QueryRequest):
     except Exception as e:
         logger.error(f"Query failed: {e}", exc_info=True)
         trace.update(level="ERROR", status_message=str(e))
+        from api.errors import is_rate_limited
+
+        if is_rate_limited(e):
+            raise HTTPException(
+                status_code=429,
+                detail="The language model is rate limited. Please retry shortly.",
+                headers={"Retry-After": "60"},
+            )
         raise HTTPException(status_code=500, detail="Query processing failed")

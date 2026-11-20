@@ -7,6 +7,7 @@ require multiple retrievals. This breaks them into atomic sub-questions.
 import instructor
 from pydantic import BaseModel, Field
 from generation.llm import get_llm_client
+from generation.reasoning import reasoning_options
 import os
 import logging
 
@@ -51,6 +52,7 @@ async def decompose_query(question: str) -> list[str] | None:
             },
         ],
         max_tokens=400,
+        **reasoning_options("low"),
     )
 
     if result.needs_decomposition and result.sub_questions:

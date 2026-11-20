@@ -4,7 +4,7 @@ This is what production RAG systems actually use.
 Reciprocal Rank Fusion (RRF) formula: score = sum(1 / (k + rank_i)) where k=60
 """
 
-from retrieval.tokenize import tokenize
+from retrieval.context import contextualize
 from retrieval.vectorstore import dense_search, get_vectorstore
 from ingestion.embedder import embed_texts
 from rank_bm25 import BM25Okapi
@@ -68,7 +68,9 @@ def _get_bm25_index():
         _bm25_corpus = [
             {"text": r.payload.get("text", ""), "metadata": r.payload} for r in records
         ]
-        tokenized = [tokenize(doc["text"]) for doc in _bm25_corpus]
+        tokenized = [
+            contextualize(doc["text"], doc["metadata"]).lower().split() for doc in _bm25_corpus
+        ]
         _bm25_index = BM25Okapi(tokenized) if tokenized else None
         _bm25_count = count
         logger.info(f"BM25 index built with {len(_bm25_corpus)} documents")
@@ -88,7 +90,7 @@ async def hybrid_search(query: str, top_k: int = 20) -> list[dict]:
     # BM25 retrieval
     bm25, corpus = _get_bm25_index()
     if bm25 is not None and corpus:
-        tokenized_query = tokenize(query)
+        tokenized_query = query.lower().split()
         bm25_scores = bm25.get_scores(tokenized_query)
         top_bm25_indices = np.argsort(bm25_scores)[::-1][:top_k]
         bm25_results = [

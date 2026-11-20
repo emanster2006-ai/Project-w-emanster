@@ -25,6 +25,7 @@ async def generate_hypothetical_doc(question: str) -> str:
     Returns the hypothetical answer string (used for embedding, not shown to user).
     """
     from generation.llm import get_llm_client
+    from generation.reasoning import reasoning_options
 
     template = _jinja_env.get_template("hyde.j2")
     prompt = template.render(question=question)
@@ -35,6 +36,7 @@ async def generate_hypothetical_doc(question: str) -> str:
         messages=[{"role": "user", "content": prompt}],
         max_tokens=300,
         temperature=0.2,
+        **reasoning_options("low"),
     )
 
     hypothetical = response.choices[0].message.content.strip()

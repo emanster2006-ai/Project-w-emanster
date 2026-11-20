@@ -10,6 +10,7 @@ from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from slowapi.util import get_remote_address
 
+from api.middleware.headers import SecurityHeadersMiddleware
 from api.middleware.logging import LoggingMiddleware
 from api.middleware.security import SecurityMiddleware
 from api.routes import health, ingest, query
@@ -65,12 +66,17 @@ def create_app() -> FastAPI:
 
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=["http://localhost:3000"],
+        allow_origins=[
+            o.strip()
+            for o in os.getenv("CORS_ORIGINS", "http://localhost:3000").split(",")
+            if o.strip()
+        ],
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],
     )
     app.add_middleware(LoggingMiddleware)
+    app.add_middleware(SecurityHeadersMiddleware)
     app.add_middleware(SecurityMiddleware)
 
     app.state.limiter = limiter
