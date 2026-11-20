@@ -34,7 +34,7 @@ async def decompose_query(question: str) -> list[str] | None:
         client = instructor.from_openai(raw_client, mode=instructor.Mode.JSON)
 
     result = client.chat.completions.create(
-        model=os.getenv("LLM_MODEL", "llama-3.1-70b-versatile"),
+        model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
         response_model=DecomposedQuery,
         messages=[
             {

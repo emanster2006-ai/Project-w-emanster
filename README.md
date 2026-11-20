@@ -23,9 +23,15 @@ The system decomposes multi-hop questions, retrieves relevant passages using hyb
 
 ## Demo
 
-![SecureRAG frontend: question box, example questions, and API status badge](docs/images/frontend-home.png)
+A real answer from the local stack (`make dev` plus a 10-filing FinanceBench sample, `openai/gpt-oss-120b` on Groq, Nov 2026). The reference answer for this question in FinanceBench is $1,577 million.
 
-*The Next.js frontend (`frontend/`) running on its own. The "API unavailable" badge appears because no backend was running when this screenshot was taken; start the stack with `make dev` and the badge reports the live API status.*
+![SecureRAG frontend answering a question about 3M's 2018 capital expenditure with cited sources](docs/images/frontend-answer.png)
+
+**Caveats.** This is one cherry-picked success on a tiny corpus, not a benchmark. With the frontend's default settings (HyDE and decomposition on) the same question returned the right answer in 3 of 6 repeated runs and "Insufficient context" in the other 3. Source badges show the raw reranker score, not a percentage. See [docs/BENCHMARKS.md](docs/BENCHMARKS.md) for the evaluation protocol; no comparative results are published.
+
+Before the stack is running, the frontend shows an "API unavailable" badge:
+
+![SecureRAG frontend with no backend running](docs/images/frontend-home.png)
 
 ---
 
@@ -65,7 +71,7 @@ User Query
     └──────────┬──────────┘
                │
     ┌──────────▼──────────┐
-    │  LLM Generation      │  Groq llama-3.1-70b + instructor validation
+    │  LLM Generation      │  Groq gpt-oss-120b + instructor validation
     └──────────┬──────────┘
                │
     ┌──────────▼──────────┐
@@ -208,7 +214,7 @@ make ab-test    # run A/B pipeline comparison
 | Vector DB | Qdrant (dense + sparse collections) |
 | Embeddings | SentenceTransformers `all-MiniLM-L6-v2` |
 | Reranker | CrossEncoder `ms-marco-MiniLM-L-6-v2` |
-| LLM | Groq `llama-3.1-70b-versatile` (free tier) + OpenAI fallback |
+| LLM | Groq `openai/gpt-oss-120b` (free tier; Groq retires models, see `.env.example`) + OpenAI fallback |
 | Structured output | `instructor` (NOT Guardrails RAIL — deprecated) |
 | Cache | Redis (semantic cosine similarity) |
 | PII | Microsoft Presidio |

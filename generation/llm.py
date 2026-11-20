@@ -63,7 +63,7 @@ async def generate_answer(question: str, context_chunks: list[dict]) -> str:
         client = instructor.from_openai(raw_client, mode=instructor.Mode.JSON)
 
     response = client.chat.completions.create(
-        model=os.getenv("LLM_MODEL", "llama-3.1-70b-versatile"),
+        model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
         response_model=FinancialRAGResponse,
         messages=[
             {"role": "system", "content": system_prompt},

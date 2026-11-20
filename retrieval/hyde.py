@@ -31,7 +31,7 @@ async def generate_hypothetical_doc(question: str) -> str:
 
     client = get_llm_client()
     response = client.chat.completions.create(
-        model=os.getenv("LLM_MODEL", "llama-3.1-70b-versatile"),
+        model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
         messages=[{"role": "user", "content": prompt}],
         max_tokens=300,
         temperature=0.7,
