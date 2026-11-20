@@ -34,7 +34,7 @@ async def generate_hypothetical_doc(question: str) -> str:
         model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
         messages=[{"role": "user", "content": prompt}],
         max_tokens=300,
-        temperature=0.7,
+        temperature=0.2,
     )
 
     hypothetical = response.choices[0].message.content.strip()

@@ -4,6 +4,7 @@ This is what production RAG systems actually use.
 Reciprocal Rank Fusion (RRF) formula: score = sum(1 / (k + rank_i)) where k=60
 """
 
+from retrieval.tokenize import tokenize
 from retrieval.vectorstore import dense_search, get_vectorstore
 from ingestion.embedder import embed_texts
 from rank_bm25 import BM25Okapi
@@ -28,7 +29,7 @@ def reciprocal_rank_fusion(
 
     for ranked_list in ranked_lists:
         for rank, item in enumerate(ranked_list):
-            key = item["text"][:100]  # dedup key
+            key = item["text"]  # dedup key (full text: a 100-char prefix merged distinct chunks)
             scores[key] = scores.get(key, 0.0) + (1.0 / (k + rank + 1))
             items[key] = item
 
@@ -36,31 +37,40 @@ def reciprocal_rank_fusion(
     return [{**items[key], "score": scores[key]} for key in sorted_keys]
 
 
-# Module-level BM25 index (rebuilt on first call, then cached)
+# Module-level BM25 index, rebuilt whenever the collection's size changes
 _bm25_index = None
 _bm25_corpus = None
+_bm25_count = -1
 
 
 def _get_bm25_index():
     """
-    Build BM25 index from Qdrant collection.
-    In production, this would be rebuilt incrementally.
+    Build the BM25 index from the whole Qdrant collection (paginated).
+    Rebuilds automatically after ingestion, so no API restart is needed.
     """
-    global _bm25_index, _bm25_corpus
-    if _bm25_index is None:
-        client = get_vectorstore()
-        # Scroll all texts from Qdrant
-        records, _ = client.scroll(
-            collection_name=os.getenv("QDRANT_COLLECTION_NAME", "financebench"),
-            limit=10000,
-            with_payload=True,
-            with_vectors=False,
-        )
+    global _bm25_index, _bm25_corpus, _bm25_count
+    client = get_vectorstore()
+    collection = os.getenv("QDRANT_COLLECTION_NAME", "financebench")
+    count = client.count(collection_name=collection, exact=True).count
+    if _bm25_index is None or count != _bm25_count:
+        records, offset = [], None
+        while True:
+            batch, offset = client.scroll(
+                collection_name=collection,
+                limit=1000,
+                offset=offset,
+                with_payload=True,
+                with_vectors=False,
+            )
+            records.extend(batch)
+            if offset is None:
+                break
         _bm25_corpus = [
             {"text": r.payload.get("text", ""), "metadata": r.payload} for r in records
         ]
-        tokenized = [doc["text"].lower().split() for doc in _bm25_corpus]
+        tokenized = [tokenize(doc["text"]) for doc in _bm25_corpus]
         _bm25_index = BM25Okapi(tokenized) if tokenized else None
+        _bm25_count = count
         logger.info(f"BM25 index built with {len(_bm25_corpus)} documents")
     return _bm25_index, _bm25_corpus
 
@@ -78,7 +88,7 @@ async def hybrid_search(query: str, top_k: int = 20) -> list[dict]:
     # BM25 retrieval
     bm25, corpus = _get_bm25_index()
     if bm25 is not None and corpus:
-        tokenized_query = query.lower().split()
+        tokenized_query = tokenize(query)
         bm25_scores = bm25.get_scores(tokenized_query)
         top_bm25_indices = np.argsort(bm25_scores)[::-1][:top_k]
         bm25_results = [

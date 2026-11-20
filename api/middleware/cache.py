@@ -11,6 +11,8 @@ import os
 import hashlib
 import logging
 
+from api.middleware.cache_key import is_reusable, options_key, signature
+
 logger = logging.getLogger(__name__)
 
 REDIS_URL = os.getenv("REDIS_URL", "redis://localhost:6379")
@@ -35,36 +37,40 @@ def _embed_query(query: str) -> np.ndarray:
     return vec
 
 
-async def check_cache(query: str) -> dict | None:
-    """Return cached response if a semantically similar query exists."""
+# v2: payloads carry a signature and the request options so a similar-sounding question
+# about a different year/company, or asked with other settings, never reuses an answer.
+EMB_PREFIX = "cache:v2:emb:"
+RESP_PREFIX = "cache:v2:resp:"
+
+
+async def check_cache(
+    query: str, use_hyde: bool = True, use_decomposition: bool = True, top_k: int = 5
+) -> dict | None:
+    """Return a cached response for a semantically similar, compatible query."""
     try:
         r = await get_redis()
         query_vec = _embed_query(query)
+        options = options_key(use_hyde, use_decomposition, top_k)
 
-        # Scan all cached embedding keys
-        keys = await r.keys("cache:emb:*")
-        best_sim = 0.0
-        best_key = None
-
-        for key in keys:
+        candidates = []
+        for key in await r.keys(EMB_PREFIX + "*"):
             cached_emb_bytes = await r.get(key)
             if cached_emb_bytes is None:
                 continue
             cached_vec = np.frombuffer(cached_emb_bytes, dtype=np.float32)
-            sim = float(
-                np.dot(query_vec, cached_vec)
-            )  # dot product = cosine (normalized)
-            if sim > best_sim:
-                best_sim = sim
-                best_key = key
+            sim = float(np.dot(query_vec, cached_vec))  # normalized, so cosine
+            if sim >= THRESHOLD:
+                candidates.append((sim, key))
 
-        if best_sim >= THRESHOLD and best_key is not None:
-            # Get corresponding response
-            response_key = best_key.decode().replace("cache:emb:", "cache:resp:")
-            cached_response = await r.get(response_key)
-            if cached_response:
-                logger.info(f"Semantic cache hit (similarity={best_sim:.4f})")
-                return json.loads(cached_response)
+        for sim, key in sorted(candidates, reverse=True):
+            payload = await r.get(key.decode().replace(EMB_PREFIX, RESP_PREFIX))
+            if not payload:
+                continue
+            entry = json.loads(payload)
+            if is_reusable(query, entry["sig"], entry["options"], options):
+                logger.info(f"Semantic cache hit (similarity={sim:.4f})")
+                return entry["response"]
+            logger.info(f"Cache candidate rejected (similarity={sim:.4f}): details differ")
 
     except Exception as e:
         logger.warning(f"Cache check failed: {e}")
@@ -72,18 +78,24 @@ async def check_cache(query: str) -> dict | None:
     return None
 
 
-async def set_cache(query: str, response: dict) -> None:
+async def set_cache(
+    query: str,
+    response: dict,
+    use_hyde: bool = True,
+    use_decomposition: bool = True,
+    top_k: int = 5,
+) -> None:
     """Store query embedding + response in Redis."""
     try:
         r = await get_redis()
-        query_hash = hashlib.md5(query.encode()).hexdigest()
+        options = options_key(use_hyde, use_decomposition, top_k)
+        query_hash = hashlib.md5(f"{options}|{query}".encode()).hexdigest()
 
         query_vec = _embed_query(query)
-        emb_key = f"cache:emb:{query_hash}"
-        resp_key = f"cache:resp:{query_hash}"
+        entry = {"sig": sorted(signature(query)), "options": options, "response": response}
 
-        await r.setex(emb_key, TTL, query_vec.astype(np.float32).tobytes())
-        await r.setex(resp_key, TTL, json.dumps(response))
+        await r.setex(EMB_PREFIX + query_hash, TTL, query_vec.astype(np.float32).tobytes())
+        await r.setex(RESP_PREFIX + query_hash, TTL, json.dumps(entry))
 
     except Exception as e:
         logger.warning(f"Cache set failed: {e}")
