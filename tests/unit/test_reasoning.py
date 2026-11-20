@@ -14,7 +14,9 @@ def test_default_model_is_a_reasoning_model(monkeypatch):
     assert reasoning_options("low")["extra_body"]["reasoning_effort"] == "low"
 
 
-@pytest.mark.parametrize("model", ["llama-3.3-70b-versatile", "gpt-4o-mini", "qwen/qwen3-32b"])
+@pytest.mark.parametrize(
+    "model", ["llama-3.3-70b-versatile", "gpt-4o-mini", "qwen/qwen3-32b"]
+)
 def test_other_models_get_no_extra_arguments(monkeypatch, model):
     monkeypatch.setenv("LLM_MODEL", model)
     assert reasoning_options("low") == {}

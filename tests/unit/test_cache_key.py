@@ -27,5 +27,9 @@ def test_settings_must_match():
     q = "What was 3M's capital expenditure in fiscal year 2018?"
     sig = sorted(signature(q))
     assert is_reusable(q, sig, options_key(True, True, 5), options_key(True, True, 5))
-    assert not is_reusable(q, sig, options_key(True, True, 5), options_key(False, False, 5))
-    assert not is_reusable(q, sig, options_key(True, True, 5), options_key(True, True, 10))
+    assert not is_reusable(
+        q, sig, options_key(True, True, 5), options_key(False, False, 5)
+    )
+    assert not is_reusable(
+        q, sig, options_key(True, True, 5), options_key(True, True, 10)
+    )

@@ -70,7 +70,9 @@ async def check_cache(
             if is_reusable(query, entry["sig"], entry["options"], options):
                 logger.info(f"Semantic cache hit (similarity={sim:.4f})")
                 return entry["response"]
-            logger.info(f"Cache candidate rejected (similarity={sim:.4f}): details differ")
+            logger.info(
+                f"Cache candidate rejected (similarity={sim:.4f}): details differ"
+            )
 
     except Exception as e:
         logger.warning(f"Cache check failed: {e}")
@@ -92,9 +94,15 @@ async def set_cache(
         query_hash = hashlib.md5(f"{options}|{query}".encode()).hexdigest()
 
         query_vec = _embed_query(query)
-        entry = {"sig": sorted(signature(query)), "options": options, "response": response}
+        entry = {
+            "sig": sorted(signature(query)),
+            "options": options,
+            "response": response,
+        }
 
-        await r.setex(EMB_PREFIX + query_hash, TTL, query_vec.astype(np.float32).tobytes())
+        await r.setex(
+            EMB_PREFIX + query_hash, TTL, query_vec.astype(np.float32).tobytes()
+        )
         await r.setex(RESP_PREFIX + query_hash, TTL, json.dumps(entry))
 
     except Exception as e:

@@ -6,7 +6,10 @@ def is_rate_limited(exc: BaseException | None) -> bool:
     seen = set()
     while exc is not None and id(exc) not in seen:
         seen.add(id(exc))
-        if getattr(exc, "status_code", None) == 429 or type(exc).__name__ == "RateLimitError":
+        if (
+            getattr(exc, "status_code", None) == 429
+            or type(exc).__name__ == "RateLimitError"
+        ):
             return True
         # tenacity.RetryError keeps the real failure on its last attempt
         last = getattr(exc, "last_attempt", None)

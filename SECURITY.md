@@ -13,6 +13,14 @@ within a few days.
 - If you believe a key was exposed, revoke and rotate it immediately.
 - Secret scanning and push protection are enabled on this repository.
 
+## Operator endpoints and API hardening
+
+- `POST /api/v1/ingest` requires `INGEST_API_KEY` as a bearer token (constant-time comparison) and is disabled when the key is unset. It refuses concurrent runs.
+- API responses carry `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and `Cache-Control: no-store`.
+- CORS origins come from `CORS_ORIGINS` (default `http://localhost:3000`); set it explicitly in production.
+- The semantic cache only reuses an answer when the years, figures and named entities in the question match and the request settings are identical.
+- Known gap: the rate limiter keys on the client address, so behind a proxy or the Next.js rewrite all users share one bucket. Configure trusted forwarding headers before a public deployment.
+
 ## Scope
 
 SecureRAG is a research/portfolio project. Its prompt-injection and PII controls

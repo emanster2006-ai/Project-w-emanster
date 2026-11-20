@@ -9,9 +9,35 @@ import re
 
 _WORD = re.compile(r"[A-Za-z0-9&][A-Za-z0-9&.'\-]*")
 _STOP = {
-    "what", "which", "who", "how", "when", "where", "why", "is", "are", "was", "were",
-    "does", "do", "did", "the", "a", "an", "in", "of", "for", "and", "if", "assume",
-    "answer", "give", "compare", "i", "us", "u.s.",
+    "what",
+    "which",
+    "who",
+    "how",
+    "when",
+    "where",
+    "why",
+    "is",
+    "are",
+    "was",
+    "were",
+    "does",
+    "do",
+    "did",
+    "the",
+    "a",
+    "an",
+    "in",
+    "of",
+    "for",
+    "and",
+    "if",
+    "assume",
+    "answer",
+    "give",
+    "compare",
+    "i",
+    "us",
+    "u.s.",
 }
 
 
@@ -35,5 +61,7 @@ def options_key(use_hyde: bool, use_decomposition: bool, top_k: int) -> str:
     return f"h{int(use_hyde)}d{int(use_decomposition)}k{top_k}"
 
 
-def is_reusable(query: str, cached_signature: list[str], cached_options: str, options: str) -> bool:
+def is_reusable(
+    query: str, cached_signature: list[str], cached_options: str, options: str
+) -> bool:
     return cached_options == options and signature(query) == frozenset(cached_signature)

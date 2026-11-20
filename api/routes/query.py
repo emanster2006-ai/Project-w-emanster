@@ -19,7 +19,9 @@ limiter = Limiter(key_func=get_remote_address)
 class QueryRequest(BaseModel):
     question: str = Field(..., min_length=3, max_length=2000)
     top_k: int = Field(default=5, ge=1, le=20)
-    use_hyde: bool = Field(default=True)
+    use_hyde: bool = Field(
+        default=False
+    )  # no measured retrieval gain; costs a model call
     use_decomposition: bool = Field(default=True)
     stream: bool = Field(default=True)
 
@@ -73,7 +75,13 @@ async def query(request: Request, body: QueryRequest):
 
     try:
         # ── 1. Semantic cache ──────────────────────────────────────────────
-        cached = None if pii_mapping else await check_cache(question, body.use_hyde, body.use_decomposition, body.top_k or 5)
+        cached = (
+            None
+            if pii_mapping
+            else await check_cache(
+                question, body.use_hyde, body.use_decomposition, body.top_k or 5
+            )
+        )
         if cached:
             logger.info("Cache hit for query")
             cached["cached"] = True
@@ -86,7 +94,9 @@ async def query(request: Request, body: QueryRequest):
             span = trace.span(name="decomposition")
             sub_questions = await decompose_query(question)
             if sub_questions and len(sub_questions) > 1:
-                queries_to_run = sub_questions
+                # Keep the original question too: sub-questions alone can drop the
+                # company, year or metric that the full question carries.
+                queries_to_run = [question, *sub_questions]
             span.end(output={"sub_questions": sub_questions})
 
         # ── 3. HyDE expansion ──────────────────────────────────────────────
@@ -99,7 +109,11 @@ async def query(request: Request, body: QueryRequest):
                 hypo_doc = await generate_hypothetical_doc(q)
                 if hypo_doc:
                     retrieval_queries.append(hypo_doc)
-            span.end(output={"hyde_docs_generated": len(retrieval_queries) - len(queries_to_run)})
+            span.end(
+                output={
+                    "hyde_docs_generated": len(retrieval_queries) - len(queries_to_run)
+                }
+            )
 
         # ── 4. Hybrid retrieval + RRF fusion ───────────────────────────────
         span = trace.span(name="retrieval")
@@ -162,7 +176,13 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 8. Cache the result ───────────────────────────────────────────
         if not pii_mapping:
-            await set_cache(question, result.model_dump(), body.use_hyde, body.use_decomposition, body.top_k or 5)
+            await set_cache(
+                question,
+                result.model_dump(),
+                body.use_hyde,
+                body.use_decomposition,
+                body.top_k or 5,
+            )
 
         return result
 

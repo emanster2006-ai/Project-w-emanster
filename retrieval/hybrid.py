@@ -29,7 +29,9 @@ def reciprocal_rank_fusion(
 
     for ranked_list in ranked_lists:
         for rank, item in enumerate(ranked_list):
-            key = item["text"]  # dedup key (full text: a 100-char prefix merged distinct chunks)
+            key = item[
+                "text"
+            ]  # dedup key (full text: a 100-char prefix merged distinct chunks)
             scores[key] = scores.get(key, 0.0) + (1.0 / (k + rank + 1))
             items[key] = item
 
@@ -69,7 +71,8 @@ def _get_bm25_index():
             {"text": r.payload.get("text", ""), "metadata": r.payload} for r in records
         ]
         tokenized = [
-            contextualize(doc["text"], doc["metadata"]).lower().split() for doc in _bm25_corpus
+            contextualize(doc["text"], doc["metadata"]).lower().split()
+            for doc in _bm25_corpus
         ]
         _bm25_index = BM25Okapi(tokenized) if tokenized else None
         _bm25_count = count

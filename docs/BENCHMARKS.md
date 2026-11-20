@@ -38,6 +38,25 @@ The one miss is `123-45-6789`, a sequential value Presidio rejects as an invalid
 
 Before this change, Presidio's default entities masked fiscal years, quarters and regions: only 3 of 8 benign questions were left unchanged (e.g. "from 2020 to 2022" became `<DATE_TIME_0>`), which would also degrade retrieval. The handler now masks only person/account identifiers (`PII_ENTITIES`). Detection quality on real user text and non-English input is unmeasured.
 
+## Retrieval benchmark (offline, 2026-11-20)
+
+`python scripts/retrieval_benchmark.py` (or `make retrieval-bench`) needs no API keys or LLM calls. For each of the 150 FinanceBench questions it runs the real hybrid search and reranker and checks whether a returned chunk was cut from that question's evidence text. The corpus is the evidence snippets only (962 chunks), so a perfect system scores 100%; the numbers compare retrieval changes against each other and say nothing about complete filings.
+
+| Change (all on the same 150 questions) | recall@20 (candidate pool) | recall@5 (after rerank) |
+| --- | --- | --- |
+| Before: chunk text only | 121/150 (80.7%) | 105/150 (70.0%) |
+| **Company / period header added to each chunk** | **144/150 (96.0%)** | **135/150 (90.0%)** |
+| Header + larger candidate pool (40) | 147/150 | 128/150 |
+| Header + `ms-marco-MiniLM-L-12-v2` reranker | 144/150 | 133/150 |
+| Header + `BAAI/bge-reranker-base` reranker | 144/150 | 130/150 |
+| Header + a regex tokenizer for BM25 | 144/150 | 135/150 (no change, not adopted) |
+
+Questions name the company and fiscal year, but evidence chunks rarely do, so retrieval could not match them. `retrieval/context.py` now prepends "company year filing" to each chunk for embedding, keyword search and reranking (stored text is unchanged). The larger pool and both alternative rerankers scored worse, so `ms-marco-MiniLM-L-6-v2` and a pool of 20 stay.
+
+On a 38-question subset with the header in place, question-only retrieval, HyDE-only and question+HyDE (old and new HyDE prompts) all scored 35/38 at recall@5. HyDE showed no measurable retrieval benefit and costs a model call per query, so `use_hyde` now defaults to false.
+
+**Re-ingest after upgrading.** Vectors in collections built before this change were embedded without the header. Build a fresh collection (see below) to get the full benefit; do not mix old and new points in one collection.
+
 ## Run and preserve the comparison
 
 From the repo root, after installing `requirements.txt`, configure provider keys privately and set `LLM_MODEL` to a model currently available from that provider. The historical example model may have been retired. Groq generation requires both `GROQ_API_KEY` and `OPENAI_API_KEY` (the latter for the judge); OpenAI generation uses `OPENAI_API_KEY`. `JUDGE_MODEL` defaults to `gpt-4o-mini`.
