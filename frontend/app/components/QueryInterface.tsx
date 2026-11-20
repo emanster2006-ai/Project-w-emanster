@@ -213,10 +213,11 @@ export default function QueryInterface() {
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <span
+                        title="Reranker relevance score (higher is more relevant; not a percentage)"
                         className="shrink-0 text-xs font-mono px-2 py-0.5 rounded"
                         style={{ background: "var(--surface-2)", color: "var(--accent)" }}
                       >
-                        {(src.score * 100).toFixed(0)}%
+                        {src.score.toFixed(2)}
                       </span>
                       <span className="truncate font-medium" style={{ color: "var(--text)" }}>
                         {src.company ?? src.source}
