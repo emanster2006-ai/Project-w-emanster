@@ -1,23 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-
-interface SourceChunk {
-  text: string;
-  source: string;
-  company: string | null;
-  year: string | null;
-  section: string | null;
-  score: number;
-}
-
-interface QueryResponse {
-  answer: string;
-  sources: SourceChunk[];
-  latency_ms: number;
-  cached: boolean;
-  sub_questions: string[] | null;
-}
+import { submitQuery, type QueryResponse } from "@/lib/queryApi";
 
 const EXAMPLE_QUESTIONS = [
   "What was Apple's R&D expense in fiscal year 2022?",
@@ -33,6 +17,9 @@ export default function QueryInterface() {
   const [error, setError] = useState<string | null>(null);
   const [expandedSources, setExpandedSources] = useState<Set<number>>(new Set());
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const abortRef = useRef<AbortController | null>(null);
+
+  useEffect(() => () => abortRef.current?.abort(), []);
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -43,7 +30,12 @@ export default function QueryInterface() {
 
   async function handleSubmit(q?: string) {
     const query = q ?? question;
-    if (!query.trim()) return;
+    if (!query.trim() || loading) return;
+
+    // Cancel any in-flight request so a slow older answer cannot overwrite a newer one.
+    abortRef.current?.abort();
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     setLoading(true);
     setError(null);
@@ -51,28 +43,16 @@ export default function QueryInterface() {
     setExpandedSources(new Set());
 
     try {
-      const res = await fetch("/api/v1/query", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          question: query,
-          use_hyde: true,
-          use_decomposition: true,
-          top_k: 5,
-        }),
-      });
-
-      if (!res.ok) {
-        const detail = await res.json().catch(() => ({}));
-        throw new Error(detail?.detail ?? `Server error ${res.status}`);
-      }
-
-      const data: QueryResponse = await res.json();
-      setResult(data);
+      const data = await submitQuery(query, controller.signal);
+      if (!controller.signal.aborted) setResult(data);
     } catch (err) {
+      if (controller.signal.aborted) return;
       setError(err instanceof Error ? err.message : "Unknown error");
     } finally {
-      setLoading(false);
+      if (abortRef.current === controller) {
+        abortRef.current = null;
+        setLoading(false);
+      }
     }
   }
 
@@ -98,6 +78,7 @@ export default function QueryInterface() {
         <textarea
           ref={textareaRef}
           rows={2}
+          aria-label="Question about SEC 10-K filings"
           placeholder="Ask a question about SEC 10-K filings…"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
@@ -155,7 +136,7 @@ export default function QueryInterface() {
 
       {/* Loading */}
       {loading && (
-        <div className="flex items-center gap-3" style={{ color: "var(--text-muted)" }}>
+        <div role="status" aria-live="polite" className="flex items-center gap-3" style={{ color: "var(--text-muted)" }}>
           <div className="h-4 w-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }} />
           <span className="text-sm">Running pipeline — hybrid retrieval + reranking…</span>
         </div>
@@ -163,14 +144,14 @@ export default function QueryInterface() {
 
       {/* Error */}
       {error && (
-        <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
+        <div role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
           {error}
         </div>
       )}
 
       {/* Result */}
       {result && (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-6" aria-live="polite">
           {/* Meta bar */}
           <div className="flex items-center gap-4 text-xs" style={{ color: "var(--text-muted)" }}>
             <span>{result.latency_ms.toFixed(0)} ms</span>
@@ -228,6 +209,7 @@ export default function QueryInterface() {
                   <button
                     className="w-full flex items-center justify-between px-4 py-3 text-sm hover:bg-white/5 transition-colors"
                     onClick={() => toggleSource(i)}
+                    aria-expanded={expandedSources.has(i)}
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <span
