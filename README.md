@@ -21,6 +21,14 @@ The system decomposes multi-hop questions, retrieves relevant passages using hyb
 
 ---
 
+## Demo
+
+![SecureRAG frontend: question box, example questions, and API status badge](docs/images/frontend-home.png)
+
+*The Next.js frontend (`frontend/`) running on its own. The "API unavailable" badge appears because no backend was running when this screenshot was taken; start the stack with `make dev` and the badge reports the live API status.*
+
+---
+
 ## Architecture
 
 ```
@@ -74,6 +82,12 @@ User Query
 ## Portfolio and ownership
 
 This is a team project. Emmanuel focuses on the frontend, API integration, deployment, and CI/CD. Erik focuses on retrieval, evaluation, and ML. No numerical improvement is claimed until reproducible measurements are published.
+
+## Inspect the evidence
+
+- [Benchmark protocol, artifacts, and current limitations](docs/BENCHMARKS.md)
+- [Engineering decisions and tradeoffs](docs/ENGINEERING_DECISIONS.md)
+- [Public portfolio case study](https://github.com/emanster2006-ai/emanster2006-ai/blob/main/projects/secure-rag.md)
 
 ## Quick Start
 
