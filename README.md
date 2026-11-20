@@ -21,6 +21,14 @@ The system decomposes multi-hop questions, retrieves relevant passages using hyb
 
 ---
 
+## Demo
+
+![SecureRAG frontend: question box, example questions, and API status badge](docs/images/frontend-home.png)
+
+*The Next.js frontend (`frontend/`) running on its own. The "API unavailable" badge appears because no backend was running when this screenshot was taken; start the stack with `make dev` and the badge reports the live API status.*
+
+---
+
 ## Architecture
 
 ```
