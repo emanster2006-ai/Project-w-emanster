@@ -35,10 +35,3 @@ class FinancialRAGResponse(BaseModel):
             if flag.lower() in v.lower():
                 raise ValueError(f"Answer contains hallucination indicator: '{flag}'")
         return v
-
-    @field_validator("answer")
-    @classmethod
-    def no_competitor_data(cls, v: str) -> str:
-        """Prevent leaking info about companies not in retrieved context."""
-        # This is a placeholder — extend with your corpus's company list
-        return v
