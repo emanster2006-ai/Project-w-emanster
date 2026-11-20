@@ -24,6 +24,8 @@ rank-bm25==0.2.2            # BM25 for hybrid retrieval
 # ── Caching ───────────────────────────────────────────────────────────────────
 redis==5.1.1
 numpy==1.26.4
+pyarrow==17.0.0            # must stay <18: newer wheels require NumPy 2
+pandas==2.2.3              # pandas 3 needs a newer NumPy/pyarrow stack
 
 # ── Security ──────────────────────────────────────────────────────────────────
 presidio-analyzer==2.2.355
