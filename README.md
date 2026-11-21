@@ -29,7 +29,7 @@ A real answer from the local stack (`make dev` plus a 10-filing FinanceBench sam
 
 **Caveats.** This screenshot is one successful answer on a 10-filing sample, not a benchmark. Retrieval is measured (see below), but end-to-end answer quality is not: before the latest changes, this same question answered correctly in 3 of 6 runs with the then-default settings and said "Insufficient context" in the other 3, and the latest code has only a handful of real-model runs because the free Groq tier's daily token cap (200,000 tokens) ran out during testing. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
 
-**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **90.0%** (135/150) with company/period chunk headers, up from 70.0% (105/150) without; the default context is now the top 8, which reaches **94.7%** (142/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **94.0%** (141/150), up from 70.0% (105/150) at the start. Company/period chunk headers gave 90.0%, and fiscal-year-aware reranking the rest. The default context is the top 8, which reaches **96.0%** (144/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 Before the stack is running, the frontend shows an "API unavailable" badge:
 
@@ -89,7 +89,7 @@ User Query
 
 ## Portfolio and ownership
 
-This is a team project. Emmanuel focuses on the frontend, API integration, deployment, and CI/CD. Erik focuses on retrieval, evaluation, and ML. No numerical improvement is claimed until reproducible measurements are published.
+This is a team project. Erik built the initial scaffold, the evaluation framework and the first retrieval pipeline. Emmanuel built the frontend, API integration, CI/CD and security hardening, and measured and improved retrieval: the reproducible benchmark (`make retrieval-bench`), contextual chunk headers and fiscal-year-aware reranking, which took top-5 recall from 70.0% to 94.0% (top-8: 96.0%) on 150 FinanceBench questions (see [docs/BENCHMARKS.md](docs/BENCHMARKS.md)).
 
 ## Inspect the evidence
 
@@ -224,7 +224,7 @@ make ab-test    # run A/B pipeline comparison
 | Tracing | Langfuse |
 | Ingestion | unstructured[pdf] + HuggingFace datasets |
 | Frontend | Next.js 16 + Tailwind CSS |
-| Deploy | Vercel / Fly.io configuration (deployment not independently verified) |
+| Deploy | Vercel + Hugging Face Spaces or Fly.io; steps in [docs/DEPLOY.md](docs/DEPLOY.md) |
 | CI | GitHub Actions |
 
 ---
@@ -282,8 +282,8 @@ make ab-test    # run A/B pipeline comparison
 
 ## Team
 
-- **Erik** — DS/ML: retrieval pipeline, evaluation framework, A/B testing, embedding fine-tuning
-- **Emmanuel** — SWE: Next.js frontend, Fly.io deployment, CI/CD, API integration
+- **Erik** — DS/ML: initial scaffold, first retrieval pipeline, evaluation framework, A/B testing
+- **Emmanuel** — SWE: Next.js frontend, API integration, CI/CD, security hardening, retrieval benchmark and recall improvements (70% to 94% top-5), deployment
 
 ---
 

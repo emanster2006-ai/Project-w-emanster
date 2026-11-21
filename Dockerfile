@@ -45,4 +45,6 @@ USER appuser
 
 EXPOSE 8000
 
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "2"]
+# Each worker loads its own models (2.5 GB measured with 2 workers), so hosted demos should use 1.
+# PORT is set by hosts such as Hugging Face Spaces (7860); defaults to 8000.
+CMD ["sh", "-c", "exec uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers ${UVICORN_WORKERS:-2}"]

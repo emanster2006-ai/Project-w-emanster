@@ -79,6 +79,10 @@ The cross-encoder rarely weighs the fiscal year in a question ("FY2018") against
 
 The bonus was chosen on these same 150 questions, so the gain may be slightly optimistic on unseen ones.
 
+Two-digit years ("FY20 and FY21") are also recognised, which recovered one more question: top-8 143/150 to **144/150 (96.0%)**, top-5 unchanged at 141/150.
+
+Tested and not adopted: an extra dense and BM25 search restricted to the named year's chunks. It raised the candidate pool from 144/150 to 148/150 (98.7%), but the reranker then dropped other evidence, so final top-5 (141/150) and top-8 (144/150) were unchanged while each question cost extra searches.
+
 On a 38-question subset with the header in place, question-only retrieval, HyDE-only and question+HyDE (old and new HyDE prompts) all scored 35/38 at recall@5. HyDE showed no measurable retrieval benefit and costs a model call per query, so `use_hyde` now defaults to false.
 
 **Re-ingest after upgrading.** Vectors in collections built before this change were embedded without the header. Build a fresh collection (see below) to get the full benefit; do not mix old and new points in one collection.
