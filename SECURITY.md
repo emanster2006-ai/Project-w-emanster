@@ -34,3 +34,9 @@ them before using this code with sensitive data.
 ## Answer grounding
 
 `security/grounding.py` compares the numbers in a generated answer with the retrieved context and logs a warning for any that do not appear. It is a heuristic (digits only, so unit conversions are flagged) and does not block or alter responses.
+
+## Dependency vulnerabilities
+
+- **Frontend:** `npm audit --audit-level=high` runs in CI and currently reports 0 vulnerabilities (Next.js 16.4.5).
+- **Python:** `pip-audit` runs in CI as a report. As of 2026-11-20 GitHub's Dependabot flags `llama-index` / `llama-index-core`, `unstructured`, `pyarrow`, `black` and `pytest` at their pinned versions. Patched releases need a major migration (llama-index 0.11 to 0.13+, NumPy 1 to 2 for pyarrow) that has not been regression-tested against the retrieval benchmark, so those pins are deliberately left for a dedicated upgrade rather than bumped blind. `black` and `pytest` are development tools and are not in the runtime image.
+- Dependabot is configured (`.github/dependabot.yml`) for npm, pip and GitHub Actions.

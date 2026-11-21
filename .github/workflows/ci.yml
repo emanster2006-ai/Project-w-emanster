@@ -44,6 +44,31 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      - name: Install browser for end-to-end tests
+        run: npx playwright install --with-deps chromium
+      - name: End-to-end tests (API mocked)
+        run: npm run e2e
+
+  dependency-audit:
+    name: Dependency vulnerability audit
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: npm audit (fails on high or critical)
+        working-directory: frontend
+        run: npm audit --audit-level=high
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      # Report only: some pinned Python packages need a major migration (see SECURITY.md).
+      - name: pip-audit (report only)
+        continue-on-error: true
+        run: |
+          pip install pip-audit
+          pip-audit -r requirements.txt --no-deps --disable-pip || true
 
   # ── Job 1: Lint + Format ───────────────────────────────────────────────────
   lint:
