@@ -29,7 +29,7 @@ A real answer from the local stack (`make dev` plus a 10-filing FinanceBench sam
 
 **Caveats.** This screenshot is one successful answer on a 10-filing sample, not a benchmark. Retrieval is measured (see below), but end-to-end answer quality is not: before the latest changes, this same question answered correctly in 3 of 6 runs with the then-default settings and said "Insufficient context" in the other 3, and the latest code has only a handful of real-model runs because the free Groq tier's daily token cap (200,000 tokens) ran out during testing. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
 
-**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **90.0%** (135/150) with company/period chunk headers, up from 70.0% (105/150) without. Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **90.0%** (135/150) with company/period chunk headers, up from 70.0% (105/150) without; the default context is now the top 8, which reaches **94.7%** (142/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 Before the stack is running, the frontend shows an "API unavailable" badge:
 
@@ -295,7 +295,7 @@ Full interactive docs at `http://localhost:8000/docs` after `make dev`.
 ```json
 {
   "question": "What was Apple's revenue in FY2022?",
-  "top_k": 5,
+  "top_k": 8,
   "use_hyde": false,
   "use_decomposition": true
 }

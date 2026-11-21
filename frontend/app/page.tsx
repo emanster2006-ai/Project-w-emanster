@@ -32,7 +32,7 @@ export default function Home() {
             <StatusBadge />
           </Suspense>
           <a
-            href="https://github.com/ErikEllis-git/Project-w-emanster"
+            href="https://github.com/emanster2006-ai/Project-w-emanster"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:underline"
@@ -51,7 +51,7 @@ export default function Home() {
               Financial Document Intelligence
             </h1>
             <p className="text-base" style={{ color: "var(--text-muted)" }}>
-              Multi-hop RAG over SEC 10-K filings — hybrid retrieval, HyDE, reranking, and OWASP LLM security guardrails.
+              Ask questions about SEC filings. Hybrid retrieval, reranking and prompt-injection guardrails, with every answer tied to its source passages.
             </p>
           </div>
 

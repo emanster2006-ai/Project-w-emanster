@@ -38,6 +38,35 @@ export function errorMessage(body: unknown, status: number): string {
   return `Server error ${status}`;
 }
 
+/** Error carrying the server's Retry-After hint (seconds) when rate limited. */
+export class ApiError extends Error {
+  constructor(
+    message: string,
+    public status: number,
+    public retryAfter: number | null = null,
+  ) {
+    super(message);
+    this.name = "ApiError";
+  }
+}
+
+export function parseRetryAfter(value: string | null): number | null {
+  if (!value) return null;
+  const seconds = Number(value);
+  return Number.isFinite(seconds) && seconds > 0 ? Math.ceil(seconds) : null;
+}
+
+/** True when the model declined to answer from the retrieved context. */
+export function isAbstention(answer: string): boolean {
+  return /insufficient context/i.test(answer);
+}
+
+/** Numbers like 1,577 or 24.26 that appear in the answer, for highlighting in sources. */
+export function figuresIn(answer: string): string[] {
+  const found = answer.match(/\d[\d,]*\.?\d*/g) ?? [];
+  return [...new Set(found.map((f) => f.replace(/[.,]$/, "")).filter((f) => f.length >= 3))];
+}
+
 export async function submitQuery(
   question: string,
   signal?: AbortSignal,
@@ -50,13 +79,17 @@ export async function submitQuery(
       question,
       use_hyde: false,
       use_decomposition: true,
-      top_k: 5,
+      top_k: 8,
     }),
   });
 
   if (!res.ok) {
     const body = await res.json().catch(() => null);
-    throw new Error(errorMessage(body, res.status));
+    throw new ApiError(
+      errorMessage(body, res.status),
+      res.status,
+      parseRetryAfter(res.headers?.get?.("Retry-After") ?? null),
+    );
   }
 
   return (await res.json()) as QueryResponse;

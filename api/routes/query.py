@@ -18,7 +18,7 @@ limiter = Limiter(key_func=get_remote_address)
 
 class QueryRequest(BaseModel):
     question: str = Field(..., min_length=3, max_length=2000)
-    top_k: int = Field(default=5, ge=1, le=20)
+    top_k: int = Field(default=8, ge=1, le=20)
     use_hyde: bool = Field(
         default=False
     )  # no measured retrieval gain; costs a model call
@@ -79,7 +79,7 @@ async def query(request: Request, body: QueryRequest):
             None
             if pii_mapping
             else await check_cache(
-                question, body.use_hyde, body.use_decomposition, body.top_k or 5
+                question, body.use_hyde, body.use_decomposition, body.top_k or 8
             )
         )
         if cached:
@@ -136,7 +136,7 @@ async def query(request: Request, body: QueryRequest):
 
         # ── 5. CrossEncoder reranking ──────────────────────────────────────
         span = trace.span(name="reranking")
-        top_k = body.top_k or int(os.getenv("TOP_K_RERANK", 5))
+        top_k = body.top_k or int(os.getenv("TOP_K_RERANK", 8))
         reranked_chunks = rerank(question, all_chunks, top_k=top_k)
         span.end(output={"chunks_after_rerank": len(reranked_chunks)})
 
@@ -181,7 +181,7 @@ async def query(request: Request, body: QueryRequest):
                 result.model_dump(),
                 body.use_hyde,
                 body.use_decomposition,
-                body.top_k or 5,
+                body.top_k or 8,
             )
 
         return result
