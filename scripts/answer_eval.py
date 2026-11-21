@@ -41,6 +41,16 @@ def figures(text: str) -> set[str]:
     }
 
 
+def close(want: set[str], got: set[str], rel: float = 0.01) -> bool:
+    """True if any wanted figure appears in got, allowing 1% rounding (24.26 vs 24.3)."""
+    for w in want:
+        for g in got:
+            fw, fg = float(w), float(g)
+            if fw == fg or (fw and abs(fw - fg) / abs(fw) <= rel):
+                return True
+    return False
+
+
 def load_rows() -> list[dict]:
     from datasets import load_dataset
 
@@ -85,8 +95,15 @@ def main() -> None:
 
     rows = load_rows()[:: args.stride][: args.limit]
     results = []
+    streak = 0
     for i, row in enumerate(rows, 1):
         resp = ask(args.url, row["question"], args.top_k, args.decompose)
+        streak = streak + 1 if "429" in str(resp.get("error", "")) else 0
+        if streak >= 3:
+            print(
+                "Stopping: 3 rate-limit errors in a row (provider quota). Rerun later."
+            )
+            break
         answer = resp.get("answer", "")
         answer_figs = figures(answer)
         source_text = " ".join(s.get("text", "") for s in resp.get("sources", []))
@@ -97,9 +114,9 @@ def main() -> None:
                 "question": row["question"],
                 "error": resp.get("error"),
                 "want": sorted(want),
-                "matched": bool(want & answer_figs),
+                "matched": close(want, answer_figs),
                 "abstained": "insufficient context" in answer.lower(),
-                "figure_in_sources": bool(want & source_figs),
+                "figure_in_sources": close(want, source_figs, rel=0.0),
                 "answer": answer[:300],
             }
         )
