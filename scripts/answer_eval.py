@@ -19,11 +19,25 @@ import time
 import urllib.request
 
 
+def _canon(num: str) -> str:
+    """Canonical form so '1,577', '1577.00' and '$1577' compare equal."""
+    value = float(num.replace(",", ""))
+    return str(int(value)) if value == int(value) else f"{value:g}"
+
+
 def figures(text: str) -> set[str]:
-    """Numbers of 3+ characters with thousands separators removed, e.g. '1,577' -> '1577'."""
+    """Distinctive numbers (3+ digits/characters after canonicalising) found in text."""
     found = re.findall(r"\d[\d,]*\.?\d*", text)
+    out = set()
+    for f in found:
+        f = f.rstrip(".,")
+        if f and len(f.replace(",", "").replace(".", "")) >= 2:
+            out.add(_canon(f))
+    # Drop plain years (FY2018 etc.): they appear in questions and answers regardless of correctness.
     return {
-        f.replace(",", "").rstrip(".") for f in found if len(f.replace(",", "")) >= 3
+        f
+        for f in out
+        if (len(f) >= 3 or "." in f) and not (f.isdigit() and 1990 <= int(f) <= 2035)
     }
 
 
@@ -32,8 +46,10 @@ def load_rows() -> list[dict]:
 
     rows = []
     for row in load_dataset("PatronusAI/financebench", split="train"):
-        ref = figures(row.get("answer") or "")
-        if ref and row.get("evidence"):
+        answer = row.get("answer") or ""
+        ref = figures(answer)
+        # Short numeric answers only: long qualitative ones cannot be scored by figure matching.
+        if ref and len(answer) <= 150 and row.get("evidence"):
             rows.append({"question": row["question"], "figures": sorted(ref)})
     return rows
 
@@ -80,6 +96,7 @@ def main() -> None:
             {
                 "question": row["question"],
                 "error": resp.get("error"),
+                "want": sorted(want),
                 "matched": bool(want & answer_figs),
                 "abstained": "insufficient context" in answer.lower(),
                 "figure_in_sources": bool(want & source_figs),
