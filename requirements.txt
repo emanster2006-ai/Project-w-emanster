@@ -17,7 +17,7 @@ instructor==1.4.3          # structured outputs via Pydantic (replaces Guardrail
 jinja2==3.1.4
 
 # ── Embeddings & Retrieval ────────────────────────────────────────────────────
-sentence-transformers==3.1.1
+sentence-transformers==6.3.0
 qdrant-client==1.11.3
 rank-bm25==0.2.2            # BM25 for hybrid retrieval
 
