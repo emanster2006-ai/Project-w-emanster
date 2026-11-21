@@ -1,25 +1,70 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
-import { submitQuery, type QueryResponse } from "@/lib/queryApi";
+import {
+  ApiError,
+  figuresIn,
+  isAbstention,
+  submitQuery,
+  type QueryResponse,
+} from "@/lib/queryApi";
 
+// Questions taken from the FinanceBench sample the demo index is built from,
+// so each one has its evidence in the corpus.
 const EXAMPLE_QUESTIONS = [
-  "What was Apple's R&D expense in fiscal year 2022?",
-  "Compare Microsoft and Google's operating margins for 2021.",
-  "How did Amazon's AWS revenue grow from 2020 to 2022?",
-  "What risk factors did Tesla cite in their 2022 10-K?",
+  "What was 3M's capital expenditure in fiscal year 2018?",
+  "What is the FY2019 fixed asset turnover ratio for Activision Blizzard?",
+  "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard?",
 ];
+
+function Highlighted({ text, terms }: { text: string; terms: string[] }) {
+  if (terms.length === 0) return <>{text}</>;
+  const escaped = terms.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"));
+  const parts = text.split(new RegExp(`(${escaped.join("|")})`, "g"));
+  return (
+    <>
+      {parts.map((part, i) =>
+        terms.includes(part) ? (
+          <mark key={i} className="rounded px-0.5" style={{ background: "rgba(99,102,241,0.35)", color: "var(--text)" }}>
+            {part}
+          </mark>
+        ) : (
+          <span key={i}>{part}</span>
+        ),
+      )}
+    </>
+  );
+}
 
 export default function QueryInterface() {
   const [question, setQuestion] = useState("");
   const [result, setResult] = useState<QueryResponse | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [retryIn, setRetryIn] = useState(0);
+  const [copied, setCopied] = useState(false);
   const [expandedSources, setExpandedSources] = useState<Set<number>>(new Set());
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const abortRef = useRef<AbortController | null>(null);
 
   useEffect(() => () => abortRef.current?.abort(), []);
+
+  // Count down after a rate-limit response so the user knows when to retry.
+  useEffect(() => {
+    if (retryIn <= 0) return;
+    const t = setTimeout(() => setRetryIn((n) => n - 1), 1000);
+    return () => clearTimeout(t);
+  }, [retryIn]);
+
+  async function copyAnswer(text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    } catch {
+      /* clipboard unavailable (insecure context); nothing to do */
+    }
+  }
 
   useEffect(() => {
     if (textareaRef.current) {
@@ -30,7 +75,7 @@ export default function QueryInterface() {
 
   async function handleSubmit(q?: string) {
     const query = q ?? question;
-    if (!query.trim() || loading) return;
+    if (!query.trim() || loading || retryIn > 0) return;
 
     // Cancel any in-flight request so a slow older answer cannot overwrite a newer one.
     abortRef.current?.abort();
@@ -39,6 +84,8 @@ export default function QueryInterface() {
 
     setLoading(true);
     setError(null);
+    setRetryIn(0);
+    setCopied(false);
     setResult(null);
     setExpandedSources(new Set());
 
@@ -48,6 +95,7 @@ export default function QueryInterface() {
     } catch (err) {
       if (controller.signal.aborted) return;
       setError(err instanceof Error ? err.message : "Unknown error");
+      if (err instanceof ApiError && err.status === 429) setRetryIn(err.retryAfter ?? 30);
     } finally {
       if (abortRef.current === controller) {
         abortRef.current = null;
@@ -97,11 +145,11 @@ export default function QueryInterface() {
           </span>
           <button
             onClick={() => handleSubmit()}
-            disabled={loading || !question.trim()}
+            disabled={loading || retryIn > 0 || !question.trim()}
             className="px-4 py-2 rounded-lg text-sm font-medium text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             style={{ background: loading ? "var(--accent-hover)" : "var(--accent)" }}
           >
-            {loading ? "Searching…" : "Ask"}
+            {loading ? "Searching…" : retryIn > 0 ? `Retry in ${retryIn}s` : "Ask"}
           </button>
         </div>
       </div>
@@ -110,7 +158,7 @@ export default function QueryInterface() {
       {!result && !loading && (
         <div className="flex flex-col gap-2">
           <p className="text-xs font-medium uppercase tracking-widest" style={{ color: "var(--text-muted)" }}>
-            Example questions
+            Try a question from the demo index
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             {EXAMPLE_QUESTIONS.map((q) => (
@@ -138,7 +186,14 @@ export default function QueryInterface() {
       {loading && (
         <div role="status" aria-live="polite" className="flex items-center gap-3" style={{ color: "var(--text-muted)" }}>
           <div className="h-4 w-4 rounded-full border-2 border-t-transparent animate-spin" style={{ borderColor: "var(--accent)", borderTopColor: "transparent" }} />
-          <span className="text-sm">Running pipeline — hybrid retrieval + reranking…</span>
+          <span className="text-sm">Searching filings, reranking passages and writing an answer…</span>
+        </div>
+      )}
+      {loading && (
+        <div aria-hidden className="flex flex-col gap-3 animate-pulse">
+          <div className="h-24 rounded-2xl" style={{ background: "var(--surface)" }} />
+          <div className="h-10 rounded-xl" style={{ background: "var(--surface)" }} />
+          <div className="h-10 rounded-xl" style={{ background: "var(--surface)" }} />
         </div>
       )}
 
@@ -146,6 +201,7 @@ export default function QueryInterface() {
       {error && (
         <div role="alert" className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-400">
           {error}
+          {retryIn > 0 && <span> You can ask again in {retryIn}s.</span>}
         </div>
       )}
 
@@ -189,9 +245,26 @@ export default function QueryInterface() {
             className="rounded-2xl border p-6"
             style={{ background: "var(--surface)", borderColor: "var(--border)" }}
           >
+            {isAbstention(result.answer) && (
+              <p
+                className="mb-3 rounded-lg px-3 py-2 text-xs"
+                style={{ background: "var(--surface-2)", color: "var(--text-muted)" }}
+              >
+                The model could not find this in the retrieved passages. The demo index only holds
+                excerpts from 150 FinanceBench questions, so try one of the example questions or
+                check the sources below.
+              </p>
+            )}
             <p className="text-base leading-7" style={{ color: "var(--text)", whiteSpace: "pre-wrap" }}>
               {result.answer}
             </p>
+            <button
+              onClick={() => copyAnswer(result.answer)}
+              className="mt-4 text-xs underline-offset-2 hover:underline"
+              style={{ color: "var(--text-muted)" }}
+            >
+              {copied ? "Copied" : "Copy answer"}
+            </button>
           </div>
 
           {/* Sources */}
@@ -241,7 +314,9 @@ export default function QueryInterface() {
                       className="px-4 pb-4 text-sm leading-6 border-t"
                       style={{ color: "var(--text-muted)", borderColor: "var(--border)" }}
                     >
-                      <p className="pt-3 font-mono text-xs whitespace-pre-wrap">{src.text}</p>
+                      <p className="pt-3 font-mono text-xs whitespace-pre-wrap">
+                        <Highlighted text={src.text} terms={figuresIn(result.answer)} />
+                      </p>
                     </div>
                   )}
                 </div>
