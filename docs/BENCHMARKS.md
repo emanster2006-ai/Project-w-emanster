@@ -65,6 +65,20 @@ Same 150 questions, same index; only the number of reranked passages passed to t
 
 The candidate pool ceiling is 144/150. Going from 5 to 8 recovers cases like 3M FY2018 capex, where the right passage ranked 7th and the model correctly said "Insufficient context" because it never saw it. Going past 8 adds little for roughly 25% more prompt tokens, so the default is 8. Override with `TOP_K_RERANK` or the request's `top_k`.
 
+### Fiscal-year bonus in the reranker
+
+The cross-encoder rarely weighs the fiscal year in a question ("FY2018") against a chunk labelled 2022, so chunks from a year the question names get a score bonus (`RERANK_YEAR_BONUS`, default 3, `0` disables). Same 150 questions:
+
+| bonus | top-5 | top-8 |
+|---|---|---|
+| 0 | 135/150 (90.0%) | 142/150 (94.7%) |
+| 1 | 139/150 (92.7%) | 142/150 (94.7%) |
+| 2 | 140/150 (93.3%) | 142/150 (94.7%) |
+| **3 (default)** | **141/150 (94.0%)** | **143/150 (95.3%)** |
+| 5 | 141/150 (94.0%) | 143/150 (95.3%) |
+
+The bonus was chosen on these same 150 questions, so the gain may be slightly optimistic on unseen ones.
+
 On a 38-question subset with the header in place, question-only retrieval, HyDE-only and question+HyDE (old and new HyDE prompts) all scored 35/38 at recall@5. HyDE showed no measurable retrieval benefit and costs a model call per query, so `use_hyde` now defaults to false.
 
 **Re-ingest after upgrading.** Vectors in collections built before this change were embedded without the header. Build a fresh collection (see below) to get the full benefit; do not mix old and new points in one collection.
