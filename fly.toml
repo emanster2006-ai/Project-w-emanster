@@ -12,10 +12,8 @@ primary_region = "iad"
   ENVIRONMENT = "production"
   LOG_LEVEL = "INFO"
   TOP_K_RETRIEVE = "20"
-  TOP_K_RERANK = "5"
-  ENABLE_HYBRID_RETRIEVAL = "true"
-  ENABLE_HYDE = "true"
-  ENABLE_QUERY_DECOMPOSITION = "true"
+  TOP_K_RERANK = "8"
+  UVICORN_WORKERS = "1"
   RATE_LIMIT_PER_MINUTE = "20"
   MAX_QUERY_LENGTH = "2000"
 
@@ -25,6 +23,8 @@ primary_region = "iad"
 # QDRANT_URL          (Qdrant Cloud URL)
 # QDRANT_API_KEY      (Qdrant Cloud API key)
 # REDIS_URL           (Upstash Redis URL)
+# INGEST_API_KEY      (required to call /api/v1/ingest; unset = ingestion disabled)
+# CORS_ORIGINS        (your frontend URL, e.g. https://securerag.vercel.app)
 # LANGFUSE_PUBLIC_KEY
 # LANGFUSE_SECRET_KEY
 
@@ -42,8 +42,9 @@ primary_region = "iad"
     path = "/health"
     timeout = "5s"
 
+# Measured locally: 2.5 GB with 2 workers after the models load, so 1 GB is not enough. Use 1 worker and 2 GB (4 GB if you see out-of-memory restarts).
 [[vm]]
-  memory = "1gb"
+  memory = "2gb"
   cpu_kind = "shared"
   cpus = 1
 

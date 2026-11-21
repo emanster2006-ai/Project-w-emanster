@@ -11,6 +11,15 @@ def test_extracts_years_not_other_numbers():
     assert query_years("no year here") == set()
 
 
+def test_reads_two_digit_fiscal_years():
+    assert query_years("Did Pfizer grow its PPNE between FY20 and FY21?") == {
+        "2020",
+        "2021",
+    }
+    assert query_years("FY '19 revenue") == {"2019"}
+    assert query_years("FY2018 and FY 2019") == {"2018", "2019"}
+
+
 def test_bonus_only_for_named_year(monkeypatch):
     monkeypatch.setenv("RERANK_YEAR_BONUS", "3")
     scores = apply_year_bonus(

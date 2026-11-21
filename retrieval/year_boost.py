@@ -11,11 +11,14 @@ import re
 
 DEFAULT_BONUS = 3.0
 _YEAR = re.compile(r"(?<!\d)((?:19|20)\d{2})(?!\d)")
+_SHORT_FY = re.compile(r"\bFY\s?'?(\d{2})(?!\d)", re.IGNORECASE)
 
 
 def query_years(query: str) -> set[str]:
-    """Fiscal years named in the question, e.g. 'FY2018' or 'in 2018'."""
-    return set(_YEAR.findall(query))
+    """Fiscal years named in the question: 'FY2018', 'in 2018', 'FY20' or "FY '21"."""
+    years = set(_YEAR.findall(query))
+    years.update(f"20{yy}" for yy in _SHORT_FY.findall(query))
+    return years
 
 
 def year_bonus() -> float:
