@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from "vitest";
-import { errorMessage, submitQuery } from "./queryApi";
+import { ApiError, errorMessage, figuresIn, isAbstention, parseRetryAfter, submitQuery } from "./queryApi";
 
 describe("errorMessage", () => {
   it("returns a string detail as is", () => {
@@ -71,5 +71,42 @@ describe("submitQuery", () => {
       }),
     );
     await expect(submitQuery("hello")).rejects.toThrow("Server error 502");
+  });
+});
+
+describe("helpers", () => {
+  it("parses Retry-After seconds and rejects junk", () => {
+    expect(parseRetryAfter("60")).toBe(60);
+    expect(parseRetryAfter("1.2")).toBe(2);
+    expect(parseRetryAfter(null)).toBeNull();
+    expect(parseRetryAfter("soon")).toBeNull();
+    expect(parseRetryAfter("0")).toBeNull();
+  });
+
+  it("detects an abstaining answer", () => {
+    expect(isAbstention("Insufficient context to answer this question accurately.")).toBe(true);
+    expect(isAbstention("Capex was $1,577 million.")).toBe(false);
+  });
+
+  it("extracts distinctive figures for highlighting", () => {
+    expect(figuresIn("Capex was $1,577 million in 2018; ratio 24.26.")).toEqual(["1,577", "2018", "24.26"]);
+    expect(figuresIn("no numbers 5")).toEqual([]);
+  });
+
+  it("surfaces Retry-After on a 429", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn().mockResolvedValue({
+        ok: false,
+        status: 429,
+        headers: new Headers({ "Retry-After": "60" }),
+        json: async () => ({ detail: "Rate limited" }),
+      }),
+    );
+    const err = await submitQuery("hi").catch((e) => e);
+    expect(err).toBeInstanceOf(ApiError);
+    expect(err.status).toBe(429);
+    expect(err.retryAfter).toBe(60);
+    vi.unstubAllGlobals();
   });
 });

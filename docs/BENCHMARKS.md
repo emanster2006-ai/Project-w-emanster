@@ -53,6 +53,18 @@ Before this change, Presidio's default entities masked fiscal years, quarters an
 
 Questions name the company and fiscal year, but evidence chunks rarely do, so retrieval could not match them. `retrieval/context.py` now prepends "company year filing" to each chunk for embedding, keyword search and reranking (stored text is unchanged). The larger pool and both alternative rerankers scored worse, so `ms-marco-MiniLM-L-6-v2` and a pool of 20 stay.
 
+### How many passages the model sees (`top_k`)
+
+Same 150 questions, same index; only the number of reranked passages passed to the model changes:
+
+| top_k | evidence in final context |
+|---|---|
+| 5 | 135/150 (90.0%) |
+| **8 (new default)** | **142/150 (94.7%)** |
+| 10 | 143/150 (95.3%) |
+
+The candidate pool ceiling is 144/150. Going from 5 to 8 recovers cases like 3M FY2018 capex, where the right passage ranked 7th and the model correctly said "Insufficient context" because it never saw it. Going past 8 adds little for roughly 25% more prompt tokens, so the default is 8. Override with `TOP_K_RERANK` or the request's `top_k`.
+
 On a 38-question subset with the header in place, question-only retrieval, HyDE-only and question+HyDE (old and new HyDE prompts) all scored 35/38 at recall@5. HyDE showed no measurable retrieval benefit and costs a model call per query, so `use_hyde` now defaults to false.
 
 **Re-ingest after upgrading.** Vectors in collections built before this change were embedded without the header. Build a fresh collection (see below) to get the full benefit; do not mix old and new points in one collection.
