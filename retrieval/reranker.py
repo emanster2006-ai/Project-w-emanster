@@ -6,6 +6,7 @@ returns top_k=5 final chunks for LLM context.
 
 from sentence_transformers import CrossEncoder
 from retrieval.context import contextualize
+from retrieval.year_boost import apply_year_bonus
 import logging
 import os
 
@@ -36,7 +37,7 @@ def rerank(query: str, chunks: list[dict], top_k: int = 5) -> list[dict]:
     pairs = [
         (query, contextualize(chunk["text"], chunk.get("metadata"))) for chunk in chunks
     ]
-    scores = reranker.predict(pairs)
+    scores = apply_year_bonus(query, chunks, list(reranker.predict(pairs)))
 
     scored = sorted(
         zip(scores, chunks),
