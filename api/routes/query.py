@@ -66,12 +66,16 @@ async def query(request: Request, body: QueryRequest):
     from retrieval.decomposer import decompose_query
     from generation.llm import generate_answer
     from security.pii_handler import rehydrate
+    from api.tracing import start_trace
 
     question = getattr(request.state, "sanitized_question", body.question)
     pii_mapping = getattr(request.state, "pii_mapping", {})
     start = time.time()
-    langfuse = request.app.state.langfuse
-    trace = langfuse.trace(name="rag_query", input={"question": question})
+    trace = start_trace(
+        getattr(request.app.state, "langfuse", None),
+        name="rag_query",
+        input={"question": question},
+    )
 
     try:
         # ── 1. Semantic cache ──────────────────────────────────────────────
@@ -198,3 +202,5 @@ async def query(request: Request, body: QueryRequest):
                 headers={"Retry-After": "60"},
             )
         raise HTTPException(status_code=500, detail="Query processing failed")
+    finally:
+        trace.end()

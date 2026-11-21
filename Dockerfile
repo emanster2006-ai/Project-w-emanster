@@ -17,7 +17,9 @@ RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
 # Download spacy model for presidio NER
 # (pip --prefix installs no interpreter, so /install/bin/python does not exist; install the
 # model wheel matching spacy==3.7.5 straight into the same prefix instead.)
-RUN pip install --no-cache-dir --prefix=/install \
+# --no-deps: resolving the model's dependencies here would overwrite the pinned versions
+# installed above with whatever is newest.
+RUN pip install --no-cache-dir --no-deps --prefix=/install \
     https://github.com/explosion/spacy-models/releases/download/en_core_web_lg-3.7.1/en_core_web_lg-3.7.1-py3-none-any.whl
 
 # ── Stage 2: Runtime ────────────────────────────────────────────────────────
