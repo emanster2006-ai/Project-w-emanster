@@ -38,7 +38,7 @@ ragas==0.2.3
 scipy==1.14.1               # bootstrapping for A/B tests
 
 # ── Observability ─────────────────────────────────────────────────────────────
-langfuse==2.53.0
+langfuse==5.2.0
 
 # ── Ingestion ─────────────────────────────────────────────────────────────────
 unstructured[pdf,local-inference]==0.15.13
