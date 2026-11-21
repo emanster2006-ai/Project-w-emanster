@@ -11,13 +11,14 @@ slowapi==0.1.9
 llama-index==0.11.10
 llama-index-vector-stores-qdrant==0.3.2
 llama-index-embeddings-huggingface==0.3.1
-groq==0.11.0
+groq==1.7.0
 openai==1.51.0
 instructor==1.4.3          # structured outputs via Pydantic (replaces Guardrails RAIL)
 jinja2==3.1.4
 
 # ── Embeddings & Retrieval ────────────────────────────────────────────────────
-sentence-transformers==3.1.1
+sentence-transformers==6.3.0
+transformers>=5,<6
 qdrant-client==1.11.3
 rank-bm25==0.2.2            # BM25 for hybrid retrieval
 
@@ -42,7 +43,7 @@ langfuse==2.53.0
 
 # ── Ingestion ─────────────────────────────────────────────────────────────────
 unstructured[pdf,local-inference]==0.15.13
-huggingface-hub==0.25.2
+huggingface-hub>=1.3,<3
 datasets==3.0.1             # for FinanceBench download
 
 # ── Dev / Testing ─────────────────────────────────────────────────────────────
