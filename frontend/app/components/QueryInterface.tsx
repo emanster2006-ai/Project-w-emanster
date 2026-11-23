@@ -12,8 +12,8 @@ import {
 // Questions taken from the FinanceBench sample the demo index is built from,
 // so each one has its evidence in the corpus.
 const EXAMPLE_QUESTIONS = [
-  "What was 3M's capital expenditure in fiscal year 2018?",
-  "What is the FY2019 fixed asset turnover ratio for Activision Blizzard?",
+  "What was the largest liability in American Express's Balance Sheet in 2022?",
+  "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
   "What is the FY2017 - FY2019 3 year average of capex as a % of revenue for Activision Blizzard?",
 ];
 

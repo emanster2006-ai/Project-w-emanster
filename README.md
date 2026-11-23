@@ -7,7 +7,7 @@ An experimental system for financial questions over SEC filing evidence. Compara
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-> **Status:** The backend, security guardrails, and evaluation framework are on `main`. The Next.js frontend is included under `frontend/` in this branch. A/B benchmark numbers below are populated by running `make ab-test`.
+> **Status:** Backend, security guardrails, evaluation framework and the Next.js frontend (`frontend/`) are all on `main`. The demo runs locally (`make dev`); see [docs/DEPLOY.md](docs/DEPLOY.md) to host it.
 
 ---
 
@@ -23,17 +23,21 @@ The system decomposes multi-hop questions, retrieves relevant passages using hyb
 
 ## Demo
 
-A real answer from the local stack (`make dev` plus a 10-filing FinanceBench sample, `openai/gpt-oss-120b` on Groq, Nov 2026). The reference answer for this question in FinanceBench is $1,577 million.
+Real answers from the local stack (`make dev`, the 150-question FinanceBench index, `openai/gpt-oss-120b` on Groq, Nov 2026). FinanceBench's reference answer for this question is "Customer deposits".
 
-![SecureRAG frontend answering a question about 3M's 2018 capital expenditure with cited sources](docs/images/frontend-answer.png)
+![SecureRAG answering which liability was largest on American Express's 2022 balance sheet, with eight cited sources](docs/images/frontend-answer.png)
 
-**Caveats.** This screenshot is one successful answer on a 10-filing sample, not a benchmark. Retrieval is measured (see below), but end-to-end answer quality is not: before the latest changes, this same question answered correctly in 3 of 6 runs with the then-default settings and said "Insufficient context" in the other 3, and the latest code has only a handful of real-model runs because the free Groq tier's daily token cap (200,000 tokens) ran out during testing. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
+Opening a source shows the passage the answer came from, with the figure highlighted:
 
-**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether the right evidence passage reaches the top 5: **94.0%** (141/150), up from 70.0% (105/150) at the start. Company/period chunk headers gave 90.0%, and fiscal-year-aware reranking the rest. The default context is the top 8, which reaches **96.0%** (144/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+![The cited balance-sheet passage with $110,239 million in customer deposits highlighted](docs/images/frontend-source.png)
 
-Before the stack is running, the frontend shows an "API unavailable" badge:
+The home page offers three example questions. Each one answered correctly in testing against its FinanceBench reference (American Express: customer deposits; PepsiCo: a $400 million increase; Activision Blizzard: about 1.9%):
 
-![SecureRAG frontend with no backend running](docs/images/frontend-home.png)
+![SecureRAG home page with the API connected and three example questions](docs/images/frontend-home.png)
+
+**Caveats.** These are individual answers, not a benchmark. Retrieval is measured (below), but end-to-end answer accuracy is not: the free Groq tier's token limits stopped a full run. Some questions still miss. For example, "What was 3M's capital expenditure in 2018?" returns "Insufficient context", because the filing words it as "Purchases of property, plant and equipment" and that line sits in a different chunk from the cash-flow header that is retrieved. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
+
+**Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether a chunk from the right evidence passage reaches the top 5 (a long passage can span several chunks, so a hit does not guarantee the chunk holding the figure was retrieved): **94.0%** (141/150), up from 70.0% (105/150) at the start. Company/period chunk headers gave 90.0%, and fiscal-year-aware reranking the rest. The default context is the top 8, which reaches **96.0%** (144/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 ---
 
