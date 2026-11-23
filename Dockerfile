@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir --prefix=/install -r requirements.txt
+# The PyTorch CPU index offers "+cpu" builds, which pip prefers over the default wheel
+# that pulls ~4 GB of CUDA libraries the API never uses.
+RUN pip install --no-cache-dir --prefix=/install -r requirements.txt \
+    --extra-index-url https://download.pytorch.org/whl/cpu
 
 # Download spacy model for presidio NER
 # (pip --prefix installs no interpreter, so /install/bin/python does not exist; install the
@@ -38,12 +41,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy installed packages from builder
 COPY --from=builder /install /usr/local
 
-# Copy application source
-COPY . .
+# Non-root user for security; --chown avoids a second copy of the source in another layer.
+# UID 1000 matches the user Hugging Face Spaces runs containers as.
+RUN useradd -m -u 1000 appuser
 
-# Non-root user for security
-RUN useradd -m -u 1001 appuser && chown -R appuser:appuser /app
+# Copy application source (.dockerignore keeps .env, .git, frontend and data out)
+COPY --chown=appuser:appuser . .
 USER appuser
+
+# Load the reranker, BM25 index and PII models at startup instead of on the first question,
+# so a freshly started host answers its first request quickly.
+ENV WARM_UP_MODELS=1
 
 EXPOSE 8000
 

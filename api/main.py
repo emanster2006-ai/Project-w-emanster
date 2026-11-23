@@ -23,6 +23,27 @@ logger = logging.getLogger(__name__)
 limiter = Limiter(key_func=get_remote_address)
 
 
+def _warm_up() -> None:
+    """Load what the first question would otherwise load: reranker, BM25 index, PII models.
+
+    Each step is optional; a failure is logged and the model loads on first use instead.
+    """
+    from retrieval.hybrid import _get_bm25_index
+    from retrieval.reranker import get_reranker
+    from security.pii_handler import _get_analyzer
+
+    for name, load in (
+        ("reranker", get_reranker),
+        ("BM25 index", _get_bm25_index),
+        ("PII analyzer", _get_analyzer),
+    ):
+        try:
+            load()
+            logger.info(f"Warm-up: {name} ready")
+        except Exception as exc:
+            logger.warning(f"Warm-up: {name} failed ({exc}); it will load on first use")
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Initialize resources on startup, clean up on shutdown."""
@@ -37,6 +58,9 @@ async def lifespan(app: FastAPI):
 
     get_vectorstore()
     logger.info(f"Qdrant connected — collection: {os.getenv('QDRANT_COLLECTION_NAME')}")
+
+    if os.getenv("WARM_UP_MODELS") == "1":
+        _warm_up()
 
     app.state.langfuse = Langfuse(
         public_key=os.getenv("LANGFUSE_PUBLIC_KEY"),

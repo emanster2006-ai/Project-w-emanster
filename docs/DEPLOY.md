@@ -9,21 +9,25 @@ The demo has four pieces. Every one has a free tier, but check each provider's c
 | API | Hugging Face Spaces (Docker, free CPU) **or** Fly.io (paid) | runs FastAPI + the embedding and reranker models |
 | Frontend | Vercel (Hobby) | Next.js UI; proxies `/api/v1/*` to the API |
 
-**Sizing.** Measured locally, the API uses about 2.5 GB of RAM with 2 workers once the models load, and the image is about 15 GB. Run hosted demos with `UVICORN_WORKERS=1`. Fly's free-size machines (1 GB) run out of memory, so Fly needs a paid 2 GB+ machine; a free Hugging Face CPU Space has enough memory.
+**Sizing.** The API image installs CPU-only PyTorch and keeps `.git`, `frontend/`, `data/` and `.env` out through `.dockerignore`. Measured locally, the API uses about 2.5 GB of RAM with 2 workers once the models load. Run hosted demos with `UVICORN_WORKERS=1`. Fly's free-size machines (1 GB) run out of memory, so Fly needs a paid 2 GB+ machine; a free Hugging Face CPU Space has enough memory.
+
+**Cold starts.** The image sets `WARM_UP_MODELS=1`, so the reranker, BM25 index and PII models load at startup instead of on the first question, and the frontend proxy waits up to 120 s for the API. Free Spaces still sleep when idle; the first visit after a pause waits for the Space to start.
 
 ## 1. Qdrant Cloud
 
 1. Create a free cluster and copy its URL and API key.
-2. Ingest from your machine into it (embeddings run locally, no LLM key needed):
+2. Copy the local index into it. This copies vectors and payloads as they are, so nothing is re-embedded and no LLM key is needed. With the local stack running (`make dev`) and the collection built:
 
    ```sh
-   export QDRANT_URL=https://<cluster>.cloud.qdrant.io:6333
-   export QDRANT_API_KEY=<key>
-   export QDRANT_COLLECTION_NAME=financebench
-   python scripts/ingest.py
+   export TARGET_QDRANT_URL=https://<cluster>.cloud.qdrant.io:6333
+   export TARGET_QDRANT_API_KEY=<key>
+   docker cp scripts/copy_collection.py securerag_api:/tmp/
+   docker exec -e SOURCE_QDRANT_URL=http://qdrant:6333 \
+     -e TARGET_QDRANT_URL -e TARGET_QDRANT_API_KEY \
+     securerag_api python /tmp/copy_collection.py financebench_eval150_ctx
    ```
 
-3. Check it: `make retrieval-bench` against the same variables should report the numbers in [BENCHMARKS.md](BENCHMARKS.md).
+   It ends with `done: target has 962 points (source 962)`. To build the collection from scratch instead, run `scripts/ingest.py` against the cluster.
 
 ## 2. Upstash Redis
 
@@ -33,20 +37,17 @@ Create a free Redis database and copy its `rediss://` URL. The API runs without 
 
 ### Option A: Hugging Face Spaces (free)
 
-1. Create a Space with the **Docker** SDK.
-2. Push this repository to the Space (or connect it to GitHub). Add this header to the Space's `README.md`:
+1. Create a Space with the **Docker** SDK (blank template), for example `<user>/securerag-api`.
+2. Log in once with `hf auth login`, then push the committed code:
 
-   ```yaml
-   ---
-   title: SecureRAG API
-   sdk: docker
-   app_port: 7860
-   ---
+   ```sh
+   scripts/deploy_hf_space.sh <user>/securerag-api
    ```
 
-3. In the Space settings, add **variables**: `PORT=7860`, `UVICORN_WORKERS=1`, `QDRANT_COLLECTION_NAME=financebench`, `LLM_MODEL=openai/gpt-oss-120b`, `CORS_ORIGINS=https://<your-app>.vercel.app`.
+   The script sends only what the API needs, with a Space README that sets `sdk: docker` and `app_port: 7860`. Rerun it after merging changes.
+3. In the Space settings, add **variables**: `PORT=7860`, `UVICORN_WORKERS=1`, `QDRANT_COLLECTION_NAME=financebench_eval150_ctx`, `TOP_K_RERANK=8`, `LLM_MODEL=openai/gpt-oss-120b`, `CORS_ORIGINS=https://<your-app>.vercel.app`.
 4. Add **secrets**: `GROQ_API_KEY`, `QDRANT_URL`, `QDRANT_API_KEY`, `REDIS_URL`, and optionally `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY`. Leave `INGEST_API_KEY` unset so the public demo cannot re-index.
-5. The API URL is `https://<user>-<space>.hf.space`. Free Spaces sleep when idle, so the first request after a pause is slow.
+5. The API URL is `https://<user>-securerag-api.hf.space`. Watch the build in the Space's **Logs** tab; `/health` answers once it is running.
 
 ### Option B: Fly.io (paid)
 
@@ -60,7 +61,7 @@ fly deploy
 
 ## 4. Frontend on Vercel
 
-1. Import the repository and set the **root directory** to `frontend`.
+1. Import the GitHub repository and set the **root directory** to `frontend`.
 2. Set `API_URL` to the API URL from step 3. It is read at **build** time, so redeploy after changing it.
 3. Deploy and open the site; the header badge shows "API available" when the proxy reaches the API.
 
@@ -69,7 +70,7 @@ fly deploy
 ```sh
 curl -s https://<api>/health
 curl -s -X POST https://<api>/api/v1/query -H 'Content-Type: application/json' \
-  -d '{"question":"What is the FY2019 fixed asset turnover ratio for Activision Blizzard?"}'
+  -d '{"question":"What was the largest liability in American Express'"'"'s Balance Sheet in 2022?"}'
 ```
 
 Then ask one of the example questions in the UI. Put the Vercel link in the README's Demo section once it works.
@@ -78,3 +79,4 @@ Then ask one of the example questions in the UI. Put the Vercel link in the READ
 
 - Groq's free tier allows a limited number of tokens per minute and per day; each question uses several thousand. A public demo can exhaust it, and the API then returns 429 with `Retry-After`, which the UI shows as a countdown.
 - `RATE_LIMIT_PER_MINUTE` (default 20 per IP) caps abuse of your Groq quota.
+- Use a Groq key made for the demo, so it can be revoked without affecting anything else.
