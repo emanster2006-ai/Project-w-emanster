@@ -1,17 +1,17 @@
 # Deploying a live demo
 
-The demo has four pieces. Every one has a free tier, but check each provider's current limits before you start.
+The demo has four pieces. The vector store, cache and frontend have free tiers; the API needs about 1.5 GB of RAM, which no free tier we found provides without a billing account. Check each provider's current limits before you start.
 
 | Piece | Service | Why |
 |---|---|---|
 | Vector store | Qdrant Cloud (free cluster) | holds the indexed filing excerpts |
 | Cache | Upstash Redis (free database) | semantic answer cache |
-| API | Hugging Face Spaces (Docker, free CPU) **or** Fly.io (paid) | runs FastAPI + the embedding and reranker models |
+| API | Google Cloud Run (free monthly allowance; needs a billing account) **or** Hugging Face Spaces (Docker needs PRO) **or** Fly.io (paid) | runs FastAPI + the embedding and reranker models |
 | Frontend | Vercel (Hobby) | Next.js UI; proxies `/api/v1/*` to the API |
 
-**Sizing.** The API image installs CPU-only PyTorch and keeps `.git`, `frontend/`, `data/` and `.env` out through `.dockerignore`. Measured locally, the API uses about 2.5 GB of RAM with 2 workers once the models load. Run hosted demos with `UVICORN_WORKERS=1`. Fly's free-size machines (1 GB) run out of memory, so Fly needs a paid 2 GB+ machine; a free Hugging Face CPU Space has enough memory.
+**Sizing.** The API image installs CPU-only PyTorch and keeps `.git`, `frontend/`, `data/` and `.env` out through `.dockerignore`. Measured locally, the API uses about 2.5 GB of RAM with 2 workers once the models load. Run hosted demos with `UVICORN_WORKERS=1`. One worker uses about 1.5 GB, so 512 MB–1 GB free tiers (Render, Koyeb, Fly's small machines) run out of memory. As of Nov 2026, Hugging Face Docker Spaces require a PRO subscription.
 
-**Cold starts.** The image sets `WARM_UP_MODELS=1`, so the reranker, BM25 index and PII models load at startup instead of on the first question, and the frontend proxy waits up to 120 s for the API. Free Spaces still sleep when idle; the first visit after a pause waits for the Space to start.
+**Cold starts.** The image sets `WARM_UP_MODELS=1`, so the reranker, BM25 index and PII models load at startup instead of on the first question, and the frontend proxy waits up to 120 s for the API. Hosts that scale to zero still need about two minutes to start a new instance, so the first visit after a quiet period is slow.
 
 ## 1. Qdrant Cloud
 
@@ -35,7 +35,22 @@ Create a free Redis database and copy its `rediss://` URL. The API runs without 
 
 ## 3. API
 
-### Option A: Hugging Face Spaces (free)
+### Option A: Google Cloud Run
+
+Within Cloud Run's free monthly allowance for a low-traffic demo; storing the ~5 GB image in Artifact Registry costs about $0.50/month. Requires a Google Cloud project with billing enabled.
+
+1. Install the Google Cloud CLI and log in: `gcloud auth login`.
+2. Put the keys in a private file (`chmod 600`), one `KEY=value` per line: `QDRANT_URL`, `QDRANT_API_KEY`, `REDIS_URL`, `GROQ_API_KEY`.
+3. Deploy the committed code:
+
+   ```sh
+   scripts/deploy_cloud_run.sh <gcp-project-id> ~/securerag-cloud.env
+   ```
+
+   The script enables the needed APIs, stores the keys in Secret Manager, builds the image in Cloud Build (about 20 minutes; `.gcloudignore` keeps `.env`, `data/` and `frontend/` out of the upload) and deploys with 2 GiB, 1 worker, scale to zero and at most one instance. It prints the service URL.
+4. Optional: set a budget alert in Billing → Budgets & alerts.
+
+### Option B: Hugging Face Spaces (PRO)
 
 1. Create a Space with the **Docker** SDK (blank template), for example `<user>/securerag-api`.
 2. Log in once with `hf auth login`, then push the committed code:
@@ -49,7 +64,7 @@ Create a free Redis database and copy its `rediss://` URL. The API runs without 
 4. Add **secrets**: `GROQ_API_KEY`, `QDRANT_URL`, `QDRANT_API_KEY`, `REDIS_URL`, and optionally `LANGFUSE_PUBLIC_KEY` / `LANGFUSE_SECRET_KEY`. Leave `INGEST_API_KEY` unset so the public demo cannot re-index.
 5. The API URL is `https://<user>-securerag-api.hf.space`. Watch the build in the Space's **Logs** tab; `/health` answers once it is running.
 
-### Option B: Fly.io (paid)
+### Option C: Fly.io (paid)
 
 ```sh
 fly launch --no-deploy        # keeps fly.toml

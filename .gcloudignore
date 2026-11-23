@@ -1,0 +1,15 @@
+# Upload only what the API image needs to Cloud Build (never .env or local data).
+.gcloudignore
+.git
+.github
+.env
+.env.*
+!.env.example
+frontend/
+data/
+docs/
+.pytest_cache/
+.ruff_cache/
+**/__pycache__/
+.venv/
+node_modules/
