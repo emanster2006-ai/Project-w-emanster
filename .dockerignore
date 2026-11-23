@@ -1,0 +1,20 @@
+# Keep secrets and local state out of the image.
+.env
+.env.*
+!.env.example
+
+# Not needed to run the API.
+.git
+.github
+frontend
+data
+docs
+*.md
+!README.md
+.pytest_cache
+.ruff_cache
+**/__pycache__
+**/*.pyc
+.venv
+venv
+node_modules
