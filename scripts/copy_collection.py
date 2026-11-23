@@ -17,7 +17,9 @@ import sys
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct
 
-BATCH = 256
+# Small batches and a long timeout: free cloud clusters are slow to index large upserts.
+BATCH = 64
+TIMEOUT_S = 120
 
 
 def main() -> int:
@@ -35,7 +37,9 @@ def main() -> int:
         api_key=os.getenv("SOURCE_QDRANT_API_KEY") or None,
     )
     target = QdrantClient(
-        url=target_url, api_key=os.getenv("TARGET_QDRANT_API_KEY") or None
+        url=target_url,
+        api_key=os.getenv("TARGET_QDRANT_API_KEY") or None,
+        timeout=TIMEOUT_S,
     )
 
     info = source.get_collection(name)
