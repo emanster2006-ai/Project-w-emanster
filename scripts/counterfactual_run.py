@@ -180,6 +180,10 @@ async def run(args, manifest: dict) -> None:
         )
     path = out / "outputs.jsonl"
     done = {k for k, r in read_keyed(path).items() if not r["error"]}
+    spent = sum(
+        (r.get("prompt_tokens") or 0) + (r.get("completion_tokens") or 0)
+        for r in read_keyed(path).values()
+    )
     cases = [c for c in manifest["cases"] if c["split"] == args.split]
     calls = 0
     try:
@@ -196,8 +200,14 @@ async def run(args, manifest: dict) -> None:
                         continue
                     if args.limit is not None and calls >= args.limit:
                         raise _LimitReached
+                    if args.token_budget and spent >= args.token_budget:
+                        print(f"\nStopped: token budget {args.token_budget:,} reached.")
+                        return
                     rec = await run_one(system, case, ctx, arm)
                     calls += 1
+                    spent += (rec.get("prompt_tokens") or 0) + (
+                        rec.get("completion_tokens") or 0
+                    )
                     with path.open("a") as f:
                         f.write(json.dumps(rec) + "\n")
                     print(
@@ -306,6 +316,12 @@ def main() -> None:
     parser.add_argument("--manifest", default=str(MANIFEST))
     parser.add_argument("--limit", type=int, help="stop after this many model calls")
     parser.add_argument("--pause", type=float, default=0.0)
+    parser.add_argument(
+        "--token-budget",
+        type=int,
+        default=0,
+        help="stop once this run's metered tokens reach this total (0: no cap)",
+    )
     parser.add_argument("--summary", action="store_true")
     parser.add_argument("--check-fixtures", action="store_true")
     args = parser.parse_args()

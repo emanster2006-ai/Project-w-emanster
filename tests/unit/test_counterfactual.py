@@ -198,7 +198,12 @@ def bench(tmp_path, monkeypatch):
     monkeypatch.setitem(cr.SYSTEMS, "fake", fake)
     monkeypatch.setattr(cr.time, "sleep", lambda s: None)
     args = SimpleNamespace(
-        run=str(tmp_path / "run"), split="dev", systems=["fake"], limit=None, pause=0
+        run=str(tmp_path / "run"),
+        split="dev",
+        systems=["fake"],
+        limit=None,
+        pause=0,
+        token_budget=0,
     )
     return SimpleNamespace(
         args=args, manifest={"version": 1, "cases": [CASE]}, seen=seen

@@ -38,7 +38,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from answer_eval import close, figures  # noqa: E402  (same folder)
 
 UI_OPTIONS = {"use_hyde": False, "use_decomposition": True, "top_k": 8}
-LONG_WAIT_S = 300  # a Retry-After longer than this means a daily limit: stop the run
+# A Retry-After longer than this means a daily limit: stop the run. Providers with
+# hourly request limits (Cerebras: 150/hour) need RUN_MAX_WAIT_S=3700.
+LONG_WAIT_S = float(os.getenv("RUN_MAX_WAIT_S", 300))
 
 JUDGE_SYSTEM = """You grade answers to questions about company financial filings.
 Compare the CANDIDATE answer with the REFERENCE answer and give one label:
