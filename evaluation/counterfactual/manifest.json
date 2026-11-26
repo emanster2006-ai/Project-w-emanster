@@ -1,0 +1,140 @@
+{
+ "version": 1,
+ "frozen": false,
+ "notes": "Synthetic edits of FinanceBench evidence excerpts (CC BY-NC 4.0). Arms B-D are benchmark fixtures, not company figures. Edits keep the target's direct total (and, on balance sheets, the matching total-assets and total liabilities-and-equity rows) consistent; other derived figures are not changed. Arm D also removes any total the target could be recovered from by one addition or subtraction.",
+ "eligibility": "A FinanceBench question qualifies when (1) it asks for one reported figure (question_reasoning 'Information extraction', numeric reference answer of 60 characters or fewer), (2) the captured context contains that figure in the row and fiscal-year column the question asks for, and (3) the four arms can be built cleanly (leak check passes).",
+ "split_rule": "The three pilot cases go to dev, plus the remaining eligible case with the smallest SHA-256 of its id. Every other eligible case is reserved.",
+ "cases": [
+  {
+   "id": "financebench_id_04980",
+   "doc_name": "PEPSICO_2021_10K",
+   "split": "dev",
+   "pilot": true,
+   "metric": "FY2021 capital spending (cash flow statement)",
+   "unit": "billions",
+   "expected": {"A": 4.625, "B": 4.925, "C": 4.625},
+   "trap": {"B": 4.625, "C": 4.14, "D": 4.625},
+   "arms": {
+    "B": {
+     "ops": [
+      {"re": "\\(4,625\\)", "sub": "(4,925)"},
+      {"re": "Net Cash Used for Investing Activities\\n\\(3,269\\)", "sub": "Net Cash Used for Investing Activities\n(3,569)"}
+     ],
+     "gone": ["4,625", "3,269"],
+     "present": ["4,925"]
+    },
+    "C": {
+     "ops": [
+      {"re": "\\(4,240\\)", "sub": "(4,140)"},
+      {"re": "Net Cash Used for Investing Activities\\n\\(3,269\\)\\n\\(11,619\\)", "sub": "Net Cash Used for Investing Activities\n(3,269)\n(11,519)"}
+     ],
+     "gone": ["4,240", "11,619"],
+     "present": ["4,625", "4,140"]
+    },
+    "D": {
+     "ops": [
+      {"re": "Capital spending\\n(\\([\\d,]+\\)\\n){2}\\([\\d,]+\\)\\n?", "sub": ""},
+      {"re": "Net Cash Used for Investing Activities\\n(\\([\\d,]+\\)\\n){2}\\([\\d,]+\\)\\n?", "sub": ""}
+     ],
+     "gone": ["4,625", "3,269"]
+    }
+   },
+   "audit": "Capex row appears in three overlapping 2021-10-K chunks (FY2021 first column) and in a 2022-10-K chunk (FY2021 second column); all are edited. The FY2021 investing total sums exactly to -3,269 including capex, so B moves it with capex and D removes it. No prose mention of $4.6 billion in the captured chunks."
+  },
+  {
+   "id": "financebench_id_04417",
+   "doc_name": "BESTBUY_2019_10K",
+   "split": "dev",
+   "pilot": true,
+   "metric": "Merchandise inventories at fiscal year end 2019 (Feb 2, 2019)",
+   "unit": "millions",
+   "expected": {"A": 5409, "B": 5709, "C": 5409},
+   "trap": {"B": 5409, "C": 5109, "D": 5409},
+   "arms": {
+    "B": {
+     "ops": [
+      {"re": "Merchandiseinventories\\n\\n5,409 ", "sub": "Merchandiseinventories\n\n5,709 "},
+      {"re": "Totalcurrentassets\\n\\n8,870 ", "sub": "Totalcurrentassets\n\n9,170 "}
+     ],
+     "gone": ["5,409", "8,870"],
+     "present": ["5,709"]
+    },
+    "C": {
+     "ops": [
+      {"re": "(Merchandiseinventories\\n\\n5,409 \\n)5,209", "sub": "\\g<1>5,109"},
+      {"re": "(Totalcurrentassets\\n\\n8,870 \\n)9,829", "sub": "\\g<1>9,729"}
+     ],
+     "gone": ["5,209", "9,829"],
+     "present": ["5,409", "5,109"]
+    },
+    "D": {
+     "ops": [
+      {"re": "Merchandiseinventories\\n\\n5,409 \\n5,209\\n", "sub": ""},
+      {"re": "Totalcurrentassets\\n\\n8,870 \\n9,829\\n", "sub": ""}
+     ],
+     "gone": ["5,409", "8,870"]
+    }
+   },
+   "audit": "Inventories and total current assets appear once, in the FY2019 balance sheet chunk. Total assets is not in the captured context, so removing the inventories and total current assets rows leaves no one-step recovery."
+  },
+  {
+   "id": "financebench_id_03531",
+   "doc_name": "NIKE_2019_10K",
+   "split": "dev",
+   "pilot": true,
+   "metric": "Total current assets at May 31, 2019",
+   "unit": "millions",
+   "expected": {"A": 16525, "B": 16825, "C": 16525},
+   "trap": {"B": 16525, "C": 15034, "D": 16525},
+   "arms": {
+    "B": {
+     "ops": [
+      {"re": "(?<![\\d.,])16,525(?!\\d)", "sub": "16,825"},
+      {"re": "(Prepaid expenses and other current assets\\n)1,968", "sub": "\\g<1>2,268"},
+      {"re": "(?<![\\d.,])23,717(?!\\d)", "sub": "24,017"}
+     ],
+     "gone": ["16,525", "1,968", "23,717"],
+     "present": ["16,825"]
+    },
+    "C": {
+     "ops": [
+      {"re": "(Total current assets\\n16,525\\n)15,134", "sub": "\\g<1>15,034"},
+      {"re": "(Prepaid expenses and other current assets\\n1,968\\n)1,130", "sub": "\\g<1>1,030"},
+      {"re": "(23,717\\n\\$\\n)22,536", "sub": "\\g<1>22,436"}
+     ],
+     "gone": ["15,134", "1,130", "22,536"],
+     "present": ["16,525", "15,034"]
+    },
+    "D": {
+     "ops": [
+      {"re": "Total current assets\\n16,525(\\n15,134)?\\n?", "sub": ""},
+      {"re": "Prepaid expenses and other current assets\\n1,968(\\n1,130)?\\n?", "sub": ""},
+      {"re": "TOTAL ASSETS\\n\\$\\n23,717(\\n\\$(\\n22,536)?)?\\n?", "sub": ""},
+      {"re": "TOTAL LIABILITIES AND SHAREHOLDERS' EQUITY\\n\\$\\n23,717(\\n\\$(\\n22,536)?)?\\n?", "sub": ""}
+     ],
+     "gone": ["16,525", "1,968", "23,717"]
+    }
+   },
+   "audit": "The FY2019 balance sheet appears in three overlapping chunks (one truncated after TOTAL ASSETS). B and C move one component, the subtotal, total assets and total liabilities and equity by the same amount; equity line items are not changed. D removes the subtotal, one component (so the rest cannot be summed to it) and both balance-sheet totals."
+  }
+ ],
+ "pending": [
+  {"id": "financebench_id_01328", "doc_name": "PEPSICO_2022_10K", "metric": "FY2022 restructuring and impairment charges (411 = 33 + 347 + 31)"},
+  {"id": "financebench_id_03282", "doc_name": "NETFLIX_2017_10K", "metric": "Total current liabilities, Dec 31 2017 (in thousands in the filing)"},
+  {"id": "financebench_id_04209", "doc_name": "COSTCO_2021_10K", "metric": "Total assets, FY2021 (equals total liabilities and equity)"},
+  {"id": "financebench_id_04700", "doc_name": "MICROSOFT_2016_10K", "metric": "FY2016 total cost of revenue (also revenue minus gross margin)"},
+  {"id": "financebench_id_07661", "doc_name": "BLOCK_2020_10K", "metric": "FY2020 net cash provided by operating activities (in thousands)"},
+  {"id": "financebench_id_08286", "doc_name": "AMAZON_2019_10K", "metric": "FY2019 net income (third column)"},
+  {"id": "financebench_id_10285", "doc_name": "BOEING_2018_10K", "metric": "Property, plant and equipment, net, FY2018"}
+ ],
+ "excluded": [
+  {"id": "financebench_id_03029", "doc_name": "3M_2018_10K", "reason": "Retrieval miss: the FY2018 capital expenditure row is not in the captured context (the only 1,577 is 2022 work-in-process inventory)."},
+  {"id": "financebench_id_04672", "doc_name": "3M_2018_10K", "reason": "Retrieval miss: FY2018 net PP&E is not in the captured context."},
+  {"id": "financebench_id_03882", "doc_name": "AMCOR_2020_10K", "reason": "Retrieval miss: FY2020 net accounts receivable is not in the captured context."},
+  {"id": "financebench_id_04171", "doc_name": "MGMRESORTS_2018_10K", "reason": "Retrieval miss: FY2018 accounts payable is not in the captured context."},
+  {"id": "financebench_id_05718", "doc_name": "AMERICANWATERWORKS_2020_10K", "reason": "Retrieval miss: FY2020 dividends paid is not in the captured context."},
+  {"id": "financebench_id_00705", "doc_name": "PEPSICO_2023_8K_dated-2023-05-30", "reason": "Retrieval miss: the credit agreement amounts are not in the captured context."},
+  {"id": "financebench_id_00283", "doc_name": "Pfizer_2023Q2_10Q", "reason": "Retrieval miss: the Upjohn figure is not in the captured context."},
+  {"id": "financebench_id_01244", "doc_name": "CVSHEALTH_2022_10K", "reason": "A yes/no question, not a direct figure lookup."}
+ ]
+}

@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_04417",
+ "doc_name": "BESTBUY_2019_10K",
+ "question": "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
+ "captured_at": "2026-11-26T22:44:56+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What is the year end FY2019 total amount of inventories for Best Buy? Answer in USD millions. Base your judgments on the information provided primarily in the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nConsolidated Balance Sheets\n$ in millions, except per share and share amounts\n\n\nFebruary 2, 2019\n\nFebruary 3, 2018\nAssets\n \n \nCurrent assets\n \n \nCashandcashequivalents\n $\n1,980 $\n1,101\nShort-terminvestments\n\n \n2,032\nReceivables,net\n\n1,015 \n1,049\nMerchandiseinventories\n\n5,409 \n5,209\nOthercurrentassets\n\n466 \n438\nTotalcurrentassets\n\n8,870 \n9,829\nProperty and equipment\n \n \nLandandbuildings\n\n637 \n623\nLeaseholdimprovements\n\n2,119 \n2,327\nFixturesandequipment\n\n5,865 \n5,410\nPropertyundercapitalandfinancingleases\n\n579 \n340\nGrosspropertyandequipment\n\n9,200 \n8,700\nLessaccumulateddepreciation\n\n6,690 \n6,279\nNetpropertyandequipment\n\n2,510 \n2,",
+   "sha256": "319a8ffb33f1fb97e88feeed1387447721e0d1137d7f09dc23d15eea33fe696e",
+   "score": 2.5696825683116913,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Consolidated Statements of Cash Flows\n$ in millions\n \n \n \n \n \n \n \n \n \n \n \n \n \n \nFiscal Years Ended\nJanuary 28, 2023\n \nJanuary 29, 2022\n \nJanuary 30, 2021\nOperating activities\n \n \n \n \n \n \n \n \n \n \n \nNet earnings\n$\n 1,419 \n \n$\n 2,454 \n \n$\n 1,798 \n \nAdjustments to reconcile net earnings to total cash provided by operating activities:\n \n \n \n \n \n \n \n \nDepreciation and amortization\n \n 918 \n \n \n 869 \n \n \n 839 \nRestructuring charges\n \n 147 \n \n \n (34) \n \n \n 254 \nStock-based compensation\n \n 138 \n \n \n 141 \n \n \n 135 \nDeferred income taxes\n \n 51 \n \n \n 14 \n \n \n (36) \nOther, net\n \n 12 \n \n \n 11 \n \n \n 3 \nChanges in operating assets and liabilities, net of acquired assets and liabilities:\n \n \n \n \n \n \n \n \n \nReceivables\n \n (103) \n \n \n 17 \n \n \n 73 \nMerchandise inventories\n \n 809 \n \n \n (328) \n \n \n (435) \nOther assets\n \n (21) \n \n \n (14) \n \n \n (51) \nAccounts payable\n \n (1,099) \n \n \n (201) \n \n \n 1,676 \nIncome taxes\n \n 36 \n \n \n (156) \n \n \n 173 \nOther liabilities\n \n (483) \n \n \n 479 \n \n \n 498 \nTotal cash provided by operating activities\n \n 1,824 \n \n \n 3,252 \n \n \n 4,927 \nInvesting activities\n \n \n \n \n \n \n \n \n \n \n \nAdditions to property and equipment, net of $35, $46 and $32, respectively, of non-cash \ncapital expenditures\n \n (930) \n \n \n (737) \n \n \n (713) \nPurchases of investments\n \n (46) \n \n \n (233) \n \n \n (620) \nSales of investments\n \n 7 \n \n \n 66 \n \n \n 546 \nAcquisitions, net of cash acquired\n \n - \n \n \n (468) \n \n \n - \nOther, net\n \n 7 \n \n \n - \n \n \n (1) \nTotal cash used in investing activities\n \n (962) \n \n \n (1,372) \n \n \n (788) \nFinancing activities\n \n \n \n \n \n \n \n \n \n \n \nRepurchase of common stock\n \n (1,",
+   "sha256": "894d9ed6398688a52aeb41766632536a9ae4492ca269decbd0cbe097f58ff137",
+   "score": 1.2184665203094482,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Consolidated Statements of Cash Flows\n$ in millions\n \n \n \n \n \n \n \n \n \n \n \n \n \n \nFiscal Years Ended\nJanuary 28, 2023\n \nJanuary 29, 2022\n \nJanuary 30, 2021\nOperating activities\n \n \n \n \n \n \n \n \n \n \n \nNet earnings\n$\n 1,419 \n \n$\n 2,454 \n \n$\n 1,798 \n \nAdjustments to reconcile net earnings to total cash provided by operating activities:\n \n \n \n \n \n \n \n \nDepreciation and amortization\n \n 918 \n \n \n 869 \n \n \n 839 \nRestructuring charges\n \n 147 \n \n \n (34) \n \n \n 254 \nStock-based compensation\n \n 138 \n \n \n 141 \n \n \n 135 \nDeferred income taxes\n \n 51 \n \n \n 14 \n \n \n (36) \nOther, net\n \n 12 \n \n \n 11 \n \n \n 3 \nChanges in operating assets and liabilities, net of acquired assets and liabilities:\n \n \n \n \n \n \n \n \n \nReceivables\n \n (103) \n \n \n 17 \n \n \n 73 \nMerchandise inventories\n \n 809 \n \n \n (328) \n \n \n (435) \nOther assets\n \n (21) \n \n \n (14) \n \n \n (51) \nAccounts payable\n \n (1,099) \n \n \n (201) \n \n \n 1,676 \nIncome taxes\n \n 36 \n \n \n (156) \n \n \n 173 \nOther liabilities\n \n (483) \n \n \n 479 \n \n \n 498 \nTotal cash provided by operating activities\n \n 1,824 \n \n \n 3,252 \n \n \n 4,927 \nInvesting activities\n \n \n \n \n \n \n \n \n \n \n \nAdditions to property and equipment, net of $35, $46 and $32, respectively, of non-cash \ncapital expenditures\n \n (930) \n \n \n (737) \n \n \n (713) \nPurchases of investments\n \n (46) \n \n \n (233) \n \n \n (620) \nSales of investments\n \n 7 \n \n \n 66 \n \n \n 546 \nAcquisitions, net of cash acquired\n \n - \n \n \n (468) \n \n \n - \nOther, net\n \n 7 \n \n \n - \n \n \n (1) \nTotal cash used in investing activities\n \n (962) \n \n \n (1,372) \n \n \n (788) \nFinancing activities\n \n \n \n \n \n \n \n \n \n \n \nRepurchase of common stock\n \n (1,014) \n \n \n (3,502) \n \n \n (312) \nIssuance of common stock\n \n 16 \n \n \n 29 \n \n \n 28 \nDividends paid\n \n (789) \n \n \n (688) \n \n \n (568) \nBorrowings of debt\n \n - \n \n \n - \n \n \n 1,892 \nRepayments of debt\n \n (19) \n \n \n (133) \n \n \n (1,916) \nOther, net\n \n - \n \n \n (3) \n \n \n - \nTotal cash used in financing activities\n \n (1,806) \n \n \n (4,297) \n \n \n (876) \n \n \n \n \n \n \n \n \n \n \n \n \nEffect of exchange rate changes on cash\n \n (8) \n \n \n (3) \n \n \n 7 \nIncrease (decrease) in cash, cash equivalents and restricted cash\n \n (952) \n \n \n (2,420) \n \n \n 3,270 \nCash, cash equivalents and restricted cash at beginning of period\n \n 3,205 \n \n \n 5,625 \n \n \n 2,355 \nCash, cash equivalents and restricted cash at end of period\n$\n 2,253 \n \n$\n 3,205 \n \n$\n 5,625",
+   "sha256": "f0d9ec79ec8d57b891572157d1558e365dd32f15cfe8e2ee8078ae17cc9ce651",
+   "score": 1.1097447872161865,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Table of Contents\nConsolidated Statements of Earnings\n$ and shares in millions, except per share amounts\nFiscal Years Ended\n\nJanuary 28, 2017 \nJanuary 30, 2016 \nJanuary 31, 2015\nRevenue\n $\n39,403\n $\n39,528\n $\n40,339\nCostofgoodssold\n\n29,963\n\n30,334\n\n31,292\nRestructuringchargescostofgoodssold\n\n\n\n3\n\n\nGrossprofit\n\n9,440\n\n9,191\n\n9,047\nSelling,generalandadministrativeexpenses\n\n7,547\n\n7,618\n\n7,592\nRestructuringcharges\n\n39\n\n198\n\n5\nOperatingincome\n\n1,854\n\n1,375\n\n1,450\nOtherincome(expense)\n \n \n \nGainonsaleofinvestments\n\n3\n\n2\n\n13\nInvestmentincomeandother\n\n31\n\n13\n\n14\nInterestexpense\n\n(72) \n(80) \n(90)\nEarningsfromcontinuingoperationsbeforeincometaxexpense\n\n1,",
+   "sha256": "fecf365bfb66573b2487b9967f99d9bac220bcfc8f14dd6545e07cebf236bd99",
+   "score": 0.1761133372783661,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2017",
+    "source": "BESTBUY_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "Equity\n \n \nBestBuyCo.,Inc.Shareholders'Equity\n \n \nPreferredstock,$1.00parvalue:Authorized400,000shares;Issuedandoutstandingnone\n\n \n\nCommonstock,$0.10parvalue:Authorized1.0billionshares;Issuedandoutstanding265,703,000and\n282,988,000shares,respectively\n\n27 \n28\nAdditionalpaid-incapital\n\n \n\nRetainedearnings\n\n2,985 \n3,270\nAccumulatedothercomprehensiveincome\n\n294 \n314\nTotalequity\n\n3,306 \n3,612\nTotal liabilities and equity\n $\n12,901 $\n13,049\nSeeNotestoConsolidatedFinancialStatements.\n50",
+   "sha256": "1e9951fa85250517ec106ffcbf70cc791c3cd5fd62f3c3571407d7f9ec3f8f13",
+   "score": 0.1333789825439453,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Consolidated Statements of Earnings\n$ and shares in millions, except per share amounts\n \n \n \n \n \n \n \n \n \n \n \n \n \nFiscal Years Ended\nJanuary 28, 2023\n \nJanuary 29, 2022\n \nJanuary 30, 2021\nRevenue\n$\n 46,298 \n \n$\n 51,761 \n \n$\n 47,262 \nCost of sales\n \n 36,386 \n \n \n 40,121 \n \n \n 36,689 \nGross profit\n \n 9,912 \n \n \n 11,640 \n \n \n 10,573 \nSelling, general and administrative expenses\n \n 7,970 \n \n \n 8,635 \n \n \n 7,928 \nRestructuring charges\n \n 147 \n \n \n (34) \n \n \n 254 \nOperating income\n \n 1,795 \n \n \n 3,039 \n \n \n 2,",
+   "sha256": "a0ee216f0495322817c6c1761e745da8f6252610e04673c841e18f803af0e35e",
+   "score": -0.5990550518035889,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Consolidated Statements of Cash Flows\n$ in millions\n \n \n \n \n \n \n \n \n \n \n \n \n \n \nFiscal Years Ended\nJanuary 28, 2023\n \nJanuary 29, 2022\n \nJanuary 30, 2021\nOperating activities\n \n \n \n \n \n \n \n \n \n \n \nNet earnings\n$\n 1,419 \n \n$\n 2,454 \n \n$\n 1,798 \n \nAdjustments to reconcile net earnings to total cash provided by operating activities:\n \n \n \n \n \n \n \n \nDepreciation and amortization\n \n 918 \n \n \n 869 \n \n \n 839 \nRestructuring charges\n \n 147 \n \n \n (34) \n \n \n 254 \nStock-based compensation\n \n 138 \n \n \n 141 \n \n \n 135 \nDeferred income taxes\n \n 51 \n \n \n 14 \n \n \n (36) \nOther, net\n \n 12 \n \n \n 11 \n \n \n 3 \nChanges in operating assets and liabilities,",
+   "sha256": "c11ea475c053430ace11faa008cd98b757f58e2f186672903914c3ac181bac2a",
+   "score": -0.8186588287353516,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "net\n \n 12 \n \n \n 11 \n \n \n 3 \nChanges in operating assets and liabilities, net of acquired assets and liabilities:\n \n \n \n \n \n \n \n \n \nReceivables\n \n (103) \n \n \n 17 \n \n \n 73 \nMerchandise inventories\n \n 809 \n \n \n (328) \n \n \n (435) \nOther assets\n \n (21) \n \n \n (14) \n \n \n (51) \nAccounts payable\n \n (1,099) \n \n \n (201) \n \n \n 1,676 \nIncome taxes\n \n 36 \n \n \n (156) \n \n \n 173 \nOther liabilities\n \n (483) \n \n \n 479 \n \n \n 498 \nTotal cash provided by operating activities\n \n 1,824 \n \n \n 3,252 \n \n \n 4,927 \nInvesting activities\n \n \n \n \n \n \n \n \n \n \n \nAdditions to property and equipment, net of $35, $46 and $32, respectively,",
+   "sha256": "61c21b89051189c15a2588a35472ddb48ce2ef9c51eaefe43369780903a8bffc",
+   "score": -0.8871139287948608,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "f2e32f35ab849225428ce9028b1577015ab69eceb543976e58142abb475e1e0d"
+}

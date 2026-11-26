@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_04171",
+ "doc_name": "MGMRESORTS_2018_10K",
+ "question": "Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions.",
+ "captured_at": "2026-11-26T22:45:04+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions.",
+ "pii_masked": false,
+ "sub_questions": [
+  "Basing your judgments off of the balance sheet, what is the year end FY2018 amount of accounts payable for MGM Resorts? Answer in USD millions."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "459 \n \n \n \n \n \nOtherassets\n \n \n \n \nInvestments in and advances to unconsolidated affiliates\n \n732,867 \n \n1,033,297 \nGoodwill\n \n1,821,392 \n \n1,806,531 \nOther intangible assets, net\n \n3,944,463 \n \n3,877,960 \nOther long-term assets, net\n \n455,318 \n \n430,440 \nTotal other assets\n \n6,954,040 \n \n7,148,228 \n \n $\n30,210,706 \n $\n29,160,042 \nLIABILITIESANDSTOCKHOLDERS'EQUITY\n\nCurrentliabilities\n \n \n \n \nAccounts payable\n $\n302,578 \n $\n255,028 \nConstruction payable\n \n311,793 \n \n474,807 \nCurrent portion of long-term debt\n \n43,411 \n \n158,042 \nAccrued interest on long-term debt\n \n140,046 \n \n135,785 \nOther accrued liabilities\n \n2,151,054 \n \n2,114,635 \nTotal current liabilities\n \n2,948,882 \n \n3,138,297 \n \n \n \n \n \nDeferredincometaxes,",
+   "sha256": "8bbe47cbb651189a98a8094ed7bdc2cf1c9a6e3b337cafd57cb1a187972404ca",
+   "score": 2.1524211764335632,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2018",
+    "source": "MGMRESORTS_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "MGMRESORTSINTERNATIONALANDSUBSIDIARIES\nCONSOLIDATEDBALANCESHEETS\n(Inthousands,exceptsharedata)\n \n \n\nDecember31,\n\n\n\n2018\n\n\n2017\n\nASSETS\n\nCurrentassets\n \n \n \n \nCash and cash equivalents\n $\n1,526,762 \n $\n1,499,995 \nAccounts receivable, net\n \n657,206 \n \n542,273 \nInventories\n \n110,831 \n \n102,292 \nIncome tax receivable\n \n28,431 \n \n42,551 \nPrepaid expenses and other\n \n203,548 \n \n189,244 \nTotal current assets\n \n2,526,778 \n \n2,376,355 \n \n \n \n \n \nPropertyandequipment,net\n \n20,729,888 \n \n19,635,459 \n \n \n \n \n \nOtherassets\n \n \n \n \nInvestments in and advances to unconsolidated affiliates\n \n732,867 \n \n1,033,297 \nGoodwill\n \n1,821,392 \n \n1,806,531 \nOther intangible assets, net\n \n3,944,463 \n \n3,877,",
+   "sha256": "043389c072fe963da5e756b5ed1ad289d2c40f6893b7da03a62f01a2e38a962a",
+   "score": 1.919630765914917,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2018",
+    "source": "MGMRESORTS_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "512,283 \n \n7,577,061 \nNoncontrolling interests\n \n3,957,508 \n \n4,034,063 \nTotal stockholders' equity\n \n10,469,791 \n \n11,611,124 \n \n $\n30,210,706 \n $\n29,160,042\n \n \nTheaccompanyingnotesareanintegralpartoftheseconsolidatedfinancialstatements.\n \n \n55",
+   "sha256": "d1b85803734a37abb301f46e987fac243d109b44705a7f186462d6daa21ee13d",
+   "score": 0.10678386688232422,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2018",
+    "source": "MGMRESORTS_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "2,345\n\n2,601\n\n(1,985)\nCash and cash equivalents\n \n\n\n\n\n\n\nNetincreasefortheperiod\n\n\n2,772,033\n\n802,842\n\n26,767\nBalance,beginningofperiod\n\n\n2,329,604\n\n1,526,762\n\n1,499,995\nBalance,endofperiod\n\n$\n5,101,637\n$\n2,329,604\n$\n1,526,762\nSupplemental cash flow disclosures\n \n\n\n\n\n\n\nInterestpaid,netofamountscapitalized\n\n$\n639,718\n$\n826,970\n$\n723,609\nFederal,stateandforeignincometaxespaid(refundsreceived),net",
+   "sha256": "0b65460edc2f11026b49b67bad7ddbc9f884e74526a00efdc82eaeba78827df4",
+   "score": -0.6988043785095215,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2020",
+    "source": "MGMRESORTS_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "dited) \n \nThree months ended \n \nTwelve months ended \n \nDecember 31, \n2022 \n \nDecember 31, \n2021 \n \nDecember 31, \n2022 \n \nDecember 31, \n2021 \nNet income attributable to MGM Resorts International \n$ \n284,002 $ \n131,013 $ \n1,473,093 $ \n1,254,370 \nPlus: Net loss attributable to noncontrolling interests \n \n(604,016) \n(14,926) \n(1,266,362) \n(45,981) \nNet income (loss) \n \n(320,014) \n116,087 \n206,731 \n1,208,389 \nProvision for income taxes \n \n285,937 \n31,152 \n697,068 \n253,415 \nIncome (loss) before income taxes \n \n(34,077) \n147,239 \n903,799 \n1,461,804 \nNon-operating (income) expense \n \n \n \n \nInterest expense, net of amounts capitalized \n \n137,132 \n201,477 \n594,954 \n799,",
+   "sha256": "16c07758068366c922b1f5bdc1b1823fe534d1119011d13eb22f81efd4bd2f5e",
+   "score": -0.9744042158126831,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2022",
+    "source": "MGMRESORTS_2022Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "dited) \n \nThree months ended \n \nTwelve months ended \n \nDecember 31, \n2022 \n \nDecember 31, \n2021 \n \nDecember 31, \n2022 \n \nDecember 31, \n2021 \nLas Vegas Strip Resorts \n$ \n877,052 $ \n698,739 $ \n3,142,308 $ \n1,738,211 \nRegional Operations \n \n319,517 \n309,250 \n1,294,630 \n1,217,814 \nMGM China \n \n(54,979) \n5,015 \n(203,136) \n25,367 \nUnconsolidated affiliates(1) \n \n(43,029) \n(49,698) \n(222,079) \n(131,590) \nManagement and other operations \n \n(3,037) \n2,087 \n \n(11,934) \n15,766 \nStock compensation \n \n(25,159) \n(26,494) \n(71,297) \n(63,984) \nCorporate(2) \n \n(113,058) \n(117,",
+   "sha256": "787b15b75ea00887e40f55a1c8a7ac667d78ba54196880c2ce393d27a91dcb89",
+   "score": -1.5165750980377197,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2022",
+    "source": "MGMRESORTS_2022Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "MGM RESORTS INTERNATIONAL AND SUBSIDIARIES\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In thousands, except per share data)\n\n\n \nYear Ended December 31,\n \n \n \n2020\n \n \n2019\n \n \n2018\n \nRevenues\n\n\n\n\n\n\nCasino\n$\n2,871,720\n$\n6,517,759\n$\n5,753,150\nRooms\n\n830,382\n\n2,322,579\n\n2,212,573\nFoodandbeverage\n\n696,040\n\n2,145,247\n\n1,959,021\nEntertainment,retailandother\n\n518,991\n\n1,477,200\n\n1,412,860\nReimbursedcosts\n\n244,949\n\n436,887\n\n425,492\n\n\n5,162,082\n\n12,899,672\n\n11,763,096\nExpenses",
+   "sha256": "1fc0549c49efc0c97150e675c8455ff72e62bb6aed62adb5ff7656cf0c8ab5ad",
+   "score": -2.11784029006958,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2020",
+    "source": "MGMRESORTS_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "Interestpaid,netofamountscapitalized\n\n$\n639,718\n$\n826,970\n$\n723,609\nFederal,stateandforeignincometaxespaid(refundsreceived),net\n\n\n8,543\n\n28,493\n\n(10,100)\nNon-cash investing and financing activities\n \n\n\n\n\n\n\nNotereceivablerelatedtosaleofCircusCircusLasVegasandadjacentland\n\n$\n\n$\n133,689\n$\n\nInvestmentinBellagioBREITVenture\n\n\n\n\n62,133\n\n\nInvestmentinMGPBREITVenture\n\n\n802,000\n\n\n\n\nMGPBREITVentureassumptionofbridgeloanfacility\n\n\n1,304,625\n\n\n\n\n\n\nThe accompanying notes are an integral part of these consolidated financial statements.\n65",
+   "sha256": "d43f6fa22b2d4b963642817c7aef7121cbb17d2980697ad281d245d89b56dcbe",
+   "score": -2.4844555854797363,
+   "metadata": {
+    "company": "MGM Resorts",
+    "year": "2020",
+    "source": "MGMRESORTS_2020_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "0c037b9013ee625f06d4e78bceb3cbe2a8116614a80d8453e3b8925eec05c9da"
+}

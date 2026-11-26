@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_01328",
+ "doc_name": "PEPSICO_2022_10K",
+ "question": "What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
+ "captured_at": "2026-11-26T22:45:16+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What is the quantity of restructuring costs directly outlined in Pepsico's income statements for FY2022? If restructuring costs are not explicitly outlined then state 0."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "These pre-tax charges are expected to consist of approximately 55% of severance and\nother employee-related costs, 10% for asset impairments (all non-cash) resulting from plant closures and related actions and 35%\nfor other costs associated with the implementation of our initiatives.\nThe total plan pre-tax charges are expected to be incurred by division approximately as follows:\nFLNA\nQFNA\nPBNA\nLatAm\nEurope\nAMESA\nAPAC\nCorporate\nExpected pre-tax charges\n15 %\n1 %\n25 %\n10 %\n25 %\n5 %\n4 %\n15 %\nA summary of our 2019 Productivity Plan charges is as follows:\n2022\n2021\n2020\nCost of sales\n$\n33 \n$\n29 $\n30 \nSelling, general and administrative expenses\n347 \n208 \n239 \nOther pension and retiree medical benefits expense\n31 \n10 \n20 \nTotal restructuring and impairment charges\n$\n411 \n$\n247 $\n289",
+   "sha256": "7eaa0ec196a0c5ade3a95edad46af387cce0d04e0b6c585dbcf3406a384c8273",
+   "score": 4.690822601318359,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Note 3 Restructuring and Impairment Charges\n2019 Multi-Year Productivity Plan\nWe publicly announced a multi-year productivity plan on February 15, 2019 (2019 Productivity Plan) that will leverage new\ntechnology and business models to further simplify, harmonize and automate processes; re-engineer our go-to-market and\ninformation systems, including deploying the right automation for each market; and simplify our organization and optimize our\nmanufacturing and supply chain footprint. To build on the successful implementation of the 2019 Productivity Plan, in the fourth\nquarter of 2022, we expanded and extended the plan through the end of 2028 to take advantage of additional opportunities within\nthe initiatives described above. As a result, we expect to incur pre-tax charges of approximately $3.65 billion, including cash\nexpenditures of approximately $2.9 billion. These pre-tax charges are expected to consist of approximately 55% of severance and\nother employee-related costs, 10% for asset impairments (all non-cash) resulting from plant closures and related actions and 35%\nfor other costs associated with the implementation of our initiatives.\nThe total plan pre-tax charges are expected to be incurred by division approximately as follows:\nFLNA\nQFNA\nPBNA\nLatAm\nEurope\nAMESA\nAPAC\nCorporate\nExpected pre-tax charges\n15 %\n1 %\n25 %\n10 %\n25 %\n5 %\n4 %\n15 %\nA summary of our 2019 Productivity Plan charges is as follows:\n2022\n2021\n2020\nCost of sales\n$\n33 \n$\n29 $\n30 \nSelling, general and administrative expenses\n347 \n208 \n239 \nOther pension and retiree medical benefits expense\n31 \n10 \n20 \nTotal restructuring and impairment charges\n$\n411 \n$\n247 $\n289",
+   "sha256": "a076c176774fe2cf5aefe6ecbb33f8a76482656767e1ed3fbaf25d4112500fed",
+   "score": 3.9736503958702087,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "978 $\n7,679 $\n7,175 \nDepreciation and amortization\n2,763 \n2,710 \n2,548 \nGain associated with the Juice Transaction\n(3,321)\n \n \nImpairment and other charges\n3,618 \n \n \nOperating lease right-of-use asset amortization\n517 \n505 \n478 \nShare-based compensation expense\n343 \n301 \n264 \nRestructuring and impairment charges\n411 \n247 \n289 \nCash payments for restructuring charges\n(224)\n(256)\n(255)\nAcquisition and divestiture-related charges\n80 \n(4)\n255 \nCash payments for acquisition and divestiture-related charges\n(46)\n(176)\n(131)\nPension and retiree medical plan expenses\n419 \n123 \n408 \nPension and retiree medical plan contributions\n(384)\n(785)\n(562)\nDeferred income taxes and other tax charges and credits\n(873)\n298 \n361 \nTax expense related to the TCJ Act\n86 \n190 \n \nTax payments related to the TCJ Act\n(309)\n(309)\n(78)\nChange in assets and liabilities:\nAccounts and notes receivable\n(1,",
+   "sha256": "5cd1f28123a33609e117056993367eaa805c9e9260ab2123904c52e7626e87b7",
+   "score": 3.6716153025627136,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "and Subsidiaries\nFiscal years ended December 31, 2022, December 25, 2021 and December 26, 2020\n(in millions)\n2022\n2021\n2020\nOperating Activities\nNet income\n$\n8,978 $\n7,679 $\n7,175 \nDepreciation and amortization\n2,763 \n2,710 \n2,548 \nGain associated with the Juice Transaction\n(3,321)\n \n \nImpairment and other charges\n3,618 \n \n \nOperating lease right-of-use asset amortization\n517 \n505 \n478 \nShare-based compensation expense\n343 \n301 \n264 \nRestructuring and impairment charges\n411 \n247 \n289 \nCash payments for restructuring charges\n(224)\n(256)\n(255)\nAcquisition and divestiture-related charges\n80 \n(4)\n255 \nCash payments for acquisition and divestiture-related charges\n(46)\n(176)\n(131)\nPension and retiree medical plan expenses\n419 \n123 \n408 \nPension and retiree medical plan contributions\n(384)\n(785)\n(562)\nDeferred income taxes and other tax charges and credits\n(873)\n298 \n361 \nTax expense related to the TCJ Act\n86 \n190 \n \nTax payments related to the TCJ Act\n(309)\n(309)\n(78)\nChange in assets and liabilities:\nAccounts and notes receivable\n(1,763)\n(651)\n(420)\nInventories\n(1,142)\n(582)\n(516)\nPrepaid expenses and other current assets\n118 \n159 \n26 \nAccounts payable and other current liabilities\n1,842 \n1,762 \n766 \nIncome taxes payable\n57 \n30 \n(159)\nOther, net\n(359)\n375 \n164 \nNet Cash Provided by Operating Activities\n10,811 \n11,616 \n10,613 \nInvesting Activities\nCapital spending\n(5,207)\n(4,625)\n(4,240)\nSales of property, plant and equipment\n251 \n166 \n55 \nAcquisitions, net of cash acquired, investments in noncontrolled affiliates and purchases of\nintangible and other assets\n(873)\n(61)\n(6,372)\nProceeds associated with the Juice Transaction\n3,456 \n \n \nOther divestitures,",
+   "sha256": "36df33fea298751f78fadf3adb79f58648b41236b1e494ecc43e81b495450ade",
+   "score": 3.5007457733154297,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "As a result, we expect to incur pre-tax charges of approximately $3.65 billion, including cash\nexpenditures of approximately $2.9 billion. These pre-tax charges are expected to consist of approximately 55% of severance and\nother employee-related costs, 10% for asset impairments (all non-cash) resulting from plant closures and related actions and 35%\nfor other costs associated with the implementation of our initiatives.",
+   "sha256": "dde65d0b1dbfea53d09b576c4a021e6b7277fa9a321e9721de0c8aad9401dd86",
+   "score": 2.8319592475891113,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Table of Contents\nConsolidated Statement of Income\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 31, 2022, December 25, 2021 and December 26, 2020\n(in millions except per share amounts)\n2022\n2021\n2020\nNet Revenue\n$\n86,392 $\n79,474 $\n70,372 \nCost of sales\n40,576 \n37,075 \n31,797 \nGross profit\n45,816 \n42,399 \n38,575 \nSelling, general and administrative expenses\n34,459 \n31,237 \n28,453 \nGain associated with the Juice Transaction (see Note 13)\n(3,321)\n \n \nImpairment of intangible assets (see Notes 1 and 4)\n3,166 \n \n42 \nOperating Profit\n11,512 \n11,162 \n10,080 \nOther pension and retiree medical benefits income\n132 \n522 \n117 \nNet interest expense and other\n(939)\n(1,863)\n(1,",
+   "sha256": "404e3a5c92e906f19fe4bd9022e6198876ff97dd10ba074f3ae892e51ba25b70",
+   "score": 2.3282764554023743,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Note 3 Restructuring and Impairment Charges\n2019 Multi-Year Productivity Plan\nWe publicly announced a multi-year productivity plan on February 15, 2019 (2019 Productivity Plan) that will leverage new\ntechnology and business models to further simplify, harmonize and automate processes; re-engineer our go-to-market and\ninformation systems, including deploying the right automation for each market; and simplify our organization and optimize our\nmanufacturing and supply chain footprint. To build on the successful implementation of the 2019 Productivity Plan, in the fourth\nquarter of 2022, we expanded and extended the plan through the end of 2028 to take advantage of additional opportunities within\nthe initiatives described above. As a result, we expect to incur pre-tax charges of approximately $3.65 billion, including cash\nexpenditures of approximately $2.9 billion.",
+   "sha256": "5ccedbd75dfbadf89962c0026427b7a9d748db62e214b457dc9f774d4593d7a2",
+   "score": 2.273242712020874,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "Table of Contents\nConsolidated Statement of Cash Flows\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 25, 2021, December 26, 2020 and December 28, 2019\n(in millions)\n2021\n2020\n2019\nOperating Activities\nNet income\n$\n7,679 $\n7,175 $\n7,353 \nDepreciation and amortization\n2,710 \n2,548 \n2,432 \nOperating lease right-of-use asset amortization\n505 \n478 \n412 \nShare-based compensation expense\n301 \n264 \n237 \nRestructuring and impairment charges\n247 \n289 \n370 \nCash payments for restructuring charges\n(256)\n(255)\n(350)\nAcquisition and divestiture-related charges\n(4)\n255 \n55 \nCash payments for acquisition and divestiture-related charges\n(176)\n(131)\n(10)\nPension and retiree medical plan expenses\n123 \n408 \n519 \nPension and retiree medical plan",
+   "sha256": "ce3a62285f606438eeb38c557b2ec986c4837751c2af33b9db3567e463f0157f",
+   "score": 1.7082645893096924,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "8e1357bc40fe33c6c235c2fb3f239a6cfc5af163ed2bea7f9bc8c9d966a29017"
+}

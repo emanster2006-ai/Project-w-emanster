@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_04700",
+ "doc_name": "MICROSOFT_2016_10K",
+ "question": "What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income.",
+ "captured_at": "2026-11-26T22:45:07+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What is the FY2016 COGS for Microsoft? Please state answer in USD millions. Provide a response to the question by primarily using the statement of income."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\n \nPART II\nItem 8\n \nITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA\nINCOME STATEMENTS\n \n(In millions, except per share amounts)\n \n \n \n \n \n \n \nYear Ended June 30,\n \n2016 \n2015 \n2014 \nRevenue:\n \n \n \n \n \n \n \nProduct\n \n$ 61,502 \n$ 75,956 \n$ 72,948 \nService and other\n \n \n23,818 \n \n17,624 \n \n13,885 \n \n \nTotal revenue\n \n \n85,320 \n \n93,580 \n \n86,833 \n \n \nCost of revenue:\n \n \n \n \n \n \n \nProduct\n \n \n17,880 \n \n21,410 \n \n16,681 \nService and other\n \n \n14,900 \n \n11,628 \n \n10,397 \n \n \nTotal cost of revenue\n \n \n32,780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,713 \n \n15,811 \nGeneral and administrative\n \n \n4,563 \n \n4,611 \n \n4,677 \nImpairment, integration, and restructuring\n \n \n1,110 \n \n10,011 \n \n127 \n \n \nOperating income\n \n \n20,182 \n \n18,161 \n \n27,759 \nOther income (expense), net\n \n \n(431) \n \n346 \n \n61 \n \n \nIncome before income taxes\n \n \n19,751 \n \n18,507 \n \n27,820 \nProvision for income taxes\n \n \n2,953 \n \n6,314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.10 \n$\n1.48 \n$\n2.63 \nWeighted average shares outstanding:\n \n \n \n \n \n \n \nBasic\n \n \n7,925 \n \n8,177 \n \n8,299 \nDiluted\n \n \n8,013 \n \n8,254 \n \n8,399 \nCash dividends declared per common share\n \n$\n1.44 \n$\n1.24 \n$\n1.12 \nSee accompanying notes.\n \n52",
+   "sha256": "9c1e9b567ace374488be738486f47a568243a76d7e3efd6b23d5765ae6efac8a",
+   "score": -3.555014133453369,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\n \nPART II\nItem 8\n \nITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA\nINCOME STATEMENTS\n \n(In millions, except per share amounts)\n \n \n \n \n \n \n \nYear Ended June 30,\n \n2016 \n2015 \n2014 \nRevenue:\n \n \n \n \n \n \n \nProduct\n \n$ 61,502 \n$ 75,956 \n$ 72,948 \nService and other\n \n \n23,818 \n \n17,624 \n \n13,885 \n \n \nTotal revenue\n \n \n85,320 \n \n93,580 \n \n86,833 \n \n \nCost of revenue:\n \n \n \n \n \n \n \nProduct\n \n \n17,880 \n \n21,410 \n \n16,681 \nService and other\n \n \n14,900 \n \n11,628 \n \n10,397 \n \n \nTotal cost of revenue\n \n \n32,780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,",
+   "sha256": "850b6a0b83bdfe0d8a968428f4cbfaffbd24c356bf4b574f8a930083e5f448ef",
+   "score": -3.566762924194336,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,713 \n \n15,811 \nGeneral and administrative\n \n \n4,563 \n \n4,611 \n \n4,677 \nImpairment, integration, and restructuring\n \n \n1,110 \n \n10,011 \n \n127 \n \n \nOperating income\n \n \n20,182 \n \n18,161 \n \n27,759 \nOther income (expense), net\n \n \n(431) \n \n346 \n \n61 \n \n \nIncome before income taxes\n \n \n19,751 \n \n18,507 \n \n27,820 \nProvision for income taxes\n \n \n2,953 \n \n6,314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.",
+   "sha256": "d93daa12e809e3f13252196a37a83d0a16b4cc34094e30c4d3c9671c453cda2a",
+   "score": -4.952070236206055,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.10 \n$\n1.48 \n$\n2.63 \nWeighted average shares outstanding:\n \n \n \n \n \n \n \nBasic\n \n \n7,925 \n \n8,177 \n \n8,299 \nDiluted\n \n \n8,013 \n \n8,254 \n \n8,399 \nCash dividends declared per common share\n \n$\n1.44 \n$\n1.24 \n$\n1.12 \nSee accompanying notes.\n \n52",
+   "sha256": "0d7e551321492f0ee16bcdd530785c38c306db22838b6798fd52ed94badec449",
+   "score": -5.558347702026367,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "BALANCE SHEETS \n \n(In millions)\n \n \n \n \n \n \n \n \n \nJune 30,\n \n2023 \n2022 \n \n \n \nAssets\n \n \n \nCurrent assets:\n \n \n \nCash and cash equivalents\n $\n34,704 $\n13,931 \nShort-term investments\n \n76,558 \n90,826 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nTotal cash, cash equivalents, and short-term investments\n \n111,262 \n104,757 \nAccounts receivable, net of allowance for doubtful accounts of $650 and $633\n \n48,688 \n44,261 \nInventories\n \n2,500 \n3,742 \nOther current assets\n \n21,807 \n16,924 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal current assets\n \n184,257 \n169,684 \nProperty and equipment, net of accumulated depreciation of $68,251 and $59,660\n \n95,641 \n74,398 \nOperating lease right-of-use assets\n \n14,346 \n13,148 \nEquity investments\n \n9,879 \n6,891 \nGoodwill\n \n67,886 \n67,524 \nIntangible assets, net\n \n9,",
+   "sha256": "4dcdbf910e440cc4c33f618010bdad99e0864636f9ea0f4f283e988a3b3dfbdb",
+   "score": -5.989153861999512,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2023",
+    "source": "MICROSOFT_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "251 and $59,660\n \n95,641 \n74,398 \nOperating lease right-of-use assets\n \n14,346 \n13,148 \nEquity investments\n \n9,879 \n6,891 \nGoodwill\n \n67,886 \n67,524 \nIntangible assets, net\n \n9,366 \n11,298 \nOther long-term assets\n \n30,601 \n21,897 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal assets\n $\n411,976 $\n364,840 \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nLiabilities and stockholders equity\n \n \n \nCurrent liabilities:\n \n \n \nAccounts payable\n $\n18,095 $\n19,000 \nCurrent portion of long-term debt\n \n5,247 \n2,749 \nAccrued compensation\n \n11,009 \n10,661 \nShort-term income taxes\n \n4,152 \n4,067 \nShort-term unearned revenue\n \n50,901 \n45,538 \nOther current liabilities\n \n14,745 \n13,067 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal current liabilities\n \n104,149 \n95,082 \nLong-term debt\n \n41,990 \n47,",
+   "sha256": "2ba3664d6933168e5d1b9f8687fd746c22059049e69a946531f915dca708147a",
+   "score": -8.633996963500977,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2023",
+    "source": "MICROSOFT_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "152 \n4,067 \nShort-term unearned revenue\n \n50,901 \n45,538 \nOther current liabilities\n \n14,745 \n13,067 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal current liabilities\n \n104,149 \n95,082 \nLong-term debt\n \n41,990 \n47,032 \nLong-term income taxes\n \n25,560 \n26,069 \nLong-term unearned revenue\n \n2,912 \n2,870 \nDeferred income taxes\n \n433 \n230 \nOperating lease liabilities\n \n12,728 \n11,489 \nOther long-term liabilities\n \n17,981 \n15,526 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal liabilities\n \n205,753 \n198,",
+   "sha256": "ee21dd6e78baf51d24206aaa677016724123e4b632f17937d3b07288777b991e",
+   "score": -8.79977035522461,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2023",
+    "source": "MICROSOFT_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "069 \nLong-term unearned revenue\n \n2,912 \n2,870 \nDeferred income taxes\n \n433 \n230 \nOperating lease liabilities\n \n12,728 \n11,489 \nOther long-term liabilities\n \n17,981 \n15,526 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal liabilities\n \n205,753 \n198,298 \n \n \n \n \n \n \n \n \n \n \n \n \nCommitments and contingencies\n \n \n \nStockholders equity:\n \n \n \nCommon stock and paid-in capital shares authorized 24,000; outstanding 7,432 and 7,464\n \n93,718 \n86,939 \nRetained earnings\n \n118,848 \n84,281 \nAccumulated other comprehensive loss\n \n(6,343) \n(4,678)\n \n \n \n \n \n \n \n \n \n \n \n \nTotal stockholders equity\n \n206,223 \n166,542 \n \n \n \n \n \n \n \n \n \n \n \n \nTotal liabilities and stockholders equity\n $\n411,976 $\n364,8",
+   "sha256": "09f0f85cba1024b668d8d7a91a13a78384ab7080b49f8686b97da786921f0388",
+   "score": -8.876968383789062,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2023",
+    "source": "MICROSOFT_2023_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "6dba696dd14ae87c43f96c6c0726bd40ebf3ec3f743c3cabf8a65321afc3e2c3"
+}

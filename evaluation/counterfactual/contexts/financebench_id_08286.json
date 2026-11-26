@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_08286",
+ "doc_name": "AMAZON_2019_10K",
+ "question": "By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
+ "captured_at": "2026-11-26T22:44:50+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?",
+ "pii_masked": false,
+ "sub_questions": [
+  "By drawing conclusions from the information stated only in the income statement, what is Amazon's FY2019 net income attributable to shareholders (in USD millions)?"
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in millions, except per share data)\n \n \nYear Ended December 31,\n \n2017\n \n2018\n \n2019\nNet product sales\n$\n118,573 $\n141,915 $\n160,408\nNet service sales\n59,293 \n90,972 \n120,114\nTotal net sales\n177,866 \n232,887 \n280,522\nOperating expenses:\n \n \n \nCost of sales\n111,934 \n139,156 \n165,536\nFulfillment\n25,249 \n34,027 \n40,232\nTechnology and content\n22,620 \n28,837 \n35,931\nMarketing\n10,069 \n13,814 \n18,878\nGeneral and administrative\n3,674 \n4,336 \n5,203\nOther operating expense (income), net\n214 \n296 \n201\nTotal operating expenses\n173,760 \n220,466 \n265,981\nOperating income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n(183) \n203\nTotal non-operating income (expense)\n(300) \n(1,160) \n(565)\nIncome before income taxes\n3,806 \n11,261 \n13,976\nProvision for income taxes\n(769) \n(1,197) \n(2,374)\nEquity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38",
+   "sha256": "d971cd996a8234a6ea2c1301f87cee0d34c47c2bc8695413f723831218722e05",
+   "score": 1.6482179164886475,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2019",
+    "source": "AMAZON_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38",
+   "sha256": "ba91cea4771e14b1c2d00d7b84cbfed1bcc9a0ab5bdb2c2ffc970111675aea2e",
+   "score": 0.836529016494751,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2019",
+    "source": "AMAZON_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in millions, except per share data)\n \n \nYear Ended December 31,\n \n2015\n \n2016\n \n2017\nNet product sales\n$\n79,268 $\n94,665 $\n118,573\nNet service sales\n27,738 \n41,322 \n59,293\nTotal net sales\n107,006 \n135,987 \n177,866\nOperating expenses:\n \n \n \nCost of sales\n71,651 \n88,265 \n111,934\nFulfillment\n13,410 \n17,619 \n25,249\nMarketing\n5,254 \n7,233 \n10,069\nTechnology and content\n12,540 \n16,085 \n22,620\nGeneral and administrative\n1,747 \n2,432 \n3,674\nOther operating expense, net\n171 \n167 \n214\nTotal operating expenses\n104,773 \n131,801 \n173,760\nOperating income\n2,233 \n4,186 \n4,106\nInterest income\n50 \n100 \n202\nInterest expense\n(459) \n(484) \n(848)\nOther income (expense), net\n(256) \n90 \n346\nTotal non-operating income (expense)\n(665) \n(294) \n(300)\nIncome before income taxes\n1,568 \n3,892 \n3,806\nProvision for income taxes\n(950) \n(1,425) \n(769)\nEquity-method investment activity, net of tax\n(22) \n(96) \n(4)\nNet income\n$\n596 $\n2,371 $\n3,033\nBasic earnings per share\n$\n1.28 $\n5.01 $\n6.32\nDiluted earnings per share\n$\n1.25 $\n4.90 $\n6.15\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n467 \n474 \n480\nDiluted\n477 \n484 \n493\nSee accompanying notes to consolidated financial statements.\n38 Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED BALANCE SHEETS\n(in millions, except per share data)\n \n \nDecember 31,\n \n2016\n \n2017\nASSETS\n \n \nCurrent assets:\n \n \nCash and cash equivalents\n$\n19,334 $\n20,522\nMarketable securities\n6,647 \n10,464\nInventories\n11,461 \n16,047\nAccounts receivable, net and other\n8,339 \n13,164\nTotal current assets\n45,781 \n60,197\nProperty and equipment, net\n29,114 \n48,866\nGoodwill\n3,784 \n13,350\nOther assets\n4,723 \n8,897\nTotal assets\n$\n83,402 $\n131,310\nLIABILITIES AND STOCKHOLDERS EQUITY\n \n \nCurrent liabilities:\n \n \nAccounts payable\n$\n25,309 $\n34,616\nAccrued expenses and other\n13,739 \n18,170\nUnearned revenue\n4,768 \n5,097\nTotal current liabilities\n43,816 \n57,883\nLong-term debt\n7,694 \n24,743\nOther long-term liabilities\n12,607 \n20,975\nCommitments and contingencies (Note 7)\n \nStockholders equity:\n \n \nPreferred stock, $0.01 par value:\n \n \nAuthorized shares 500\n \n \nIssued and outstanding shares none\n \n\nCommon stock, $0.01 par value:\n \n \nAuthorized shares 5,000\n \n \nIssued shares 500 and 507\n \n \nOutstanding shares 477 and 484\n5 \n5\nTreasury stock, at cost\n(1,837) \n(1,837)\nAdditional paid-in capital\n17,186 \n21,389\nAccumulated other comprehensive loss\n(985) \n(484)\nRetained earnings\n4,916 \n8,636\nTotal stockholders equity\n19,285 \n27,709\nTotal liabilities and stockholders equity\n$\n83,402 $\n131,310\nSee accompanying notes to consolidated financial statements.\n40",
+   "sha256": "db050855ce746d87cda69cfd154feb9c9aa3710e554dc67e52eeb219732a3164",
+   "score": -0.9618122577667236,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2017",
+    "source": "AMAZON_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in millions, except per share data)\n \n \nYear Ended December 31,\n \n2015\n \n2016\n \n2017\nNet product sales\n$\n79,268 $\n94,665 $\n118,573\nNet service sales\n27,738 \n41,322 \n59,293\nTotal net sales\n107,006 \n135,987 \n177,866\nOperating expenses:\n \n \n \nCost of sales\n71,651 \n88,265 \n111,934\nFulfillment\n13,410 \n17,619 \n25,249\nMarketing\n5,254 \n7,233 \n10,069\nTechnology and content\n12,540 \n16,085 \n22,620\nGeneral and administrative\n1,747 \n2,432 \n3,674\nOther operating expense, net\n171 \n167 \n214\nTotal operating expenses\n104,773 \n131,801 \n173,760\nOperating income\n2,233 \n4,186 \n4,106\nInterest income\n50 \n100 \n202\nInterest expense\n(459) \n(484) \n(848)\nOther income (expense), net\n(256) \n90 \n346\nTotal non-operating income (expense)\n(665) \n(294) \n(300)\nIncome before income taxes\n1,568 \n3,892 \n3,806\nProvision for income taxes\n(950) \n(1,425) \n(769)\nEquity-method investment activity, net of tax\n(22) \n(96) \n(4)\nNet income\n$\n596 $\n2,371 $\n3,033\nBasic earnings per share\n$\n1.28 $\n5.01 $\n6.32\nDiluted earnings per share\n$\n1.25 $\n4.90 $\n6.15\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n467 \n474 \n480\nDiluted\n477 \n484 \n493\nSee accompanying notes to consolidated financial statements.\n38 Table of Contents\nAMAZON.COM, INC.",
+   "sha256": "1c1a7cf28c0eec8b8cb8220078ea940654370b9d298c3aaa73d5d766a06eb914",
+   "score": -1.4484822750091553,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2017",
+    "source": "AMAZON_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in millions, except per share data)\n \n \nYear Ended December 31,\n \n2015\n \n2016\n \n2017\nNet product sales\n$\n79,268 $\n94,665 $\n118,573\nNet service sales\n27,738 \n41,322 \n59,293\nTotal net sales\n107,006 \n135,987 \n177,866\nOperating expenses:\n \n \n \nCost of sales\n71,651 \n88,265 \n111,934\nFulfillment\n13,410 \n17,619 \n25,249\nMarketing\n5,254 \n7,233 \n10,069\nTechnology and content\n12,540 \n16,085 \n22,620\nGeneral and administrative\n1,747 \n2,432 \n3,674\nOther operating expense, net\n171 \n167 \n214\nTotal operating expenses\n104,773 \n131,801 \n173,760\nOperating income\n2,233 \n4,186 \n4,106\nInterest income\n50 \n100 \n202\nInterest expense\n(459) \n(484) \n(848)\nOther income (expense), net\n(256) \n90 \n346\nTotal non-operating income (expense)\n(665) \n(294) \n(300)\nIncome before income taxes\n1,568 \n3,892 \n3,806\nProvision for income taxes\n(950) \n(1,425) \n(769)\nEquity-method investment activity, net of tax\n(22) \n(96) \n(4)\nNet income\n$\n596 $\n2,371 $\n3,033\nBasic earnings per share\n$\n1.28 $\n5.01 $\n6.32\nDiluted earnings per share\n$\n1.25 $\n4.90 $\n6.15\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n467 \n474 \n480\nDiluted\n477 \n484 \n493\nSee accompanying notes to consolidated financial statements.\n38",
+   "sha256": "da646042af071b7a18b2f7962e54c3471de5bc378bc0bd88e4e632e02a395bf9",
+   "score": -1.4500361680984497,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2017",
+    "source": "AMAZON_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "878\nGeneral and administrative\n3,674 \n4,336 \n5,203\nOther operating expense (income), net\n214 \n296 \n201\nTotal operating expenses\n173,760 \n220,466 \n265,981\nOperating income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n(183) \n203\nTotal non-operating income (expense)\n(300) \n(1,160) \n(565)\nIncome before income taxes\n3,806 \n11,261 \n13,976\nProvision for income taxes\n(769) \n(1,197) \n(2,374)\nEquity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.",
+   "sha256": "b005e4bfb2ed1917b458c166482d758854ad8e825cd480c2c20baf0f357d9a71",
+   "score": -1.6833834648132324,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2019",
+    "source": "AMAZON_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Table of Contents\nAMAZON.COM, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in millions, except per share data)\n \n \nYear Ended December 31,\n \n2015\n \n2016\n \n2017\nNet product sales\n$\n79,268 $\n94,665 $\n118,573\nNet service sales\n27,738 \n41,322 \n59,293\nTotal net sales\n107,006 \n135,987 \n177,866\nOperating expenses:\n \n \n \nCost of sales\n71,651 \n88,265 \n111,934\nFulfillment\n13,410 \n17,619 \n25,249\nMarketing\n5,254 \n7,233 \n10,069\nTechnology and content\n12,540 \n16,085 \n22,620\nGeneral and administrative\n1,747 \n2,432 \n3,674\nOther operating expense, net\n171 \n167 \n214\nTotal operating expenses\n104,773 \n131,801 \n173,760\nOperating income\n2,233 \n4,186 \n4,",
+   "sha256": "91d6be758169b488328f07185b6d890eb0589761ce39600a962be068dde078dc",
+   "score": -2.4958841800689697,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2017",
+    "source": "AMAZON_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "net of tax\n(22) \n(96) \n(4)\nNet income\n$\n596 $\n2,371 $\n3,033\nBasic earnings per share\n$\n1.28 $\n5.01 $\n6.32\nDiluted earnings per share\n$\n1.25 $\n4.90 $\n6.15\nWeighted-average shares used in computation of earnings per share:\n \n \n \nBasic\n467 \n474 \n480\nDiluted\n477 \n484 \n493\nSee accompanying notes to consolidated financial statements.\n38 Table of Contents\nAMAZON.COM, INC.",
+   "sha256": "ad87ff57c04b750835cf9003c2f041de766c0b67802ba1f491ec5a085a9a7e48",
+   "score": -2.5692312717437744,
+   "metadata": {
+    "company": "Amazon",
+    "year": "2017",
+    "source": "AMAZON_2017_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "eca78472fe1c33ce80c7fe41927ffaf5c2a67818364d89f010c2de7d9c0b9ed2"
+}
