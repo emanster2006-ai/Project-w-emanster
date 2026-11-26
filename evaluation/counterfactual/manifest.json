@@ -83,7 +83,8 @@
     }
    },
    "audit": "Capex appears in three overlapping 2021-10-K chunks (FY2021 first column) and in a 2022-10-K chunk (FY2021 second column); all are edited. The FY2021 investing total sums exactly to -3,269 including capex, so B and C move it and D removes it. No prose mention of $4.6 billion in the captured chunks.",
-   "split": "dev"
+   "split": "dev",
+   "source": "financebench"
   },
   {
    "id": "financebench_id_04417",
@@ -159,7 +160,8 @@
     }
    },
    "audit": "Inventories and total current assets appear once, in the FY2019 balance sheet chunk; total assets is not in the captured context. Raising inventories raises total current assets by the same amount.",
-   "split": "dev"
+   "split": "dev",
+   "source": "financebench"
   },
   {
    "id": "financebench_id_03531",
@@ -254,7 +256,8 @@
     }
    },
    "audit": "The FY2019 balance sheet appears in three overlapping chunks. B and C move prepaid expenses and total current assets and offset the change in deferred income taxes and other assets, so total assets and the balance-sheet identity are unchanged. D removes the subtotal, one component and both balance-sheet totals; recovering the figure would take several subtractions from rows that remain (total liabilities and equity are removed).",
-   "split": "dev"
+   "split": "dev",
+   "source": "financebench"
   },
   {
    "id": "financebench_id_03282",
@@ -345,7 +348,8 @@
    },
    "audit": "B and C move deferred revenue and total current liabilities and offset non-current content liabilities, so total liabilities and the balance-sheet identity are unchanged. D removes the subtotal, one component and total liabilities; total liabilities and equity minus equity minus non-current rows would still recover it in several steps.",
    "split": "reserved",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
   },
   {
    "id": "financebench_id_04209",
@@ -450,7 +454,8 @@
    },
    "audit": "B and C move one asset row and one liability row by the same amount, with total assets, total liabilities and total liabilities and equity, so both sides balance. D removes both totals, total liabilities and one asset component; recovering it would take summing several liability and equity rows.",
    "split": "reserved",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
   },
   {
    "id": "financebench_id_04700",
@@ -549,7 +554,8 @@
    },
    "audit": "B and C move service cost and service revenue by the same amount with both totals, so gross margin and everything below it are unchanged. D removes total cost of revenue, the service cost row and gross margin (cost = revenue - gross margin); operating expenses and operating income remain, so a multi-step recovery is still possible.",
    "split": "reserved",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
   },
   {
    "id": "financebench_id_07661",
@@ -652,7 +658,8 @@
    },
    "audit": "B and C move one operating item, operating cash flow, the net change in cash and the affected year-end cash balance by the same amount. D removes operating cash flow, one component and the net change in cash; beginning and ending cash with the investing and financing totals would still recover it in several steps.",
    "split": "dev",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
   },
   {
    "id": "financebench_id_08286",
@@ -755,7 +762,8 @@
    },
    "audit": "B and C change net income through the tax provision, so income before taxes and every line above it are unchanged; earnings per share are recomputed from the weighted shares shown. D removes net income, the tax provision and both EPS rows (EPS x shares would recover it).",
    "split": "reserved",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
   },
   {
    "id": "financebench_id_10285",
@@ -835,7 +843,823 @@
    },
    "audit": "B and C offset the PP&E change in investments, so total assets and the balance-sheet identity are unchanged. D removes PP&E and both balance-sheet totals; total liabilities plus total equity minus the other asset rows would still recover it in several steps.",
    "split": "reserved",
-   "pilot": false
+   "pilot": false,
+   "source": "financebench"
+  },
+  {
+   "id": "author_04980_1",
+   "parent": "financebench_id_04980",
+   "metric": "FY2021 net cash provided by operating activities",
+   "unit": "millions",
+   "expected": {
+    "A": 11616,
+    "B": 12316,
+    "C": 11616
+   },
+   "trap": {
+    "B": 11616,
+    "C": 10113,
+    "D": 11616
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(?<![\\d.,])11,616(?!\\d)",
+       "sub": "12,316"
+      },
+      {
+       "re": "(Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?)1,762(?!\\d)",
+       "sub": "\\g<1>2,462"
+      },
+      {
+       "re": "(Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)1,762(?!\\d)",
+       "sub": "\\g<1>2,462"
+      }
+     ],
+     "gone": [
+      "11,616",
+      "1,762"
+     ],
+     "present": [
+      "12,316"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(?<![\\d.,])10,613(?!\\d)",
+       "sub": "10,113"
+      },
+      {
+       "re": "(Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)766(?!\\d)",
+       "sub": "\\g<1>266"
+      },
+      {
+       "re": "(Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)766(?!\\d)",
+       "sub": "\\g<1>266"
+      }
+     ],
+     "gone": [
+      "10,613"
+     ],
+     "present": [
+      "11,616",
+      "10,113"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Net\\ Cash\\ Provided\\ by\\ Operating\\ Activities[\\s$]*\\(?11,616\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Net\\ Cash\\ Provided\\ by\\ Operating\\ Activities[\\s$]*\\(?10,811\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?1,762\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Accounts\\ payable\\ and\\ other\\ current\\ liabilities[\\s$]*\\(?1,842\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "11,616",
+      "1,762"
+     ]
+    }
+   },
+   "audit": "Operating cash flow appears in the 2021 10-K (first column) and the 2022 10-K (second column); B and C move it with one operating component in both filings. The net change in cash is not in the captured context. D removes operating cash flow and that component in both filings.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "PEPSICO_2021_10K"
+  },
+  {
+   "id": "author_04980_2",
+   "parent": "financebench_id_04980",
+   "metric": "FY2021 sales of property, plant and equipment (cash flow)",
+   "unit": "millions",
+   "expected": {
+    "A": 166,
+    "B": 226,
+    "C": 166
+   },
+   "trap": {
+    "B": 166,
+    "C": 35,
+    "D": 166
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(?<![\\d.,])166(?!\\d)",
+       "sub": "226"
+      },
+      {
+       "re": "(Divestitures\\ and\\ sales\\ of\\ investments\\ in\\ noncontrolled\\ affiliates[\\s$]*\\(?)169(?!\\d)",
+       "sub": "\\g<1>109"
+      }
+     ],
+     "gone": [
+      "166",
+      "169"
+     ],
+     "present": [
+      "226"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Sales\\ of\\ property,\\ plant\\ and\\ equipment[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)55(?!\\d)",
+       "sub": "\\g<1>35"
+      },
+      {
+       "re": "(Sales\\ of\\ property,\\ plant\\ and\\ equipment[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)55(?!\\d)",
+       "sub": "\\g<1>35"
+      },
+      {
+       "re": "(plant\\ and\\ equipment[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)55(?!\\d)",
+       "sub": "\\g<1>35"
+      },
+      {
+       "re": "(Divestitures\\ and\\ sales\\ of\\ investments\\ in\\ noncontrolled\\ affiliates[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)6(?!\\d)",
+       "sub": "\\g<1>26"
+      }
+     ],
+     "gone": [],
+     "present": [
+      "166",
+      "35"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Sales\\ of\\ property,\\ plant\\ and\\ equipment[\\s$]*\\(?166\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Sales\\ of\\ property,\\ plant\\ and\\ equipment[\\s$]*\\(?251\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "plant\\ and\\ equipment[\\s$]*\\(?166\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Net\\ Cash\\ Used\\ for\\ Investing\\ Activities[\\s$]*\\(?3,269\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "166",
+      "3,269"
+     ]
+    }
+   },
+   "audit": "Chunk 3 starts mid-label ('plant and equipment'), so it gets its own edit. B and C offset the change in divestitures within the 2021 10-K's investing section, so the investing total holds there; the 2022 10-K's FY2021 investing column is not rebalanced (its total is not in the captured chunk). D removes the row in both filings and the 2021 investing total.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "PEPSICO_2021_10K"
+  },
+  {
+   "id": "author_04417_1",
+   "parent": "financebench_id_04417",
+   "metric": "Cash and cash equivalents at Feb 2, 2019",
+   "unit": "millions",
+   "expected": {
+    "A": 1980,
+    "B": 2100,
+    "C": 1980
+   },
+   "trap": {
+    "B": 1980,
+    "C": 1001,
+    "D": 1980
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Cashandcashequivalents[\\s$]*\\(?)1,980(?!\\d)",
+       "sub": "\\g<1>2,100"
+      },
+      {
+       "re": "(Othercurrentassets[\\s$]*\\(?)466(?!\\d)",
+       "sub": "\\g<1>346"
+      }
+     ],
+     "gone": [
+      "1,980"
+     ],
+     "present": [
+      "2,100"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Cashandcashequivalents[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)1,101(?!\\d)",
+       "sub": "\\g<1>1,001"
+      },
+      {
+       "re": "(Short\\-terminvestments[\\s$]*\\(?)2,032(?!\\d)",
+       "sub": "\\g<1>2,132"
+      }
+     ],
+     "gone": [
+      "1,101",
+      "2,032"
+     ],
+     "present": [
+      "1,980",
+      "1,001"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Cashandcashequivalents[\\s$]*\\(?1,980\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Totalcurrentassets[\\s$]*\\(?8,870\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "1,980",
+      "8,870"
+     ]
+    }
+   },
+   "audit": "B offsets other current assets, C offsets the prior-year short-term investments, so total current assets is unchanged. D removes cash and total current assets.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "BESTBUY_2019_10K"
+  },
+  {
+   "id": "author_04417_2",
+   "parent": "financebench_id_04417",
+   "metric": "Receivables, net at Feb 2, 2019",
+   "unit": "millions",
+   "expected": {
+    "A": 1015,
+    "B": 1115,
+    "C": 1015
+   },
+   "trap": {
+    "B": 1015,
+    "C": 949,
+    "D": 1015
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Receivables,net[\\s$]*\\(?)1,015(?!\\d)",
+       "sub": "\\g<1>1,115"
+      },
+      {
+       "re": "(Othercurrentassets[\\s$]*\\(?)466(?!\\d)",
+       "sub": "\\g<1>366"
+      }
+     ],
+     "gone": [
+      "1,015"
+     ],
+     "present": [
+      "1,115"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Receivables,net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)1,049(?!\\d)",
+       "sub": "\\g<1>949"
+      },
+      {
+       "re": "(Othercurrentassets[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)438(?!\\d)",
+       "sub": "\\g<1>538"
+      }
+     ],
+     "gone": [
+      "1,049"
+     ],
+     "present": [
+      "1,015",
+      "949"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Receivables,net[\\s$]*\\(?1,015\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Totalcurrentassets[\\s$]*\\(?8,870\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "1,015",
+      "8,870"
+     ]
+    }
+   },
+   "audit": "B and C offset other current assets, so total current assets is unchanged. D removes receivables and total current assets.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "BESTBUY_2019_10K"
+  },
+  {
+   "id": "author_03531_1",
+   "parent": "financebench_id_03531",
+   "metric": "Cash and equivalents at May 31, 2019",
+   "unit": "millions",
+   "expected": {
+    "A": 4466,
+    "B": 4766,
+    "C": 4466
+   },
+   "trap": {
+    "B": 4466,
+    "C": 3949,
+    "D": 4466
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Cash\\ and\\ equivalents[\\s$]*\\(?)4,466(?!\\d)",
+       "sub": "\\g<1>4,766"
+      },
+      {
+       "re": "(Inventories[\\s$]*\\(?)5,622(?!\\d)",
+       "sub": "\\g<1>5,322"
+      }
+     ],
+     "gone": [
+      "4,466",
+      "5,622"
+     ],
+     "present": [
+      "4,766"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Cash\\ and\\ equivalents[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)4,249(?!\\d)",
+       "sub": "\\g<1>3,949"
+      },
+      {
+       "re": "(Inventories[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)5,261(?!\\d)",
+       "sub": "\\g<1>5,561"
+      }
+     ],
+     "gone": [
+      "4,249",
+      "5,261"
+     ],
+     "present": [
+      "4,466",
+      "3,949"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Cash\\ and\\ equivalents[\\s$]*\\(?4,466\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ assets[\\s$]*\\(?16,525\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "4,466",
+      "16,525"
+     ]
+    }
+   },
+   "audit": "B and C offset inventories, so total current assets is unchanged. D removes cash and total current assets.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "NIKE_2019_10K"
+  },
+  {
+   "id": "author_03531_2",
+   "parent": "financebench_id_03531",
+   "metric": "Inventories at May 31, 2019",
+   "unit": "millions",
+   "expected": {
+    "A": 5622,
+    "B": 5972,
+    "C": 5622
+   },
+   "trap": {
+    "B": 5622,
+    "C": 4961,
+    "D": 5622
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Inventories[\\s$]*\\(?)5,622(?!\\d)",
+       "sub": "\\g<1>5,972"
+      },
+      {
+       "re": "(Cash\\ and\\ equivalents[\\s$]*\\(?)4,466(?!\\d)",
+       "sub": "\\g<1>4,116"
+      }
+     ],
+     "gone": [
+      "5,622",
+      "4,466"
+     ],
+     "present": [
+      "5,972"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Inventories[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)5,261(?!\\d)",
+       "sub": "\\g<1>4,961"
+      },
+      {
+       "re": "(Cash\\ and\\ equivalents[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)4,249(?!\\d)",
+       "sub": "\\g<1>4,549"
+      }
+     ],
+     "gone": [
+      "5,261",
+      "4,249"
+     ],
+     "present": [
+      "5,622",
+      "4,961"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Inventories[\\s$]*\\(?5,622\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ assets[\\s$]*\\(?16,525\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "5,622",
+      "16,525"
+     ]
+    }
+   },
+   "audit": "B and C offset cash, so total current assets is unchanged. The 2021 10-K's inventories row (other years) is left as a distractor. D removes inventories and total current assets.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "NIKE_2019_10K"
+  },
+  {
+   "id": "author_03282_1",
+   "parent": "financebench_id_03282",
+   "metric": "Accounts payable (balance sheet) at Dec 31, 2017, filing in thousands",
+   "unit": "millions",
+   "expected": {
+    "A": 359.555,
+    "B": 384.555,
+    "C": 359.555
+   },
+   "trap": {
+    "B": 359.555,
+    "C": 292.842,
+    "D": 359.555
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?)359,555(?!\\d)",
+       "sub": "\\g<1>384,555"
+      },
+      {
+       "re": "(Accrued\\ expenses[\\s$]*\\(?)315,094(?!\\d)",
+       "sub": "\\g<1>290,094"
+      }
+     ],
+     "gone": [
+      "359,555",
+      "315,094"
+     ],
+     "present": [
+      "384,555"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)312,842(?!\\d)",
+       "sub": "\\g<1>292,842"
+      },
+      {
+       "re": "(Accrued\\ expenses[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)197,632(?!\\d)",
+       "sub": "\\g<1>217,632"
+      }
+     ],
+     "gone": [
+      "312,842",
+      "197,632"
+     ],
+     "present": [
+      "359,555",
+      "292,842"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Accounts\\ payable[\\s$]*\\(?359,555\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ liabilities[\\s$]*\\(?5,466,312\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ liabilities[\\s$]*\\(?15,430,786\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "359,555",
+      "5,466,312",
+      "15,430,786"
+     ]
+    }
+   },
+   "audit": "B and C offset accrued expenses, so total current liabilities is unchanged. The cash flow statement's 'Accounts payable' row (the change in payables) is left as a distractor. D removes accounts payable, total current liabilities and total liabilities.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "NETFLIX_2017_10K"
+  },
+  {
+   "id": "author_03282_2",
+   "parent": "financebench_id_03282",
+   "metric": "Long-term debt at Dec 31, 2017, filing in thousands",
+   "unit": "millions",
+   "expected": {
+    "A": 6499.432,
+    "B": 6899.432,
+    "C": 6499.432
+   },
+   "trap": {
+    "B": 6499.432,
+    "C": 3164.311,
+    "D": 6499.432
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Long\\-term\\ debt[\\s$]*\\(?)6,499,432(?!\\d)",
+       "sub": "\\g<1>6,899,432"
+      },
+      {
+       "re": "(Non\\-current\\ content\\ liabilities[\\s$]*\\(?)3,329,796(?!\\d)",
+       "sub": "\\g<1>2,929,796"
+      }
+     ],
+     "gone": [
+      "6,499,432",
+      "3,329,796"
+     ],
+     "present": [
+      "6,899,432"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Long\\-term\\ debt[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)3,364,311(?!\\d)",
+       "sub": "\\g<1>3,164,311"
+      },
+      {
+       "re": "(Non\\-current\\ content\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)2,894,654(?!\\d)",
+       "sub": "\\g<1>3,094,654"
+      }
+     ],
+     "gone": [
+      "3,364,311",
+      "2,894,654"
+     ],
+     "present": [
+      "6,499,432",
+      "3,164,311"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Long\\-term\\ debt[\\s$]*\\(?6,499,432\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ liabilities[\\s$]*\\(?15,430,786\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "6,499,432",
+      "15,430,786"
+     ]
+    }
+   },
+   "audit": "B and C offset non-current content liabilities, so total liabilities is unchanged. D removes long-term debt and total liabilities.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "NETFLIX_2017_10K"
+  },
+  {
+   "id": "author_04209_1",
+   "parent": "financebench_id_04209",
+   "metric": "Accounts payable at fiscal year end 2021",
+   "unit": "millions",
+   "expected": {
+    "A": 16278,
+    "B": 17278,
+    "C": 16278
+   },
+   "trap": {
+    "B": 16278,
+    "C": 13172,
+    "D": 16278
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?)16,278(?!\\d)",
+       "sub": "\\g<1>17,278"
+      },
+      {
+       "re": "(Other\\ current\\ liabilities[\\s$]*\\(?)4,561(?!\\d)",
+       "sub": "\\g<1>3,561"
+      }
+     ],
+     "gone": [
+      "16,278",
+      "4,561"
+     ],
+     "present": [
+      "17,278"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)14,172(?!\\d)",
+       "sub": "\\g<1>13,172"
+      },
+      {
+       "re": "(Other\\ current\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)3,728(?!\\d)",
+       "sub": "\\g<1>4,728"
+      }
+     ],
+     "gone": [
+      "14,172",
+      "3,728"
+     ],
+     "present": [
+      "16,278",
+      "13,172"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Accounts\\ payable[\\s$]*\\(?16,278\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ liabilities[\\s$]*\\(?29,441\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "TOTAL\\ LIABILITIES[\\s$]*\\(?41,190\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "16,278",
+      "29,441",
+      "41,190"
+     ]
+    }
+   },
+   "audit": "B and C offset other current liabilities, so total current liabilities is unchanged. D removes accounts payable, total current liabilities and total liabilities.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "COSTCO_2021_10K"
+  },
+  {
+   "id": "author_04209_2",
+   "parent": "financebench_id_04209",
+   "metric": "Merchandise inventories at fiscal year end 2021",
+   "unit": "millions",
+   "expected": {
+    "A": 14215,
+    "B": 15115,
+    "C": 14215
+   },
+   "trap": {
+    "B": 14215,
+    "C": 11542,
+    "D": 14215
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Merchandise\\ inventories[\\s$]*\\(?)14,215(?!\\d)",
+       "sub": "\\g<1>15,115"
+      },
+      {
+       "re": "(Cash\\ and\\ cash\\ equivalents[\\s$]*\\(?)11,258(?!\\d)",
+       "sub": "\\g<1>10,358"
+      }
+     ],
+     "gone": [
+      "14,215",
+      "11,258"
+     ],
+     "present": [
+      "15,115"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Merchandise\\ inventories[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)12,242(?!\\d)",
+       "sub": "\\g<1>11,542"
+      },
+      {
+       "re": "(Cash\\ and\\ cash\\ equivalents[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)12,277(?!\\d)",
+       "sub": "\\g<1>12,977"
+      }
+     ],
+     "gone": [
+      "12,242",
+      "12,277"
+     ],
+     "present": [
+      "14,215",
+      "11,542"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Merchandise\\ inventories[\\s$]*\\(?14,215\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ assets[\\s$]*\\(?29,505\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "14,215",
+      "29,505"
+     ]
+    }
+   },
+   "audit": "B and C offset cash, so total current assets is unchanged. D removes inventories and total current assets.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "COSTCO_2021_10K"
   }
  ],
  "excluded": [

@@ -414,6 +414,399 @@ CASES = [
     ),
 ]
 
+# Author-written questions (evaluation/counterfactual/author_questions.json). Each moves the
+# target and offsets a sibling row under the same subtotal, so no subtotal changes.
+AUTHOR_CASES = [
+    dict(
+        id="author_04980_1",
+        parent="financebench_id_04980",
+        metric="FY2021 net cash provided by operating activities",
+        unit="millions",
+        expected={"A": 11616, "B": 12316, "C": 11616},
+        trap={"B": 11616, "C": 10113, "D": 11616},
+        arms={
+            "B": dict(
+                ops=[
+                    num("11,616", "12,316"),
+                    cell(
+                        "Accounts payable and other current liabilities",
+                        0,
+                        "1,762",
+                        "2,462",
+                    ),
+                    cell(
+                        "Accounts payable and other current liabilities",
+                        1,
+                        "1,762",
+                        "2,462",
+                    ),
+                ],
+                gone=["11,616", "1,762"],
+                present=["12,316"],
+            ),
+            "C": dict(
+                ops=[
+                    num("10,613", "10,113"),
+                    cell(
+                        "Accounts payable and other current liabilities",
+                        1,
+                        "766",
+                        "266",
+                    ),
+                    cell(
+                        "Accounts payable and other current liabilities",
+                        2,
+                        "766",
+                        "266",
+                    ),
+                ],
+                gone=["10,613"],
+                present=["11,616", "10,113"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Net Cash Provided by Operating Activities", "11,616"),
+                    drop("Net Cash Provided by Operating Activities", "10,811"),
+                    drop("Accounts payable and other current liabilities", "1,762"),
+                    drop("Accounts payable and other current liabilities", "1,842"),
+                ],
+                gone=["11,616", "1,762"],
+            ),
+        },
+        audit="Operating cash flow appears in the 2021 10-K (first column) and the 2022 10-K (second column); B and C move it with one operating component in both filings. The net change in cash is not in the captured context. D removes operating cash flow and that component in both filings.",
+    ),
+    dict(
+        id="author_04980_2",
+        parent="financebench_id_04980",
+        metric="FY2021 sales of property, plant and equipment (cash flow)",
+        unit="millions",
+        expected={"A": 166, "B": 226, "C": 166},
+        trap={"B": 166, "C": 35, "D": 166},
+        arms={
+            "B": dict(
+                ops=[
+                    num("166", "226"),
+                    cell(
+                        "Divestitures and sales of investments in noncontrolled affiliates",
+                        0,
+                        "169",
+                        "109",
+                    ),
+                ],
+                gone=["166", "169"],
+                present=["226"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Sales of property, plant and equipment", 1, "55", "35"),
+                    cell("Sales of property, plant and equipment", 2, "55", "35"),
+                    cell(
+                        "plant and equipment", 1, "55", "35"
+                    ),  # chunk 3 starts mid-label
+                    cell(
+                        "Divestitures and sales of investments in noncontrolled affiliates",
+                        1,
+                        "6",
+                        "26",
+                    ),
+                ],
+                gone=[],
+                present=["166", "35"],
+            ),  # "55" also appears in an unrelated row
+            "D": dict(
+                ops=[
+                    drop("Sales of property, plant and equipment", "166"),
+                    drop("Sales of property, plant and equipment", "251"),
+                    drop("plant and equipment", "166"),  # chunk 3 starts mid-label
+                    drop("Net Cash Used for Investing Activities", "3,269"),
+                ],
+                gone=["166", "3,269"],
+            ),
+        },
+        audit="Chunk 3 starts mid-label ('plant and equipment'), so it gets its own edit. B and C offset the change in divestitures within the 2021 10-K's investing section, so the investing total holds there; the 2022 10-K's FY2021 investing column is not rebalanced (its total is not in the captured chunk). D removes the row in both filings and the 2021 investing total.",
+    ),
+    dict(
+        id="author_04417_1",
+        parent="financebench_id_04417",
+        metric="Cash and cash equivalents at Feb 2, 2019",
+        unit="millions",
+        expected={"A": 1980, "B": 2100, "C": 1980},
+        trap={"B": 1980, "C": 1001, "D": 1980},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Cashandcashequivalents", 0, "1,980", "2,100"),
+                    cell("Othercurrentassets", 0, "466", "346"),
+                ],
+                gone=["1,980"],
+                present=["2,100"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Cashandcashequivalents", 1, "1,101", "1,001"),
+                    cell("Short-terminvestments", 0, "2,032", "2,132"),
+                ],
+                gone=["1,101", "2,032"],
+                present=["1,980", "1,001"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Cashandcashequivalents", "1,980", 2),
+                    drop("Totalcurrentassets", "8,870", 2),
+                ],
+                gone=["1,980", "8,870"],
+            ),
+        },
+        audit="B offsets other current assets, C offsets the prior-year short-term investments, so total current assets is unchanged. D removes cash and total current assets.",
+    ),
+    dict(
+        id="author_04417_2",
+        parent="financebench_id_04417",
+        metric="Receivables, net at Feb 2, 2019",
+        unit="millions",
+        expected={"A": 1015, "B": 1115, "C": 1015},
+        trap={"B": 1015, "C": 949, "D": 1015},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Receivables,net", 0, "1,015", "1,115"),
+                    cell("Othercurrentassets", 0, "466", "366"),
+                ],
+                gone=["1,015"],
+                present=["1,115"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Receivables,net", 1, "1,049", "949"),
+                    cell("Othercurrentassets", 1, "438", "538"),
+                ],
+                gone=["1,049"],
+                present=["1,015", "949"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Receivables,net", "1,015", 2),
+                    drop("Totalcurrentassets", "8,870", 2),
+                ],
+                gone=["1,015", "8,870"],
+            ),
+        },
+        audit="B and C offset other current assets, so total current assets is unchanged. D removes receivables and total current assets.",
+    ),
+    dict(
+        id="author_03531_1",
+        parent="financebench_id_03531",
+        metric="Cash and equivalents at May 31, 2019",
+        unit="millions",
+        expected={"A": 4466, "B": 4766, "C": 4466},
+        trap={"B": 4466, "C": 3949, "D": 4466},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Cash and equivalents", 0, "4,466", "4,766"),
+                    cell("Inventories", 0, "5,622", "5,322"),
+                ],
+                gone=["4,466", "5,622"],
+                present=["4,766"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Cash and equivalents", 1, "4,249", "3,949"),
+                    cell("Inventories", 1, "5,261", "5,561"),
+                ],
+                gone=["4,249", "5,261"],
+                present=["4,466", "3,949"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Cash and equivalents", "4,466", 2),
+                    drop("Total current assets", "16,525", 2),
+                ],
+                gone=["4,466", "16,525"],
+            ),
+        },
+        audit="B and C offset inventories, so total current assets is unchanged. D removes cash and total current assets.",
+    ),
+    dict(
+        id="author_03531_2",
+        parent="financebench_id_03531",
+        metric="Inventories at May 31, 2019",
+        unit="millions",
+        expected={"A": 5622, "B": 5972, "C": 5622},
+        trap={"B": 5622, "C": 4961, "D": 5622},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Inventories", 0, "5,622", "5,972"),
+                    cell("Cash and equivalents", 0, "4,466", "4,116"),
+                ],
+                gone=["5,622", "4,466"],
+                present=["5,972"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Inventories", 1, "5,261", "4,961"),
+                    cell("Cash and equivalents", 1, "4,249", "4,549"),
+                ],
+                gone=["5,261", "4,249"],
+                present=["5,622", "4,961"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Inventories", "5,622", 2),
+                    drop("Total current assets", "16,525", 2),
+                ],
+                gone=["5,622", "16,525"],
+            ),
+        },
+        audit="B and C offset cash, so total current assets is unchanged. The 2021 10-K's inventories row (other years) is left as a distractor. D removes inventories and total current assets.",
+    ),
+    dict(
+        id="author_03282_1",
+        parent="financebench_id_03282",
+        metric="Accounts payable (balance sheet) at Dec 31, 2017, filing in thousands",
+        unit="millions",
+        expected={"A": 359.555, "B": 384.555, "C": 359.555},
+        trap={"B": 359.555, "C": 292.842, "D": 359.555},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Accounts payable", 0, "359,555", "384,555"),
+                    cell("Accrued expenses", 0, "315,094", "290,094"),
+                ],
+                gone=["359,555", "315,094"],
+                present=["384,555"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Accounts payable", 1, "312,842", "292,842"),
+                    cell("Accrued expenses", 1, "197,632", "217,632"),
+                ],
+                gone=["312,842", "197,632"],
+                present=["359,555", "292,842"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Accounts payable", "359,555", 2),
+                    drop("Total current liabilities", "5,466,312", 2),
+                    drop("Total liabilities", "15,430,786", 2),
+                ],
+                gone=["359,555", "5,466,312", "15,430,786"],
+            ),
+        },
+        audit="B and C offset accrued expenses, so total current liabilities is unchanged. The cash flow statement's 'Accounts payable' row (the change in payables) is left as a distractor. D removes accounts payable, total current liabilities and total liabilities.",
+    ),
+    dict(
+        id="author_03282_2",
+        parent="financebench_id_03282",
+        metric="Long-term debt at Dec 31, 2017, filing in thousands",
+        unit="millions",
+        expected={"A": 6499.432, "B": 6899.432, "C": 6499.432},
+        trap={"B": 6499.432, "C": 3164.311, "D": 6499.432},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Long-term debt", 0, "6,499,432", "6,899,432"),
+                    cell(
+                        "Non-current content liabilities", 0, "3,329,796", "2,929,796"
+                    ),
+                ],
+                gone=["6,499,432", "3,329,796"],
+                present=["6,899,432"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Long-term debt", 1, "3,364,311", "3,164,311"),
+                    cell(
+                        "Non-current content liabilities", 1, "2,894,654", "3,094,654"
+                    ),
+                ],
+                gone=["3,364,311", "2,894,654"],
+                present=["6,499,432", "3,164,311"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Long-term debt", "6,499,432", 2),
+                    drop("Total liabilities", "15,430,786", 2),
+                ],
+                gone=["6,499,432", "15,430,786"],
+            ),
+        },
+        audit="B and C offset non-current content liabilities, so total liabilities is unchanged. D removes long-term debt and total liabilities.",
+    ),
+    dict(
+        id="author_04209_1",
+        parent="financebench_id_04209",
+        metric="Accounts payable at fiscal year end 2021",
+        unit="millions",
+        expected={"A": 16278, "B": 17278, "C": 16278},
+        trap={"B": 16278, "C": 13172, "D": 16278},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Accounts payable", 0, "16,278", "17,278"),
+                    cell("Other current liabilities", 0, "4,561", "3,561"),
+                ],
+                gone=["16,278", "4,561"],
+                present=["17,278"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Accounts payable", 1, "14,172", "13,172"),
+                    cell("Other current liabilities", 1, "3,728", "4,728"),
+                ],
+                gone=["14,172", "3,728"],
+                present=["16,278", "13,172"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Accounts payable", "16,278", 2),
+                    drop("Total current liabilities", "29,441", 2),
+                    drop("TOTAL LIABILITIES", "41,190", 2),
+                ],
+                gone=["16,278", "29,441", "41,190"],
+            ),
+        },
+        audit="B and C offset other current liabilities, so total current liabilities is unchanged. D removes accounts payable, total current liabilities and total liabilities.",
+    ),
+    dict(
+        id="author_04209_2",
+        parent="financebench_id_04209",
+        metric="Merchandise inventories at fiscal year end 2021",
+        unit="millions",
+        expected={"A": 14215, "B": 15115, "C": 14215},
+        trap={"B": 14215, "C": 11542, "D": 14215},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Merchandise inventories", 0, "14,215", "15,115"),
+                    cell("Cash and cash equivalents", 0, "11,258", "10,358"),
+                ],
+                gone=["14,215", "11,258"],
+                present=["15,115"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Merchandise inventories", 1, "12,242", "11,542"),
+                    cell("Cash and cash equivalents", 1, "12,277", "12,977"),
+                ],
+                gone=["12,242", "12,277"],
+                present=["14,215", "11,542"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Merchandise inventories", "14,215", 2),
+                    drop("Total current assets", "29,505", 2),
+                ],
+                gone=["14,215", "29,505"],
+            ),
+        },
+        audit="B and C offset cash, so total current assets is unchanged. D removes inventories and total current assets.",
+    ),
+]
+for c in AUTHOR_CASES:
+    c["source"] = "author"
+
 pilots = [c["id"] for c in CASES if c.get("pilot")]
 rest = sorted(
     (c["id"] for c in CASES if not c.get("pilot")),
@@ -423,6 +816,13 @@ dev = set(pilots) | {rest[0]}
 for c in CASES:
     c["split"] = "dev" if c["id"] in dev else "reserved"
     c.setdefault("pilot", False)
+    c.setdefault("source", "financebench")
+split_of = {c["id"]: c["split"] for c in CASES}
+for c in AUTHOR_CASES:
+    c["split"] = split_of[c["parent"]]  # same filing, same split
+    c["pilot"] = False
+    c["doc_name"] = next(p["doc_name"] for p in CASES if p["id"] == c["parent"])
+CASES += AUTHOR_CASES
 
 old = json.loads((REPO / "evaluation/counterfactual/manifest.json").read_text())
 manifest = {
