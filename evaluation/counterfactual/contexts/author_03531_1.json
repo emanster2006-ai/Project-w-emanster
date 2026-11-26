@@ -1,0 +1,121 @@
+{
+ "id": "author_03531_1",
+ "doc_name": "NIKE_2019_10K",
+ "source": "author",
+ "question": "What was Nike's cash and equivalents at the end of FY2019 (May 31, 2019), in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T22:56:28+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Nike's cash and equivalents at the end of FY2019 (May 31, 2019), in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Nike's cash and equivalents at the end of FY2019 (May 31, 2019), in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nNIKE, INC.\nCONSOLIDATED BALANCE SHEETS\n \nMAY 31,\n(Dollars in millions)\n2019\n2018\nASSETS\n \n \nCurrent assets:\n \n \nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\n \n \nCurrent liabilities:\n \n \nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,",
+   "sha256": "6d8b1abfec2257e7ecf532f1e35579c267ed5b2cd31ce68b1dda0c653d5b0dfb",
+   "score": 9.04562520980835,
+   "metadata": {
+    "company": "Nike",
+    "year": "2019",
+    "source": "NIKE_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nNIKE, INC.\nCONSOLIDATED BALANCE SHEETS\n \nMAY 31,\n(Dollars in millions)\n2019\n2018\nASSETS\n \n \nCurrent assets:\n \n \nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\n \n \nCurrent liabilities:\n \n \nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,612\n2,279\nAccrued liabilities\n5,010\n3,269\nIncome taxes payable\n229\n150\nTotal current liabilities\n7,866\n6,040\nLong-term debt\n3,464\n3,468\nDeferred income taxes and other liabilities\n3,347\n3,216\nCommitments and contingencies (Note 18)\nRedeemable preferred stock\n\n\nShareholders' equity:\n \n \nCommon stock at stated value:\n \n \nClass A convertible 315 and 329 shares outstanding\n\n\nClass B 1,253 and 1,272 shares outstanding\n3\n3\nCapital in excess of stated value\n7,163\n6,384\nAccumulated other comprehensive income (loss)\n231\n(92)\nRetained earnings\n1,643\n3,517\nTotal shareholders' equity\n9,040\n9,812\nTOTAL LIABILITIES AND SHAREHOLDERS' EQUITY\n$\n23,717\n$\n22,536\nThe accompanying Notes to the Consolidated Financial Statements are an integral part of this statement.\n52 NIKE, INC.",
+   "sha256": "384bdbf78e3f6fbc2f03438a432406de5aaf0b7fdab39ee157970af4a9aea72f",
+   "score": 8.997855186462402,
+   "metadata": {
+    "company": "Nike",
+    "year": "2019",
+    "source": "NIKE_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "2021 FORM 10-K 57 Table of Contents\nNIKE, INC.\nCONSOLIDATED BALANCE SHEETS\nMAY 31,\n(In millions)\n2021\n2020\nASSETS\nCurrent assets:\nCash and equivalents\n$\n9,889 $\n8,348 \nShort-term investments\n3,587 \n439 \nAccounts receivable, net\n4,463 \n2,749 \nInventories\n6,854 \n7,367 \nPrepaid expenses and other current assets\n1,498 \n1,653 \nTotal current assets\n26,291 \n20,556 \nProperty, plant and equipment, net\n4,904 \n4,866 \nOperating lease right-of-use assets, net\n3,113 \n3,097 \nIdentifiable intangible assets, net\n269 \n274 \nGoodwill\n242 \n223 \nDeferred income taxes and other assets\n2,921 \n2,326 \nTOTAL ASSETS\n$\n37,740 $\n31,",
+   "sha256": "96308641f75cbe2a1dda750e4455b7ad766cca22209613d9e2db26c11f91f0fd",
+   "score": 5.0005879402160645,
+   "metadata": {
+    "company": "Nike",
+    "year": "2021",
+    "source": "NIKE_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "2021 FORM 10-K 57 Table of Contents\nNIKE, INC.\nCONSOLIDATED BALANCE SHEETS\nMAY 31,\n(In millions)\n2021\n2020\nASSETS\nCurrent assets:\nCash and equivalents\n$\n9,889 $\n8,348 \nShort-term investments\n3,587 \n439 \nAccounts receivable, net\n4,463 \n2,749 \nInventories\n6,854 \n7,367 \nPrepaid expenses and other current assets\n1,498 \n1,653 \nTotal current assets\n26,291 \n20,556 \nProperty, plant and equipment, net\n4,904 \n4,866 \nOperating lease right-of-use assets, net\n3,113 \n3,097 \nIdentifiable intangible assets, net\n269 \n274 \nGoodwill\n242 \n223 \nDeferred income taxes and other assets\n2,921 \n2,326 \nTOTAL ASSETS\n$\n37,740 $\n31,342 \nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n $\n3 \nNotes payable\n2 \n248 \nAccounts payable\n2,836 \n2,248 \nCurrent portion of operating lease liabilities\n467 \n445 \nAccrued liabilities\n6,063 \n5,184 \nIncome taxes payable\n306 \n156 \nTotal current liabilities\n9,674 \n8,284 \nLong-term debt\n9,413 \n9,406 \nOperating lease liabilities\n2,931 \n2,913 \nDeferred income taxes and other liabilities\n2,955 \n2,684 \nCommitments and contingencies (Note 18)\nRedeemable preferred stock\n \n \nShareholders' equity:\nCommon stock at stated value:\nClass A convertible 305 and 315 shares outstanding\n \n \nClass B 1,273 and 1,243 shares outstanding\n3 \n3 \nCapital in excess of stated value\n9,965 \n8,299 \nAccumulated other comprehensive income (loss)\n(380)\n(56)\nRetained earnings (deficit)\n3,179 \n(191)\nTotal shareholders' equity\n12,767 \n8,055 \nTOTAL LIABILITIES AND SHAREHOLDERS' EQUITY\n$\n37,740 $\n31,342 \nThe accompanying Notes to the Consolidated Financial Statements are an integral part of this statement.",
+   "sha256": "2a63532d9e7f2a734c2d22c5507b377b5a5f557bb6eceb072fcbf282302eeb43",
+   "score": 4.493643760681152,
+   "metadata": {
+    "company": "Nike",
+    "year": "2021",
+    "source": "NIKE_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "NIKE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\nYEAR ENDED MAY 31,\n(Dollars in millions)\n2023\n2022\n2021\nCash provided (used) by operations:\nNet income\n$ \n5,070 $ \n6,046 $ \n5,727 \nAdjustments to reconcile net income to net cash provided (used) by operations:\nDepreciation\n \n703 \n717 \n744 \nDeferred income taxes\n \n(117) \n(650) \n(385) \nStock-based compensation\n \n755 \n638 \n611 \nAmortization, impairment and other\n \n156 \n123 \n53 \nNet foreign currency adjustments\n \n(213) \n(26) \n(138) \nChanges in certain working capital components and other assets and liabilities:\n(Increase) decrease in accounts receivable\n \n489 \n(504) \n(1,606) \n(Increase) decrease in inventories\n \n(133) \n(1,676) \n507 \n(Increase) decrease in prepaid expenses, operating lease right-of-use assets and \nother current and non-current assets\n \n(644) \n(845) \n(182) \nIncrease (decrease) in accounts payable, accrued liabilities, operating lease liabilities \nand other current and non-current liabilities\n \n(225) \n1,365 \n1,326 \nCash provided (used) by operations\n \n5,841 \n5,188 \n6,657 \nCash provided (used) by investing activities:\nPurchases of short-term investments\n \n(6,059) \n(12,913) \n(9,961) \nMaturities of short-term investments\n \n3,356 \n8,199 \n4,236 \nSales of short-term investments\n \n4,184 \n3,967 \n2,449 \nAdditions to property, plant and equipment\n \n(969) \n(758) \n(695) \nOther investing activities\n \n52 \n(19) \n171 \nCash provided (used) by investing activities\n \n564 \n(1,524) \n(3,800) \nCash provided (used) by financing activities:\nIncrease (decrease) in notes payable, net\n \n(4) \n15 \n(52) \nRepayment of borrowings\n \n(500) \n \n(197) \nProceeds from exercise of stock options and other stock issuances\n \n651 \n1,151 \n1,172 \nRepurchase of common stock\n \n(5,480) \n(4,014) \n(608) \nDividends common and preferred\n \n(2,012) \n(1,837) \n(1,638) \nOther financing activities\n \n(102) \n(151) \n(136) \nCash provided (used) by financing activities\n \n(7,447) \n(4,836) \n(1,459) \nEffect of exchange rate changes on cash and equivalents\n \n(91) \n(143) \n143 \nNet increase (decrease) in cash and equivalents\n \n(1,133) \n(1,315) \n1,541 \nCash and equivalents, beginning of year\n \n8,574 \n9,889 \n8,348 \nCASH AND EQUIVALENTS, END OF YEAR\n$ \n7,441 $ \n8,574 $ \n9,889",
+   "sha256": "7c36c669275c1bb884ecc75c20ea45f78b19b468f454ae8fdc3dc5f19fb33711",
+   "score": 4.039558410644531,
+   "metadata": {
+    "company": "Nike",
+    "year": "2023",
+    "source": "NIKE_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "NIKE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\nYEAR ENDED MAY 31,\n(Dollars in millions)\n2023\n2022\n2021\nCash provided (used) by operations:\nNet income\n$ \n5,070 $ \n6,046 $ \n5,727 \nAdjustments to reconcile net income to net cash provided (used) by operations:\nDepreciation\n \n703 \n717 \n744 \nDeferred income taxes\n \n(117) \n(650) \n(385) \nStock-based compensation\n \n755 \n638 \n611 \nAmortization, impairment and other\n \n156 \n123 \n53 \nNet foreign currency adjustments\n \n(213) \n(26) \n(138) \nChanges in certain working capital components and other assets and liabilities:\n(Increase) decrease in accounts receivable\n \n489 \n(504) \n(1,606) \n(Increase) decrease in inventories\n \n(133) \n(1,676) \n507 \n(Increase) decrease in prepaid expenses,",
+   "sha256": "21a06a7b4e05939dbf271c6f6f10a5f9d31b41ed41ab1d77b8abbaf3d56025e9",
+   "score": 4.021610260009766,
+   "metadata": {
+    "company": "Nike",
+    "year": "2023",
+    "source": "NIKE_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "NIKE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\nYEAR ENDED MAY 31,\n(Dollars in millions)\n2023\n2022\n2021\nCash provided (used) by operations:\nNet income\n$ \n5,070 $ \n6,046 $ \n5,727 \nAdjustments to reconcile net income to net cash provided (used) by operations:\nDepreciation\n \n703 \n717 \n744 \nDeferred income taxes\n \n(117) \n(650) \n(385) \nStock-based compensation\n \n755 \n638 \n611 \nAmortization, impairment and other\n \n156 \n123 \n53 \nNet foreign currency adjustments\n \n(213) \n(26) \n(138) \nChanges in certain working capital components and other assets and liabilities:\n(Increase) decrease in accounts receivable\n \n489 \n(504) \n(1,606) \n(Increase) decrease in inventories\n \n(133) \n(1,676) \n507 \n(Increase) decrease in prepaid expenses, operating lease right-of-use assets and \nother current and non-current assets\n \n(644) \n(845) \n(182) \nIncrease (decrease) in accounts payable, accrued liabilities, operating lease liabilities \nand other current and non-current liabilities\n \n(225) \n1,365 \n1,326 \nCash provided (used) by operations\n \n5,841 \n5,188 \n6,657 \nCash provided (used) by investing activities:\nPurchases of short-term investments\n \n(6,059) \n(12,913) \n(9,961) \nMaturities of short-term investments\n \n3,356 \n8,199 \n4,236 \nSales of short-term investments\n \n4,184 \n3,967 \n2,449 \nAdditions to property, plant and equipment\n \n(969) \n(758) \n(695) \nOther investing activities\n \n52 \n(19) \n171 \nCash provided (used) by investing activities\n \n564 \n(1,524) \n(3,800) \nCash provided (used) by financing activities:\nIncrease (decrease) in notes payable, net\n \n(4) \n15 \n(52) \nRepayment of borrowings\n \n(500) \n \n(197) \nProceeds from exercise of stock options and other stock issuances\n \n651 \n1,",
+   "sha256": "0e4e617972d4764cc3f5dba920aaedd13704391e340f07d6fa3b3013e0253989",
+   "score": 3.9967243671417236,
+   "metadata": {
+    "company": "Nike",
+    "year": "2023",
+    "source": "NIKE_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "133) \n(1,315) \n1,541 \nCash and equivalents, beginning of year\n \n8,574 \n9,889 \n8,348 \nCASH AND EQUIVALENTS, END OF YEAR\n$ \n7,441 $ \n8,574 $ \n9,889",
+   "sha256": "1e785627497e12120510940c75369793f7584d94399ae07dcab9753b5368765a",
+   "score": 3.8648531436920166,
+   "metadata": {
+    "company": "Nike",
+    "year": "2023",
+    "source": "NIKE_2023_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "139fa5cb6ea70942e5337ac60372be624d82191f8962e5e8056697a04e14139b"
+}

@@ -1,0 +1,121 @@
+{
+ "id": "author_04209_2",
+ "doc_name": "COSTCO_2021_10K",
+ "source": "author",
+ "question": "What was Costco's merchandise inventories balance at the end of FY2021, in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T22:56:35+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Costco's merchandise inventories balance at the end of FY2021, in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Costco's merchandise inventories balance at the end of FY2021, in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,",
+   "sha256": "cb31e7118f25429eb092add90bc5b2a57303e2f292668b942188cd2f8a51df47",
+   "score": 5.6592631340026855,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,172 \nAccrued salaries and benefits\n4,090 \n3,605 \nAccrued member rewards\n1,671 \n1,393 \nDeferred membership fees\n2,042 \n1,851 \nCurrent portion of long-term debt\n799 \n95 \nOther current liabilities\n4,561 \n3,728 \nTotal current liabilities\n29,441 \n24,844 \nOTHER LIABILITIES\nLong-term debt, excluding current portion\n6,692 \n7,514 \nLong-term operating lease liabilities\n2,642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized; no shares issued and\noutstanding\n \n \nCommon stock $0.01 par value; 900,000,000 shares authorized; 441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,",
+   "sha256": "5729ef9df702ee4d19e567c3a874a6d2243a5be9831004b9727c29f9b6fc7c40",
+   "score": 5.429001808166504,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,172 \nAccrued salaries and benefits\n4,090 \n3,605 \nAccrued member rewards\n1,671 \n1,393 \nDeferred membership fees\n2,042 \n1,851 \nCurrent portion of long-term debt\n799 \n95 \nOther current liabilities\n4,561 \n3,728 \nTotal current liabilities\n29,441 \n24,844 \nOTHER LIABILITIES\nLong-term debt, excluding current portion\n6,692 \n7,514 \nLong-term operating lease liabilities\n2,642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized; no shares issued and\noutstanding\n \n \nCommon stock $0.01 par value; 900,000,000 shares authorized; 441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,879 \nTotal Costco stockholders equity\n17,564 \n18,284 \nNoncontrolling interests\n514 \n421 \nTOTAL EQUITY\n18,078 \n18,705 \nTOTAL LIABILITIES AND EQUITY\n$\n59,268 \n$\n55,556 \nThe accompanying notes are an integral part of these consolidated financial statements.\n38",
+   "sha256": "efbf62510c5d6a41be36d5b54b3d7f2a6c0bd8716fada3d1cebbfe741d323515",
+   "score": 5.366217136383057,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Balance Sheet\nCash and cash equivalents at the end of the fourth quarter of fiscal 2022 were $737.9\nmillion.\nMerchandise inventories, net at the end of the fourth quarter of fiscal 2022 totaled $1.6\nbillion compared to $1.5 billion at the end of the fourth quarter of fiscal 2021. The $104.2\nmillion increase was primarily due to the opening of 47 new stores since January 29, 2022,\ninventory to support new brand launches and brand expansions, and inventory cost\nincreases.",
+   "sha256": "c18adc6e64ede35998ae26b45c70dd914b7a1f800d2abeab0ddba0d3b27583a0",
+   "score": 2.540346145629883,
+   "metadata": {
+    "company": "Ulta Beauty",
+    "year": "2023",
+    "source": "ULTABEAUTY_2023Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "3M Company and Subsidiaries\nConsolidated Statement of Income\nYears ended December 31\n(Millions, except per share amounts)\n2022\n2021\n2020\nNet sales\n$\n34,229 $\n35,355 $\n32,184 3M Company and Subsidiaries\nConsolidated Balance Sheet\nAt December 31\n(Dollars in millions, except per share amount)\n2022\n2021\nAssets\nCurrent assets\nCash and cash equivalents\n$\n3,655 $\n4,564 \nMarketable securities current\n238 \n201 \nAccounts receivable net of allowances of $174 and $189\n4,532 \n4,660 \nInventories\nFinished goods\n2,497 \n2,196 \nWork in process\n1,606 \n1,577 \nRaw materials and supplies\n1,269 \n1,212 \nTotal inventories\n5,372 \n4,985 \nPrepaids\n435 \n654 \nOther current assets\n456 \n339 \nTotal current assets\n14,688 \n15,403 \nProperty,",
+   "sha256": "5c7eecdd33bdd2dcba68ebab12f1408eb5fb1eec6610cd4957efb2a8dcde4c91",
+   "score": -2.000063896179199,
+   "metadata": {
+    "company": "3M",
+    "year": "2022",
+    "source": "3M_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "3M Company and Subsidiaries\nConsolidated Statement of Income\nYears ended December 31\n(Millions, except per share amounts)\n2022\n2021\n2020\nNet sales\n$\n34,229 $\n35,355 $\n32,184 3M Company and Subsidiaries\nConsolidated Balance Sheet\nAt December 31\n(Dollars in millions, except per share amount)\n2022\n2021\nAssets\nCurrent assets\nCash and cash equivalents\n$\n3,655 $\n4,564 \nMarketable securities current\n238 \n201 \nAccounts receivable net of allowances of $174 and $189\n4,532 \n4,660 \nInventories\nFinished goods\n2,497 \n2,196 \nWork in process\n1,606 \n1,577 \nRaw materials and supplies\n1,269 \n1,212 \nTotal inventories\n5,372 \n4,985 \nPrepaids\n435 \n654 \nOther current assets\n456 \n339 \nTotal current assets\n14,688 \n15,403 \nProperty, plant and equipment\n25,998 \n27,213 \nLess: Accumulated depreciation\n(16,820)\n(17,784)\nProperty, plant and equipment net\n9,178 \n9,429 \nOperating lease right of use assets\n829 \n858 \nGoodwill\n12,790 \n13,486 \nIntangible assets net\n4,699 \n5,288 \nOther assets\n4,271 \n2,608 \nTotal assets\n$\n46,455 $\n47,072 3M Company and Subsidiaries\nConsolidated Statement of Cash Flows\nYears ended December 31\n(Millions)\n2022\n2021\n2020\nCash Flows from Operating Activities\nNet income including noncontrolling interest\n$\n5,791 $\n5,929 $\n5,453 \nAdjustments to reconcile net income including noncontrolling interest to net cash provided by operating\nactivities\nDepreciation and amortization\n1,831 \n1,915 \n1,",
+   "sha256": "fd2d0c105acda4d204009e0992190c6ace5b9ee85f431b6a3f6f94f380da3098",
+   "score": -2.3246772289276123,
+   "metadata": {
+    "company": "3M",
+    "year": "2022",
+    "source": "3M_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "3M Company and Subsidiaries\nConsolidated Statement of Income\nYears ended December 31\n(Millions, except per share amounts)\n2022\n2021\n2020\nNet sales\n$\n34,229 $\n35,355 $\n32,184 3M Company and Subsidiaries\nConsolidated Balance Sheet\nAt December 31\n(Dollars in millions, except per share amount)\n2022\n2021\nAssets\nCurrent assets\nCash and cash equivalents\n$\n3,655 $\n4,564 \nMarketable securities current\n238 \n201 \nAccounts receivable net of allowances of $174 and $189\n4,532 \n4,660 \nInventories\nFinished goods\n2,497 \n2,196 \nWork in process\n1,606 \n1,577 \nRaw materials and supplies\n1,269 \n1,212 \nTotal inventories\n5,372 \n4,985 \nPrepaids\n435 \n654 \nOther current assets\n456 \n339 \nTotal current assets\n14,688 \n15,403 \nProperty, plant and equipment\n25,998 \n27,213 \nLess: Accumulated depreciation\n(16,820)\n(17,784)\nProperty, plant and equipment net\n9,178 \n9,429 \nOperating lease right of use assets\n829 \n858 \nGoodwill\n12,790 \n13,486 \nIntangible assets net\n4,699 \n5,288 \nOther assets\n4,271 \n2,608 \nTotal assets\n$\n46,455 $\n47,072 3M Company and Subsidiaries\nConsolidated Statement of Cash Flows\nYears ended December 31\n(Millions)\n2022\n2021\n2020\nCash Flows from Operating Activities\nNet income including noncontrolling interest\n$\n5,791 $\n5,929 $\n5,453 \nAdjustments to reconcile net income including noncontrolling interest to net cash provided by operating\nactivities\nDepreciation and amortization\n1,831 \n1,915 \n1,911 \nLong-lived and indefinite-lived asset impairment expense\n618 \n \n6 \nGoodwill impairment expense\n271 \n \n \nCompany pension and postretirement contributions\n(158)\n(180)\n(156)\nCompany pension and postretirement expense\n178 \n206 \n322 \nStock-based compensation expense\n263 \n274 \n262 \nGain on business divestitures\n(2,724)\n \n(389)\nDeferred income taxes\n(663)\n(166)\n(165)\nChanges in assets and liabilities\nAccounts receivable\n(105)\n(122)\n165 \nInventories\n(629)\n(903)\n(91)\nAccounts payable\n111 \n518 \n252 \nAccrued income taxes (current and long-term)\n(47)\n(244)\n132 \nOther net\n854 \n227 \n411 \nNet cash provided by (used in) operating activities\n5,591 \n7,454 \n8,113 \nCash Flows from Investing Activities\nPurchases of property, plant and equipment (PP&E)\n(1,749)\n(1,603)\n(1,501)",
+   "sha256": "0ff33b73b62be246718eae622fb28cf6ea8982f32f5f9cb5bf723bc9547389b8",
+   "score": -2.6451094150543213,
+   "metadata": {
+    "company": "3M",
+    "year": "2022",
+    "source": "3M_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,879 \nTotal Costco stockholders equity\n17,564 \n18,284 \nNoncontrolling interests\n514 \n421 \nTOTAL EQUITY\n18,078 \n18,705 \nTOTAL LIABILITIES AND EQUITY\n$\n59,268 \n$\n55,556 \nThe accompanying notes are an integral part of these consolidated financial statements.\n38",
+   "sha256": "574533e2dbfe003cf9848e33eabc52897425dbdd29b31efecd45cfbc49d7f430",
+   "score": -3.0153608322143555,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "f0f6eaa158940a186259228f3580d8f4f20e6ec414fbd9d992333b6df156380c"
+}

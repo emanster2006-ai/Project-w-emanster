@@ -27,6 +27,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 UI_OPTIONS = {"use_decomposition": True, "use_hyde": False, "top_k": 8}
 GENERATION_MAX_TOKENS = 1000  # mirrors generation/llm.py; recorded for provenance
@@ -37,7 +38,18 @@ def sha256(text: str) -> str:
     return hashlib.sha256(text.encode()).hexdigest()
 
 
+AUTHOR_QUESTIONS = Path(__file__).resolve().parent.parent / (
+    "evaluation/counterfactual/author_questions.json"
+)
+
+
 def load_question(qid: str) -> dict:
+    """A FinanceBench row, or an author-written question (ids starting 'author_')."""
+    if qid.startswith("author_"):
+        for row in json.loads(AUTHOR_QUESTIONS.read_text())["questions"]:
+            if row["id"] == qid:
+                return {**row, "source": "author"}
+        raise KeyError(qid)
     from datasets import load_dataset
 
     for row in load_dataset("PatronusAI/financebench", split="train"):
@@ -57,14 +69,32 @@ def _git_rev() -> str | None:
         return os.getenv("GIT_REV")
 
 
+async def _retrieve_waiting(question: str, options: dict):
+    """retrieve_context, waiting out provider rate limits (decomposition calls the LLM)."""
+    from counterfactual_run import _is_rate_limit, _provider_error
+    from answer_accuracy import _retry_after, _wait_or_stop
+    from retrieval.pipeline import retrieve_context
+
+    while True:
+        try:
+            return await retrieve_context(question, **options)
+        except Exception as exc:
+            root = _provider_error(exc)
+            if not _is_rate_limit(root):
+                raise
+            headers = getattr(getattr(root, "response", None), "headers", {}) or {}
+            _wait_or_stop(
+                _retry_after(str(root), headers.get("retry-after")), "capture"
+            )
+
+
 async def capture(question: str, options: dict) -> dict:
     """Mask PII like the API middleware, then run the shared retrieval pipeline."""
     from generation.llm import render_messages
-    from retrieval.pipeline import retrieve_context
     from security.pii_handler import anonymize
 
     sanitized, mapping = anonymize(question)
-    ctx = await retrieve_context(sanitized, **options)
+    ctx = await _retrieve_waiting(sanitized, options)
     messages = render_messages(sanitized, ctx.chunks)
     return {
         "question_sent": sanitized,
@@ -136,6 +166,7 @@ async def main() -> None:
         record = {
             "id": qid,
             "doc_name": row.get("doc_name"),
+            "source": row.get("source", "financebench"),
             "question": row["question"],
             "captured_at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
             "git_rev": _git_rev(),

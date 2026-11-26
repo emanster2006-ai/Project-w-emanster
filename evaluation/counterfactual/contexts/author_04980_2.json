@@ -1,0 +1,121 @@
+{
+ "id": "author_04980_2",
+ "doc_name": "PEPSICO_2021_10K",
+ "source": "author",
+ "question": "How much did PepsiCo receive from sales of property, plant and equipment in FY2021, in USD millions? Answer using the cash flow statement.",
+ "captured_at": "2026-11-26T22:56:22+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "How much did PepsiCo receive from sales of property, plant and equipment in FY2021, in USD millions? Answer using the cash flow statement.",
+ "pii_masked": false,
+ "sub_questions": [
+  "How much did PepsiCo receive from sales of property, plant and equipment in FY2021, in USD millions? Answer using the cash flow statement."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nConsolidated Statement of Cash Flows\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 25, 2021, December 26, 2020 and December 28, 2019\n(in millions)\n2021\n2020\n2019\nOperating Activities\nNet income\n$\n7,679 $\n7,175 $\n7,353 \nDepreciation and amortization\n2,710 \n2,548 \n2,432 \nOperating lease right-of-use asset amortization\n505 \n478 \n412 \nShare-based compensation expense\n301 \n264 \n237 \nRestructuring and impairment charges\n247 \n289 \n370 \nCash payments for restructuring charges\n(256)\n(255)\n(350)\nAcquisition and divestiture-related charges\n(4)\n255 \n55 \nCash payments for acquisition and divestiture-related charges\n(176)\n(131)\n(10)\nPension and retiree medical plan expenses\n123 \n408 \n519 \nPension and retiree medical plan contributions\n(785)\n(562)\n(716)\nDeferred income taxes and other tax charges and credits\n298 \n361 \n453 \nTax expense/(benefit) related to the TCJ Act\n190 \n \n(8)\nTax payments related to the TCJ Act\n(309)\n(78)\n(423)\nChange in assets and liabilities:\nAccounts and notes receivable\n(651)\n(420)\n(650)\nInventories\n(582)\n(516)\n(190)\nPrepaid expenses and other current assets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments, by original maturity:\nMore than three months - purchases\n \n(1,135)\n \nMore than three months - maturities\n1,135 \n \n16 \nMore than three months - sales\n \n \n62 \nThree months or less, net\n(58)\n27 \n19 \nOther investing, net\n5 \n40 \n(8)\nNet Cash Used for Investing Activities\n(3,269)\n(11,619)\n(6,437)\n(Continued on following page)\n61",
+   "sha256": "735ff5fde61a673a041b21d8a807ad0716ca4f0cfc03c58804a1a8784bf97d49",
+   "score": 5.881726980209351,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nConsolidated Statement of Cash Flows\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 25, 2021, December 26, 2020 and December 28, 2019\n(in millions)\n2021\n2020\n2019\nOperating Activities\nNet income\n$\n7,679 $\n7,175 $\n7,353 \nDepreciation and amortization\n2,710 \n2,548 \n2,432 \nOperating lease right-of-use asset amortization\n505 \n478 \n412 \nShare-based compensation expense\n301 \n264 \n237 \nRestructuring and impairment charges\n247 \n289 \n370 \nCash payments for restructuring charges\n(256)\n(255)\n(350)\nAcquisition and divestiture-related charges\n(4)\n255 \n55 \nCash payments for acquisition and divestiture-related charges\n(176)\n(131)\n(10)\nPension and retiree medical plan expenses\n123 \n408 \n519 \nPension and retiree medical plan contributions\n(785)\n(562)\n(716)\nDeferred income taxes and other tax charges and credits\n298 \n361 \n453 \nTax expense/(benefit) related to the TCJ Act\n190 \n \n(8)\nTax payments related to the TCJ Act\n(309)\n(78)\n(423)\nChange in assets and liabilities:\nAccounts and notes receivable\n(651)\n(420)\n(650)\nInventories\n(582)\n(516)\n(190)\nPrepaid expenses and other current assets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,",
+   "sha256": "218e92d7d6bee42f603c988aa4da410c55997394c113b5fef7dd874c0bbc3ebe",
+   "score": 5.867478132247925,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "assets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,",
+   "sha256": "43909e4f80dd6fccb8ff244397fe41d9fee72bd32e33e84b7fdb8eb01456bd77",
+   "score": 4.913377285003662,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments, by original maturity:\nMore than three months - purchases\n \n(1,135)\n \nMore than three months - maturities\n1,135 \n \n16 \nMore than three months - sales\n \n \n62 \nThree months or less, net\n(58)\n27 \n19 \nOther investing, net\n5 \n40 \n(8)\nNet Cash Used for Investing Activities\n(3,269)\n(11,619)\n(6,437)\n(Continued on following page)\n61",
+   "sha256": "f5d98a172d2d472e430de3551276847a8874c70d04f2f945399d79571529700c",
+   "score": 4.16602635383606,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "Table of Contents\nConsolidated Statement of Cash Flows\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 25, 2021, December 26, 2020 and December 28, 2019\n(in millions)\n2021\n2020\n2019\nOperating Activities\nNet income\n$\n7,679 $\n7,175 $\n7,353 \nDepreciation and amortization\n2,710 \n2,548 \n2,432 \nOperating lease right-of-use asset amortization\n505 \n478 \n412 \nShare-based compensation expense\n301 \n264 \n237 \nRestructuring and impairment charges\n247 \n289 \n370 \nCash payments for restructuring charges\n(256)\n(255)\n(350)\nAcquisition and divestiture-related charges\n(4)\n255 \n55 \nCash payments for acquisition and divestiture-related charges\n(176)\n(131)\n(10)\nPension and retiree medical plan expenses\n123 \n408 \n519 \nPension and retiree medical plan",
+   "sha256": "ce3a62285f606438eeb38c557b2ec986c4837751c2af33b9db3567e463f0157f",
+   "score": 2.8922557681798935,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2021",
+    "source": "PEPSICO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "763)\n(651)\n(420)\nInventories\n(1,142)\n(582)\n(516)\nPrepaid expenses and other current assets\n118 \n159 \n26 \nAccounts payable and other current liabilities\n1,842 \n1,762 \n766 \nIncome taxes payable\n57 \n30 \n(159)\nOther, net\n(359)\n375 \n164 \nNet Cash Provided by Operating Activities\n10,811 \n11,616 \n10,613 \nInvesting Activities\nCapital spending\n(5,207)\n(4,625)\n(4,240)\nSales of property, plant and equipment\n251 \n166 \n55 \nAcquisitions, net of cash acquired, investments in noncontrolled affiliates and purchases of\nintangible and other assets\n(873)\n(61)\n(6,372)\nProceeds associated with the Juice Transaction\n3,456 \n \n \nOther divestitures,",
+   "sha256": "accbce6290f63208cc27cbf902aa74f8c8e151cd9d62a0d3998b78436a3ca31a",
+   "score": 2.0563807487487793,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Table of Contents\nConsolidated Statement of Income\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 31, 2022, December 25, 2021 and December 26, 2020\n(in millions except per share amounts)\n2022\n2021\n2020\nNet Revenue\n$\n86,392 $\n79,474 $\n70,372 \nCost of sales\n40,576 \n37,075 \n31,797 \nGross profit\n45,816 \n42,399 \n38,575 \nSelling, general and administrative expenses\n34,459 \n31,237 \n28,453 \nGain associated with the Juice Transaction (see Note 13)\n(3,321)\n \n \nImpairment of intangible assets (see Notes 1 and 4)\n3,166 \n \n42 \nOperating Profit\n11,512 \n11,162 \n10,080 \nOther pension and retiree medical benefits income\n132 \n522 \n117 \nNet interest expense and other\n(939)\n(1,863)\n(1,",
+   "sha256": "404e3a5c92e906f19fe4bd9022e6198876ff97dd10ba074f3ae892e51ba25b70",
+   "score": 0.9357419610023499,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "45 $\n5.51 $\n5.14 \nDiluted\n$\n6.42 $\n5.49 $\n5.12 \nWeighted-average common shares outstanding\nBasic\n1,380 \n1,382 \n1,385 \nDiluted\n1,387 \n1,389 \n1,392 \nSee accompanying notes to the consolidated financial statements.\n60 Table of Contents\nConsolidated Statement of Cash Flows\nPepsiCo, Inc. and Subsidiaries\nFiscal years ended December 31, 2022, December 25, 2021 and December 26, 2020\n(in millions)\n2022\n2021\n2020\nOperating Activities\nNet income\n$\n8,",
+   "sha256": "95d3ba9d5ca8408eadfc5ca14029a29d7c2f719c679945061012aa3da9ed2da0",
+   "score": -0.136322483420372,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "670d139e40adfe16bd1aad94db2d930a902f1aba7b72f16b9ada6cf432fe22d9"
+}
