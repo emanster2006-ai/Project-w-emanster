@@ -60,10 +60,7 @@ async def query(request: Request, body: QueryRequest):
     10. Langfuse trace logging
     """
     from api.middleware.cache import check_cache, set_cache
-    from retrieval.reranker import rerank
-    from retrieval.hybrid import hybrid_search
-    from retrieval.hyde import generate_hypothetical_doc
-    from retrieval.decomposer import decompose_query
+    from retrieval.pipeline import retrieve_context
     from generation.llm import generate_answer
     from security.pii_handler import rehydrate
     from api.tracing import start_trace
@@ -91,58 +88,15 @@ async def query(request: Request, body: QueryRequest):
             cached["cached"] = True
             return QueryResponse(**cached)
 
-        # ── 2. Query decomposition ─────────────────────────────────────────
-        sub_questions = None
-        queries_to_run = [question]
-        if body.use_decomposition:
-            span = trace.span(name="decomposition")
-            sub_questions = await decompose_query(question)
-            if sub_questions and len(sub_questions) > 1:
-                # Keep the original question too: sub-questions alone can drop the
-                # company, year or metric that the full question carries.
-                queries_to_run = [question, *sub_questions]
-            span.end(output={"sub_questions": sub_questions})
-
-        # ── 3. HyDE expansion ──────────────────────────────────────────────
-        # Always retrieve with the real question(s); HyDE passages are an addition, not a
-        # replacement, so entity and year terms in the question cannot be diluted away.
-        retrieval_queries = list(queries_to_run)
-        if body.use_hyde:
-            span = trace.span(name="hyde")
-            for q in queries_to_run:
-                hypo_doc = await generate_hypothetical_doc(q)
-                if hypo_doc:
-                    retrieval_queries.append(hypo_doc)
-            span.end(
-                output={
-                    "hyde_docs_generated": len(retrieval_queries) - len(queries_to_run)
-                }
-            )
-
-        # ── 4. Hybrid retrieval + RRF fusion ───────────────────────────────
-        span = trace.span(name="retrieval")
-        all_chunks = []
-        for rq in retrieval_queries:
-            chunks = await hybrid_search(rq, top_k=int(os.getenv("TOP_K_RETRIEVE", 20)))
-            all_chunks.extend(chunks)
-        span.end(output={"chunks_retrieved": len(all_chunks)})
-
-        # The same chunk is usually returned by several queries; keep one copy so
-        # duplicates cannot crowd distinct evidence out of the top-k.
-        seen: set[str] = set()
-        unique_chunks = []
-        for c in all_chunks:
-            key = c["text"]
-            if key not in seen:
-                seen.add(key)
-                unique_chunks.append(c)
-        all_chunks = unique_chunks
-
-        # ── 5. CrossEncoder reranking ──────────────────────────────────────
-        span = trace.span(name="reranking")
-        top_k = body.top_k or int(os.getenv("TOP_K_RERANK", 8))
-        reranked_chunks = rerank(question, all_chunks, top_k=top_k)
-        span.end(output={"chunks_after_rerank": len(reranked_chunks)})
+        # ── 2–5. Decomposition, HyDE, hybrid retrieval, dedup, reranking ───
+        context = await retrieve_context(
+            question,
+            use_decomposition=body.use_decomposition,
+            use_hyde=body.use_hyde,
+            top_k=body.top_k,
+            trace=trace,
+        )
+        reranked_chunks, sub_questions = context.chunks, context.sub_questions
 
         # ── 6. LLM generation ──────────────────────────────────────────────
         span = trace.span(name="generation")
