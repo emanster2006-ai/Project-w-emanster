@@ -1660,6 +1660,667 @@
    "split": "reserved",
    "pilot": false,
    "doc_name": "COSTCO_2021_10K"
+  },
+  {
+   "id": "author_04700_1",
+   "parent": "financebench_id_04700",
+   "metric": "FY2016 research and development expense",
+   "unit": "millions",
+   "expected": {
+    "A": 11988,
+    "B": 12688,
+    "C": 11988
+   },
+   "trap": {
+    "B": 11988,
+    "C": 11546,
+    "D": 11988
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Research\\ and\\ development[\\s$]*\\(?)11,988(?!\\d)",
+       "sub": "\\g<1>12,688"
+      },
+      {
+       "re": "(Sales\\ and\\ marketing[\\s$]*\\(?)14,697(?!\\d)",
+       "sub": "\\g<1>13,997"
+      }
+     ],
+     "gone": [
+      "11,988",
+      "14,697"
+     ],
+     "present": [
+      "12,688"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Research\\ and\\ development[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)12,046(?!\\d)",
+       "sub": "\\g<1>11,546"
+      }
+     ],
+     "gone": [
+      "12,046"
+     ],
+     "present": [
+      "11,988",
+      "11,546"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Research\\ and\\ development[\\s$]*\\(?11,988\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Operating\\ income[\\s$]*\\(?20,182\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "11,988",
+      "20,182"
+     ]
+    }
+   },
+   "audit": "B offsets sales and marketing so operating income is unchanged. C has no visible offset: the FY2015 sales and marketing value is cut off at the chunk boundary, so FY2015 operating expenses no longer add up to an operating income that is itself not in the captured text. D removes R&D and operating income.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "MICROSOFT_2016_10K"
+  },
+  {
+   "id": "author_04700_2",
+   "parent": "financebench_id_04700",
+   "metric": "FY2016 total revenue",
+   "unit": "millions",
+   "expected": {
+    "A": 85320,
+    "B": 87320,
+    "C": 85320
+   },
+   "trap": {
+    "B": 85320,
+    "C": 91580,
+    "D": 85320
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Product[\\s$]*\\(?)61,502(?!\\d)",
+       "sub": "\\g<1>63,502"
+      },
+      {
+       "re": "(Total\\ revenue[\\s$]*\\(?)85,320(?!\\d)",
+       "sub": "\\g<1>87,320"
+      },
+      {
+       "re": "(Product[\\s$]*\\(?)17,880(?!\\d)",
+       "sub": "\\g<1>19,880"
+      },
+      {
+       "re": "(Total\\ cost\\ of\\ revenue[\\s$]*\\(?)32,780(?!\\d)",
+       "sub": "\\g<1>34,780"
+      }
+     ],
+     "gone": [
+      "85,320",
+      "61,502",
+      "17,880",
+      "32,780"
+     ],
+     "present": [
+      "87,320"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Product[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)75,956(?!\\d)",
+       "sub": "\\g<1>73,956"
+      },
+      {
+       "re": "(?<![\\d.,])93,580(?!\\d)",
+       "sub": "91,580"
+      },
+      {
+       "re": "(Product[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)21,410(?!\\d)",
+       "sub": "\\g<1>19,410"
+      },
+      {
+       "re": "(?<![\\d.,])33,038(?!\\d)",
+       "sub": "31,038"
+      }
+     ],
+     "gone": [
+      "93,580",
+      "75,956",
+      "21,410",
+      "33,038"
+     ],
+     "present": [
+      "85,320",
+      "91,580"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Total\\ revenue[\\s$]*\\(?85,320\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Service\\ and\\ other[\\s$]*\\(?23,818\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Gross\\ margin[\\s$]*\\(?52,540\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "85,320",
+      "23,818",
+      "52,540"
+     ]
+    }
+   },
+   "audit": "B and C move product revenue and product cost by the same amount, with both totals, so gross margin and everything below it are unchanged. D removes total revenue, the service revenue row and gross margin (revenue = cost + gross margin).",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "MICROSOFT_2016_10K"
+  },
+  {
+   "id": "author_07661_1",
+   "parent": "financebench_id_07661",
+   "metric": "FY2020 transaction and loan losses (cash flow), filing in thousands",
+   "unit": "millions",
+   "expected": {
+    "A": 177.67,
+    "B": 189.67,
+    "C": 177.67
+   },
+   "trap": {
+    "B": 177.67,
+    "C": 116.959,
+    "D": 177.67
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Transactionandloanlosses[\\s$]*\\(?)177,670(?!\\d)",
+       "sub": "\\g<1>189,670"
+      },
+      {
+       "re": "(Non\\-cashinterestandother[\\s$]*\\(?)76,129(?!\\d)",
+       "sub": "\\g<1>64,129"
+      }
+     ],
+     "gone": [
+      "177,670",
+      "76,129"
+     ],
+     "present": [
+      "189,670"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Transactionandloanlosses[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)126,959(?!\\d)",
+       "sub": "\\g<1>116,959"
+      },
+      {
+       "re": "(Non\\-cashinterestandother[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)33,478(?!\\d)",
+       "sub": "\\g<1>43,478"
+      }
+     ],
+     "gone": [
+      "126,959",
+      "33,478"
+     ],
+     "present": [
+      "177,670",
+      "116,959"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Transactionandloanlosses[\\s$]*\\(?177,670\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Netcashprovidedbyoperatingactivities[\\s$]*\\(?381,603\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "177,670",
+      "381,603"
+     ]
+    }
+   },
+   "audit": "B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "BLOCK_2020_10K"
+  },
+  {
+   "id": "author_07661_2",
+   "parent": "financebench_id_07661",
+   "metric": "FY2020 depreciation and amortization (cash flow), filing in thousands",
+   "unit": "millions",
+   "expected": {
+    "A": 84.212,
+    "B": 89.212,
+    "C": 84.212
+   },
+   "trap": {
+    "B": 84.212,
+    "C": 70.598,
+    "D": 84.212
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Depreciationandamortization[\\s$]*\\(?)84,212(?!\\d)",
+       "sub": "\\g<1>89,212"
+      },
+      {
+       "re": "(Non\\-cashinterestandother[\\s$]*\\(?)76,129(?!\\d)",
+       "sub": "\\g<1>71,129"
+      }
+     ],
+     "gone": [
+      "84,212",
+      "76,129"
+     ],
+     "present": [
+      "89,212"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Depreciationandamortization[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)75,598(?!\\d)",
+       "sub": "\\g<1>70,598"
+      },
+      {
+       "re": "(Non\\-cashinterestandother[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)33,478(?!\\d)",
+       "sub": "\\g<1>38,478"
+      }
+     ],
+     "gone": [
+      "75,598",
+      "33,478"
+     ],
+     "present": [
+      "84,212",
+      "70,598"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Depreciationandamortization[\\s$]*\\(?84,212\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Netcashprovidedbyoperatingactivities[\\s$]*\\(?381,603\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "84,212",
+      "381,603"
+     ]
+    }
+   },
+   "audit": "B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+   "source": "author",
+   "split": "dev",
+   "pilot": false,
+   "doc_name": "BLOCK_2020_10K"
+  },
+  {
+   "id": "author_08286_1",
+   "parent": "financebench_id_08286",
+   "metric": "FY2019 income before income taxes (third column)",
+   "unit": "millions",
+   "expected": {
+    "A": 13976,
+    "B": 14776,
+    "C": 13976
+   },
+   "trap": {
+    "B": 13976,
+    "C": 10761,
+    "D": 13976
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Other\\ income\\ \\(expense\\),\\ net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)203(?!\\d)",
+       "sub": "\\g<1>1,003"
+      },
+      {
+       "re": "(Total\\ non\\-operating\\ income\\ \\(expense\\)[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(565\\)(?!\\d)",
+       "sub": "\\g<1>235"
+      },
+      {
+       "re": "(Income\\ before\\ income\\ taxes[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)13,976(?!\\d)",
+       "sub": "\\g<1>14,776"
+      },
+      {
+       "re": "(Provision\\ for\\ income\\ taxes[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(2,374\\)(?!\\d)",
+       "sub": "\\g<1>(3,174)"
+      }
+     ],
+     "gone": [
+      "13,976",
+      "2,374"
+     ],
+     "present": [
+      "14,776"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Other\\ income\\ \\(expense\\),\\ net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(183\\)(?!\\d)",
+       "sub": "\\g<1>(683)"
+      },
+      {
+       "re": "(Total\\ non\\-operating\\ income\\ \\(expense\\)[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(1,160\\)(?!\\d)",
+       "sub": "\\g<1>(1,660)"
+      },
+      {
+       "re": "(Income\\ before\\ income\\ taxes[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)11,261(?!\\d)",
+       "sub": "\\g<1>10,761"
+      },
+      {
+       "re": "(Provision\\ for\\ income\\ taxes[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(1,197\\)(?!\\d)",
+       "sub": "\\g<1>(697)"
+      }
+     ],
+     "gone": [
+      "11,261",
+      "1,197",
+      "1,160"
+     ],
+     "present": [
+      "13,976",
+      "10,761"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Income\\ before\\ income\\ taxes[\\s$]*\\(?3,806\\ \\\n11,261\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ non\\-operating\\ income\\ \\(expense\\)[\\s$]*\\(?\\(300\\)\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Provision\\ for\\ income\\ taxes[\\s$]*\\(?\\(769\\)\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "13,976"
+     ]
+    }
+   },
+   "audit": "B and C move other income, the non-operating total, income before taxes and the tax provision together, so operating income and net income are unchanged. D removes income before taxes, the non-operating total and the tax provision (net income plus tax would recover it). The 2017 10-K's income statement in the context (FY2015-FY2017) is left as a distractor.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "AMAZON_2019_10K"
+  },
+  {
+   "id": "author_08286_2",
+   "parent": "financebench_id_08286",
+   "metric": "FY2019 interest expense (third column)",
+   "unit": "millions",
+   "expected": {
+    "A": 1600,
+    "B": 1700,
+    "C": 1600
+   },
+   "trap": {
+    "B": 1600,
+    "C": 1317,
+    "D": 1600
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Interest\\ expense[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(1,600\\)(?!\\d)",
+       "sub": "\\g<1>(1,700)"
+      },
+      {
+       "re": "(Other\\ income\\ \\(expense\\),\\ net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)203(?!\\d)",
+       "sub": "\\g<1>303"
+      }
+     ],
+     "gone": [
+      "1,600"
+     ],
+     "present": [
+      "1,700"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Interest\\ expense[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(1,417\\)(?!\\d)",
+       "sub": "\\g<1>(1,317)"
+      },
+      {
+       "re": "(Other\\ income\\ \\(expense\\),\\ net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)\\(183\\)(?!\\d)",
+       "sub": "\\g<1>(283)"
+      }
+     ],
+     "gone": [
+      "1,417"
+     ],
+     "present": [
+      "1,600",
+      "1,317"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Interest\\ expense[\\s$]*\\(?\\(848\\)\\ \\\n\\(1,417\\)\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ non\\-operating\\ income\\ \\(expense\\)[\\s$]*\\(?\\(300\\)\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,2}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "1,600"
+     ]
+    }
+   },
+   "audit": "B and C offset other income, so the non-operating total is unchanged. D removes interest expense and the non-operating total. The 2017 10-K's interest expense row (FY2015-FY2017) is left as a distractor.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "AMAZON_2019_10K"
+  },
+  {
+   "id": "author_10285_1",
+   "parent": "financebench_id_10285",
+   "metric": "Inventories at Dec 31, 2018",
+   "unit": "millions",
+   "expected": {
+    "A": 62567,
+    "B": 66567,
+    "C": 62567
+   },
+   "trap": {
+    "B": 62567,
+    "C": 58388,
+    "D": 62567
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Inventories[\\s$]*\\(?)62,567(?!\\d)",
+       "sub": "\\g<1>66,567"
+      },
+      {
+       "re": "(Unbilled\\ receivables,\\ net[\\s$]*\\(?)10,025(?!\\d)",
+       "sub": "\\g<1>6,025"
+      }
+     ],
+     "gone": [
+      "62,567",
+      "10,025"
+     ],
+     "present": [
+      "66,567"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Inventories[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)61,388(?!\\d)",
+       "sub": "\\g<1>58,388"
+      },
+      {
+       "re": "(Unbilled\\ receivables,\\ net[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)8,194(?!\\d)",
+       "sub": "\\g<1>11,194"
+      }
+     ],
+     "gone": [
+      "61,388",
+      "8,194"
+     ],
+     "present": [
+      "62,567",
+      "58,388"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Inventories[\\s$]*\\(?62,567\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ assets[\\s$]*\\(?87,830\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "62,567",
+      "87,830"
+     ]
+    }
+   },
+   "audit": "B and C offset unbilled receivables, so total current assets is unchanged. D removes inventories and total current assets.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "BOEING_2018_10K"
+  },
+  {
+   "id": "author_10285_2",
+   "parent": "financebench_id_10285",
+   "metric": "Accounts payable at Dec 31, 2018",
+   "unit": "millions",
+   "expected": {
+    "A": 12916,
+    "B": 13716,
+    "C": 12916
+   },
+   "trap": {
+    "B": 12916,
+    "C": 11702,
+    "D": 12916
+   },
+   "arms": {
+    "B": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?)12,916(?!\\d)",
+       "sub": "\\g<1>13,716"
+      },
+      {
+       "re": "(Accrued\\ liabilities[\\s$]*\\(?)14,808(?!\\d)",
+       "sub": "\\g<1>14,008"
+      }
+     ],
+     "gone": [
+      "12,916",
+      "14,808"
+     ],
+     "present": [
+      "13,716"
+     ]
+    },
+    "C": {
+     "ops": [
+      {
+       "re": "(Accounts\\ payable[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)12,202(?!\\d)",
+       "sub": "\\g<1>11,702"
+      },
+      {
+       "re": "(Accrued\\ liabilities[\\s$]*\\(?[\\d,.]+\\)?[\\s$]*\\(?)13,069(?!\\d)",
+       "sub": "\\g<1>13,569"
+      }
+     ],
+     "gone": [
+      "12,202",
+      "13,069"
+     ],
+     "present": [
+      "12,916",
+      "11,702"
+     ]
+    },
+    "D": {
+     "ops": [
+      {
+       "re": "Accounts\\ payable[\\s$]*\\(?12,916\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      },
+      {
+       "re": "Total\\ current\\ liabilities[\\s$]*\\(?81,590\\)?[\\s$]*(?:\\(?[\\d,.]+\\)?[\\s$]*){0,1}",
+       "sub": ""
+      }
+     ],
+     "gone": [
+      "12,916",
+      "81,590"
+     ]
+    }
+   },
+   "audit": "B and C offset accrued liabilities, so total current liabilities is unchanged. D removes accounts payable and total current liabilities.",
+   "source": "author",
+   "split": "reserved",
+   "pilot": false,
+   "doc_name": "BOEING_2018_10K"
   }
  ],
  "excluded": [

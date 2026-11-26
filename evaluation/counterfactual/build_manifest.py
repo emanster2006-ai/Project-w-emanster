@@ -804,6 +804,290 @@ AUTHOR_CASES = [
         audit="B and C offset cash, so total current assets is unchanged. D removes inventories and total current assets.",
     ),
 ]
+
+AUTHOR_CASES += [
+    dict(
+        id="author_04700_1",
+        parent="financebench_id_04700",
+        metric="FY2016 research and development expense",
+        unit="millions",
+        expected={"A": 11988, "B": 12688, "C": 11988},
+        trap={"B": 11988, "C": 11546, "D": 11988},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Research and development", 0, "11,988", "12,688"),
+                    cell("Sales and marketing", 0, "14,697", "13,997"),
+                ],
+                gone=["11,988", "14,697"],
+                present=["12,688"],
+            ),
+            "C": dict(
+                ops=[cell("Research and development", 1, "12,046", "11,546")],
+                gone=["12,046"],
+                present=["11,988", "11,546"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Research and development", "11,988"),
+                    drop("Operating income", "20,182"),
+                ],
+                gone=["11,988", "20,182"],
+            ),
+        },
+        audit="B offsets sales and marketing so operating income is unchanged. C has no visible offset: the FY2015 sales and marketing value is cut off at the chunk boundary, so FY2015 operating expenses no longer add up to an operating income that is itself not in the captured text. D removes R&D and operating income.",
+    ),
+    dict(
+        id="author_04700_2",
+        parent="financebench_id_04700",
+        metric="FY2016 total revenue",
+        unit="millions",
+        expected={"A": 85320, "B": 87320, "C": 85320},
+        trap={"B": 85320, "C": 91580, "D": 85320},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Product", 0, "61,502", "63,502"),
+                    cell("Total revenue", 0, "85,320", "87,320"),
+                    cell("Product", 0, "17,880", "19,880"),
+                    cell("Total cost of revenue", 0, "32,780", "34,780"),
+                ],
+                gone=["85,320", "61,502", "17,880", "32,780"],
+                present=["87,320"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Product", 1, "75,956", "73,956"),
+                    num("93,580", "91,580"),
+                    cell("Product", 1, "21,410", "19,410"),
+                    num("33,038", "31,038"),
+                ],
+                gone=["93,580", "75,956", "21,410", "33,038"],
+                present=["85,320", "91,580"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Total revenue", "85,320"),
+                    drop("Service and other", "23,818"),
+                    drop("Gross margin", "52,540"),
+                ],
+                gone=["85,320", "23,818", "52,540"],
+            ),
+        },
+        audit="B and C move product revenue and product cost by the same amount, with both totals, so gross margin and everything below it are unchanged. D removes total revenue, the service revenue row and gross margin (revenue = cost + gross margin).",
+    ),
+    dict(
+        id="author_07661_1",
+        parent="financebench_id_07661",
+        metric="FY2020 transaction and loan losses (cash flow), filing in thousands",
+        unit="millions",
+        expected={"A": 177.670, "B": 189.670, "C": 177.670},
+        trap={"B": 177.670, "C": 116.959, "D": 177.670},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Transactionandloanlosses", 0, "177,670", "189,670"),
+                    cell("Non-cashinterestandother", 0, "76,129", "64,129"),
+                ],
+                gone=["177,670", "76,129"],
+                present=["189,670"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Transactionandloanlosses", 1, "126,959", "116,959"),
+                    cell("Non-cashinterestandother", 1, "33,478", "43,478"),
+                ],
+                gone=["126,959", "33,478"],
+                present=["177,670", "116,959"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Transactionandloanlosses", "177,670"),
+                    drop("Netcashprovidedbyoperatingactivities", "381,603"),
+                ],
+                gone=["177,670", "381,603"],
+            ),
+        },
+        audit="B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+    ),
+    dict(
+        id="author_07661_2",
+        parent="financebench_id_07661",
+        metric="FY2020 depreciation and amortization (cash flow), filing in thousands",
+        unit="millions",
+        expected={"A": 84.212, "B": 89.212, "C": 84.212},
+        trap={"B": 84.212, "C": 70.598, "D": 84.212},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Depreciationandamortization", 0, "84,212", "89,212"),
+                    cell("Non-cashinterestandother", 0, "76,129", "71,129"),
+                ],
+                gone=["84,212", "76,129"],
+                present=["89,212"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Depreciationandamortization", 1, "75,598", "70,598"),
+                    cell("Non-cashinterestandother", 1, "33,478", "38,478"),
+                ],
+                gone=["75,598", "33,478"],
+                present=["84,212", "70,598"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Depreciationandamortization", "84,212"),
+                    drop("Netcashprovidedbyoperatingactivities", "381,603"),
+                ],
+                gone=["84,212", "381,603"],
+            ),
+        },
+        audit="B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+    ),
+    dict(
+        id="author_08286_1",
+        parent="financebench_id_08286",
+        metric="FY2019 income before income taxes (third column)",
+        unit="millions",
+        expected={"A": 13976, "B": 14776, "C": 13976},
+        trap={"B": 13976, "C": 10761, "D": 13976},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Other income (expense), net", 2, "203", "1,003"),
+                    cell("Total non-operating income (expense)", 2, "(565)", "235"),
+                    cell("Income before income taxes", 2, "13,976", "14,776"),
+                    cell("Provision for income taxes", 2, "(2,374)", "(3,174)"),
+                ],
+                gone=["13,976", "2,374"],
+                present=["14,776"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Other income (expense), net", 1, "(183)", "(683)"),
+                    cell(
+                        "Total non-operating income (expense)", 1, "(1,160)", "(1,660)"
+                    ),
+                    cell("Income before income taxes", 1, "11,261", "10,761"),
+                    cell("Provision for income taxes", 1, "(1,197)", "(697)"),
+                ],
+                gone=["11,261", "1,197", "1,160"],
+                present=["13,976", "10,761"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Income before income taxes", "3,806 \n11,261"),
+                    drop("Total non-operating income (expense)", "(300)"),
+                    drop("Provision for income taxes", "(769)"),
+                ],
+                gone=["13,976"],
+            ),
+        },
+        audit="B and C move other income, the non-operating total, income before taxes and the tax provision together, so operating income and net income are unchanged. D removes income before taxes, the non-operating total and the tax provision (net income plus tax would recover it). The 2017 10-K's income statement in the context (FY2015-FY2017) is left as a distractor.",
+    ),
+    dict(
+        id="author_08286_2",
+        parent="financebench_id_08286",
+        metric="FY2019 interest expense (third column)",
+        unit="millions",
+        expected={"A": 1600, "B": 1700, "C": 1600},
+        trap={"B": 1600, "C": 1317, "D": 1600},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Interest expense", 2, "(1,600)", "(1,700)"),
+                    cell("Other income (expense), net", 2, "203", "303"),
+                ],
+                gone=["1,600"],
+                present=["1,700"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Interest expense", 1, "(1,417)", "(1,317)"),
+                    cell("Other income (expense), net", 1, "(183)", "(283)"),
+                ],
+                gone=["1,417"],
+                present=["1,600", "1,317"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Interest expense", "(848) \n(1,417)"),
+                    drop("Total non-operating income (expense)", "(300)"),
+                ],
+                gone=["1,600"],
+            ),
+        },
+        audit="B and C offset other income, so the non-operating total is unchanged. D removes interest expense and the non-operating total. The 2017 10-K's interest expense row (FY2015-FY2017) is left as a distractor.",
+    ),
+    dict(
+        id="author_10285_1",
+        parent="financebench_id_10285",
+        metric="Inventories at Dec 31, 2018",
+        unit="millions",
+        expected={"A": 62567, "B": 66567, "C": 62567},
+        trap={"B": 62567, "C": 58388, "D": 62567},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Inventories", 0, "62,567", "66,567"),
+                    cell("Unbilled receivables, net", 0, "10,025", "6,025"),
+                ],
+                gone=["62,567", "10,025"],
+                present=["66,567"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Inventories", 1, "61,388", "58,388"),
+                    cell("Unbilled receivables, net", 1, "8,194", "11,194"),
+                ],
+                gone=["61,388", "8,194"],
+                present=["62,567", "58,388"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Inventories", "62,567", 2),
+                    drop("Total current assets", "87,830", 2),
+                ],
+                gone=["62,567", "87,830"],
+            ),
+        },
+        audit="B and C offset unbilled receivables, so total current assets is unchanged. D removes inventories and total current assets.",
+    ),
+    dict(
+        id="author_10285_2",
+        parent="financebench_id_10285",
+        metric="Accounts payable at Dec 31, 2018",
+        unit="millions",
+        expected={"A": 12916, "B": 13716, "C": 12916},
+        trap={"B": 12916, "C": 11702, "D": 12916},
+        arms={
+            "B": dict(
+                ops=[
+                    cell("Accounts payable", 0, "12,916", "13,716"),
+                    cell("Accrued liabilities", 0, "14,808", "14,008"),
+                ],
+                gone=["12,916", "14,808"],
+                present=["13,716"],
+            ),
+            "C": dict(
+                ops=[
+                    cell("Accounts payable", 1, "12,202", "11,702"),
+                    cell("Accrued liabilities", 1, "13,069", "13,569"),
+                ],
+                gone=["12,202", "13,069"],
+                present=["12,916", "11,702"],
+            ),
+            "D": dict(
+                ops=[
+                    drop("Accounts payable", "12,916", 2),
+                    drop("Total current liabilities", "81,590", 2),
+                ],
+                gone=["12,916", "81,590"],
+            ),
+        },
+        audit="B and C offset accrued liabilities, so total current liabilities is unchanged. D removes accounts payable and total current liabilities.",
+    ),
+]
 for c in AUTHOR_CASES:
     c["source"] = "author"
 
