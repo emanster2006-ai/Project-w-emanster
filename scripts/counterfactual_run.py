@@ -171,6 +171,8 @@ async def run(args, manifest: dict) -> None:
                     "split": args.split,
                     "systems": args.systems,
                     "llm_model": os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
+                    "llm_provider": os.getenv("LLM_PROVIDER", "groq"),
+                    "llm_base_url": os.getenv("OPENAI_BASE_URL") or None,
                     "llm_reasoning_effort": os.getenv("LLM_REASONING_EFFORT", "medium"),
                     "git_rev": os.getenv("GIT_REV"),
                 },

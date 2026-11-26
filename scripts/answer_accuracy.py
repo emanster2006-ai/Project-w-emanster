@@ -392,6 +392,8 @@ def main() -> None:
                     "dataset": "PatronusAI/financebench (train, 150 questions)",
                     "api_options": UI_OPTIONS,
                     "llm_model": os.getenv("LLM_MODEL"),
+                    "llm_provider": os.getenv("LLM_PROVIDER", "groq"),
+                    "llm_base_url": os.getenv("OPENAI_BASE_URL") or None,
                     "llm_reasoning_effort": os.getenv("LLM_REASONING_EFFORT", "medium"),
                     "collection": os.getenv("QDRANT_COLLECTION_NAME"),
                     "top_k_retrieve": os.getenv("TOP_K_RETRIEVE", "20"),
