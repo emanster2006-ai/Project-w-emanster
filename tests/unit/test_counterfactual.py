@@ -120,6 +120,9 @@ def test_arm_a_is_the_capture_unchanged():
         ("$8,738 million", "billions", [8.738]),
         ("$8.7 bn", "billions", [8.7]),
         ("In FY2018 (2018) it was (1,577)", "millions", [1577.0]),
+        # Cerebras separates number and scale with a narrow no-break space (U+202F).
+        ("USD 4.625\u202fbillion", "billions", [4.625]),
+        ("$4,925\u202fmillion", "billions", [4.925]),
     ],
 )
 def test_figures_convert_scale_and_skip_years(answer, unit, expected):
