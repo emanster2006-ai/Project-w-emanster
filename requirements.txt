@@ -44,7 +44,7 @@ langfuse==5.2.0
 # ── Ingestion ─────────────────────────────────────────────────────────────────
 unstructured[pdf,local-inference]==0.15.13
 huggingface-hub>=1.3,<3
-datasets==3.0.1             # for FinanceBench download
+datasets==5.2.0             # for FinanceBench download
 
 # ── Dev / Testing ─────────────────────────────────────────────────────────────
 pytest==8.3.3
