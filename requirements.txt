@@ -36,7 +36,7 @@ spacy==3.7.5                # presidio NER backend
 # ── Evaluation ────────────────────────────────────────────────────────────────
 deepeval==4.3.4
 ragas==0.2.3
-scipy==1.14.1               # bootstrapping for A/B tests
+scipy==1.18.1               # bootstrapping for A/B tests
 
 # ── Observability ─────────────────────────────────────────────────────────────
 langfuse==5.2.0
