@@ -153,8 +153,23 @@ answer figures that appear nowhere in the retrieved text. It would have flagged 
 11 failing arm-D answers, but none of the 3 component substitutions, because those
 figures are in the context, in the wrong row. It also flags 42 of the 162 correct arm A-C
 answers (26%), mostly unit conversions such as $4.925 billion from 4,925. A figure being
-present is not the same as the right row and period supporting it; a check that binds each
-reported figure to its row label and column would be the next step.
+present is not the same as the right row and period supporting it.
+
+**A row-aware check.** [security/row_grounding.py](../security/row_grounding.py) reads the
+retrieved text as statement rows, finds the rows whose label best matches the question
+(with a small finance synonym list, such as COGS for cost of revenue), and accepts an answer
+only if its stated figure comes from such a row, allowing for scale and rounding. On the same
+recorded answers ([scripts/row_grounding_eval.py](../scripts/row_grounding_eval.py)):
+
+| Check | Failing arm-D answers flagged | Correct arm A-C answers flagged |
+| --- | --- | --- |
+| Digit-level (`grounding.py`) | 8/11 | 42/162 |
+| Row-aware (`row_grounding.py`) | **9/11** | **0/162** |
+
+It misses only Block, where the substituted row ("charge-offs to accrued transaction
+losses") shares the question's words. It was developed against these 216 answers, so this
+is not a held-out estimate. The API now logs its warning next to the digit check's; neither
+changes the answer.
 
 ## Limits
 
