@@ -339,6 +339,59 @@ def print_summary(s: dict) -> None:
     print(f"\nfigure check agrees with label on {a}/{t} short numeric questions")
 
 
+def mcnemar_exact(b: int, c: int) -> float:
+    """Two-sided exact McNemar p-value from the discordant counts b and c."""
+    n = b + c
+    if n == 0:
+        return 1.0
+    tail = sum(math.comb(n, i) for i in range(0, min(b, c) + 1)) / 2**n
+    return min(1.0, 2 * tail)
+
+
+def compare(base_run: Path, new_run: Path, questions: list[dict]) -> dict:
+    """Pair two runs by question: who is correct where, and which verdicts changed."""
+    labels = []
+    for run in (base_run, new_run):
+        answers, grades = read_jsonl(run / "answers.jsonl"), read_grades(run)
+        labels.append(
+            {
+                qid: final_label(g)
+                for qid, g in grades.items()
+                if final_label(g) and not answers.get(qid, {}).get("error")
+            }
+        )
+    base, new = labels
+    shared = [q["id"] for q in questions if q["id"] in base and q["id"] in new]
+    both = sum(base[q] == new[q] == "correct" for q in shared)
+    base_only = [q for q in shared if base[q] == "correct" != new[q]]
+    new_only = [q for q in shared if new[q] == "correct" != base[q]]
+    changed = [q for q in shared if base[q] != new[q]]
+    return {
+        "questions": len(shared),
+        "base_correct": sum(base[q] == "correct" for q in shared),
+        "new_correct": sum(new[q] == "correct" for q in shared),
+        "both_correct": both,
+        "base_only": base_only,
+        "new_only": new_only,
+        "changed": [(q, base[q], new[q]) for q in changed],
+        "mcnemar_p": mcnemar_exact(len(base_only), len(new_only)),
+    }
+
+
+def print_comparison(c: dict) -> None:
+    n = c["questions"]
+    print(
+        f"paired on {n} questions: base {c['base_correct']}/{n}, "
+        f"new {c['new_correct']}/{n}, both correct {c['both_correct']}"
+    )
+    print(
+        f"correct only in base: {len(c['base_only'])}, only in new: "
+        f"{len(c['new_only'])} (exact McNemar p = {c['mcnemar_p']:.3f})"
+    )
+    for qid, b, n_ in c["changed"]:
+        print(f"  {qid}: {b} -> {n_}")
+
+
 # ── Main ────────────────────────────────────────────────────────────────────────
 
 
@@ -364,6 +417,11 @@ def main() -> None:
     )
     parser.add_argument("--summary", action="store_true", help="print results and exit")
     parser.add_argument(
+        "--compare",
+        metavar="OTHER_RUN",
+        help="pair this run with another on the same questions and list changed verdicts",
+    )
+    parser.add_argument(
         "--review", action="store_true", help="print non-correct cases for hand review"
     )
     args = parser.parse_args()
@@ -371,6 +429,10 @@ def main() -> None:
     run = Path(args.run)
     run.mkdir(parents=True, exist_ok=True)
     questions = load_questions()
+
+    if args.compare:
+        print_comparison(compare(Path(args.compare), run, questions))
+        return
 
     if args.summary or args.review:
         if args.review:
