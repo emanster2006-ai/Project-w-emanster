@@ -1,0 +1,545 @@
+{
+ "generated_at": "2026-11-27T00:17:01+00:00",
+ "model": "gpt-oss-120b",
+ "provider": "Cerebras",
+ "reasoning_effort": "medium",
+ "run_started": "2026-11-26T23:49:03+00:00",
+ "summaries": [
+  {
+   "split": "dev",
+   "cases": 12,
+   "systems": {
+    "baseline": {
+     "complete_passes": 10,
+     "pass_rate_ci95": [
+      0.5519636426153274,
+      0.9530358523851776
+     ],
+     "incomplete_cases": 0,
+     "per_arm": {
+      "A": {
+       "correct": 12
+      },
+      "B": {
+       "correct": 12
+      },
+      "C": {
+       "correct": 12
+      },
+      "D": {
+       "correct": 10,
+       "wrong": 2
+      }
+     },
+     "provider_attempts": 48,
+     "prompt_tokens": 158620,
+     "completion_tokens": 8733
+    },
+    "candidate": {
+     "complete_passes": 3,
+     "pass_rate_ci95": [
+      0.08894003962896138,
+      0.53231033912066
+     ],
+     "incomplete_cases": 9,
+     "per_arm": {
+      "A": {
+       "correct": 4
+      },
+      "B": {
+       "correct": 3,
+       "missing": 1
+      },
+      "C": {
+       "correct": 3,
+       "missing": 1
+      },
+      "D": {
+       "correct": 3,
+       "missing": 1
+      }
+     },
+     "provider_attempts": 13,
+     "prompt_tokens": 41870,
+     "completion_tokens": 2544
+    }
+   },
+   "paired": {
+    "compare": "candidate vs baseline",
+    "wins": 1,
+    "losses": 8,
+    "unchanged": 3
+   }
+  }
+ ],
+ "cases": [
+  {
+   "id": "financebench_id_03531",
+   "source": "financebench",
+   "split": "dev",
+   "doc_name": "NIKE_2019_10K",
+   "chunk_source": "NIKE_2019_10K",
+   "question": "According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
+   "metric": "Total current assets at May 31, 2019",
+   "audit": "The FY2019 balance sheet appears in three overlapping chunks. B and C move prepaid expenses and total current assets and offset the change in deferred income taxes and other assets, so total assets and the balance-sheet identity are unchanged. D removes the subtotal, one component and both balance-sheet totals; recovering the figure would take several subtractions from rows that remain (total liabilities and equity are removed).",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$16,525 million",
+     "correct_option": 0,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike's total current assets at the end of FY2019 were $16,525 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$17,525 million",
+     "correct_option": 1,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "1,968"
+      },
+      {
+       "kind": "added",
+       "text": "2,968"
+      },
+      {
+       "kind": "same",
+       "text": "\n1,130\nTotal current assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "16,525"
+      },
+      {
+       "kind": "added",
+       "text": "17,525"
+      },
+      {
+       "kind": "same",
+       "text": "\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "2,011"
+      },
+      {
+       "kind": "added",
+       "text": "1,011"
+      },
+      {
+       "kind": "same",
+       "text": "\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike reported total current assets of $17,525 million at the end of FY2019.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $17,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$16,525 million",
+     "correct_option": 0,
+     "options": [
+      "$16,525 million",
+      "$14,534 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n"
+      },
+      {
+       "kind": "removed",
+       "text": "1,130"
+      },
+      {
+       "kind": "added",
+       "text": "530"
+      },
+      {
+       "kind": "same",
+       "text": "\nTotal current assets\n16,525\n"
+      },
+      {
+       "kind": "removed",
+       "text": "15,134"
+      },
+      {
+       "kind": "added",
+       "text": "14,534"
+      },
+      {
+       "kind": "same",
+       "text": "\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n"
+      },
+      {
+       "kind": "removed",
+       "text": "2,509"
+      },
+      {
+       "kind": "added",
+       "text": "3,109"
+      },
+      {
+       "kind": "same",
+       "text": "\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Prepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\n"
+      },
+      {
+       "kind": "same",
+       "text": "Property, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\n"
+      },
+      {
+       "kind": "removed",
+       "text": "TOTAL ASSETS\n$\n23,717\n$\n22,536\n"
+      },
+      {
+       "kind": "same",
+       "text": "LIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike's total current assets at the end of FY2019 were $14,557 million.",
+       "grade": "wrong"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "author_07661_1",
+   "source": "author",
+   "split": "dev",
+   "doc_name": "BLOCK_2020_10K",
+   "chunk_source": "BLOCK_2020_10K",
+   "question": "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement.",
+   "metric": "FY2020 transaction and loan losses (cash flow), filing in thousands",
+   "audit": "B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$177.67 million",
+     "correct_option": 0,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $177.67 million in FY2020 (the cash flow statement shows $177,670 in thousands)【Source: Block 2020】【SQUARE, INC. CONSOLIDATED STATEMENTS OF CASH FLOWS (In thousands) – Transaction and loan losses: 177,670】",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$189.67 million",
+     "correct_option": 1,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n"
+      },
+      {
+       "kind": "removed",
+       "text": "177,670"
+      },
+      {
+       "kind": "added",
+       "text": "189,670"
+      },
+      {
+       "kind": "same",
+       "text": "\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $189.7 million in FY2020, as shown in the cash flow statement (Transaction and loan losses: 189,670 in thousands)【Source: Block 2020】",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$177.67 million",
+     "correct_option": 0,
+     "options": [
+      "$177.67 million",
+      "$116.959 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $177.67 million in FY2020.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Transactionandloanlosses\n177,670\n126,"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded $73.6 million in charge-offs to accrued transaction losses for FY2020 (shown as (73,613) in the cash flow statement, which is in thousands of dollars).",
+       "grade": "wrong"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "financebench_id_04980",
+   "source": "financebench",
+   "split": "dev",
+   "doc_name": "PEPSICO_2021_10K",
+   "chunk_source": "PEPSICO_2021_10K",
+   "question": "What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
+   "metric": "FY2021 capital spending (cash flow statement)",
+   "audit": "Capex appears in three overlapping 2021-10-K chunks (FY2021 first column) and in a 2022-10-K chunk (FY2021 second column); all are edited. The FY2021 investing total sums exactly to -3,269 including capex, so B and C move it and D removes it. No prose mention of $4.6 billion in the captured chunks.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$4.625 billion",
+     "correct_option": 0,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "USD 4.625 billion",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "The FY2021 capital expenditure (capital spending) reported in the Consolidated Statement of Cash Flows is $4.625 billion (shown as (4,625) million).",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$4.925 billion",
+     "correct_option": 1,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n"
+      },
+      {
+       "kind": "removed",
+       "text": "(4,625)"
+      },
+      {
+       "kind": "added",
+       "text": "(4,925)"
+      },
+      {
+       "kind": "same",
+       "text": "\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "PepsiCo's FY2021 capital expenditures were $4.925 billion (capital spending of $4,925 million) as reported in the Consolidated Statement of Cash Flows.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "FY2021 capital expenditure (capital spending) was $4.925 billion, derived from the $4,925 million figure reported in the Consolidated Statement of Cash Flows for 2021.",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$4.625 billion",
+     "correct_option": 0,
+     "options": [
+      "$4.625 billion",
+      "$4.04 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n"
+      },
+      {
+       "kind": "removed",
+       "text": "(4,240)"
+      },
+      {
+       "kind": "added",
+       "text": "(4,040)"
+      },
+      {
+       "kind": "same",
+       "text": "\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "PepsiCo's FY2021 capital expenditure was $4.625 billion (reported as a capital spending outflow of (4,625) million in the 2021 Consolidated Statement of Cash Flows).",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "The FY2021 capital expenditure was $4.625 billion (Capital spending = $4,625 million)【Source: PepsiCo 2021, Consolidated Statement of Cash Flows, Capital spending (4,625) in millions】.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Capital spending\n(4,625)\n(4,240)\n(4,232)\n"
+      },
+      {
+       "kind": "same",
+       "text": "Sales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  }
+ ]
+}
