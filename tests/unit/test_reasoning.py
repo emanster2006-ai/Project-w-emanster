@@ -29,13 +29,13 @@ def test_other_models_get_no_extra_arguments(monkeypatch, model):
 
 
 def test_system_template_comes_from_env_and_must_exist(monkeypatch):
-    import generation.llm as llm
+    import generation.templates as templates
 
     monkeypatch.delenv("LLM_SYSTEM_TEMPLATE", raising=False)
-    assert llm.default_system_template() == "rag_system.j2"
+    assert templates.default_system_template() == "rag_system.j2"
     monkeypatch.setenv("LLM_SYSTEM_TEMPLATE", "rag_system_candidate.j2")
-    assert llm.default_system_template() == "rag_system_candidate.j2"
+    assert templates.default_system_template() == "rag_system_candidate.j2"
     for bad in ("../../etc/passwd", "missing.j2"):
         monkeypatch.setenv("LLM_SYSTEM_TEMPLATE", bad)
         with pytest.raises(ValueError):
-            llm.default_system_template()
+            templates.default_system_template()

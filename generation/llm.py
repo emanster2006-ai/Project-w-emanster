@@ -7,11 +7,11 @@ from groq import Groq
 from openai import OpenAI
 from jinja2 import Environment, FileSystemLoader
 import os
-import re
 import logging
 from dataclasses import dataclass
 
 from generation.reasoning import reasoning_options
+from generation.templates import default_system_template
 from security.grounding import ungrounded_numbers
 from security.row_grounding import check_answer as check_row_grounding
 
@@ -45,19 +45,6 @@ class Usage:
     attempts: int = 0
     prompt_tokens: int = 0
     completion_tokens: int = 0
-
-
-def default_system_template() -> str:
-    """System prompt template: rag_system.j2 unless LLM_SYSTEM_TEMPLATE names another
-    template in generation/prompts/ (used to evaluate prompt changes end to end)."""
-    name = os.getenv("LLM_SYSTEM_TEMPLATE", "rag_system.j2")
-    if not re.fullmatch(r"[\w.-]+\.j2", name) or not os.path.exists(
-        os.path.join(os.path.dirname(__file__), "prompts", name)
-    ):
-        raise ValueError(
-            f"LLM_SYSTEM_TEMPLATE must name a template in prompts/: {name!r}"
-        )
-    return name
 
 
 def render_messages(
