@@ -7,6 +7,7 @@ from groq import Groq
 from openai import OpenAI
 from jinja2 import Environment, FileSystemLoader
 import os
+import re
 import logging
 from dataclasses import dataclass
 
@@ -46,15 +47,30 @@ class Usage:
     completion_tokens: int = 0
 
 
+def default_system_template() -> str:
+    """System prompt template: rag_system.j2 unless LLM_SYSTEM_TEMPLATE names another
+    template in generation/prompts/ (used to evaluate prompt changes end to end)."""
+    name = os.getenv("LLM_SYSTEM_TEMPLATE", "rag_system.j2")
+    if not re.fullmatch(r"[\w.-]+\.j2", name) or not os.path.exists(
+        os.path.join(os.path.dirname(__file__), "prompts", name)
+    ):
+        raise ValueError(
+            f"LLM_SYSTEM_TEMPLATE must name a template in prompts/: {name!r}"
+        )
+    return name
+
+
 def render_messages(
-    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+    question: str, context_chunks: list[dict], system_template: str | None = None
 ) -> list[dict]:
     """The exact chat messages the generator sends for this question and context."""
     context_text = "\n\n---\n\n".join(
         f"[Source: {c['metadata'].get('company', 'Unknown')} {c['metadata'].get('year', '')}]\n{c['text']}"
         for c in context_chunks
     )
-    system_prompt = _jinja_env.get_template(system_template).render()
+    system_prompt = _jinja_env.get_template(
+        system_template or default_system_template()
+    ).render()
     user_prompt = _jinja_env.get_template("rag_user.j2").render(
         question=question,
         context=context_text,
@@ -66,7 +82,7 @@ def render_messages(
 
 
 async def generate_response(
-    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+    question: str, context_chunks: list[dict], system_template: str | None = None
 ):
     """
     Generate a validated FinancialRAGResponse from retrieved chunks.
