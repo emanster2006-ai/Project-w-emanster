@@ -12,6 +12,7 @@ from dataclasses import dataclass
 
 from generation.reasoning import reasoning_options
 from security.grounding import ungrounded_numbers
+from security.row_grounding import check_answer as check_row_grounding
 
 logger = logging.getLogger(__name__)
 
@@ -112,6 +113,16 @@ async def generate_response(
     missing = ungrounded_numbers(response.answer, context_chunks)
     if missing:
         logger.warning(f"Answer figures not found in retrieved context: {missing}")
+    try:
+        # Catches a figure taken from the wrong row (e.g. a component reported as the
+        # total), which the digit check above cannot see. Logged only.
+        rows = check_row_grounding(question, response.answer, context_chunks)
+        if rows.flagged:
+            logger.warning(
+                f"Answer figure not supported by a matching row: {rows.reason}"
+            )
+    except Exception:  # a heuristic must never break generation
+        logger.exception("Row grounding check failed")
 
     return response, usage
 
