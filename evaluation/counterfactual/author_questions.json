@@ -1,0 +1,23 @@
+{
+ "notes": "Author-written questions, not part of FinanceBench. Each asks for one reported figure from the same filing as an eligible FinanceBench question (its parent), and inherits the parent's split so dev and reserved never share a filing. Written before any model answered them. Each is captured through the real retrieval pipeline like the FinanceBench questions; a question whose row is not retrieved is excluded.",
+ "questions": [
+  {"id": "author_04980_1", "parent": "financebench_id_04980", "doc_name": "PEPSICO_2021_10K", "question": "What is PepsiCo's FY2021 net cash provided by operating activities, in USD millions? Answer using the cash flow statement."},
+  {"id": "author_04980_2", "parent": "financebench_id_04980", "doc_name": "PEPSICO_2021_10K", "question": "How much did PepsiCo receive from sales of property, plant and equipment in FY2021, in USD millions? Answer using the cash flow statement."},
+  {"id": "author_04417_1", "parent": "financebench_id_04417", "doc_name": "BESTBUY_2019_10K", "question": "What was Best Buy's cash and cash equivalents at the end of FY2019 (February 2, 2019), in USD millions? Answer using the balance sheet."},
+  {"id": "author_04417_2", "parent": "financebench_id_04417", "doc_name": "BESTBUY_2019_10K", "question": "What were Best Buy's net receivables at the end of FY2019 (February 2, 2019), in USD millions? Answer using the balance sheet."},
+  {"id": "author_03531_1", "parent": "financebench_id_03531", "doc_name": "NIKE_2019_10K", "question": "What was Nike's cash and equivalents at the end of FY2019 (May 31, 2019), in USD millions? Answer using the balance sheet."},
+  {"id": "author_03531_2", "parent": "financebench_id_03531", "doc_name": "NIKE_2019_10K", "question": "What was Nike's inventories balance at the end of FY2019 (May 31, 2019), in USD millions? Answer using the balance sheet."},
+  {"id": "author_03282_1", "parent": "financebench_id_03282", "doc_name": "NETFLIX_2017_10K", "question": "What was Netflix's accounts payable on the balance sheet at the end of FY2017 (December 31, 2017), in USD millions?"},
+  {"id": "author_03282_2", "parent": "financebench_id_03282", "doc_name": "NETFLIX_2017_10K", "question": "What was Netflix's long-term debt at the end of FY2017 (December 31, 2017), in USD millions? Answer using the balance sheet."},
+  {"id": "author_04209_1", "parent": "financebench_id_04209", "doc_name": "COSTCO_2021_10K", "question": "What was Costco's accounts payable at the end of FY2021, in USD millions? Answer using the balance sheet."},
+  {"id": "author_04209_2", "parent": "financebench_id_04209", "doc_name": "COSTCO_2021_10K", "question": "What was Costco's merchandise inventories balance at the end of FY2021, in USD millions? Answer using the balance sheet."},
+  {"id": "author_04700_1", "parent": "financebench_id_04700", "doc_name": "MICROSOFT_2016_10K", "question": "What was Microsoft's FY2016 research and development expense, in USD millions? Answer using the income statement."},
+  {"id": "author_04700_2", "parent": "financebench_id_04700", "doc_name": "MICROSOFT_2016_10K", "question": "What was Microsoft's FY2016 total revenue, in USD millions? Answer using the income statement."},
+  {"id": "author_07661_1", "parent": "financebench_id_07661", "doc_name": "BLOCK_2020_10K", "question": "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement."},
+  {"id": "author_07661_2", "parent": "financebench_id_07661", "doc_name": "BLOCK_2020_10K", "question": "What was Block's (formerly Square) depreciation and amortization in FY2020, in USD millions? Answer using the cash flow statement."},
+  {"id": "author_08286_1", "parent": "financebench_id_08286", "doc_name": "AMAZON_2019_10K", "question": "What was Amazon's FY2019 income before income taxes, in USD millions? Answer using the income statement."},
+  {"id": "author_08286_2", "parent": "financebench_id_08286", "doc_name": "AMAZON_2019_10K", "question": "What was Amazon's FY2019 interest expense, in USD millions? Answer using the income statement."},
+  {"id": "author_10285_1", "parent": "financebench_id_10285", "doc_name": "BOEING_2018_10K", "question": "What was Boeing's inventories balance at the end of FY2018, in USD millions? Answer using the balance sheet."},
+  {"id": "author_10285_2", "parent": "financebench_id_10285", "doc_name": "BOEING_2018_10K", "question": "What was Boeing's accounts payable at the end of FY2018, in USD millions? Answer using the balance sheet."}
+ ]
+}

@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_00283",
+ "doc_name": "Pfizer_2023Q2_10Q",
+ "question": "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
+ "captured_at": "2026-11-26T22:45:22+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?",
+ "pii_masked": false,
+ "sub_questions": [
+  "How much does Pfizer expect to pay to spin off Upjohn in the future in USD million?"
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "We expect to incur costs of approximately $700 million in connection with separating Upjohn, of which approximately 90% has been incurred since inception\nand through the second quarter of 2023. These charges include costs and expenses related to separation of legal entities and transaction costs.",
+   "sha256": "0b2a66707a8fd2316de7ca24dfe1a71804501ee92f572790d254eb96a56365c0",
+   "score": 6.931190013885498,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2023",
+    "source": "Pfizer_2023Q2_10Q",
+    "filing_type": "10q"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "We financed the majority of the transaction with debt and the balance with existing cash. Therachon\nOn July 1, 2019, we acquired all the remaining shares of Therachon, a privately-held clinical-stage biotechnology company focused on rare diseases, with assets in development for\nthe treatment of achondroplasia, a genetic condition and the most common form of short-limb dwarfism, for $340 million upfront, plus potential milestone payments of up to $470\nmillion contingent on the achievement of key milestones in the development and commercialization of the lead asset. We accounted for the transaction as an asset acquisition since\nthe lead asset represented substantially all the fair value of the gross assets acquired. The total fair value of the consideration transferred for Therachon was $322 million, which\nconsisted of $317 million of cash and our previous $5 million investment in Therachon. In connection with this asset acquisition, we recorded a charge of $337 million in Research and\ndevelopment expenses.",
+   "sha256": "f78412c051ab783f3a37e5811d8ec512864aa414e5037c04b26231d4175de180",
+   "score": -0.9096755981445312,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Year Ended December 31,\n(MILLIONS, EXCEPT PER COMMON SHARE DATA)\n2021\n2020\n2019\nRevenues\n$\n81,288 \n$\n41,651 \n$\n40,905 \nCosts and expenses:\n \n \nCost of sales\n30,821 \n8,484 \n8,054 \nSelling, informational and administrative expenses\n12,703 \n11,597 \n12,726 \nResearch and development expenses\n13,829 \n9,393 \n8,385 \nAmortization of intangible assets\n3,700 \n3,348 \n4,429 \nRestructuring charges and certain acquisition-related costs\n802 \n579 \n601 \n(Gain) on completion of Consumer Healthcare JV transaction\n \n(6)\n(8,107)\nOther (income)/deductionsnet\n(4,878)\n1,219 \n3,497 \nIncome from continuing operations before provision/(benefit) for taxes on income\n24,311 \n7,036 \n11,321 \nProvision/(benefit) for taxes on income\n1,",
+   "sha256": "7484f423d722229b7d6da0dce1e374ba3a453646b8c9a38173944075b91d4ece",
+   "score": -1.6210834980010986,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Year Ended December 31,\n(MILLIONS, EXCEPT PER COMMON SHARE DATA)\n2021\n2020\n2019\nRevenues\n$\n81,288 \n$\n41,651 \n$\n40,905 \nCosts and expenses:\n \n \nCost of sales\n30,821 \n8,484 \n8,054 \nSelling, informational and administrative expenses\n12,703 \n11,597 \n12,726 \nResearch and development expenses\n13,829 \n9,393 \n8,385 \nAmortization of intangible assets\n3,700 \n3,348 \n4,429 \nRestructuring charges and certain acquisition-related costs\n802 \n579 \n601 \n(Gain) on completion of Consumer Healthcare JV transaction\n \n(6)\n(8,107)\nOther (income)/deductionsnet\n(4,878)\n1,219 \n3,497 \nIncome from continuing operations before provision/(benefit) for taxes on income\n24,311 \n7,036 \n11,321 \nProvision/(benefit) for taxes on income\n1,852 \n370 \n583 \nIncome from continuing operations\n22,459 \n6,666 \n10,738 \nDiscontinued operationsnet of tax\n(434)\n2,529 \n5,318 \nNet income before allocation to noncontrolling interests\n22,025 \n9,195 \n16,056 \nLess: Net income attributable to noncontrolling interests\n45 \n36 \n29 \nNet income attributable to Pfizer Inc. common shareholders\n$\n21,979 \n$\n9,159 \n$\n16,026",
+   "sha256": "a3b49b6eb6ae42fe0d67eba1ca28fd0d18c7a97688050d2c88fad7c5daa96703",
+   "score": -1.7290929555892944,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "In connection with this acquisition, we recorded $256 million of assets acquired\nprimarily consisting of cash and investments. Liabilities assumed were approximately $81 million.\nArray\nOn July 30, 2019, we acquired Array, a commercial stage biopharmaceutical company focused on the discovery, development and commercialization of targeted small molecule\nmedicines to treat cancer and other diseases of high unmet need, for $48 per share in cash. The total fair value of the consideration transferred was $11.2 billion ($10.9 billion, net of\ncash acquired). In addition, $157 million in payments to Array employees for the fair value of previously unvested stock options was recognized as post-closing compensation expense\nand recorded in Restructuring charges and certain acquisition-related costs (see Note 3). We financed the majority of the transaction with debt and the balance with existing cash.",
+   "sha256": "9b64cf1299504a2ff14718e28080ec3cbd5669ba0d72b0c6a77b4c0e185632c6",
+   "score": -1.9486685991287231,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "The following summarizes revenues by geographic area:\n \nThree Months Ended\nSix Months Ended\n(MILLIONS)\nJuly 2,\n2023\nJuly 3,\n2022\n%\nChange\nJuly 2,\n2023\nJuly 3,\n2022\n%\nChange\nUnited States\n$\n6,185 \n$\n11,222 \n(45)\n$\n14,692 \n$\n20,140 \n(27)\nDeveloped Europe\n2,415 \n5,480 \n(56)\n5,236 \n11,569 \n(55)\nDeveloped Rest of World\n1,305 \n5,034 \n(74)\n3,778 \n8,320 \n(55)\nEmerging Markets\n2,828 \n6,006 \n(53)\n7,308 \n13,373 \n(45)\nRevenues\n$\n12,734 \n$\n27,742 \n(54)\n$\n31,015 \n$\n53,402 \n(42)",
+   "sha256": "62c0aa0e32f3044f6cda3207e48fbf6c9a2996de3fd4cbbb02eba6fcbcc4001a",
+   "score": -2.2149477005004883,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2023",
+    "source": "Pfizer_2023Q2_10Q",
+    "filing_type": "10q"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "As of December 31,\n(MILLIONS, EXCEPT PER COMMON SHARE DATA)\n2021\n2020\nAssets\nCash and cash equivalents\n$\n1,944 \n$\n1,786 \nShort-term investments\n29,125 \n10,437 \nTrade accounts receivable, less allowance for doubtful accounts: 2021$492; 2020$508\n11,479 \n7,913 \nInventories\n9,059 \n8,020 \nCurrent tax assets\n4,266 \n3,264 \nOther current assets\n3,820 \n3,646 \nTotal current assets\n59,693 \n35,067 \nEquity-method investments\n16,472 \n16,856 \nLong-term investments\n5,054 \n3,406 \nProperty, plant and equipment\n14,882 \n13,745",
+   "sha256": "10d850033dc67d58f90ad7e48d8260dbad19fda7e4545815ecd1f36fda809391",
+   "score": -2.3692851066589355,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "Note 2. Acquisitions, Divestitures, Equity-Method Investments, Licensing Arrangements and Collaborative Arrangements\nA. Acquisitions\nTrillium\nOn November 17, 2021, we acquired all of the issued and outstanding common stock not already owned by Pfizer of Trillium, a clinical stage immuno-oncology company developing\ntherapies targeting cancer immune evasion pathways and specific cell targeting approaches, for a price of $18.50 per share in cash, for total consideration of $2.0 billion, net of cash\nacquired. As a result, Trillium became our wholly owned subsidiary. We previously held a 2% ownership investment in Trillium. Trilliums lead program, TTI-622, is an investigational\nfusion protein that is designed to block the inhibitory activity of CD47, a molecule that is overexpressed by a wide variety of tumors.\nWe accounted for the transaction as an asset acquisition since the lead asset, TTI-622, represented substantially all of the fair value of the gross assets acquired, which exclude cash\nacquired. At the acquisition date, we recorded a $2.1 billion charge representing an acquired IPR&D asset with no alternative future use in Research and development expenses, of\nwhich the $2.0 billion net cash consideration is presented as a cash outflow from operating activities. In connection with this acquisition, we recorded $256 million of assets acquired\nprimarily consisting of cash and investments. Liabilities assumed were approximately $81 million.\nArray\nOn July 30, 2019, we acquired Array, a commercial stage biopharmaceutical company focused on the discovery, development and commercialization of targeted small molecule\nmedicines to treat cancer and other diseases of high unmet need, for $48 per share in cash. The total fair value of the consideration transferred was $11.2 billion ($10.9 billion, net of\ncash acquired). In addition, $157 million in payments to Array employees for the fair value of previously unvested stock options was recognized as post-closing compensation expense\nand recorded in Restructuring charges and certain acquisition-related costs (see Note 3). We financed the majority of the transaction with debt and the balance with existing cash.",
+   "sha256": "6059c1756d810c07ff2ecae5dde51e7863cbb3ad60d739c777175ae0a42a1553",
+   "score": -2.9695534706115723,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "0dc598905906c11a01da1a31f5de77d77ff730357b62ece2c4cee2bd456d2b8f"
+}

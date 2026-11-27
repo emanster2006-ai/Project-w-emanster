@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_01244",
+ "doc_name": "CVSHEALTH_2022_10K",
+ "question": "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
+ "captured_at": "2026-11-26T22:45:18+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?",
+ "pii_masked": false,
+ "sub_questions": [
+  "Has CVS Health paid dividends to common shareholders in Q2 of FY2022?"
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Dividends\nDuring 2022, 2021 and 2020, the quarterly cash dividend was $0.55, $0.50 and $0.50 per share, respectively.",
+   "sha256": "9498046931a9747a1b21859fbfcc9b8e2b80bd0f33e7d1bdcf38cf3111099744",
+   "score": 4.771827220916748,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2022",
+    "source": "CVSHEALTH_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "net of tax\n \n \n(9)\nNet income\n4,165 \n7,898 \n7,192 Consolidated Balance Sheets\nAt December 31,\nIn millions, except per share amounts\n2022\n2021\nAssets:\n \nCash and cash equivalents\n$\n12,945 $\n9,408 \nInvestments\n2,778 \n3,117 \nAccounts receivable, net\n27,276 \n24,431 \nInventories\n19,090 \n17,760 \nAssets held for sale\n908 \n \nOther current assets\n2,685 \n5,292 \nTotal current assets\n65,682 \n60,008 \nLong-term investments\n21,096 \n23,025 \nProperty and equipment, net\n12,873 \n12,",
+   "sha256": "1634fc22a21f1c3d5a437c27715015293bb2846483f6048cfd8fc49e85dee143",
+   "score": -0.5069420337677002,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2022",
+    "source": "CVSHEALTH_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Consolidated Statements of Operations\nFor the Years Ended December 31,\nIn millions, except per share amounts\n2022\n2021\n2020\nRevenues:\n \n \n \nProducts\n$\n226,616 $\n203,738 $\n190,688 \nPremiums\n85,330 \n76,132 \n69,364 \nServices\n9,683 \n11,042 \n7,856 \nNet investment income\n838 \n1,199 \n798 \nTotal revenues\n322,467 \n292,111 \n268,706 \nOperating costs:\nCost of products sold\n196,892 \n175,803 \n163,981 \nBenefit costs\n71,281 \n64,260 \n55,679 \nOpioid litigation charges\n5,803 \n \n \nLoss on assets held for sale\n2,533 \n \n \nStore impairments\n \n1,358 \n \nGoodwill impairment\n \n431 \n \nOperating expenses\n38,212 \n37,066 \n35,135 \nTotal operating costs\n314,721 \n278,918 \n254,795 \nOperating income\n7,746 \n13,193 \n13,",
+   "sha256": "7bb702111117f3943b6adf70967c1dd5892f3f2f33da6d21952dc021d18a8566",
+   "score": -1.1437740325927734,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2022",
+    "source": "CVSHEALTH_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "57) $\n6.44 $\n4.90\nWeightedaveragedilutedsharesoutstanding\n1,044 \n1,024 \n1,079\nDividendsdeclaredpershare\n$\n2.00 $\n2.00 $\n1.70\n\n\n \n \nSeeaccompanyingnotestoconsolidatedfinancialstatements.\nPage38 ConsolidatedBalanceSheets\n\nAtDecember31,\nIn millions, except per share amounts\n2018\n\n2017\nAssets:\n\n \nCashandcashequivalents\n$\n4,059 $\n1,696\nInvestments\n2,522 \n111\nAccountsreceivable,net\n17,631 \n13,181\nInventories\n16,450 \n15,296\nOthercurrentassets\n4,581 \n945\nTotalcurrentassets\n45,243 \n31,229\nLong-terminvestments\n15,732 \n112\nPropertyandequipment,net\n11,349 \n10,292\nGoodwill\n78,678 \n38,451\nIntangibleassets,net\n36,524 \n13,630\nSeparateaccountsassets\n3,884 \n\nOtherassets\n5,046 \n1,417\nTotalassets\n$\n196,456 $\n95,131",
+   "sha256": "e17ff4eb14003f13d811ce278798ca67a8fca437e679d51fa167504d9e029480",
+   "score": -1.531030297279358,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2018",
+    "source": "CVSHEALTH_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "01) $\n\nNetincome(loss)attributabletoCVSHealth\n$\n(0.57) $\n6.44 $\n4.90\nWeightedaveragedilutedsharesoutstanding\n1,044 \n1,024 \n1,079\nDividendsdeclaredpershare\n$\n2.00 $\n2.00 $\n1.70",
+   "sha256": "5652ee137c72a9587d4402ae1610e8fe7672e960065f3d02a355e240e39b1c07",
+   "score": -1.9701967239379883,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2018",
+    "source": "CVSHEALTH_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Liabilities:\n\n \nAccountspayable\n$\n8,925 $\n8,863\nPharmacyclaimsanddiscountspayable\n12,302 \n10,355\nHealthcarecostspayable\n5,210 \n5\nPolicyholdersfunds\n2,939 \n\nAccruedexpenses\n10,711 \n6,581\nOtherinsuranceliabilities\n1,937 \n23\nShort-termdebt\n720 \n1,276\nCurrentportionoflong-termdebt\n1,265 \n3,545\nTotalcurrentliabilities\n44,009 \n30,648\nLong-termdebt\n71,444 \n22,181\nDeferredincometaxes\n7,677 \n2,996\nSeparateaccountsliabilities\n3,884 \n\nOtherlong-terminsuranceliabilities\n8,119 \n334\nOtherlong-termliabilities\n2,780 \n1,277\nTotalliabilities\n137,913 \n57,436\nCommitmentsandcontingencies(Note16)\n\n\n\n \nShareholdersequity:",
+   "sha256": "198f5dc33b86427137c1b4282bc60af12486b45a52e1d4a877beb8fc87103fc4",
+   "score": -2.3426265716552734,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2018",
+    "source": "CVSHEALTH_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Liabilities:\n\n \nAccountspayable\n$\n8,925 $\n8,863\nPharmacyclaimsanddiscountspayable\n12,302 \n10,355\nHealthcarecostspayable\n5,210 \n5\nPolicyholdersfunds\n2,939 \n\nAccruedexpenses\n10,711 \n6,581\nOtherinsuranceliabilities\n1,937 \n23\nShort-termdebt\n720 \n1,276\nCurrentportionoflong-termdebt\n1,265 \n3,545\nTotalcurrentliabilities\n44,009 \n30,648\nLong-termdebt\n71,444 \n22,181\nDeferredincometaxes\n7,677 \n2,996\nSeparateaccountsliabilities\n3,884 \n\nOtherlong-terminsuranceliabilities\n8,119 \n334\nOtherlong-termliabilities\n2,780 \n1,277\nTotalliabilities\n137,913 \n57,436\nCommitmentsandcontingencies(Note16)\n\n\n\n \nShareholdersequity:\n\n\n\nCVSHealthshareholdersequity:\n\n \nPreferredstock,parvalue$0.01:0.1sharesauthorized;noneissuedoroutstanding\n \n\nCommonstock,parvalue$0.01:3,200sharesauthorized;1,720sharesissuedand1,295sharesoutstandingat\nDecember31,2018and1,712sharesissuedand1,014sharesoutstandingatDecember31,2017andcapital\nsurplus\n45,440 \n32,096\nTreasurystock,atcost:425sharesatDecember31,2018and698sharesatDecember31,2017\n(28,228) \n(37,796)\nRetainedearnings\n40,911 \n43,556\nAccumulatedothercomprehensiveincome(loss)\n102 \n(165)\nTotalCVSHealthshareholdersequity\n58,225 \n37,691\nNoncontrollinginterests\n318 \n4\nTotalshareholdersequity\n58,543 \n37,695\nTotalliabilitiesandshareholdersequity\n$\n196,456 $\n95,131\n\n\n \nSeeaccompanyingnotestoconsolidatedfinancialstatements.\nPage40",
+   "sha256": "18897639d3fd646f275c0a8b4b844e8093127a1f6b5fd2fd07cf8d3421748066",
+   "score": -2.8829987049102783,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2018",
+    "source": "CVSHEALTH_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "ConsolidatedStatementsofOperations\n\nFortheYearsEndedDecember31,\nIn millions, except per share amounts\n2018\n\n2017\n\n2016\nRevenues:\n\n \n \nProducts\n$\n183,910 $\n180,063 $\n173,377\nPremiums\n8,184 \n3,558 \n3,069\nServices\n1,825 \n1,144 \n1,080\nNetinvestmentincome\n660 \n21 \n20\nTotalrevenues\n194,579 \n184,786 \n177,546\nOperatingcosts:\n\n \n \nCostofproductssold\n156,447 \n153,448 \n146,533\nBenefitcosts\n6,594 \n2,810 \n2,179\nGoodwillimpairments\n6,149 \n181 \n\nOperatingexpenses\n21,368 \n18,809 \n18,448\nTotaloperatingcosts\n190,558 \n175,248 \n167,160\nOperatingincome\n4,021 \n9,538 \n10,386\nInterestexpense\n2,619 \n1,062 \n1,078\nLossonearlyextinguishmentofdebt\n \n \n643\nOtherexpense(income)\n(4) \n208 \n28\nIncomebeforeincometaxprovision\n1,406 \n8,268 \n8,637\nIncometaxprovision\n2,002 \n1,637 \n3,317\nIncome(loss)fromcontinuingoperations\n(596) \n6,631 \n5,320\nLossfromdiscontinuedoperations,netoftax\n \n(8) \n(1)\nNetincome(loss)\n(596) \n6,623 \n5,319\nNet(income)lossattributabletononcontrollinginterests\n2 \n(1) \n(2)\nNetincome(loss)attributabletoCVSHealth\n$\n(594) $\n6,622 $\n5,317",
+   "sha256": "7a9a8771249b7904890713fc55e40c656d9fe410f5cbdeb5ef9b692260b8f126",
+   "score": -3.9146037101745605,
+   "metadata": {
+    "company": "CVS Health",
+    "year": "2018",
+    "source": "CVSHEALTH_2018_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "9feb8230993354bc9c7e57a6944052c0056d317900526784f91db082de85f400"
+}

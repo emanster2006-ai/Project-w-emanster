@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_03882",
+ "doc_name": "AMCOR_2020_10K",
+ "question": "What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet.",
+ "captured_at": "2026-11-26T22:44:52+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What is Amcor's year end FY2020 net AR (in USD millions)? Address the question by adopting the perspective of a financial analyst who can only use the details shown within the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Amcor plc and Subsidiaries\nConsolidated Balance Sheet\n(in millions)\nAs of June 30,\n2020\n2019\nAssets\nCurrent assets:\nCash and cash equivalents\n$\n742.6 \n$\n601.6 \nTrade receivables, net\n1,615.9 \n1,864.3 \nInventories, net\n1,831.9 \n1,953.8 \nPrepaid expenses and other current assets\n344.3 \n374.3 \nAssets held for sale\n \n416.1 \nTotal current assets\n4,534.7 \n5,210.1 \nNon-current assets:\nInvestments in affiliated companies\n77.7 \n98.9 \nProperty, plant and equipment, net\n3,614.8 \n3,975.0 \nOperating lease assets\n525.3 \n \nDeferred tax assets\n135.4 \n190.9 \nOther intangible assets, net\n1,994.3 \n2,306.8 \nGoodwill\n5,339.3 \n5,156.0 \nEmployee benefit assets\n43.",
+   "sha256": "c62a6f2eae3289d649482c036b5d28ad30534f253fd2ff1e638646836db778a2",
+   "score": 0.547527551651001,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2020",
+    "source": "AMCOR_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Amcor plc and Subsidiaries\nConsolidated Balance Sheet\n(in millions)\nAs of June 30,\n2020\n2019\nAssets\nCurrent assets:\nCash and cash equivalents\n$\n742.6 \n$\n601.6 \nTrade receivables, net\n1,615.9 \n1,864.3 \nInventories, net\n1,831.9 \n1,953.8 \nPrepaid expenses and other current assets\n344.3 \n374.3 \nAssets held for sale\n \n416.1 \nTotal current assets\n4,534.7 \n5,210.1 \nNon-current assets:\nInvestments in affiliated companies\n77.7 \n98.9 \nProperty, plant and equipment, net\n3,614.8 \n3,975.0 \nOperating lease assets\n525.3 \n \nDeferred tax assets\n135.4 \n190.9 \nOther intangible assets, net\n1,994.3 \n2,306.8 \nGoodwill\n5,339.3 \n5,156.0 \nEmployee benefit assets\n43.4 \n40.2 \nOther non-current assets\n177.2 \n187.1 \nTotal non-current assets\n11,907.4 \n11,954.9 \nTotal assets\n$\n16,442.1 \n$\n17,165.0 \nLiabilities\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n11.1 \n$\n5.4 \nShort-term debt\n195.2 \n788.8 \nTrade payables\n2,170.8 \n2,303.4 \nAccrued employee costs\n476.5 \n378.4 \nOther current liabilities\n1,120.0 \n1,044.9 \nLiabilities held for sale\n \n20.9 \nTotal current liabilities\n3,973.6 \n4,541.8 \nNon-current liabilities:\nLong-term debt, less current portion\n6,028.4 \n5,309.0 \nOperating lease liabilities\n465.7 \n \nDeferred tax liabilities\n672.4 \n1,011.7 \nEmployee benefit obligations\n391.7 \n386.8 \nOther non-current liabilities\n223.2 \n241.0 \nTotal non-current liabilities\n7,781.4 \n6,948.5 \nTotal liabilities\n11,755.",
+   "sha256": "4a7a234d3d2fea1d39db5fca278df8cd47da4267eb58c825288681f7c9480749",
+   "score": 0.5021302700042725,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2020",
+    "source": "AMCOR_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Amcor plc and Subsidiaries\nConsolidated Balance Sheet\n(in millions)\nAs of June 30,\n2020\n2019\nAssets\nCurrent assets:\nCash and cash equivalents\n$\n742.6 \n$\n601.6 \nTrade receivables, net\n1,615.9 \n1,864.3 \nInventories, net\n1,831.9 \n1,953.8 \nPrepaid expenses and other current assets\n344.3 \n374.3 \nAssets held for sale\n \n416.1 \nTotal current assets\n4,534.7 \n5,210.1 \nNon-current assets:\nInvestments in affiliated companies\n77.7 \n98.9 \nProperty, plant and equipment, net\n3,614.8 \n3,975.0 \nOperating lease assets\n525.3 \n \nDeferred tax assets\n135.4 \n190.9 \nOther intangible assets, net\n1,994.3 \n2,306.8 \nGoodwill\n5,339.3 \n5,156.0 \nEmployee benefit assets\n43.4 \n40.2 \nOther non-current assets\n177.2 \n187.1 \nTotal non-current assets\n11,907.4 \n11,954.9 \nTotal assets\n$\n16,442.1 \n$\n17,165.0 \nLiabilities\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n11.1 \n$\n5.4 \nShort-term debt\n195.2 \n788.8 \nTrade payables\n2,170.8 \n2,303.4 \nAccrued employee costs\n476.5 \n378.4 \nOther current liabilities\n1,120.0 \n1,044.9 \nLiabilities held for sale\n \n20.9 \nTotal current liabilities\n3,973.6 \n4,541.8 \nNon-current liabilities:\nLong-term debt, less current portion\n6,028.4 \n5,309.0 \nOperating lease liabilities\n465.7 \n \nDeferred tax liabilities\n672.4 \n1,011.7 \nEmployee benefit obligations\n391.7 \n386.8 \nOther non-current liabilities\n223.2 \n241.0 \nTotal non-current liabilities\n7,781.4 \n6,948.5 \nTotal liabilities\n11,755.0 \n11,490.3 \nCommitments and contingencies (See Note 19)\nShareholders' Equity\nAmcor plc shareholders equity:\nOrdinary shares ($0.01 par value):\nAuthorized (9,000.0 shares)\nIssued (1,568.5 and 1,625.9 shares, respectively)\n15.7 \n16.3 \nAdditional paid-in capital\n5,480.0 \n6,007.5 \nRetained earnings\n246.5 \n323.7 \nAccumulated other comprehensive income (loss)\n(1,049.3)\n(722.4)\nTreasury shares (6.7 and 1.4 shares, respectively)\n(67.0)\n(16.1)\nTotal Amcor plc shareholders' equity\n4,625.9 \n5,609.0 \nNon-controlling interest\n61.2 \n65.7 \nTotal shareholders' equity\n4,687.1 \n5,674.7 \nTotal liabilities and shareholders' equity\n$\n16,442.1 \n$\n17,165.0 \nSee accompanying notes to consolidated financial statements.\n50",
+   "sha256": "122cb7ce97ecf59c1e099af7c724e2be1103c879db1eccec55a3f45f3c6d0198",
+   "score": 0.48018383979797363,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2020",
+    "source": "AMCOR_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Amcor plc and Subsidiaries\nConsolidated Statements of Income\n($ in millions, except per share data)\nFor the years ended June 30,\n2023\n2022\n2021\nNet sales\n$\n14,694 \n$\n14,544 \n$\n12,861 \nCost of sales\n(11,969)\n(11,724)\n(10,129)\nGross profit\n2,725 \n2,820 \n2,732",
+   "sha256": "8512781951e56679de769e0afca819fdccbe36febe05cbc953af33fea1fe8a5a",
+   "score": -1.1782541275024414,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2023",
+    "source": "AMCOR_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "Twelve Months Ended June 30, 2022\nTwelve Months Ended June 30, 2023\n($ million)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted\nUS \ncents)(1)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted \nUS \ncents)(1)\nNet income attributable to Amcor\n \n805 \n \n805 \n \n805 \n \n52.9 \n \n1,048 \n \n1,048 \n \n1,048 \n \n70.5 \nNet income attributable to non-controlling \ninterests\n \n10 \n \n10 \n \n10 \n \n10 \nTax expense\n \n300 \n \n300 \n \n193 \n \n193 \nInterest expense, net\n \n135 \n \n135 \n \n259 \n \n259 \nDepreciation and amortization\n \n579 \n \n569 \nEBITDA, EBIT, Net income and EPS\n \n1,829 \n \n1,250 \n \n805 \n \n52.9 \n \n2,080 \n \n1,510 \n \n1,048 \n \n70.5 \n2019 Bemis Integration Plan\n \n37 \n \n37 \n \n37 \n \n2.",
+   "sha256": "bd6b5f40ed484d7bd5d27c984d378f83324bb867fe7f10b168c8d1b2b4b307e2",
+   "score": -1.2081009149551392,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2023",
+    "source": "AMCOR_2023Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Twelve Months Ended June 30, 2022\nTwelve Months Ended June 30, 2023\n($ million)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted\nUS \ncents)(1)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted \nUS \ncents)(1)\nNet income attributable to Amcor\n \n805 \n \n805 \n \n805 \n \n52.9 \n \n1,048 \n \n1,048 \n \n1,048 \n \n70.5 \nNet income attributable to non-controlling \ninterests\n \n10 \n \n10 \n \n10 \n \n10 \nTax expense\n \n300 \n \n300 \n \n193 \n \n193 \nInterest expense, net\n \n135 \n \n135 \n \n259 \n \n259 \nDepreciation and amortization\n \n579 \n \n569 \nEBITDA, EBIT, Net income and EPS\n \n1,829 \n \n1,250 \n \n805 \n \n52.9 \n \n2,080 \n \n1,510 \n \n1,048 \n \n70.5 \n2019 Bemis Integration Plan\n \n37 \n \n37 \n \n37 \n \n2.5 \n \n \n \n \n \n \n \n \nNet loss on disposals(2)\n \n10 \n \n10 \n \n10 \n \n0.7 \n \n \n \n \n \n \n \n \nImpact of hyperinflation\n \n16 \n \n16 \n \n16 \n \n1.0 \n \n24 \n \n24 \n \n24 \n \n1.9 \nProperty and other losses, net(3)\n \n13 \n \n13 \n \n13 \n \n0.8 \n \n2 \n \n2 \n \n2 \n \n0.1 \nRussia-Ukraine conflict impacts(4)\n \n200 \n \n200 \n \n200 \n \n13.2 \n \n(90) \n(90) \n(90) \n(6.0) \nPension settlements\n \n8 \n \n8 \n \n8 \n \n0.5 \n \n5 \n \n5 \n \n5 \n \n0.3 \nOther\n \n4 \n \n4 \n \n4 \n \n0.3 \n \n(3) \n(3) \n(3) \n(0.3) \nAmortization of acquired intangibles (5)\n \n163 \n \n163 \n \n10.7 \n \n160 \n \n160 \n \n10.8 \nTax effect of above items \n \n(32) \n(2.1) \n \n(57) \n(4.0) \nAdjusted EBITDA, EBIT, Net income and EPS \n \n2,117 \n \n1,701 \n \n1,224 \n \n80.5 \n \n2,018 \n \n1,608 \n \n1,089 \n \n73.3",
+   "sha256": "8bbc3eaa88418267cb7ee7fc373fb93a66821d708afcccbf2f4b185c925579db",
+   "score": -1.5561094284057617,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2023",
+    "source": "AMCOR_2023Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Twelve Months Ended June 30, 2022\nTwelve Months Ended June 30, 2023\n($ million)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted\nUS \ncents)(1)\nEBITDA\nEBIT\nNet \nIncome\nEPS \n(Diluted \nUS \ncents)(1)\nNet income attributable to Amcor\n \n805 \n \n805 \n \n805 \n \n52.9 \n \n1,048 \n \n1,048 \n \n1,048 \n \n70.5 \nNet income attributable to non-controlling \ninterests\n \n10 \n \n10 \n \n10 \n \n10 \nTax expense\n \n300 \n \n300 \n \n193 \n \n193 \nInterest expense, net\n \n135 \n \n135 \n \n259 \n \n259 \nDepreciation and amortization\n \n579 \n \n569 \nEBITDA, EBIT, Net income and EPS\n \n1,829 \n \n1,250 \n \n805 \n \n52.9 \n \n2,080 \n \n1,510 \n \n1,048 \n \n70.5 \n2019 Bemis Integration Plan\n \n37 \n \n37 \n \n37 \n \n2.5 \n \n \n \n \n \n \n \n \nNet loss on disposals(2)\n \n10 \n \n10 \n \n10 \n \n0.7 \n \n \n \n \n \n \n \n \nImpact of hyperinflation\n \n16 \n \n16 \n \n16 \n \n1.0 \n \n24 \n \n24 \n \n24 \n \n1.9 \nProperty and other losses, net(3)\n \n13 \n \n13 \n \n13 \n \n0.8 \n \n2 \n \n2 \n \n2 \n \n0.1 \nRussia-Ukraine conflict impacts(4)\n \n200 \n \n200 \n \n200 \n \n13.2 \n \n(90) \n(90) \n(90) \n(6.0) \nPension settlements\n \n8 \n \n8 \n \n8 \n \n0.5 \n \n5 \n \n5 \n \n5 \n \n0.3 \nOther\n \n4 \n \n4 \n \n4 \n \n0.3 \n \n(3) \n(3) \n(3) \n(0.3) \nAmortization of acquired intangibles (5)\n \n163 \n \n163 \n \n10.7 \n \n160 \n \n160 \n \n10.8 \nTax effect of above items \n \n(32) \n(2.1) \n \n(57) \n(4.0) \nAdjusted EBITDA, EBIT, Net income and EPS \n \n2,117 \n \n1,701 \n \n1,224 \n \n80.5 \n \n2,",
+   "sha256": "1303ec09776bbb2e4158dd0fb7bcc6ef36544814e32f930d170c22fbe69f435e",
+   "score": -1.6052019596099854,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2023",
+    "source": "AMCOR_2023Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "On August 1, 2022, the Company completed the acquisition of 100% equity interest in a Czech Republic company that operates a world-class\nflexible packaging manufacturing plant. The purchase consideration of $59 million included a deferred portion of $5 million that was paid in the\nfirst quarter of fiscal year 2024. The acquisition is part of the Company's Flexibles reportable segment and resulted in the recognition of acquired\nidentifiable net assets of $36 million and goodwill of $23 million. Goodwill is not deductible for tax purposes. The fair values of the identifiable\nnet assets acquired and goodwill are based on the Company's best estimate as of June 30, 2023.\n On March 17, 2023, the Company completed the acquisition of 100% equity interest in a medical device packaging manufacturing site in\nShanghai, China. The purchase consideration of $60 million is subject to customary post-closing adjustments. The consideration includes\ncontingent consideration of $20 million, to be earned and paid in cash over the three years following the acquisition date, subject to meeting\ncertain performance targets. The acquisition is part of the Company's Flexibles reportable segment and resulted in the recognition of acquired\nidentifiable net assets of $21 million and goodwill of $39 million. Goodwill is not deductible for tax purposes. The fair values of the contingent\nconsideration, identifiable net assets acquired, and goodwill are based on the Company's best estimate as of June 30, 2023, and are considered\npreliminary. The Company aims to complete the purchase price allocation as soon as practicable but no later than one year from the date of the\nacquisition.\n On May 31, 2023, the Company completed the acquisition of a New Zealand based leading manufacturer of state-of-the-art, automated protein\npackaging machines. The purchase consideration of $45 million is subject to customary post-closing adjustments. The consideration includes\ncontingent consideration of $13 million, to be earned and paid in cash over the two years following the acquisition date, subject to meeting\ncertain performance targets. The acquisition is part of the Company's Flexibles reportable segment and resulted in the recognition of acquired\nidentifiable net assets of $9 million and goodwill of $36 million. Goodwill is deductible for tax purposes. The fair values of the contingent\nconsideration, identifiable net assets acquired, and goodwill are based on the Company's best estimate as of June 30, 2023, and are considered\npreliminary. The Company aims to complete the purchase price allocation as soon as practicable but no later than one year from the date of the\nacquisition.",
+   "sha256": "3d05ec05ffda87ad6ba7ddd78baf92156b1c2a8292ad0c1325e7bc16cd5e976b",
+   "score": -3.803471803665161,
+   "metadata": {
+    "company": "Amcor",
+    "year": "2023",
+    "source": "AMCOR_2023_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "bec3873d64731e146d00f724972720bd174e5473b644a8b2c41a6286f40290a1"
+}

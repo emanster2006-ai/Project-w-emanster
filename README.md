@@ -1,7 +1,7 @@
 # SecureRAG
 
 **Evaluation-first RAG platform with OWASP LLM security guardrails.**  
-An experimental system for financial questions over SEC filing evidence. On all 150 FinanceBench questions it answers **80.0%** correctly (hand-reviewed).
+An experimental system for financial questions over SEC filing evidence. On all 150 FinanceBench questions it answers **80.0%** correctly (hand-reviewed), and a counterfactual benchmark tests whether its answers follow the filing.
 
 [![CI](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml/badge.svg)](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
@@ -40,6 +40,10 @@ The home page offers three example questions. Each one answered correctly in tes
 **Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether a chunk from the right evidence passage reaches the top 5 (a long passage can span several chunks, so a hit does not guarantee the chunk holding the figure was retrieved): **94.0%** (141/150), up from 70.0% (105/150) at the start. Company/period chunk headers gave 90.0%, and fiscal-year-aware reranking the rest. The default context is the top 8, which reaches **96.0%** (144/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 **Answer accuracy is measured.** All 150 FinanceBench questions through the API with the UI's settings (`gpt-oss-120b` on Cerebras, cache off), graded by a judge from a different model family against the reference answers, with every incorrect or refused label checked by hand: **120/150 correct (80.0%, 95% CI 72.9-85.6%)**, 118/143 when the evidence passage was retrieved. Setup, hand review and artifacts are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+
+**Does the answer follow the filing?** A counterfactual benchmark asks each question against four versions of its frozen retrieved evidence: the original, the asked-for figure changed, another year's figure changed, and the evidence removed. A case passes only if all four answers are right. On 27 cases the model followed every edit and never took the wrong year (81/81), but when the figure was removed it often answered anyway, with a partial sum, a different row, or the removed figure rebuilt from the rows above it. One prompt rule raised held-out passes from **10/15 to 12/15** (2 fixed, none broken) without fully stopping it. Method and results: [docs/COUNTERFACTUAL.md](docs/COUNTERFACTUAL.md). Step through recorded cases at `/replay` in the frontend (no model calls):
+
+![Replay of a held-out case: with the evidence removed, the baseline rebuilds the removed figure; with the rule it refuses](docs/images/replay-evidence-removed.png)
 
 ---
 
@@ -95,11 +99,12 @@ User Query
 
 ## Portfolio and ownership
 
-This is a team project. Erik built the initial scaffold, the evaluation framework and the first retrieval pipeline. Emmanuel built the frontend, API integration, CI/CD and security hardening, and measured and improved retrieval: the reproducible benchmark (`make retrieval-bench`), contextual chunk headers and fiscal-year-aware reranking, which took top-5 recall from 70.0% to 94.0% (top-8: 96.0%) on 150 FinanceBench questions (see [docs/BENCHMARKS.md](docs/BENCHMARKS.md)). He also built the end-to-end answer-accuracy evaluation (80.0% on all 150 questions, hand-reviewed).
+This is a team project. Erik built the initial scaffold, the evaluation framework and the first retrieval pipeline. Emmanuel built the frontend, API integration, CI/CD and security hardening, and measured and improved retrieval: the reproducible benchmark (`make retrieval-bench`), contextual chunk headers and fiscal-year-aware reranking, which took top-5 recall from 70.0% to 94.0% (top-8: 96.0%) on 150 FinanceBench questions (see [docs/BENCHMARKS.md](docs/BENCHMARKS.md)). He also built the end-to-end answer-accuracy evaluation (80.0% on all 150 questions, hand-reviewed) and the counterfactual grounding benchmark with its replay page ([docs/COUNTERFACTUAL.md](docs/COUNTERFACTUAL.md)).
 
 ## Inspect the evidence
 
 - [Benchmark protocol, artifacts, and current limitations](docs/BENCHMARKS.md)
+- [Counterfactual grounding benchmark: method and results](docs/COUNTERFACTUAL.md)
 - [Engineering decisions and tradeoffs](docs/ENGINEERING_DECISIONS.md)
 - [Public portfolio case study](https://github.com/emanster2006-ai/emanster2006-ai/blob/main/projects/secure-rag.md)
 

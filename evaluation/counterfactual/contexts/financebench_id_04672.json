@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_04672",
+ "doc_name": "3M_2018_10K",
+ "question": "Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions.",
+ "captured_at": "2026-11-26T22:44:48+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions.",
+ "pii_masked": false,
+ "sub_questions": [
+  "Assume that you are a public equities analyst. Answer the following question by primarily using information that is shown in the balance sheet: what is the year end FY2018 net PPNE for 3M? Answer in USD billions."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents \n3M Company and Subsidiaries\nConsolidated Balance Shee t\nAt December 31\n \n \n \nDecember 31,\n \nDecember 31,\n \n(Dollars in millions, except per share amount)\n \n2018\n \n2017\n \nAssets\n \n \n \n \n \nCurrent assets\n \n \n \n \n \nCash and cash equivalents\n \n$\n2,853 \n$\n3,053 \nMarketable securities current\n \n \n380 \n \n1,076 \nAccounts receivable net of allowances of $95 and $103\n \n \n5,020 \n \n4,911 \nInventories\n \n \n \n \n \nFinished goods\n \n \n2,120 \n \n1,915 \nWork in process\n \n \n1,292 \n \n1,218 \nRaw materials and supplies\n \n \n954 \n \n901 \nTotal inventories\n \n \n4,366 \n \n4,034 \nPrepaids\n \n \n741 \n \n937 \nOther current assets\n \n \n349 \n \n266 \nTotal current assets\n \n \n13,709 \n \n14,277 \nProperty, plant and equipment\n \n \n24,873 \n \n24,914 \nLess: Accumulated depreciation\n \n \n(16,",
+   "sha256": "d9499b3ceb64fbb8779571c3804e90b03859df8f7717140b338e727b68e76116",
+   "score": -7.004968643188477,
+   "metadata": {
+    "company": "3M",
+    "year": "2018",
+    "source": "3M_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents \n3M Company and Subsidiaries\nConsolidated Statement of Cash Flow s\nYears ended December 31\n \n(Millions)\n \n2018\n \n2017\n \n2016\n \nCash Flows from Operating Activities\n \n \n \n \n \n \n \nNet income including noncontrolling interest\n \n$\n5,363 \n$\n4,869 \n$\n5,058 \nAdjustments to reconcile net income including noncontrolling interest to net cash\nprovided by operating activities\n \n \n \n \n \n \n \nDepreciation and amortization\n \n \n1,488 \n \n1,544 \n \n1,",
+   "sha256": "e7365feb56ba8d2f9e73819954d16ffb91b918a9d7ef86b4c88f241f865ff6ac",
+   "score": -7.308794021606445,
+   "metadata": {
+    "company": "3M",
+    "year": "2018",
+    "source": "3M_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "211 \n$\n1,853 \nAccounts payable\n \n \n2,266 \n \n1,945 \nAccrued payroll\n \n \n749 \n \n870 \nAccrued income taxes\n \n \n243 \n \n310 \nOther current liabilities\n \n \n2,775 \n \n2,709 \nTotal current liabilities\n \n \n7,244 \n \n7,687 \n \n \n \n \n \n \nLong-term debt\n \n \n13,411 \n \n12,096 \nPension and postretirement benefits\n \n \n2,987 \n \n3,620 \nOther liabilities\n \n \n3,010 \n \n2,962 \nTotal liabilities\n \n$\n26,652 \n$\n26,365 \nCommitments and contingencies (Note 16)\n \n \n \n \n \nEquity\n \n \n \n \n \n3M Company shareholders equity:\n \n \n \n \n \nCommon stock par value, $.",
+   "sha256": "5e65db40679af3a8279cdd44056522886cfd77a1e3251fb82b21c4e5caade41a",
+   "score": -7.513801574707031,
+   "metadata": {
+    "company": "3M",
+    "year": "2018",
+    "source": "3M_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Note 2. Acquisitions, Divestitures, Equity-Method Investments, Licensing Arrangements and Collaborative Arrangements\nA. Acquisitions\nTrillium\nOn November 17, 2021, we acquired all of the issued and outstanding common stock not already owned by Pfizer of Trillium, a clinical stage immuno-oncology company developing\ntherapies targeting cancer immune evasion pathways and specific cell targeting approaches, for a price of $18.50 per share in cash, for total consideration of $2.0 billion, net of cash\nacquired. As a result, Trillium became our wholly owned subsidiary. We previously held a 2% ownership investment in Trillium. Trilliums lead program, TTI-622, is an investigational\nfusion protein that is designed to block the inhibitory activity of CD47, a molecule that is overexpressed by a wide variety of tumors.\nWe accounted for the transaction as an asset acquisition since the lead asset, TTI-622, represented substantially all of the fair value of the gross assets acquired, which exclude cash\nacquired. At the acquisition date, we recorded a $2.1 billion charge representing an acquired IPR&D asset with no alternative future use in Research and development expenses, of\nwhich the $2.0 billion net cash consideration is presented as a cash outflow from operating activities. In connection with this acquisition, we recorded $256 million of assets acquired\nprimarily consisting of cash and investments. Liabilities assumed were approximately $81 million.\nArray\nOn July 30, 2019, we acquired Array, a commercial stage biopharmaceutical company focused on the discovery, development and commercialization of targeted small molecule\nmedicines to treat cancer and other diseases of high unmet need, for $48 per share in cash. The total fair value of the consideration transferred was $11.2 billion ($10.9 billion, net of\ncash acquired). In addition, $157 million in payments to Array employees for the fair value of previously unvested stock options was recognized as post-closing compensation expense\nand recorded in Restructuring charges and certain acquisition-related costs (see Note 3). We financed the majority of the transaction with debt and the balance with existing cash.",
+   "sha256": "6059c1756d810c07ff2ecae5dde51e7863cbb3ad60d739c777175ae0a42a1553",
+   "score": -8.605177879333496,
+   "metadata": {
+    "company": "Pfizer",
+    "year": "2021",
+    "source": "PFIZER_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "3M Company and Subsidiaries\nConsolidated Balance Sheet\n(Unaudited)\n(Dollars in millions, except per share amount)\nJune 30, 2023\nDecember 31, 2022\nAssets\nCurrent assets\nCash and cash equivalents\n$\n4,258 \n$\n3,655 \nMarketable securities current\n56 \n238 \nAccounts receivable net of allowances of $160 and $174\n4,947 \n4,532 \nInventories\nFinished goods\n2,526 \n2,497 \nWork in process\n1,527 \n1,606 \nRaw materials and supplies\n1,227 \n1,269 \nTotal inventories\n5,280 \n5,372 \nPrepaids\n674 \n435 \nOther current assets\n539 \n456 \nTotal current assets\n15,754 \n14,688 \nProperty, plant and equipment\n26,459 \n25,998 \nLess: Accumulated depreciation\n(17,248)\n(16,820)\nProperty, plant and equipment net\n9,211 \n9,",
+   "sha256": "dd6f274392ccc95ccca9aaf0dba8d30366c5a6e28341b6af4369797c4bbf1bae",
+   "score": -9.221132278442383,
+   "metadata": {
+    "company": "3M",
+    "year": "2023",
+    "source": "3M_2023Q2_10Q",
+    "filing_type": "10q"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "These forward-looking\nstatements are based on currently available information, operating plans and projections about future events and trends. They\ninherently involve risks and uncertainties that could cause actual results to differ materially from those predicted in any such\nforward-looking statement. These risks and uncertainties include, but are not limited to, those described in Item 1A. Risk\nFactors and Item 7. Managements Discussion and Analysis of Financial Condition and Results of Operations Our Business\n Our Business Risks. Investors are cautioned not to place undue reliance on any such forward-looking statements, which speak\nonly as of the date they are made. We undertake no obligation to update any forward-looking statement, whether as a result of\nnew information, future events or otherwise. The discussion of risks in this report is by no means all-inclusive but is designed to\nhighlight what we believe are important factors to consider when evaluating our future performance.\nPART I\nItem 1. Business.",
+   "sha256": "ed8905215da824f689fde5c1f71e5c0e111f34c95dd49a1dcf90da93eb31a8d7",
+   "score": -9.393272399902344,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2022",
+    "source": "PEPSICO_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "3M Company and Subsidiaries\nConsolidated Balance Sheet\n(Unaudited)\n(Dollars in millions, except per share amount)\nJune 30, 2023\nDecember 31, 2022\nAssets\nCurrent assets\nCash and cash equivalents\n$\n4,258 \n$\n3,655 \nMarketable securities current\n56 \n238 \nAccounts receivable net of allowances of $160 and $174\n4,947 \n4,532 \nInventories\nFinished goods\n2,526 \n2,497 \nWork in process\n1,527 \n1,606 \nRaw materials and supplies\n1,227 \n1,269 \nTotal inventories\n5,280 \n5,372 \nPrepaids\n674 \n435 \nOther current assets\n539 \n456 \nTotal current assets\n15,754 \n14,688 \nProperty, plant and equipment\n26,459 \n25,998 \nLess: Accumulated depreciation\n(17,248)\n(16,820)\nProperty, plant and equipment net\n9,211 \n9,178 \nOperating lease right of use assets\n812 \n829 \nGoodwill\n12,869 \n12,790 \nIntangible assets net\n4,470 \n4,699 \nOther assets\n5,764 \n4,271 \nTotal assets\n$\n48,880 \n$\n46,455 \nLiabilities\nCurrent liabilities\nShort-term borrowings and current portion of long-term debt\n$\n3,033 \n$\n1,938 \nAccounts payable\n3,231 \n3,183 \nAccrued payroll\n785 \n692 \nAccrued income taxes\n172 \n259 \nOperating lease liabilities current\n244 \n261 \nOther current liabilities\n3,471 \n3,190 \nTotal current liabilities\n10,936 \n9,523",
+   "sha256": "24325167fc448ac0dbdbfd61e7930fb37ac141dfb8a2779724c6f74c836e4445",
+   "score": -9.404146194458008,
+   "metadata": {
+    "company": "3M",
+    "year": "2023",
+    "source": "3M_2023Q2_10Q",
+    "filing_type": "10q"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "3M Company and Subsidiaries\nConsolidated Statement of Income\nYears ended December 31\n(Millions, except per share amounts)\n2022\n2021\n2020\nNet sales\n$\n34,229 $\n35,355 $\n32,184 3M Company and Subsidiaries\nConsolidated Balance Sheet\nAt December 31\n(Dollars in millions, except per share amount)\n2022\n2021\nAssets\nCurrent assets\nCash and cash equivalents\n$\n3,655 $\n4,564 \nMarketable securities current\n238 \n201 \nAccounts receivable net of allowances of $174 and $189\n4,532 \n4,660 \nInventories\nFinished goods\n2,497 \n2,196 \nWork in process\n1,606 \n1,577 \nRaw materials and supplies\n1,269 \n1,212 \nTotal inventories\n5,372 \n4,985 \nPrepaids\n435 \n654 \nOther current assets\n456 \n339 \nTotal current assets\n14,688 \n15,403 \nProperty,",
+   "sha256": "5c7eecdd33bdd2dcba68ebab12f1408eb5fb1eec6610cd4957efb2a8dcde4c91",
+   "score": -9.619739532470703,
+   "metadata": {
+    "company": "3M",
+    "year": "2022",
+    "source": "3M_2022_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "89b5396c48b974e0422128fc6a8f4fb77c568b7c11e075f4493c5a591bcfe153"
+}

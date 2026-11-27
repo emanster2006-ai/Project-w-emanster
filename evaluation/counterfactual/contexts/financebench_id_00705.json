@@ -1,0 +1,120 @@
+{
+ "id": "financebench_id_00705",
+ "doc_name": "PEPSICO_2023_8K_dated-2023-05-30",
+ "question": "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
+ "captured_at": "2026-11-26T22:45:20+00:00",
+ "git_rev": "ac78c63",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?",
+ "pii_masked": false,
+ "sub_questions": [
+  "By how much did Pepsico increase its unsecured five year revolving credit agreement on May 26, 2023?"
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "There were no\noutstanding borrowings under the 2022 Five Year Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 five year unsecured revolving credit agreement (the 2023 Five Year Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent. The 2023 Five Year Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S. Dollars and/or Euros, including a $750,000,000 swing line\nsubfacility for Euro-denominated borrowings permitted to be borrowed on a same day basis, subject to customary terms and conditions, and expires on\nMay 26, 2028.",
+   "sha256": "194cd196e8506aa093248e6cb1bf40e1840ed46e70b789b944f306c9d21805ce",
+   "score": 12.71607780456543,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Effective May 26, 2023, PepsiCo terminated the $3,800,000,000 five year unsecured revolving credit agreement, dated as of May 27, 2022, among\nPepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 Five Year Credit Agreement). There were no\noutstanding borrowings under the 2022 Five Year Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 five year unsecured revolving credit agreement (the 2023 Five Year Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent. The 2023 Five Year Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S.",
+   "sha256": "5b7d7a9b353a9fe0f3df8a15d8e6c5808952e9d9a020404d657735380a4fd879",
+   "score": 12.694964408874512,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Effective May 26, 2023, PepsiCo terminated the $3,800,000,000 five year unsecured revolving credit agreement, dated as of May 27, 2022, among\nPepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 Five Year Credit Agreement). There were no\noutstanding borrowings under the 2022 Five Year Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 five year unsecured revolving credit agreement (the 2023 Five Year Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent. The 2023 Five Year Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S. Dollars and/or Euros, including a $750,000,000 swing line\nsubfacility for Euro-denominated borrowings permitted to be borrowed on a same day basis, subject to customary terms and conditions, and expires on\nMay 26, 2028. PepsiCo may also, upon the agreement of either the then existing lenders or of additional banks not currently party to the 2023 Five Year\nCredit Agreement, increase the commitments under the 2023 Five Year Credit Agreement to up to $4,950,000,000 in U.S. Dollars and/or Euros. PepsiCo\nmay, once a year, request renewal of the 2023 Five Year Credit Agreement for an additional one year period. Subject to certain conditions stated in the 2023\nFive Year Credit Agreement, PepsiCo and its borrowing subsidiaries may borrow, prepay and reborrow amounts under the 2023 Five Year Credit\nAgreement at any time during the term of the 2023 Five Year Credit Agreement. Funds borrowed under the 2023 Five Year Credit Agreement may be used\nfor general corporate purposes of PepsiCo and its subsidiaries. The 2023 Five Year Credit Agreement contains customary representations and warranties\nand events of default.",
+   "sha256": "12f3ff2d5c5d9401aa3c58ffcc6f335505f130193245f89bafc108958a9c70d0",
+   "score": 12.268634796142578,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Effective May 26, 2023, PepsiCo terminated the $3,800,000,000 five year unsecured revolving credit agreement, dated as of May 27, 2022, among\nPepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 Five Year Credit Agreement). There were no\noutstanding borrowings under the 2022 Five Year Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 five year unsecured revolving credit agreement (the 2023 Five Year Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent. The 2023 Five Year Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S. Dollars and/or Euros, including a $750,000,000 swing line\nsubfacility for Euro-denominated borrowings permitted to be borrowed on a same day basis, subject to customary terms and conditions, and expires on\nMay 26, 2028. PepsiCo may also, upon the agreement of either the then existing lenders or of additional banks not currently party to the 2023 Five Year\nCredit Agreement, increase the commitments under the 2023 Five Year Credit Agreement to up to $4,950,000,000 in U.S. Dollars and/or Euros. PepsiCo\nmay, once a year, request renewal of the 2023 Five Year Credit Agreement for an additional one year period. Subject to certain conditions stated in the 2023\nFive Year Credit Agreement, PepsiCo and its borrowing subsidiaries may borrow, prepay and reborrow amounts under the 2023 Five Year Credit\nAgreement at any time during the term of the 2023 Five Year Credit Agreement. Funds borrowed under the 2023 Five Year Credit Agreement may be used\nfor general corporate purposes of PepsiCo and its subsidiaries. The 2023 Five Year Credit Agreement contains customary representations and warranties\nand events of default. In the ordinary course of their respective businesses, the lenders under the 2023 Five Year Credit Agreement and their affiliates have\nengaged, and may in the future engage, in commercial banking and/or investment banking transactions with PepsiCo and its affiliates.",
+   "sha256": "435c040d13c759f700f05a4bc05f92b2ec78b628c8d0a692ae1e0d6e4845ab9e",
+   "score": 11.971525192260742,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "In the ordinary course of their respective businesses, the lenders under the 2023 364 Day Credit\nAgreement and their affiliates have engaged, and may in the future engage, in commercial banking and/or investment banking transactions with PepsiCo\nand its affiliates.\n\nEffective May 26, 2023, PepsiCo terminated the $3,800,000,000 five year unsecured revolving credit agreement, dated as of May 27, 2022, among\nPepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 Five Year Credit Agreement). There were no\noutstanding borrowings under the 2022 Five Year Credit Agreement at the time of its termination.",
+   "sha256": "3da3b1ca8af5d3fb2c0c3117bd87f1ae2d246cec68007bd0059e1f2a7546322c",
+   "score": 11.718711853027344,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Item 8.01.\nOther Events.\n\nEffective May 26, 2023, PepsiCo, Inc. (PepsiCo) terminated the $3,800,000,000 364 day unsecured revolving credit agreement, dated as of\nMay 27, 2022, among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 364 Day Credit\nAgreement). There were no outstanding borrowings under the 2022 364 Day Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 364 day unsecured revolving credit agreement (the 2023 364 Day Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent. The 2023 364 Day Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S. Dollars and/or Euros, subject to customary terms and conditions,\nand expires on May 24, 2024. PepsiCo may also, upon the agreement of either the then existing lenders or of additional banks not currently party to the\n2023 364 Day Credit Agreement, increase the commitments under the 2023 364 Day Credit Agreement to up to $4,950,000,000 in U.S. Dollars and/or\nEuros. PepsiCo may request renewal of the 2023 364 Day Credit Agreement for an additional 364 day period or convert any amounts outstanding into a\nterm loan for a period of up to one year, which term loan would mature no later than the anniversary of the then effective termination date. Subject to\ncertain conditions stated in the 2023 364 Day Credit Agreement, PepsiCo and its borrowing subsidiaries may borrow, prepay and reborrow amounts under\nthe 2023 364 Day Credit Agreement at any time during the term of the 2023 364 Day Credit Agreement.",
+   "sha256": "d072d7b1081fd8e948b89b01448dbaedf5a325b7d6b0441c36e2f2fb60dee4a6",
+   "score": 11.480712890625,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Item 8.01.\nOther Events.\n\nEffective May 26, 2023, PepsiCo, Inc. (PepsiCo) terminated the $3,800,000,000 364 day unsecured revolving credit agreement, dated as of\nMay 27, 2022, among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent (the 2022 364 Day Credit\nAgreement). There were no outstanding borrowings under the 2022 364 Day Credit Agreement at the time of its termination.\n\nOn May 26, 2023, PepsiCo entered into a new $4,200,000,000 364 day unsecured revolving credit agreement (the 2023 364 Day Credit\nAgreement) among PepsiCo, as borrower, the lenders party thereto, and Citibank, N.A., as administrative agent.",
+   "sha256": "196c335b960f398435153ce4a30041b060294fac9e0886409819f123694a1dcc",
+   "score": 11.450181007385254,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "The 2023 Five Year Credit Agreement\nenables PepsiCo and its borrowing subsidiaries to borrow up to $4,200,000,000 in U.S. Dollars and/or Euros, including a $750,000,000 swing line\nsubfacility for Euro-denominated borrowings permitted to be borrowed on a same day basis, subject to customary terms and conditions, and expires on\nMay 26, 2028. PepsiCo may also, upon the agreement of either the then existing lenders or of additional banks not currently party to the 2023 Five Year\nCredit Agreement, increase the commitments under the 2023 Five Year Credit Agreement to up to $4,950,000,000 in U.S. Dollars and/or Euros. PepsiCo\nmay, once a year, request renewal of the 2023 Five Year Credit Agreement for an additional one year period.",
+   "sha256": "300b6ad86d987ffcd0b3356b85648c1ed877096bba9a7a015ffc6dc33652e1d5",
+   "score": 11.22910213470459,
+   "metadata": {
+    "company": "PepsiCo",
+    "year": "2023",
+    "source": "PEPSICO_2023_8K_dated-2023-05-30",
+    "filing_type": "8k"
+   }
+  }
+ ],
+ "messages_sha256": "73cd0c51bc5a8d47d157283d4c4b5bbe0c498a4c0b5b27a5ce280ed2b83ecddf"
+}

@@ -1,0 +1,1244 @@
+{
+ "generated_at": "2026-11-27T05:10:22+00:00",
+ "model": "gpt-oss-120b",
+ "provider": "Cerebras",
+ "reasoning_effort": "medium",
+ "run_started": "2026-11-26T23:49:03+00:00",
+ "summaries": [
+  {
+   "split": "dev",
+   "cases": 12,
+   "systems": {
+    "baseline": {
+     "complete_passes": 10,
+     "pass_rate_ci95": [
+      0.5519636426153274,
+      0.9530358523851776
+     ],
+     "incomplete_cases": 0,
+     "per_arm": {
+      "A": {
+       "correct": 12
+      },
+      "B": {
+       "correct": 12
+      },
+      "C": {
+       "correct": 12
+      },
+      "D": {
+       "correct": 10,
+       "wrong": 2
+      }
+     },
+     "provider_attempts": 48,
+     "prompt_tokens": 158620,
+     "completion_tokens": 8733
+    },
+    "candidate": {
+     "complete_passes": 11,
+     "pass_rate_ci95": [
+      0.6461140782014047,
+      0.9851352905492264
+     ],
+     "incomplete_cases": 0,
+     "per_arm": {
+      "A": {
+       "correct": 12
+      },
+      "B": {
+       "correct": 12
+      },
+      "C": {
+       "correct": 12
+      },
+      "D": {
+       "correct": 11,
+       "wrong": 1
+      }
+     },
+     "provider_attempts": 48,
+     "prompt_tokens": 162220,
+     "completion_tokens": 9718
+    }
+   },
+   "paired": {
+    "compare": "candidate vs baseline",
+    "wins": 1,
+    "losses": 0,
+    "unchanged": 11
+   }
+  },
+  {
+   "split": "reserved",
+   "cases": 15,
+   "systems": {
+    "baseline": {
+     "complete_passes": 10,
+     "pass_rate_ci95": [
+      0.41713125151212976,
+      0.8482389930530876
+     ],
+     "incomplete_cases": 0,
+     "per_arm": {
+      "A": {
+       "correct": 15
+      },
+      "B": {
+       "correct": 15
+      },
+      "C": {
+       "correct": 15
+      },
+      "D": {
+       "wrong": 4,
+       "correct": 10,
+       "leaked": 1
+      }
+     },
+     "provider_attempts": 60,
+     "prompt_tokens": 188301,
+     "completion_tokens": 11364
+    },
+    "candidate": {
+     "complete_passes": 12,
+     "pass_rate_ci95": [
+      0.5481406466534955,
+      0.9295257935638959
+     ],
+     "incomplete_cases": 0,
+     "per_arm": {
+      "A": {
+       "correct": 15
+      },
+      "B": {
+       "correct": 15
+      },
+      "C": {
+       "correct": 15
+      },
+      "D": {
+       "wrong": 3,
+       "correct": 12
+      }
+     },
+     "provider_attempts": 60,
+     "prompt_tokens": 192801,
+     "completion_tokens": 11862
+    }
+   },
+   "paired": {
+    "compare": "candidate vs baseline",
+    "wins": 2,
+    "losses": 0,
+    "unchanged": 13
+   }
+  }
+ ],
+ "cases": [
+  {
+   "id": "author_08286_1",
+   "source": "author",
+   "split": "reserved",
+   "doc_name": "AMAZON_2019_10K",
+   "chunk_source": "AMAZON_2019_10K",
+   "question": "What was Amazon's FY2019 income before income taxes, in USD millions? Answer using the income statement.",
+   "metric": "FY2019 income before income taxes (third column)",
+   "audit": "B and C move other income, the non-operating total, income before taxes and the tax provision together, so operating income and net income are unchanged. D removes income before taxes, the non-operating total and the tax provision (net income plus tax would recover it). The 2017 10-K's income statement in the context (FY2015-FY2017) is left as a distractor.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$13,976 million",
+     "correct_option": 0,
+     "options": [
+      "$13,976 million",
+      "$14,776 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ting income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n(183) \n203\nTotal non-operating income (expense)\n(300) \n(1,160) \n(565)\nIncome before income taxes\n3,806 \n11,261 \n13,976\nProvision for income taxes\n(769) \n(1,197) \n(2,374)\nEquity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "$13,976 million (Income before income taxes for FY2019) – Source: Amazon 2019 consolidated statements of operations",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "$13,976 million (Income before income taxes for FY2019)",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$14,776 million",
+     "correct_option": 1,
+     "options": [
+      "$13,976 million",
+      "$14,776 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ting income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n(183) \n"
+      },
+      {
+       "kind": "removed",
+       "text": "203"
+      },
+      {
+       "kind": "added",
+       "text": "1,003"
+      },
+      {
+       "kind": "same",
+       "text": "\nTotal non-operating income (expense)\n(300) \n(1,160) \n"
+      },
+      {
+       "kind": "removed",
+       "text": "(565)"
+      },
+      {
+       "kind": "added",
+       "text": "235"
+      },
+      {
+       "kind": "same",
+       "text": "\nIncome before income taxes\n3,806 \n11,261 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "13,976"
+      },
+      {
+       "kind": "added",
+       "text": "14,776"
+      },
+      {
+       "kind": "same",
+       "text": "\nProvision for income taxes\n(769) \n(1,197) \n"
+      },
+      {
+       "kind": "removed",
+       "text": "(2,374)"
+      },
+      {
+       "kind": "added",
+       "text": "(3,174)"
+      },
+      {
+       "kind": "same",
+       "text": "\nEquity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "$14,776 million",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "14,776",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$13,976 million",
+     "correct_option": 0,
+     "options": [
+      "$13,976 million",
+      "$10,761 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ting income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "(183)"
+      },
+      {
+       "kind": "added",
+       "text": "(683)"
+      },
+      {
+       "kind": "same",
+       "text": " \n203\nTotal non-operating income (expense)\n(300) \n"
+      },
+      {
+       "kind": "removed",
+       "text": "(1,160)"
+      },
+      {
+       "kind": "added",
+       "text": "(1,660)"
+      },
+      {
+       "kind": "same",
+       "text": " \n(565)\nIncome before income taxes\n3,806 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "11,261"
+      },
+      {
+       "kind": "added",
+       "text": "10,761"
+      },
+      {
+       "kind": "same",
+       "text": " \n13,976\nProvision for income taxes\n(769) \n"
+      },
+      {
+       "kind": "removed",
+       "text": "(1,197)"
+      },
+      {
+       "kind": "added",
+       "text": "(697)"
+      },
+      {
+       "kind": "same",
+       "text": " \n(2,374)\nEquity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "$13,976 million",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "$13,976 million",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$13,976 million",
+      "$14,776 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ting income\n4,106 \n12,421 \n14,541\nInterest income\n202 \n440 \n832\nInterest expense\n(848) \n(1,417) \n(1,600)\nOther income (expense), net\n346 \n(183) \n203\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Total non-operating income (expense)\n(300) \n(1,160) \n(565)\nIncome before income taxes\n3,806 \n11,261 \n13,976\nProvision for income taxes\n(769) \n(1,197) \n(2,374)\n"
+      },
+      {
+       "kind": "same",
+       "text": "Equity-method investment activity, net of tax\n(4) \n9 \n(14)\nNet income\n$\n3,033 $\n10,073 $\n11,588\nBasic earnings per share\n$\n6.32 $\n20.68 $\n23.46\nDiluted earnings per share\n$\n6.15 $\n20.14 $\n23.01\nWeighted-average shares used in computation of earnings per share:\nBasic\n480 \n487 \n494\nDiluted\n493 \n500 \n504\nSee accompanying notes to consolidated financial statements.\n38…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Amazon's FY2019 income before income taxes was approximately $13,976 million.",
+       "grade": "leaked"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "financebench_id_03531",
+   "source": "financebench",
+   "split": "dev",
+   "doc_name": "NIKE_2019_10K",
+   "chunk_source": "NIKE_2019_10K",
+   "question": "According to the details clearly outlined within the balance sheet, how much total current assets did Nike have at the end of FY2019? Answer in USD millions.",
+   "metric": "Total current assets at May 31, 2019",
+   "audit": "The FY2019 balance sheet appears in three overlapping chunks. B and C move prepaid expenses and total current assets and offset the change in deferred income taxes and other assets, so total assets and the balance-sheet identity are unchanged. D removes the subtotal, one component and both balance-sheet totals; recovering the figure would take several subtractions from rows that remain (total liabilities and equity are removed).",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$16,525 million",
+     "correct_option": 0,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike's total current assets at the end of FY2019 were $16,525 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$17,525 million",
+     "correct_option": 1,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "1,968"
+      },
+      {
+       "kind": "added",
+       "text": "2,968"
+      },
+      {
+       "kind": "same",
+       "text": "\n1,130\nTotal current assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "16,525"
+      },
+      {
+       "kind": "added",
+       "text": "17,525"
+      },
+      {
+       "kind": "same",
+       "text": "\n15,134\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "2,011"
+      },
+      {
+       "kind": "added",
+       "text": "1,011"
+      },
+      {
+       "kind": "same",
+       "text": "\n2,509\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike reported total current assets of $17,525 million at the end of FY2019.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $17,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$16,525 million",
+     "correct_option": 0,
+     "options": [
+      "$16,525 million",
+      "$14,534 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\nPrepaid expenses and other current assets\n1,968\n"
+      },
+      {
+       "kind": "removed",
+       "text": "1,130"
+      },
+      {
+       "kind": "added",
+       "text": "530"
+      },
+      {
+       "kind": "same",
+       "text": "\nTotal current assets\n16,525\n"
+      },
+      {
+       "kind": "removed",
+       "text": "15,134"
+      },
+      {
+       "kind": "added",
+       "text": "14,534"
+      },
+      {
+       "kind": "same",
+       "text": "\nProperty, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n"
+      },
+      {
+       "kind": "removed",
+       "text": "2,509"
+      },
+      {
+       "kind": "added",
+       "text": "3,109"
+      },
+      {
+       "kind": "same",
+       "text": "\nTOTAL ASSETS\n$\n23,717\n$\n22,536\nLIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Nike reported total current assets of $16,525 million at the end of FY2019.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$16,525 million",
+      "$17,525 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ons)\n2019\n2018\nASSETS\nCurrent assets:\nCash and equivalents\n$\n4,466\n$\n4,249\nShort-term investments\n197\n996\nAccounts receivable, net\n4,272\n3,498\nInventories\n5,622\n5,261\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Prepaid expenses and other current assets\n1,968\n1,130\nTotal current assets\n16,525\n15,134\n"
+      },
+      {
+       "kind": "same",
+       "text": "Property, plant and equipment, net\n4,744\n4,454\nIdentifiable intangible assets, net\n283\n285\nGoodwill\n154\n154\nDeferred income taxes and other assets\n2,011\n2,509\n"
+      },
+      {
+       "kind": "removed",
+       "text": "TOTAL ASSETS\n$\n23,717\n$\n22,536\n"
+      },
+      {
+       "kind": "same",
+       "text": "LIABILITIES AND SHAREHOLDERS' EQUITY\nCurrent liabilities:\nCurrent portion of long-term debt\n$\n6\n$\n6\nNotes payable\n9\n336\nAccounts payable\n2,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Nike's total current assets at the end of FY2019 were $14,557 million.",
+       "grade": "wrong"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "author_04700_2",
+   "source": "author",
+   "split": "reserved",
+   "doc_name": "MICROSOFT_2016_10K",
+   "chunk_source": "MICROSOFT_2016_10K",
+   "question": "What was Microsoft's FY2016 total revenue, in USD millions? Answer using the income statement.",
+   "metric": "FY2016 total revenue",
+   "audit": "B and C move product revenue and product cost by the same amount, with both totals, so gross margin and everything below it are unchanged. D removes total revenue, the service revenue row and gross margin (revenue = cost + gross margin).",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$85,320 million",
+     "correct_option": 0,
+     "options": [
+      "$85,320 million",
+      "$87,320 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…INCOME STATEMENTS\n(In millions, except per share amounts)\nYear Ended June 30,\n2016 \n2015 \n2014 \nRevenue:\nProduct\n$ 61,502 \n$ 75,956 \n$ 72,948 \nService and other\n23,818 \n17,624 \n13,885 \nTotal revenue\n85,320 \n93,580 \n86,833 \nCost of revenue:\nProduct\n17,880 \n21,410 \n16,681 \nService and other\n14,900 \n11,628 \n10,397 \nTotal cost of revenue\n32,780 \n33,038 \n27,078 \nGross margin\n52,540 \n60,542 \n59,755 \nResearch and development\n11,988 \n12,046 \n11,381 \nSales and marketing\n14,697 \n15,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Microsoft's FY2016 total revenue was $85,320 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "$85,320 million",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$87,320 million",
+     "correct_option": 1,
+     "options": [
+      "$85,320 million",
+      "$87,320 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…INCOME STATEMENTS\n(In millions, except per share amounts)\nYear Ended June 30,\n2016 \n2015 \n2014 \nRevenue:\nProduct\n$ "
+      },
+      {
+       "kind": "removed",
+       "text": "61,502"
+      },
+      {
+       "kind": "added",
+       "text": "63,502"
+      },
+      {
+       "kind": "same",
+       "text": " \n$ 75,956 \n$ 72,948 \nService and other\n23,818 \n17,624 \n13,885 \nTotal revenue\n"
+      },
+      {
+       "kind": "removed",
+       "text": "85,320"
+      },
+      {
+       "kind": "added",
+       "text": "87,320"
+      },
+      {
+       "kind": "same",
+       "text": " \n93,580 \n86,833 \nCost of revenue:\nProduct\n"
+      },
+      {
+       "kind": "removed",
+       "text": "17,880"
+      },
+      {
+       "kind": "added",
+       "text": "19,880"
+      },
+      {
+       "kind": "same",
+       "text": " \n21,410 \n16,681 \nService and other\n14,900 \n11,628 \n10,397 \nTotal cost of revenue\n"
+      },
+      {
+       "kind": "removed",
+       "text": "32,780"
+      },
+      {
+       "kind": "added",
+       "text": "34,780"
+      },
+      {
+       "kind": "same",
+       "text": " \n33,038 \n27,078 \nGross margin\n52,540 \n60,542 \n59,755 \nResearch and development\n11,988 \n12,046 \n11,381 \nSales and marketing\n14,697 \n15,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Microsoft's FY2016 total revenue was $87,320 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Microsoft's FY2016 total revenue was $87,320 million (as reported in the 2016 income statement).",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$85,320 million",
+     "correct_option": 0,
+     "options": [
+      "$85,320 million",
+      "$91,580 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…INCOME STATEMENTS\n(In millions, except per share amounts)\nYear Ended June 30,\n2016 \n2015 \n2014 \nRevenue:\nProduct\n$ 61,502 \n$ "
+      },
+      {
+       "kind": "removed",
+       "text": "75,956"
+      },
+      {
+       "kind": "added",
+       "text": "73,956"
+      },
+      {
+       "kind": "same",
+       "text": " \n$ 72,948 \nService and other\n23,818 \n17,624 \n13,885 \nTotal revenue\n85,320 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "93,580"
+      },
+      {
+       "kind": "added",
+       "text": "91,580"
+      },
+      {
+       "kind": "same",
+       "text": " \n86,833 \nCost of revenue:\nProduct\n17,880 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "21,410"
+      },
+      {
+       "kind": "added",
+       "text": "19,410"
+      },
+      {
+       "kind": "same",
+       "text": " \n16,681 \nService and other\n14,900 \n11,628 \n10,397 \nTotal cost of revenue\n32,780 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "33,038"
+      },
+      {
+       "kind": "added",
+       "text": "31,038"
+      },
+      {
+       "kind": "same",
+       "text": " \n27,078 \nGross margin\n52,540 \n60,542 \n59,755 \nResearch and development\n11,988 \n12,046 \n11,381 \nSales and marketing\n14,697 \n15,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Microsoft's FY2016 total revenue was $85,320 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Microsoft's FY2016 total revenue was $85,320 million USD.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$85,320 million",
+      "$87,320 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…INCOME STATEMENTS\n(In millions, except per share amounts)\nYear Ended June 30,\n2016 \n2015 \n2014 \nRevenue:\nProduct\n$ 61,502 \n$ 75,956 \n$ 72,948 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "Service and other\n23,818 \n17,624 \n13,885 \nTotal revenue\n85,320 \n93,580 \n86,833 \n"
+      },
+      {
+       "kind": "same",
+       "text": "Cost of revenue:\nProduct\n17,880 \n21,410 \n16,681 \nService and other\n14,900 \n11,628 \n10,397 \nTotal cost of revenue\n32,780 \n33,038 \n27,078 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "Gross margin\n52,540 \n60,542 \n59,755 \n"
+      },
+      {
+       "kind": "same",
+       "text": "Research and development\n11,988 \n12,046 \n11,381 \nSales and marketing\n14,697 \n15,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Microsoft's FY2016 total revenue was $61,502 million, as reported in the income statement.",
+       "grade": "wrong"
+      },
+      "candidate": {
+       "text": "Microsoft's FY2016 total revenue was $61,502 million.",
+       "grade": "wrong"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "financebench_id_04209",
+   "source": "financebench",
+   "split": "reserved",
+   "doc_name": "COSTCO_2021_10K",
+   "chunk_source": "COSTCO_2021_10K",
+   "question": "Using only the information within the balance sheet, how much total assets did Costco have at the end of FY2021? Answer in USD millions.",
+   "metric": "Total assets at fiscal year end 2021",
+   "audit": "B and C move one asset row and one liability row by the same amount, with total assets, total liabilities and total liabilities and equity, so both sides balance. D removes both totals, total liabilities and one asset component; recovering it would take summing several liability and equity rows.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$59,268 million",
+     "correct_option": 0,
+     "options": [
+      "$59,268 million",
+      "$62,268 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…es\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Costco's total assets at the end of FY2021 were $59,268 million.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Costco reported total assets of $59,268 million at the end of FY2021.",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$62,268 million",
+     "correct_option": 1,
+     "options": [
+      "$59,268 million",
+      "$62,268 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…es\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n"
+      },
+      {
+       "kind": "removed",
+       "text": "3,381"
+      },
+      {
+       "kind": "added",
+       "text": "6,381"
+      },
+      {
+       "kind": "same",
+       "text": " \n2,841 \nTOTAL ASSETS\n$\n"
+      },
+      {
+       "kind": "removed",
+       "text": "59,268"
+      },
+      {
+       "kind": "added",
+       "text": "62,268"
+      },
+      {
+       "kind": "same",
+       "text": " \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Costco reported total assets of $62,268 million at the end of FY2021.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Costco total assets at the end of FY2021 were $62,268 million USD.",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$59,268 million",
+     "correct_option": 0,
+     "options": [
+      "$59,268 million",
+      "$54,056 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…es\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "2,841"
+      },
+      {
+       "kind": "added",
+       "text": "1,341"
+      },
+      {
+       "kind": "same",
+       "text": " \nTOTAL ASSETS\n$\n59,268 \n$\n"
+      },
+      {
+       "kind": "removed",
+       "text": "55,556"
+      },
+      {
+       "kind": "added",
+       "text": "54,056"
+      },
+      {
+       "kind": "same",
+       "text": " \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Costco reported total assets of $59,268 million at the end of FY2021.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "$59,268 million USD",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$59,268 million",
+      "$62,268 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…es\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \n"
+      },
+      {
+       "kind": "removed",
+       "text": "Other long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \n"
+      },
+      {
+       "kind": "same",
+       "text": "LIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Total assets for Costco at the end of FY2021 were $55,887 million.",
+       "grade": "wrong"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "author_07661_1",
+   "source": "author",
+   "split": "dev",
+   "doc_name": "BLOCK_2020_10K",
+   "chunk_source": "BLOCK_2020_10K",
+   "question": "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement.",
+   "metric": "FY2020 transaction and loan losses (cash flow), filing in thousands",
+   "audit": "B and C offset non-cash interest and other, so operating cash flow is unchanged. D removes the row and operating cash flow.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$177.67 million",
+     "correct_option": 0,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $177.67 million in FY2020 (the cash flow statement shows $177,670 in thousands)【Source: Block 2020】【SQUARE, INC. CONSOLIDATED STATEMENTS OF CASH FLOWS (In thousands) – Transaction and loan losses: 177,670】",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "The cash flow statement shows transaction and loan losses of $177,670 (in thousands) for FY2020, which equals approximately $177.7 million USD.",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$189.67 million",
+     "correct_option": 1,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n"
+      },
+      {
+       "kind": "removed",
+       "text": "177,670"
+      },
+      {
+       "kind": "added",
+       "text": "189,670"
+      },
+      {
+       "kind": "same",
+       "text": "\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $189.7 million in FY2020, as shown in the cash flow statement (Transaction and loan losses: 189,670 in thousands)【Source: Block 2020】",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Block recorded $189.670 million for transaction and loan losses in FY2020, as shown in the cash flow statement (\"Transaction and loan losses\" = 189,670 in thousands)【Source: Block 2020】",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$177.67 million",
+     "correct_option": 0,
+     "options": [
+      "$177.67 million",
+      "$116.959 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded transaction and loan losses of $177.67 million in FY2020.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Block recorded $177.670 million in transaction and loan losses for FY 2020.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$177.67 million",
+      "$189.67 million",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…253\n29,696\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n899\nGainonsaleofassetgroup\n(373,445)\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Transactionandloanlosses\n177,670\n126,"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Block recorded $73.6 million in charge-offs to accrued transaction losses for FY2020 (shown as (73,613) in the cash flow statement, which is in thousands of dollars).",
+       "grade": "wrong"
+      },
+      "candidate": {
+       "text": "Block recorded $73.613 million in charge-offs to accrued transaction losses and $6.651 million in loss on extinguishment of long-term debt for FY2020, totaling approximately $80.3 million.",
+       "grade": "wrong"
+      }
+     }
+    }
+   }
+  },
+  {
+   "id": "financebench_id_04980",
+   "source": "financebench",
+   "split": "dev",
+   "doc_name": "PEPSICO_2021_10K",
+   "chunk_source": "PEPSICO_2021_10K",
+   "question": "What is the FY2021 capital expenditure amount (in USD billions) for PepsiCo? Respond to the question by assuming the perspective of an investment analyst who can only use the details shown within the statement of cash flows.",
+   "metric": "FY2021 capital spending (cash flow statement)",
+   "audit": "Capex appears in three overlapping 2021-10-K chunks (FY2021 first column) and in a 2022-10-K chunk (FY2021 second column); all are edited. The FY2021 investing total sums exactly to -3,269 including capex, so B and C move it and D removes it. No prose mention of $4.6 billion in the captured chunks.",
+   "arms": {
+    "A": {
+     "label": "Original filing",
+     "expected": "$4.625 billion",
+     "correct_option": 0,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "USD 4.625 billion",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "The FY2021 capital expenditure (capital spending) reported in the Consolidated Statement of Cash Flows is $4.625 billion (shown as (4,625) million).",
+       "grade": "correct"
+      }
+     }
+    },
+    "B": {
+     "label": "Target figure changed",
+     "expected": "$4.925 billion",
+     "correct_option": 1,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n"
+      },
+      {
+       "kind": "removed",
+       "text": "(4,625)"
+      },
+      {
+       "kind": "added",
+       "text": "(4,925)"
+      },
+      {
+       "kind": "same",
+       "text": "\n(4,240)\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "PepsiCo's FY2021 capital expenditures were $4.925 billion (capital spending of $4,925 million) as reported in the Consolidated Statement of Cash Flows.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "FY2021 capital expenditure (capital spending) was $4.925 billion, derived from the $4,925 million figure reported in the Consolidated Statement of Cash Flows for 2021.",
+       "grade": "correct"
+      }
+     }
+    },
+    "C": {
+     "label": "Another year changed",
+     "expected": "$4.625 billion",
+     "correct_option": 0,
+     "options": [
+      "$4.625 billion",
+      "$4.04 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\nCapital spending\n(4,625)\n"
+      },
+      {
+       "kind": "removed",
+       "text": "(4,240)"
+      },
+      {
+       "kind": "added",
+       "text": "(4,040)"
+      },
+      {
+       "kind": "same",
+       "text": "\n(4,232)\nSales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "PepsiCo's FY2021 capital expenditure was $4.625 billion (reported as a capital spending outflow of (4,625) million in the 2021 Consolidated Statement of Cash Flows).",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "The FY2021 capital expenditure was $4.625 billion (Capital spending = $4,625 million)【Source: PepsiCo 2021, Consolidated Statement of Cash Flows, Capital spending (4,625) in millions】.",
+       "grade": "correct"
+      }
+     }
+    },
+    "D": {
+     "label": "Evidence removed",
+     "expected": "Say the evidence is insufficient",
+     "correct_option": 2,
+     "options": [
+      "$4.625 billion",
+      "$4.925 billion",
+      "Say it can't answer"
+     ],
+     "segments": [
+      {
+       "kind": "same",
+       "text": "…ets\n159 \n26 \n(87)\nAccounts payable and other current liabilities\n1,762 \n766 \n735 \nIncome taxes payable\n30 \n(159)\n(287)\nOther, net\n375 \n164 \n(196)\nNet Cash Provided by Operating Activities\n11,616 \n10,613 \n9,649 \nInvesting Activities\n"
+      },
+      {
+       "kind": "removed",
+       "text": "Capital spending\n(4,625)\n(4,240)\n(4,232)\n"
+      },
+      {
+       "kind": "same",
+       "text": "Sales of property, plant and equipment\n166 \n55 \n170 \nAcquisitions, net of cash acquired, and investments in noncontrolled affiliates\n(61)\n(6,372)\n(2,717)\nDivestitures and sales of investments in noncontrolled affiliates\n169 \n6 \n253 \nShort-term investments,…"
+      }
+     ],
+     "answers": {
+      "baseline": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      },
+      "candidate": {
+       "text": "Insufficient context to answer this question accurately.",
+       "grade": "correct"
+      }
+     }
+    }
+   }
+  }
+ ]
+}

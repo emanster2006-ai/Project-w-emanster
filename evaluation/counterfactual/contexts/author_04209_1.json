@@ -1,0 +1,121 @@
+{
+ "id": "author_04209_1",
+ "doc_name": "COSTCO_2021_10K",
+ "source": "author",
+ "question": "What was Costco's accounts payable at the end of FY2021, in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T22:56:33+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Costco's accounts payable at the end of FY2021, in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Costco's accounts payable at the end of FY2021, in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,",
+   "sha256": "cb31e7118f25429eb092add90bc5b2a57303e2f292668b942188cd2f8a51df47",
+   "score": 4.802680969238281,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,172 \nAccrued salaries and benefits\n4,090 \n3,605 \nAccrued member rewards\n1,671 \n1,393 \nDeferred membership fees\n2,042 \n1,851 \nCurrent portion of long-term debt\n799 \n95 \nOther current liabilities\n4,561 \n3,728 \nTotal current liabilities\n29,441 \n24,844 \nOTHER LIABILITIES\nLong-term debt, excluding current portion\n6,692 \n7,514 \nLong-term operating lease liabilities\n2,642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized; no shares issued and\noutstanding\n \n \nCommon stock $0.01 par value; 900,000,000 shares authorized; 441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,879 \nTotal Costco stockholders equity\n17,564 \n18,284 \nNoncontrolling interests\n514 \n421 \nTOTAL EQUITY\n18,078 \n18,705 \nTOTAL LIABILITIES AND EQUITY\n$\n59,268 \n$\n55,556 \nThe accompanying notes are an integral part of these consolidated financial statements.\n38",
+   "sha256": "efbf62510c5d6a41be36d5b54b3d7f2a6c0bd8716fada3d1cebbfe741d323515",
+   "score": 4.638031721115112,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nCOSTCO WHOLESALE CORPORATION\nCONSOLIDATED BALANCE SHEETS\n(amounts in millions, except par value and share data)\nAugust 29,\n2021\nAugust 30,\n2020\nASSETS\nCURRENT ASSETS\nCash and cash equivalents\n$\n11,258 \n$\n12,277 \nShort-term investments\n917 \n1,028 \nReceivables, net\n1,803 \n1,550 \nMerchandise inventories\n14,215 \n12,242 \nOther current assets\n1,312 \n1,023 \nTotal current assets\n29,505 \n28,120 \nOTHER ASSETS\nProperty and equipment, net\n23,492 \n21,807 \nOperating lease right-of-use assets\n2,890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,172 \nAccrued salaries and benefits\n4,090 \n3,605 \nAccrued member rewards\n1,671 \n1,393 \nDeferred membership fees\n2,042 \n1,851 \nCurrent portion of long-term debt\n799 \n95 \nOther current liabilities\n4,561 \n3,728 \nTotal current liabilities\n29,441 \n24,844 \nOTHER LIABILITIES\nLong-term debt, excluding current portion\n6,692 \n7,514 \nLong-term operating lease liabilities\n2,642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized; no shares issued and\noutstanding\n \n \nCommon stock $0.01 par value; 900,000,000 shares authorized; 441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,",
+   "sha256": "5729ef9df702ee4d19e567c3a874a6d2243a5be9831004b9727c29f9b6fc7c40",
+   "score": 4.513801097869873,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "890 \n2,788 \nOther long-term assets\n3,381 \n2,841 \nTOTAL ASSETS\n$\n59,268 \n$\n55,556 \nLIABILITIES AND EQUITY\nCURRENT LIABILITIES\nAccounts payable\n$\n16,278 \n$\n14,172 \nAccrued salaries and benefits\n4,090 \n3,605 \nAccrued member rewards\n1,671 \n1,393 \nDeferred membership fees\n2,042 \n1,851 \nCurrent portion of long-term debt\n799 \n95 \nOther current liabilities\n4,561 \n3,728 \nTotal current liabilities\n29,441 \n24,844 \nOTHER LIABILITIES\nLong-term debt, excluding current portion\n6,692 \n7,514 \nLong-term operating lease liabilities\n2,642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized;",
+   "sha256": "f5f348f7927f0b11fb44b1a9ad7744740ed4f32ee426a14cf34bd276bcca16b7",
+   "score": 2.1149449348449707,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,879 \nTotal Costco stockholders equity\n17,564 \n18,284 \nNoncontrolling interests\n514 \n421 \nTOTAL EQUITY\n18,078 \n18,705 \nTOTAL LIABILITIES AND EQUITY\n$\n59,268 \n$\n55,556 \nThe accompanying notes are an integral part of these consolidated financial statements.\n38",
+   "sha256": "574533e2dbfe003cf9848e33eabc52897425dbdd29b31efecd45cfbc49d7f430",
+   "score": -1.1892423629760742,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "642 \n2,558 \nOther long-term liabilities\n2,415 \n1,935 \nTOTAL LIABILITIES\n41,190 \n36,851 \nCOMMITMENTS AND CONTINGENCIES\nEQUITY\nPreferred stock $0.01 par value; 100,000,000 shares authorized; no shares issued and\noutstanding\n \n \nCommon stock $0.01 par value; 900,000,000 shares authorized; 441,825,000 and\n441,255,000 shares issued and outstanding\n4 \n4 \nAdditional paid-in capital\n7,031 \n6,698 \nAccumulated other comprehensive loss\n(1,137)\n(1,297)\nRetained earnings\n11,666 \n12,",
+   "sha256": "62b1e227e2c04f402aeb245097c9d207900eb863a3a4316f63bd03283a400e52",
+   "score": -1.8379130363464355,
+   "metadata": {
+    "company": "Costco",
+    "year": "2021",
+    "source": "COSTCO_2021_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Consolidated Balance Sheets \nVerizon Communications Inc. and Subsidiaries \n(dollars in millions, except per share amounts) \nAt December 31,\n2022\n2021 \nAssets \nCurrent assets \nCash and cash equivalents\n$ \n2,605 \n$ \n2,921 \nAccounts receivable\n \n25,332 \n \n24,742 \nLess Allowance for credit losses\n \n826 \n \n896 \nAccounts receivable, net \n \n24,506 \n \n23,846 \nInventories\n \n2,388 \n \n3,055 \nPrepaid expenses and other\n \n8,358 \n \n6,906 \nTotal current assets\n \n37,857 \n \n36,728 \nProperty, plant and equipment\n \n307,689 \n \n289,897 \nLess Accumulated depreciation\n \n200,255 \n \n190,201 \nProperty, plant and equipment, net\n \n107,434 \n \n99,696 \nInvestments in unconsolidated businesses\n \n1,071 \n \n1,061 \nWireless licenses\n \n149,796 \n \n147,619 \nGoodwill\n \n28,671 \n \n28,603 \nOther intangible assets, net\n \n11,461 \n \n11,677 \nOperating lease right-of-use assets\n \n26,130 \n \n27,883 \nOther assets\n \n17,260 \n \n13,329 \nTotal assets\n$ \n379,680 \n$ \n366,596 Consolidated Operating Revenues \n(dollars in millions) \nIncrease/(Decrease) \nYears Ended December 31,\n2022\n2021 \n2022 vs. 2021 \nConsumer\n$ 103,506 \n$ 95,300 $ \n8,206 \n 8.6 % \nBusiness\n31,072 \n31,042 \n30 \n 0.1 \nCorporate and other\n2,510 \n7,722 \n(5,212) \n (67.5) \nEliminations\n(253)\n(451)\n198 \n 43.9 \nConsolidated Operating Revenues\n$ 136,835 \n$ 133,613 $ \n3,222 \n 2.4",
+   "sha256": "9335b4f47ea22accef4fde2675c8cbf95fb36cb573411a38296f36fb88391317",
+   "score": -3.4189672470092773,
+   "metadata": {
+    "company": "Verizon",
+    "year": "2022",
+    "source": "VERIZON_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "50 \n \nConsolidated Balance Sheets \nGENERAL MILLS, INC. AND SUBSIDIARIES \n(In Millions, Except Par Value) \n \nMay 31, 2020 \nMay 26, 2019 \nASSETS \n \n \n \n \nCurrent assets: \n \n \n \n \nCash and cash equivalents \n$ \n1,677.8 $ \n450.0 \nReceivables \n \n1,615.1 \n1,679.7 \nInventories \n \n1,426.3 \n1,559.3 \nPrepaid expenses and other current assets \n \n402.1 \n497.5 \nTotal current assets \n \n5,121.3 \n4,186.5 \nLand, buildings, and equipment \n \n3,580.6 \n3,787.2 \nGoodwill \n \n13,923.2 \n13,995.8 \nOther intangible assets \n \n7,095.8 \n7,166.8 \nOther assets \n \n1,085.8 \n974.9 \nTotal assets \n$ \n30,806.7 $ \n30,111.2 \n \n \n \n \n \nLIABILITIES AND EQUITY \n \n \n \n \nCurrent liabilities: \n \n \n \n \nAccounts payable \n$ \n3,247.7 $ \n2,854.1 \nCurrent portion of long-term debt \n \n2,331.5 \n1,396.5 \nNotes payable \n \n279.0 \n1,468.7 \nOther current liabilities \n \n1,633.3 \n1,367.8 \nTotal current liabilities \n \n7,491.5 \n7,087.1 \nLong-term debt \n \n10,929.0 \n11,624.8 \nDeferred income taxes \n \n1,947.1 \n2,031.0 \nOther liabilities \n \n1,545.0 \n1,448.9 \nTotal liabilities \n \n21,912.6 \n22,191.8 \nRedeemable interest \n \n544.6 \n551.7 \nStockholders' equity: \n \n \n \n \nCommon stock, 754.6 shares issued, $0.10 par value \n \n75.5 \n75.5 \nAdditional paid-in capital \n \n1,348.6 \n1,386.7 \nRetained earnings \n \n15,982.1 \n14,996.7 \nCommon stock in treasury, at cost, shares of 144.8 and 152.",
+   "sha256": "9c1dcbcbd8a7051a20e433b8335ed40961722f2f9219503cd347e7d94a1814d2",
+   "score": -4.698342323303223,
+   "metadata": {
+    "company": "General Mills",
+    "year": "2020",
+    "source": "GENERALMILLS_2020_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "e68d167b16f853517a1eede32b87667d04ce5e822c20f611217cd1373b537738"
+}
