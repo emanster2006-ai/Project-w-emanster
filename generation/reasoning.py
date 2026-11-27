@@ -7,7 +7,8 @@ free-tier quotas and can exhaust ``max_tokens`` before any visible answer appear
 
 import os
 
-_REASONING_MODEL_PREFIXES = ("openai/gpt-oss",)
+# Groq names the model "openai/gpt-oss-120b"; Cerebras and others use "gpt-oss-120b".
+_REASONING_MODEL_PREFIXES = ("openai/gpt-oss", "gpt-oss")
 
 
 def reasoning_options(effort: str) -> dict:

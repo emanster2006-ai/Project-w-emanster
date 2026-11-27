@@ -1,7 +1,7 @@
 # SecureRAG
 
 **Evaluation-first RAG platform with OWASP LLM security guardrails.**  
-An experimental system for financial questions over SEC filing evidence. Comparative accuracy has not yet been established.
+An experimental system for financial questions over SEC filing evidence. On all 150 FinanceBench questions it answers **80.0%** correctly (hand-reviewed).
 
 [![CI](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml/badge.svg)](https://github.com/emanster2006-ai/Project-w-emanster/actions/workflows/ci.yml)
 [![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)](https://www.python.org/downloads/release/python-3110/)
@@ -35,9 +35,11 @@ The home page offers three example questions. Each one answered correctly in tes
 
 ![SecureRAG home page with the API connected and three example questions](docs/images/frontend-home.png)
 
-**Caveats.** These are individual answers, not a benchmark. Retrieval is measured (below), but end-to-end answer accuracy is not: the free Groq tier's token limits stopped a full run. Some questions still miss. For example, "What was 3M's capital expenditure in 2018?" returns "Insufficient context", because the filing words it as "Purchases of property, plant and equipment" and that line sits in a different chunk from the cash-flow header that is retrieved. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
+**Caveats.** These are individual answers. Measured results are below. Some questions still miss. For example, "What was 3M's capital expenditure in 2018?" returns "Insufficient context", because the filing words it as "Purchases of property, plant and equipment" and that line sits in a different chunk from the cash-flow header that is retrieved. Treat generated answers as unverified. Source badges show the raw reranker score, not a percentage.
 
 **Retrieval is measured.** `make retrieval-bench` (no API keys) checks, for all 150 FinanceBench questions, whether a chunk from the right evidence passage reaches the top 5 (a long passage can span several chunks, so a hit does not guarantee the chunk holding the figure was retrieved): **94.0%** (141/150), up from 70.0% (105/150) at the start. Company/period chunk headers gave 90.0%, and fiscal-year-aware reranking the rest. The default context is the top 8, which reaches **96.0%** (144/150). Details and the experiments that did not help are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
+
+**Answer accuracy is measured.** All 150 FinanceBench questions through the API with the UI's settings (`gpt-oss-120b` on Cerebras, cache off), graded by a judge from a different model family against the reference answers, with every incorrect or refused label checked by hand: **120/150 correct (80.0%, 95% CI 72.9-85.6%)**, 118/143 when the evidence passage was retrieved. Setup, hand review and artifacts are in [docs/BENCHMARKS.md](docs/BENCHMARKS.md).
 
 ---
 
@@ -93,7 +95,7 @@ User Query
 
 ## Portfolio and ownership
 
-This is a team project. Erik built the initial scaffold, the evaluation framework and the first retrieval pipeline. Emmanuel built the frontend, API integration, CI/CD and security hardening, and measured and improved retrieval: the reproducible benchmark (`make retrieval-bench`), contextual chunk headers and fiscal-year-aware reranking, which took top-5 recall from 70.0% to 94.0% (top-8: 96.0%) on 150 FinanceBench questions (see [docs/BENCHMARKS.md](docs/BENCHMARKS.md)).
+This is a team project. Erik built the initial scaffold, the evaluation framework and the first retrieval pipeline. Emmanuel built the frontend, API integration, CI/CD and security hardening, and measured and improved retrieval: the reproducible benchmark (`make retrieval-bench`), contextual chunk headers and fiscal-year-aware reranking, which took top-5 recall from 70.0% to 94.0% (top-8: 96.0%) on 150 FinanceBench questions (see [docs/BENCHMARKS.md](docs/BENCHMARKS.md)). He also built the end-to-end answer-accuracy evaluation (80.0% on all 150 questions, hand-reviewed).
 
 ## Inspect the evidence
 
