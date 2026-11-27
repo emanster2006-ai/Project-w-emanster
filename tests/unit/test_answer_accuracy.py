@@ -117,3 +117,24 @@ def test_read_jsonl_keeps_the_last_record_per_id(tmp_path):
     )
     assert aa.read_jsonl(tmp_path / "g.jsonl")["a"]["label"] == "correct"
     assert aa.read_jsonl(tmp_path / "missing.jsonl") == {}
+
+
+def test_hand_reviews_file_overrides_the_judge_but_keeps_its_label(tmp_path):
+    questions = [
+        {"id": "q0", "question": "Q?", "reference": "-0.02", "question_type": "m"}
+    ]
+    _write(
+        tmp_path / "answers.jsonl",
+        [{"id": "q0", "answer": "-1.53%", "error": None, "evidence_retrieved": True}],
+    )
+    _write(
+        tmp_path / "grades.jsonl", [{"id": "q0", "label": "incorrect", "reason": ""}]
+    )
+    _write(
+        tmp_path / "reviews.jsonl",
+        [{"id": "q0", "review_label": "correct", "review_note": "same figure"}],
+    )
+    merged = aa.read_grades(tmp_path)["q0"]
+    assert merged["label"] == "incorrect" and merged["review_label"] == "correct"
+    s = aa.summarize(tmp_path, questions)
+    assert s["correct"] == 1 and s["label_changed_on_review"] == 1

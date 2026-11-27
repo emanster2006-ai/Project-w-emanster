@@ -248,6 +248,16 @@ def wilson(k: int, n: int, z: float = 1.96) -> tuple[float, float]:
     return (centre - half, centre + half)
 
 
+def read_grades(run: Path) -> dict[str, dict]:
+    """Judge grades with hand reviews (reviews.jsonl) merged in. The judge's own label
+    stays in `label`; `review_label` holds the hand decision and wins in summaries."""
+    grades = read_jsonl(run / "grades.jsonl")
+    for qid, review in read_jsonl(run / "reviews.jsonl").items():
+        if qid in grades:
+            grades[qid] = {**grades[qid], **review}
+    return grades
+
+
 def final_label(grade: dict) -> str | None:
     """A hand-reviewed label overrides the judge's."""
     return grade.get("review_label") or grade.get("label")
@@ -255,7 +265,7 @@ def final_label(grade: dict) -> str | None:
 
 def summarize(run: Path, questions: list[dict]) -> dict:
     answers = read_jsonl(run / "answers.jsonl")
-    grades = read_jsonl(run / "grades.jsonl")
+    grades = read_grades(run)
     by_id = {q["id"]: q for q in questions}
     rows = []
     for qid, g in grades.items():
@@ -364,9 +374,7 @@ def main() -> None:
 
     if args.summary or args.review:
         if args.review:
-            answers, grades = read_jsonl(run / "answers.jsonl"), read_jsonl(
-                run / "grades.jsonl"
-            )
+            answers, grades = read_jsonl(run / "answers.jsonl"), read_grades(run)
             for q in questions:
                 g = grades.get(q["id"])
                 if g and final_label(g) != "correct":
