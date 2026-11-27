@@ -45,13 +45,15 @@ class Usage:
     completion_tokens: int = 0
 
 
-def render_messages(question: str, context_chunks: list[dict]) -> list[dict]:
+def render_messages(
+    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+) -> list[dict]:
     """The exact chat messages the generator sends for this question and context."""
     context_text = "\n\n---\n\n".join(
         f"[Source: {c['metadata'].get('company', 'Unknown')} {c['metadata'].get('year', '')}]\n{c['text']}"
         for c in context_chunks
     )
-    system_prompt = _jinja_env.get_template("rag_system.j2").render()
+    system_prompt = _jinja_env.get_template(system_template).render()
     user_prompt = _jinja_env.get_template("rag_user.j2").render(
         question=question,
         context=context_text,
@@ -62,7 +64,9 @@ def render_messages(question: str, context_chunks: list[dict]) -> list[dict]:
     ]
 
 
-async def generate_response(question: str, context_chunks: list[dict]):
+async def generate_response(
+    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+):
     """
     Generate a validated FinancialRAGResponse from retrieved chunks.
     Returns (response, Usage); Usage meters every provider call, retries included.
@@ -99,7 +103,7 @@ async def generate_response(question: str, context_chunks: list[dict]):
     response = client.chat.completions.create(
         model=os.getenv("LLM_MODEL", "openai/gpt-oss-120b"),
         response_model=FinancialRAGResponse,
-        messages=render_messages(question, context_chunks),
+        messages=render_messages(question, context_chunks, system_template),
         max_tokens=1000,
         max_retries=2,  # instructor auto-retries if schema validation fails
         **reasoning_options(os.getenv("LLM_REASONING_EFFORT", "medium")),

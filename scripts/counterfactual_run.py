@@ -56,7 +56,17 @@ async def baseline(question: str, chunks: list[dict]):
     return await generate_response(question, chunks)
 
 
-SYSTEMS = {"baseline": baseline}
+async def candidate(question: str, chunks: list[dict]):
+    """Baseline plus one rule against substituting or deriving a missing line item,
+    chosen from the dev failures (generation/prompts/rag_system_candidate.j2)."""
+    from generation.llm import generate_response
+
+    return await generate_response(
+        question, chunks, system_template="rag_system_candidate.j2"
+    )
+
+
+SYSTEMS = {"baseline": baseline, "candidate": candidate}
 
 
 # ── Data ────────────────────────────────────────────────────────────────────────
