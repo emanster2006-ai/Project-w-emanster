@@ -192,32 +192,37 @@ Rerunning those questions with the rule switched on (`LLM_SYSTEM_TEMPLATE=rag_sy
 and pairing them with the 80% baseline run, question by question
 (`answer_accuracy.py --compare`), using the same judge and the same hand reviews:
 
-**Interim: 112 of 150 questions** (the rest wait on the provider's daily token limit).
 Answers, grades, hand reviews and the paired comparison are in
 [evaluation/results/answer-accuracy-rule-2026-11-27](../evaluation/results/answer-accuracy-rule-2026-11-27/).
+Every changed verdict was checked by hand, and so was every answer the judge called
+incorrect where the rule's answer differs from the baseline's.
 
-| On the same 112 questions | Baseline prompt | With the rule |
+| All 150 questions | Baseline prompt | With the rule |
 | --- | --- | --- |
-| Correct | 89 | 83 |
-| Refused ("Insufficient context") | 12 | 18 |
+| Correct | **120 (80.0%)** | **113 (75.3%)** |
+| Incorrect | 13 | 14 |
+| Refused ("Insufficient context") | 17 | 23 |
 
-Paired, the rule lost 9 correct answers and gained 3 (exact McNemar p = 0.15, so not
-statistically established at this size). Six of the 9 losses are new refusals of
-questions the baseline answered correctly:
+Paired, the rule lost 11 correct answers and gained 4 (exact McNemar p = 0.12, so not
+statistically established at this size). Eight of the 11 losses follow from the rule's
+wording:
 
-- two calculations whose formula the question gives (General Mills cash conversion cycle
-  and retention ratio), although the rule exempts questions that ask for a calculation;
-- one estimate built from a reported figure (JPMorgan's liquidation value per share from
-  tangible book value per share);
-- three questions that ask for a judgment, such as whether gross margin is a useful metric
-  for American Express (also Amcor's restructuring liability, Boeing's gross margin).
+- seven new refusals of questions the baseline answered correctly: two calculations whose
+  formula the question gives (General Mills cash conversion cycle and retention ratio),
+  although the rule exempts calculations; one estimate from a reported figure (JPMorgan's
+  liquidation value per share from tangible book value per share); one plain lookup
+  (whether Pfizer's PP&E grew); and three judgment questions, such as whether gross margin
+  is a useful metric for American Express (also Amcor's restructuring liability and
+  Boeing's gross margin);
+- one answer of "0" for PepsiCo's restructuring costs, because the filing's row is labelled
+  "restructuring and impairment charges", not the exact line item the question names.
 
-The other 3 losses and the 3 gains are answers that changed in ways the rule's wording
-does not touch (for example inventory turnover computed from sales instead of cost of
-sales). Run-to-run variation was not measured, so these may be noise.
+The other 3 losses and the 4 gains are answers that changed in ways the rule's wording does
+not touch (for example inventory turnover computed from sales instead of cost of sales).
+Run-to-run variation was not measured, so these may be noise.
 
-So the rule trades one failure for another: on the counterfactual benchmark it stopped 2
-of 5 held-out substitutions; here it over-refuses about 5% of ordinary questions. It is
+So the rule trades one failure for another: on the counterfactual benchmark it fixed 2 of 5
+failing held-out cases; here it costs about 5% of ordinary questions (8 of 150). It is
 therefore **not the default prompt**. `rag_system_candidate.j2` stays selectable for
 evaluation, and narrowing the rule to single-figure lookups is the next thing to test on
 both benchmarks.

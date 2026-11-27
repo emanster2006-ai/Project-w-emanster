@@ -110,3 +110,41 @@
 {"id": "financebench_id_04700", "label": "correct", "reason": "The candidate's answer of $32,780 million matches the reference answer of $32780.00 exactly."}
 {"id": "financebench_id_00552", "label": "correct", "reason": "The candidate correctly identifies that Microsoft's debt decreased, matching the reference conclusion, and provides specific figures that align with the reference reasoning."}
 {"id": "financebench_id_10420", "label": "incorrect", "reason": "The candidate's answer of -1.53% does not match the reference answer of -0.02 (which corresponds to -2.00% or -200% depending on scale, but clearly distinct from -1.53%)."}
+{"id": "financebench_id_04458", "label": "correct", "reason": "The candidate's final answer of 5.4% matches the reference answer exactly."}
+{"id": "financebench_id_03282", "label": "correct", "reason": "The candidate's figure of $5,466.312 million is within the allowed rounding tolerance of the reference answer $5,466.00 million."}
+{"id": "financebench_id_04302", "label": "correct", "reason": "The candidate's answer of 55.1% matches the reference answer exactly."}
+{"id": "financebench_id_03531", "label": "correct", "reason": "The candidate's answer of 16,525 million matches the reference value of 16,525.00 million exactly."}
+{"id": "financebench_id_04080", "label": "correct", "reason": "The candidate's final answer of 3.46 matches the reference answer exactly."}
+{"id": "financebench_id_01163", "label": "correct", "reason": "The candidate correctly identifies operating activities as the source of the highest cash flow, which aligns with the reference answer."}
+{"id": "financebench_id_00080", "label": "incorrect", "reason": "The candidate's calculated working capital of $12.4 billion significantly contradicts the reference answer of $1.6 billion."}
+{"id": "financebench_id_04980", "label": "correct", "reason": "The candidate's figure of $4.625 billion is within the 1% rounding tolerance of the reference answer $4.60 billion."}
+{"id": "financebench_id_01009", "label": "correct", "reason": "The candidate lists the same geographic regions as the reference, grouped into the company's reportable segments, which aligns with the reference's list of primary operating geographies."}
+{"id": "financebench_id_00735", "label": "correct", "reason": "The candidate correctly concludes that PepsiCo is not involved in material legal battles, aligning with the reference answer's conclusion that management believes outcomes will not be material."}
+{"id": "financebench_id_01328", "label": "incorrect", "reason": "The candidate answered 0, whereas the reference states the restructuring costs were $411 million."}
+{"id": "financebench_id_03620", "label": "correct", "reason": "The candidate's answer of USD 9,068 million matches the reference answer of $9068.00 million exactly."}
+{"id": "financebench_id_04481", "label": "correct", "reason": "The candidate's final answer of 16.5% matches the reference answer exactly."}
+{"id": "financebench_id_01482", "label": "correct", "reason": "The candidate correctly states that the proposal was defeated, which matches the reference answer's conclusion."}
+{"id": "financebench_id_00705", "label": "correct", "reason": "The candidate's answer of $400,000,000 matches the reference answer exactly."}
+{"id": "financebench_id_00882", "label": "correct", "reason": "The candidate's total of $8.4 billion matches the reference answer of $8,400,000,000."}
+{"id": "financebench_id_01474", "label": "correct", "reason": "The candidate correctly identifies that the strong Q1 performance (strong start to the year) was the reason for raising guidance, which aligns with the reference answer."}
+{"id": "financebench_id_01476", "label": "correct", "reason": "The candidate's answer of 1 percentage point matches the reference answer exactly."}
+{"id": "financebench_id_00302", "label": "refused", "reason": "The candidate explicitly states there is insufficient context and does not provide a final answer."}
+{"id": "financebench_id_00702", "label": "refused", "reason": "The candidate explicitly states there is insufficient context to answer, providing no final answer."}
+{"id": "financebench_id_02416", "label": "correct", "reason": "The candidate correctly identifies the three companies (Trillium, Array, and Therachon) as stated in the reference answer."}
+{"id": "financebench_id_00283", "label": "incorrect", "reason": "The candidate answer states $700 million, which is the total cost, whereas the reference answer specifies $77.78 million as the amount expected to be paid in the future (the remaining 10% of the cost)."}
+{"id": "financebench_id_00724", "label": "correct", "reason": "The candidate correctly identifies 'Developed Rest of the World' as the region with the biggest drop, matching the reference answer."}
+{"id": "financebench_id_02419", "label": "correct", "reason": "The candidate correctly identifies that Pfizer is spinning off the Upjohn business, which matches the reference answer."}
+{"id": "financebench_id_00746", "label": "correct", "reason": "The candidate correctly identifies that no debt securities are registered, matching the reference answer."}
+{"id": "financebench_id_00521", "label": "incorrect", "reason": "The candidate claims there was an acquisition of $1,220 thousand in FY2023, whereas the reference states that Ulta Beauty did not make any acquisitions in FY2023 or FY2022."}
+{"id": "financebench_id_00601", "label": "correct", "reason": "The candidate correctly identifies the primary drivers (lower marketing expenses and leverage of incentive compensation) as stated in the reference, and the additional details provided do not contradict the reference."}
+{"id": "financebench_id_00603", "label": "refused", "reason": "The candidate explicitly states there is insufficient context and provides no final answer."}
+{"id": "financebench_id_00605", "label": "refused", "reason": "The candidate explicitly states there is insufficient context and provides no final answer."}
+{"id": "financebench_id_00606", "label": "refused", "reason": "The candidate explicitly states there is insufficient context and provides no final answer."}
+{"id": "financebench_id_00859", "label": "correct", "reason": "The candidate correctly identifies cross currency swaps as the instrument with the highest notional value and provides the exact figure matching the reference."}
+{"id": "financebench_id_02024", "label": "correct", "reason": "The candidate correctly identifies the individual components ($1,097 million and $862 million) and provides the correct total sum ($1,959 million) as requested by the question."}
+{"id": "financebench_id_00216", "label": "correct", "reason": "The candidate correctly calculates the quick ratio as approximately 0.54 and concludes that Verizon does not have a healthy liquidity profile, which aligns with the reference answer's conclusion and figure."}
+{"id": "financebench_id_00215", "label": "correct", "reason": "The candidate correctly concludes that Verizon is a capital intensive business, which aligns with the reference answer's conclusion, even though the specific metric used (asset composition vs. ratio) differs."}
+{"id": "financebench_id_00566", "label": "correct", "reason": "The candidate correctly identifies that debt decreased and provides the specific figures that match the reference calculation."}
+{"id": "financebench_id_06247", "label": "correct", "reason": "The candidate's answer of 42.70 is within the allowed rounding tolerance (approx 1%) of the reference answer 42.69."}
+{"id": "financebench_id_04784", "label": "correct", "reason": "The candidate's answer matches the reference answer exactly."}
+{"id": "financebench_id_06741", "label": "correct", "reason": "The candidate's answer matches the reference answer exactly."}
