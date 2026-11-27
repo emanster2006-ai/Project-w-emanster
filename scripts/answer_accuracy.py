@@ -465,6 +465,9 @@ def main() -> None:
                     "llm_provider": os.getenv("LLM_PROVIDER", "groq"),
                     "llm_base_url": os.getenv("OPENAI_BASE_URL") or None,
                     "llm_reasoning_effort": os.getenv("LLM_REASONING_EFFORT", "medium"),
+                    "llm_system_template": os.getenv(
+                        "LLM_SYSTEM_TEMPLATE", "rag_system.j2"
+                    ),
                     "collection": os.getenv("QDRANT_COLLECTION_NAME"),
                     "top_k_retrieve": os.getenv("TOP_K_RETRIEVE", "20"),
                     "judge_model": args.judge_model,

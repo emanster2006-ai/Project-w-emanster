@@ -1,0 +1,15 @@
+paired on 112 questions: base 89/112, new 83/112, both correct 80
+correct only in base: 9, only in new: 3 (exact McNemar p = 0.146)
+  financebench_id_01226: incorrect -> refused
+  financebench_id_01936: correct -> refused
+  financebench_id_00720: correct -> refused
+  financebench_id_00685: incorrect -> correct
+  financebench_id_00678: correct -> refused
+  financebench_id_03473: correct -> incorrect
+  financebench_id_01107: correct -> incorrect
+  financebench_id_04103: correct -> refused
+  financebench_id_10136: correct -> refused
+  financebench_id_00711: correct -> incorrect
+  financebench_id_02119: correct -> refused
+  financebench_id_00206: refused -> correct
+  financebench_id_03849: incorrect -> correct
