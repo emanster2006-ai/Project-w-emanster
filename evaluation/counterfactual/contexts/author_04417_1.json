@@ -1,0 +1,121 @@
+{
+ "id": "author_04417_1",
+ "doc_name": "BESTBUY_2019_10K",
+ "source": "author",
+ "question": "What was Best Buy's cash and cash equivalents at the end of FY2019 (February 2, 2019), in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T22:56:25+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Best Buy's cash and cash equivalents at the end of FY2019 (February 2, 2019), in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Best Buy's cash and cash equivalents at the end of FY2019 (February 2, 2019), in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nConsolidated Balance Sheets\n$ in millions, except per share and share amounts\n\n\nFebruary 2, 2019\n\nFebruary 3, 2018\nAssets\n \n \nCurrent assets\n \n \nCashandcashequivalents\n $\n1,980 $\n1,101\nShort-terminvestments\n\n \n2,032\nReceivables,net\n\n1,015 \n1,049\nMerchandiseinventories\n\n5,409 \n5,209\nOthercurrentassets\n\n466 \n438\nTotalcurrentassets\n\n8,870 \n9,829\nProperty and equipment\n \n \nLandandbuildings\n\n637 \n623\nLeaseholdimprovements\n\n2,119 \n2,327\nFixturesandequipment\n\n5,865 \n5,410\nPropertyundercapitalandfinancingleases\n\n579 \n340\nGrosspropertyandequipment\n\n9,200 \n8,700\nLessaccumulateddepreciation\n\n6,690 \n6,279\nNetpropertyandequipment\n\n2,510 \n2,421\nGoodwill\n\n915 \n425\nOther assets\n\n606 \n374\nTotal assets\n $\n12,901 $\n13,049\n\n \n \nLiabilities and equity\n \n \nCurrent liabilities\n \n \nAccountspayable\n $\n5,257 $\n4,873\nUnredeemedgiftcardliabilities\n\n290 \n385\nDeferredrevenue\n\n446 \n453\nAccruedcompensationandrelatedexpenses\n\n482 \n561\nAccruedliabilities\n\n982 \n1,001\nCurrentportionoflong-termdebt\n\n56 \n544\nTotalcurrentliabilities\n\n7,513 \n7,817\nLong-term liabilities\n\n750 \n809\nLong-term debt\n\n1,332 \n811\nContingencies and commitments (Note 13)",
+   "sha256": "34eed40c462849f21af7502e481a36f47df0a2035c62f2e0d68040b88bb2b66b",
+   "score": 7.775359153747559,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nConsolidated Balance Sheets\n$ in millions, except per share and share amounts\n\n\nFebruary 2, 2019\n\nFebruary 3, 2018\nAssets\n \n \nCurrent assets\n \n \nCashandcashequivalents\n $\n1,980 $\n1,101\nShort-terminvestments\n\n \n2,032\nReceivables,net\n\n1,015 \n1,049\nMerchandiseinventories\n\n5,409 \n5,209\nOthercurrentassets\n\n466 \n438\nTotalcurrentassets\n\n8,870 \n9,829\nProperty and equipment\n \n \nLandandbuildings\n\n637 \n623\nLeaseholdimprovements\n\n2,119 \n2,327\nFixturesandequipment\n\n5,865 \n5,410\nPropertyundercapitalandfinancingleases\n\n579 \n340\nGrosspropertyandequipment\n\n9,200 \n8,700\nLessaccumulateddepreciation\n\n6,690 \n6,279\nNetpropertyandequipment\n\n2,510 \n2,",
+   "sha256": "319a8ffb33f1fb97e88feeed1387447721e0d1137d7f09dc23d15eea33fe696e",
+   "score": 7.596681594848633,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nConsolidated Balance Sheets\n$ in millions, except per share and share amounts\n\n\nFebruary 2, 2019\n\nFebruary 3, 2018\nAssets\n \n \nCurrent assets\n \n \nCashandcashequivalents\n $\n1,980 $\n1,101\nShort-terminvestments\n\n \n2,032\nReceivables,net\n\n1,015 \n1,049\nMerchandiseinventories\n\n5,409 \n5,209\nOthercurrentassets\n\n466 \n438\nTotalcurrentassets\n\n8,870 \n9,829\nProperty and equipment\n \n \nLandandbuildings\n\n637 \n623\nLeaseholdimprovements\n\n2,119 \n2,327\nFixturesandequipment\n\n5,865 \n5,410\nPropertyundercapitalandfinancingleases\n\n579 \n340\nGrosspropertyandequipment\n\n9,200 \n8,700\nLessaccumulateddepreciation\n\n6,690 \n6,279\nNetpropertyandequipment\n\n2,510 \n2,421\nGoodwill\n\n915 \n425\nOther assets\n\n606 \n374\nTotal assets\n $\n12,901 $\n13,049\n\n \n \nLiabilities and equity\n \n \nCurrent liabilities\n \n \nAccountspayable\n $\n5,257 $\n4,873\nUnredeemedgiftcardliabilities\n\n290 \n385\nDeferredrevenue\n\n446 \n453\nAccruedcompensationandrelatedexpenses\n\n482 \n561\nAccruedliabilities\n\n982 \n1,001\nCurrentportionoflong-termdebt\n\n56 \n544\nTotalcurrentliabilities\n\n7,513 \n7,817\nLong-term liabilities\n\n750 \n809\nLong-term debt\n\n1,332 \n811\nContingencies and commitments (Note 13)\n\n\nEquity\n \n \nBestBuyCo.,Inc.Shareholders'Equity\n \n \nPreferredstock,$1.00parvalue:Authorized400,000shares;Issuedandoutstandingnone\n\n \n\nCommonstock,$0.10parvalue:Authorized1.0billionshares;Issuedandoutstanding265,703,000and\n282,988,000shares,respectively\n\n27 \n28\nAdditionalpaid-incapital\n\n \n\nRetainedearnings\n\n2,985 \n3,270\nAccumulatedothercomprehensiveincome\n\n294 \n314\nTotalequity\n\n3,306 \n3,612\nTotal liabilities and equity\n $\n12,901 $\n13,049\nSeeNotestoConsolidatedFinancialStatements.\n50",
+   "sha256": "0f2a4d4825a0fb57d0b106aec71e8f1c547cf9d9b0a9f9781fb571b8776f7347",
+   "score": 7.483044147491455,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "We modify our approach to managing these variables as changes in our operating environment arise. For example, capital expenditures and share \nrepurchases are a component of our cash flow and capital management strategy, which, to a large extent, we can adjust in response to economic and other \nchanges in our business environment. We have a disciplined approach to capital allocation, which focuses on investing in key priorities that support our strategy.\n \nCash and cash equivalents were as follows ($ in millions):\n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \n \nJuly 29, 2023\n \nJanuary 28, 2023\n \nJuly 30, 2022\nCash and cash equivalents\n \n $\n 1,093 $\n 1,874 $\n 840",
+   "sha256": "363be3f8851f899778e88a395f8f2e93a41f3a6236fded70bec64dbf34c662af",
+   "score": 3.8383948802948,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2024",
+    "source": "BESTBUY_2024Q2_10Q",
+    "filing_type": "10q"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "806) \n \n \n (4,297) \n \n \n (876) \n \n \n \n \n \n \n \n \n \n \n \n \nEffect of exchange rate changes on cash\n \n (8) \n \n \n (3) \n \n \n 7 \nIncrease (decrease) in cash, cash equivalents and restricted cash\n \n (952) \n \n \n (2,420) \n \n \n 3,270 \nCash, cash equivalents and restricted cash at beginning of period\n \n 3,205 \n \n \n 5,625 \n \n \n 2,355 \nCash, cash equivalents and restricted cash at end of period\n$\n 2,253 \n \n$\n 3,205 \n \n$\n 5,625",
+   "sha256": "d8ae1ec0168df4ea9494c512fa4eb510fca5c17a441bd905effcafdbdc7370c0",
+   "score": 3.2046451568603516,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2023",
+    "source": "BESTBUY_2023_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "053 \n \n2,398 \n \n1,798 \nCash and cash equivalents at end of period\n \n$\n2,853 \n$\n3,053 \n$\n2,398 \n \nThe accompanying Notes to Consolidated Financial Statements are an integral part of this statement.\n \n60",
+   "sha256": "29f3984adfb1bddef5ddb389cc8fc8de422b4373d7d78ec5bd4689d3e37f854c",
+   "score": 2.4531192779541016,
+   "metadata": {
+    "company": "3M",
+    "year": "2018",
+    "source": "3M_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "865 \n5,410\nPropertyundercapitalandfinancingleases\n\n579 \n340\nGrosspropertyandequipment\n\n9,200 \n8,700\nLessaccumulateddepreciation\n\n6,690 \n6,279\nNetpropertyandequipment\n\n2,510 \n2,421\nGoodwill\n\n915 \n425\nOther assets\n\n606 \n374\nTotal assets\n $\n12,901 $\n13,049\n\n \n \nLiabilities and equity\n \n \nCurrent liabilities\n \n \nAccountspayable\n $\n5,257 $\n4,873\nUnredeemedgiftcardliabilities\n\n290 \n385\nDeferredrevenue\n\n446 \n453\nAccruedcompensationandrelatedexpenses\n\n482 \n561\nAccruedliabilities\n\n982 \n1,001\nCurrentportionoflong-termdebt\n\n56 \n544\nTotalcurrentliabilities\n\n7,513 \n7,817\nLong-term liabilities\n\n750 \n809\nLong-term debt\n\n1,332 \n811\nContingencies and commitments (Note 13)",
+   "sha256": "31de96259d0e6329a0a54b9a0e5c44bae23f9f67f6bbc1360c62db02f9106997",
+   "score": 1.9204639196395874,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "Equity\n \n \nBestBuyCo.,Inc.Shareholders'Equity\n \n \nPreferredstock,$1.00parvalue:Authorized400,000shares;Issuedandoutstandingnone\n\n \n\nCommonstock,$0.10parvalue:Authorized1.0billionshares;Issuedandoutstanding265,703,000and\n282,988,000shares,respectively\n\n27 \n28\nAdditionalpaid-incapital\n\n \n\nRetainedearnings\n\n2,985 \n3,270\nAccumulatedothercomprehensiveincome\n\n294 \n314\nTotalequity\n\n3,306 \n3,612\nTotal liabilities and equity\n $\n12,901 $\n13,049\nSeeNotestoConsolidatedFinancialStatements.\n50",
+   "sha256": "1e9951fa85250517ec106ffcbf70cc791c3cd5fd62f3c3571407d7f9ec3f8f13",
+   "score": 1.537814974784851,
+   "metadata": {
+    "company": "Best Buy",
+    "year": "2019",
+    "source": "BESTBUY_2019_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "b03f4016183d10b8e7f13631a9c2ccb3bf51dfec143113aa63b54173967f85fc"
+}

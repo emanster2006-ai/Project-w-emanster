@@ -1,0 +1,121 @@
+{
+ "id": "author_10285_1",
+ "doc_name": "BOEING_2018_10K",
+ "source": "author",
+ "question": "What was Boeing's inventories balance at the end of FY2018, in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T23:48:48+00:00",
+ "git_rev": "125dfb1",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Boeing's inventories balance at the end of FY2018, in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Boeing's inventories balance at the end of FY2018, in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nThe Boeing Company and Subsidiaries\nConsolidated Statements of Financial Position \n(Dollarsinmillions,exceptpersharedata)\n\n \nDecember 31,\n2018\n\n2017\nAssets\n\n \nCash and cash equivalents\n$7,637\n\n$8,813\nShort-term and other investments\n927\n\n1,179\nAccounts receivable, net\n3,879\n\n2,894\nUnbilled receivables, net\n10,025\n\n8,194\nCurrent portion of customer financing, net\n460\n\n309\nInventories\n62,567\n\n61,388\nOther current assets\n2,335\n\n2,417\nTotal current assets\n87,830\n\n85,194\nCustomer financing, net\n2,418\n\n2,756\nProperty, plant and equipment, net\n12,645\n\n12,672\nGoodwill\n7,840\n\n5,559\nAcquired intangible assets, net\n3,429\n\n2,573\nDeferred income taxes\n284\n\n321\nInvestments\n1,087\n\n1,260\nOther assets, net of accumulated amortization of $503 and $482\n1,826\n\n2,027\nTotal assets\n$117,359\n\n$112,362\nLiabilities and equity\n\n \nAccounts payable\n$12,916\n\n$12,202\nAccrued liabilities\n14,808\n\n13,069\nAdvances and progress billings\n50,676\n\n48,042\nShort-term debt and current portion of long-term debt\n3,190\n\n1,335\nTotal current liabilities\n81,590\n\n74,648\nDeferred income taxes\n1,736\n\n2,188\nAccrued retiree health care\n4,584\n\n5,545\nAccrued pension plan liability, net\n15,323\n\n16,471\nOther long-term liabilities\n3,059\n\n2,015\nLong-term debt\n10,657\n\n9,782\nShareholders equity:\n\n \nCommon stock, par value $5.00 1,200,000,000 shares authorized; 1,012,261,159 shares issued\n5,061\n\n5,061\nAdditional paid-in capital\n6,768\n\n6,804\nTreasury stock, at cost\n(52,348) \n(43,454)\nRetained earnings\n55,941\n\n49,618\nAccumulated other comprehensive loss\n(15,083) \n(16,373)\nTotal shareholders equity\n339\n\n1,656\nNoncontrolling interests\n71\n\n57\nTotal equity\n410\n\n1,713\nTotal liabilities and equity\n$117,359\n\n$112,362\nSee Notes to the Consolidated Financial Statements on pages 54 113 .\n50",
+   "sha256": "671fcabcb9f0b6038ee8c0951f50e466b86654fc9c2a4988c18f4e2f41e0858b",
+   "score": 0.7115850448608398,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2018",
+    "source": "BOEING_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nThe Boeing Company and Subsidiaries\nConsolidated Statements of Financial Position \n(Dollarsinmillions,exceptpersharedata)\n\n \nDecember 31,\n2018\n\n2017\nAssets\n\n \nCash and cash equivalents\n$7,637\n\n$8,813\nShort-term and other investments\n927\n\n1,179\nAccounts receivable, net\n3,879\n\n2,894\nUnbilled receivables, net\n10,025\n\n8,194\nCurrent portion of customer financing, net\n460\n\n309\nInventories\n62,567\n\n61,388\nOther current assets\n2,335\n\n2,417\nTotal current assets\n87,830\n\n85,194\nCustomer financing, net\n2,418\n\n2,756\nProperty, plant and equipment, net\n12,645\n\n12,672\nGoodwill\n7,840\n\n5,559\nAcquired intangible assets, net\n3,429\n\n2,573\nDeferred income taxes\n284\n\n321\nInvestments\n1,087\n\n1,",
+   "sha256": "67a05f98071f48353550eca3dfbf52a6e7a4b1c134fc3eab8a0d14f9617a9ee1",
+   "score": 0.6630396842956543,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2018",
+    "source": "BOEING_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nThe Boeing Company and Subsidiaries\nConsolidated Statements of Financial Position \n(Dollarsinmillions,exceptpersharedata)\n\n \nDecember 31,\n2018\n\n2017\nAssets\n\n \nCash and cash equivalents\n$7,637\n\n$8,813\nShort-term and other investments\n927\n\n1,179\nAccounts receivable, net\n3,879\n\n2,894\nUnbilled receivables, net\n10,025\n\n8,194\nCurrent portion of customer financing, net\n460\n\n309\nInventories\n62,567\n\n61,388\nOther current assets\n2,335\n\n2,417\nTotal current assets\n87,830\n\n85,194\nCustomer financing, net\n2,418\n\n2,756\nProperty, plant and equipment, net\n12,645\n\n12,672\nGoodwill\n7,840\n\n5,559\nAcquired intangible assets, net\n3,429\n\n2,573\nDeferred income taxes\n284\n\n321\nInvestments\n1,087\n\n1,260\nOther assets, net of accumulated amortization of $503 and $482\n1,826\n\n2,027\nTotal assets\n$117,359\n\n$112,362\nLiabilities and equity\n\n \nAccounts payable\n$12,916\n\n$12,202\nAccrued liabilities\n14,808\n\n13,069\nAdvances and progress billings\n50,676\n\n48,042\nShort-term debt and current portion of long-term debt\n3,190\n\n1,335\nTotal current liabilities\n81,590\n\n74,648\nDeferred income taxes\n1,736\n\n2,188\nAccrued retiree health care\n4,584\n\n5,545\nAccrued pension plan liability, net\n15,323\n\n16,471\nOther long-term liabilities\n3,059\n\n2,015\nLong-term debt\n10,657\n\n9,782\nShareholders equity:\n\n \nCommon stock, par value $5.00 1,200,000,000 shares authorized; 1,012,261,159 shares issued\n5,061\n\n5,061\nAdditional paid-in capital\n6,768\n\n6,804\nTreasury stock, at cost\n(52,",
+   "sha256": "178d392d3571ca53f32713263832a738338e7f7d661bb27e075ecf6101c9532d",
+   "score": 0.5298235416412354,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2018",
+    "source": "BOEING_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "Balance Sheet\nCash and cash equivalents at the end of the fourth quarter of fiscal 2022 were $737.9\nmillion.\nMerchandise inventories, net at the end of the fourth quarter of fiscal 2022 totaled $1.6\nbillion compared to $1.5 billion at the end of the fourth quarter of fiscal 2021. The $104.2\nmillion increase was primarily due to the opening of 47 new stores since January 29, 2022,\ninventory to support new brand launches and brand expansions, and inventory cost\nincreases.",
+   "sha256": "c18adc6e64ede35998ae26b45c70dd914b7a1f800d2abeab0ddba0d3b27583a0",
+   "score": -1.313475251197815,
+   "metadata": {
+    "company": "Ulta Beauty",
+    "year": "2023",
+    "source": "ULTABEAUTY_2023Q4_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "Table of Contents \n3M Company and Subsidiaries\nConsolidated Balance Shee t\nAt December 31\n \n \n \nDecember 31,\n \nDecember 31,\n \n(Dollars in millions, except per share amount)\n \n2018\n \n2017\n \nAssets\n \n \n \n \n \nCurrent assets\n \n \n \n \n \nCash and cash equivalents\n \n$\n2,853 \n$\n3,053 \nMarketable securities current\n \n \n380 \n \n1,076 \nAccounts receivable net of allowances of $95 and $103\n \n \n5,020 \n \n4,911 \nInventories\n \n \n \n \n \nFinished goods\n \n \n2,120 \n \n1,915 \nWork in process\n \n \n1,292 \n \n1,218 \nRaw materials and supplies\n \n \n954 \n \n901 \nTotal inventories\n \n \n4,366 \n \n4,034 \nPrepaids\n \n \n741 \n \n937 \nOther current assets\n \n \n349 \n \n266 \nTotal current assets\n \n \n13,709 \n \n14,277 \nProperty, plant and equipment\n \n \n24,873 \n \n24,914 \nLess: Accumulated depreciation\n \n \n(16,",
+   "sha256": "d9499b3ceb64fbb8779571c3804e90b03859df8f7717140b338e727b68e76116",
+   "score": -1.4194326400756836,
+   "metadata": {
+    "company": "3M",
+    "year": "2018",
+    "source": "3M_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "par value $5.00 1,200,000,000 shares authorized; 1,012,261,159 shares issued\n5,061\n\n5,061\nAdditional paid-in capital\n6,768\n\n6,804\nTreasury stock, at cost\n(52,348) \n(43,454)\nRetained earnings\n55,941\n\n49,618\nAccumulated other comprehensive loss\n(15,083) \n(16,373)\nTotal shareholders equity\n339\n\n1,656\nNoncontrolling interests\n71\n\n57\nTotal equity\n410\n\n1,713\nTotal liabilities and equity\n$117,359\n\n$112,362\nSee Notes to the Consolidated Financial Statements on pages 54 113 .\n50",
+   "sha256": "e146ebc2de925f4dd93c866659335a723a265b31160ebdc2a2944ddb145ef8ec",
+   "score": -3.050633430480957,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2018",
+    "source": "BOEING_2018_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "The Boeing Company and Subsidiaries\nConsolidated Statements of Operations\n(Dollars in millions, except per share data)\n \n \n \nYears ended December 31,\n2022\n2021\n2020\nSales of products\n$55,893 \n$51,386 \n$47,142 \nSales of services\n10,715 \n10,900 \n11,016 \nTotal revenues\n66,608 \n62,286 \n58,158 \nCost of products\n(53,969)\n(49,954)\n(54,568)\nCost of services\n(9,109)\n(9,283)\n(9,232)\nBoeing Capital interest expense\n(28)\n(32)\n(43)\nTotal costs and expenses\n(63,106)\n(59,269)\n(63,843)\n3,502 \n3,017 \n(5,685)\n(Loss)/income from operating investments, net\n(16)\n210 \n9 \nGeneral and administrative expense\n(4,187)\n(4,157)\n(4,817)\nResearch and development expense,",
+   "sha256": "42fa856c379724d9e7ca1afafdafe41de8edc01b8d357ee0e317ffd5fae97a1d",
+   "score": -3.2257015705108643,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2022",
+    "source": "BOEING_2022_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "The Boeing Company and Subsidiaries\nConsolidated Statements of Operations\n(Dollars in millions, except per share data)\n \n \n \nYears ended December 31,\n2022\n2021\n2020\nSales of products\n$55,893 \n$51,386 \n$47,142 \nSales of services\n10,715 \n10,900 \n11,016 \nTotal revenues\n66,608 \n62,286 \n58,158 \nCost of products\n(53,969)\n(49,954)\n(54,568)\nCost of services\n(9,109)\n(9,283)\n(9,232)\nBoeing Capital interest expense\n(28)\n(32)\n(43)\nTotal costs and expenses\n(63,106)\n(59,269)\n(63,843)\n3,502 \n3,017 \n(5,685)\n(Loss)/income from operating investments, net\n(16)\n210 \n9 \nGeneral and administrative expense\n(4,187)\n(4,157)\n(4,817)\nResearch and development expense, net\n(2,852)\n(2,249)\n(2,476)\nGain on dispositions, net\n6 \n277 \n202 \nLoss from operations\n(3,547)\n(2,902)\n(12,767)\nOther income, net\n1,058 \n551 \n447 \nInterest and debt expense\n(2,533)\n(2,682)\n(2,156)\nLoss before income taxes\n(5,022)\n(5,033)\n(14,476)\nIncome tax (expense)/benefit\n(31)\n743 \n2,535",
+   "sha256": "49acc1b82ac06888cbf33463dedd560445402dce584bf4fe82f6eab24889ba45",
+   "score": -3.24221134185791,
+   "metadata": {
+    "company": "Boeing",
+    "year": "2022",
+    "source": "BOEING_2022_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "c7d5a608bb1bf8d3f9eaa763b805cdab56dfd0ccf7e284fc2962286eec039d63"
+}

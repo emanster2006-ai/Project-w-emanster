@@ -1,0 +1,121 @@
+{
+ "id": "author_03282_2",
+ "doc_name": "NETFLIX_2017_10K",
+ "source": "author",
+ "question": "What was Netflix's long-term debt at the end of FY2017 (December 31, 2017), in USD millions? Answer using the balance sheet.",
+ "captured_at": "2026-11-26T22:56:32+00:00",
+ "git_rev": "9588c34",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "openai/gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Netflix's long-term debt at the end of FY2017 (December 31, 2017), in USD millions? Answer using the balance sheet.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Netflix's long-term debt at the end of FY2017 (December 31, 2017), in USD millions? Answer using the balance sheet."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\nNETFLIX, INC.\nCONSOLIDATED BALANCE SHEETS\n(in thousands, except share and per share data)\n \n \n \nAs of December 31,\n \n \n2017\n \n2016\nAssets\n \n \nCurrent assets:\n \n \nCash and cash equivalents\n $\n2,822,795 $\n1,467,576\nShort-term investments\n \n \n266,206\nCurrent content assets, net\n \n4,310,934 \n3,726,307\nOther current assets\n \n536,245 \n260,202\nTotal current assets\n \n7,669,974 \n5,720,291\nNon-current content assets, net\n \n10,371,055 \n7,274,501\nProperty and equipment, net\n \n319,404 \n250,395\nOther non-current assets\n \n652,309 \n341,423\nTotal assets\n $\n19,012,742 $\n13,586,610\nLiabilities and Stockholders Equity\n \n \nCurrent liabilities:\n \n \nCurrent content liabilities\n $\n4,173,041 $\n3,632,711\nAccounts payable\n \n359,555 \n312,842\nAccrued expenses\n \n315,094 \n197,632\nDeferred revenue\n \n618,622 \n443,472\nTotal current liabilities\n \n5,466,312 \n4,586,657\nNon-current content liabilities\n \n3,329,796 \n2,894,654\nLong-term debt\n \n6,499,432 \n3,364,311\nOther non-current liabilities\n \n135,246 \n61,188\nTotal liabilities\n \n15,430,786 \n10,906,810\nCommitments and contingencies (Note 5)\n \n \nStockholders equity:\n \n \nPreferred stock, $0.001 par value; 10,000,000 shares authorized at December 31, 2017 and 2016; no shares\nissued and outstanding at December 31, 2017 and 2016\n \n \n\nCommon stock, $0.001 par value; 4,990,000,000 shares authorized at December 31, 2017 and December 31,\n2016, respectively; 433,392,686 and 430,054,212 issued and outstanding at December 31, 2017 and\nDecember 31, 2016, respectively\n \n1,871,396 \n1,599,",
+   "sha256": "22f51bdbcc0d82d3e7c9ec610898865049aed1f386166407db683c0c2908d66e",
+   "score": 6.219350099563599,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "Table of Contents\nNETFLIX, INC.\nCONSOLIDATED BALANCE SHEETS\n(in thousands, except share and per share data)\n \n \n \nAs of December 31,\n \n \n2017\n \n2016\nAssets\n \n \nCurrent assets:\n \n \nCash and cash equivalents\n $\n2,822,795 $\n1,467,576\nShort-term investments\n \n \n266,206\nCurrent content assets, net\n \n4,310,934 \n3,726,307\nOther current assets\n \n536,245 \n260,202\nTotal current assets\n \n7,669,974 \n5,720,291\nNon-current content assets, net\n \n10,371,055 \n7,274,501\nProperty and equipment, net\n \n319,404 \n250,395\nOther non-current assets\n \n652,309 \n341,423\nTotal assets\n $\n19,012,742 $\n13,586,610\nLiabilities and Stockholders Equity\n \n \nCurrent liabilities:\n \n \nCurrent content liabilities\n $\n4,173,041 $\n3,632,711\nAccounts payable\n \n359,555 \n312,842\nAccrued expenses\n \n315,094 \n197,632\nDeferred revenue\n \n618,622 \n443,472\nTotal current liabilities\n \n5,466,312 \n4,586,657\nNon-current content liabilities\n \n3,329,796 \n2,894,654\nLong-term debt\n \n6,499,432 \n3,364,311\nOther non-current liabilities\n \n135,246 \n61,188\nTotal liabilities\n \n15,430,786 \n10,906,810\nCommitments and contingencies (Note 5)\n \n \nStockholders equity:\n \n \nPreferred stock, $0.001 par value; 10,000,000 shares authorized at December 31, 2017 and 2016; no shares\nissued and outstanding at December 31, 2017 and 2016\n \n \n\nCommon stock, $0.001 par value; 4,990,000,000 shares authorized at December 31, 2017 and December 31,\n2016, respectively; 433,392,686 and 430,054,212 issued and outstanding at December 31, 2017 and\nDecember 31, 2016, respectively\n \n1,871,396 \n1,599,762\nAccumulated other comprehensive loss\n \n(20,557) \n(48,565)\nRetained earnings\n \n1,731,117 \n1,128,603\nTotal stockholders equity\n \n3,581,956 \n2,679,800\nTotal liabilities and stockholders equity\n $\n19,012,742 $\n13,586,610\nSee accompanying notes to consolidated financial statements.\n43",
+   "sha256": "b9486efb4e4b207f9fcdb8726863d2ef1c503583e01dc4f47178f5fb32c6a8a5",
+   "score": 6.034868478775024,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\nNETFLIX, INC.\nCONSOLIDATED BALANCE SHEETS\n(in thousands, except share and per share data)\n \n \n \nAs of December 31,\n \n \n2017\n \n2016\nAssets\n \n \nCurrent assets:\n \n \nCash and cash equivalents\n $\n2,822,795 $\n1,467,576\nShort-term investments\n \n \n266,206\nCurrent content assets, net\n \n4,310,934 \n3,726,307\nOther current assets\n \n536,245 \n260,202\nTotal current assets\n \n7,669,974 \n5,720,291\nNon-current content assets, net\n \n10,371,055 \n7,274,501\nProperty and equipment, net\n \n319,404 \n250,395\nOther non-current assets\n \n652,309 \n341,423\nTotal assets\n $\n19,012,742 $\n13,586,610\nLiabilities and Stockholders Equity\n \n \nCurrent liabilities:\n \n \nCurrent content liabilities\n $\n4,173,041 $\n3,632,711\nAccounts payable\n \n359,555 \n312,",
+   "sha256": "65c46328da2e1677847c2ad1a71cc830a4d7efd905a88edd9f300e68b8f04278",
+   "score": 4.846229791641235,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "309 \n341,423\nTotal assets\n $\n19,012,742 $\n13,586,610\nLiabilities and Stockholders Equity\n \n \nCurrent liabilities:\n \n \nCurrent content liabilities\n $\n4,173,041 $\n3,632,711\nAccounts payable\n \n359,555 \n312,842\nAccrued expenses\n \n315,094 \n197,632\nDeferred revenue\n \n618,622 \n443,472\nTotal current liabilities\n \n5,466,312 \n4,586,657\nNon-current content liabilities\n \n3,329,796 \n2,894,654\nLong-term debt\n \n6,499,432 \n3,364,311\nOther non-current liabilities\n \n135,246 \n61,188\nTotal liabilities\n \n15,430,786 \n10,906,810\nCommitments and contingencies (Note 5)\n \n \nStockholders equity:\n \n \nPreferred stock, $0.001 par value; 10,000,000 shares authorized at December 31, 2017 and 2016; no shares\nissued and outstanding at December 31,",
+   "sha256": "0658cd9a3bb41da6821a1173ff0fab8c67395f6fcb2d353e5b329d575f7dd93b",
+   "score": 4.777549743652344,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "2017 and December 31,\n2016, respectively; 433,392,686 and 430,054,212 issued and outstanding at December 31, 2017 and\nDecember 31, 2016, respectively\n \n1,871,396 \n1,599,762\nAccumulated other comprehensive loss\n \n(20,557) \n(48,565)\nRetained earnings\n \n1,731,117 \n1,128,603\nTotal stockholders equity\n \n3,581,956 \n2,679,800\nTotal liabilities and stockholders equity\n $\n19,012,742 $\n13,586,610\nSee accompanying notes to consolidated financial statements.\n43",
+   "sha256": "b2154ddc3a1fc867c27ca57a505ed302d0f4ab586880dd04cc742b6eef9120d3",
+   "score": 4.50838828086853,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "906,810\nCommitments and contingencies (Note 5)\n \n \nStockholders equity:\n \n \nPreferred stock, $0.001 par value; 10,000,000 shares authorized at December 31, 2017 and 2016; no shares\nissued and outstanding at December 31, 2017 and 2016\n \n \n\nCommon stock, $0.001 par value; 4,990,000,000 shares authorized at December 31, 2017 and December 31,\n2016, respectively; 433,392,686 and 430,054,212 issued and outstanding at December 31, 2017 and\nDecember 31, 2016, respectively\n \n1,871,396 \n1,599,",
+   "sha256": "3e3e9b327ad08cd804a9db60f78e7b83d61bb23444f2263c419b16b43008d07d",
+   "score": 2.0042871832847595,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2017",
+    "source": "NETFLIX_2017_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Table of Contents\nNETFLIX, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in thousands, except per share data)\n \n \n \nYear ended December 31,\n \n \n2015\n \n2014\n \n2013\nRevenues\n $\n6,779,511 $\n5,504,656 $\n4,374,562\nCost of revenues\n \n4,591,476 \n3,752,760 \n3,117,203\nMarketing\n \n824,092 \n607,186 \n469,942\nTechnology and development\n \n650,788 \n472,321 \n378,769\nGeneral and administrative\n \n407,329 \n269,741 \n180,301\nOperating income\n \n305,826 \n402,648 \n228,347\nOther income (expense):\n \n \n \nInterest expense\n \n(132,716) \n(50,219) \n(29,142)\nInterest and other income (expense)\n \n(31,225) \n(3,060) \n(3,002)\nLoss on extinguishment of debt\n \n \n \n(25,129)\nIncome before income taxes\n \n141,885 \n349,369 \n171,074\nProvision for income taxes\n \n19,244 \n82,570 \n58,671\nNet income\n $\n122,641 $\n266,799 $\n112,403\nEarnings per share:\n \n \n \nBasic\n $\n0.29 $\n0.63 $\n0.28\nDiluted\n $\n0.28 $\n0.62 $\n0.26\nWeighted-average common shares outstanding:\n \n \n \nBasic\n \n425,889 \n420,544 \n407,385\nDiluted\n \n436,456 \n431,894 \n425,327\nSee accompanying notes to consolidated financial statements.\n38 Table of Contents\nNETFLIX, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(in thousands)\n \n \nYear Ended December 31,\n \n \n2015\n \n2014\n \n2013\nCash flows from operating activities:\n \n \n \nNet income\n $\n122,641 $\n266,799 $\n112,403\nAdjustments to reconcile net income to net cash (used in) provided by operating activities:\n \n \n \nAdditions to streaming content assets\n \n(5,771,652) \n(3,773,019) \n(3,030,701)\nChange in streaming content liabilities\n \n1,162,413 \n593,125 \n673,785\nAmortization of streaming content assets\n \n3,405,382 \n2,656,279 \n2,121,981\nAmortization of DVD content assets\n \n79,380 \n71,491 \n71,325\nDepreciation and amortization of property, equipment and intangibles\n \n62,283 \n54,028 \n48,374\nStock-based compensation expense\n \n124,725 \n115,239 \n73,100\nExcess tax benefits from stock-based compensation\n \n(80,471) \n(89,341) \n(81,663)\nOther non-cash items\n \n31,628 \n15,282 \n5,332\nLoss on extinguishment of debt\n \n \n \n25,129\nDeferred taxes\n \n(58,655) \n(30,063) \n(22,044)\nChanges in operating assets and liabilities:\n \n \n \nOther current assets\n \n18,693 \n(9,198) \n43,177\nAccounts payable\n \n51,615 \n83,812 \n18,374\nAccrued expenses\n \n48,810 \n55,636 \n1,941\nDeferred revenue\n \n72,135 \n58,819 \n46,295\nOther non-current assets and liabilities\n \n(18,366) \n(52,406) \n(8,977)\nNet cash (used in) provided by operating activities\n \n(749,439) \n16,483 \n97,831\nCash flows from investing activities:\n \n \n \nAcquisition of DVD content assets\n \n(77,958) \n(74,790) \n(65,927)\nPurchases of property and equipment\n \n(91,248) \n(69,726) \n(54,143)\nOther assets\n \n(1,912) \n1,334 \n5,939\nPurchases of short-term investments\n \n(371,915) \n(426,934) \n(550,264)\nProceeds from sale of short-term investments\n \n259,079 \n385,300 \n347,502\nProceeds from maturities of short-term investments\n \n104,762 \n141,950 \n60,925\nNet cash used in investing activities\n \n(179,192) \n(42,866) \n(255,968)\nCash flows from financing activities:\n \n \n \nProceeds from issuance of common stock\n \n77,980 \n60,544 \n124,557\nProceeds from issuance of debt\n \n1,500,000 \n400,000 \n500,000\nIssuance costs\n \n(17,629) \n(7,080) \n(9,414)\nRedemption of debt\n \n \n \n(219,362)\nExcess tax benefits from stock-based compensation\n \n80,471 \n89,341 \n81,663\nPrincipal payments of lease financing obligations\n \n(545) \n(1,093) \n(1,180)\nNet cash provided by financing activities\n \n1,640,277 \n541,712 \n476,264\nEffect of exchange rate changes on cash and cash equivalents\n \n(15,924) \n(6,686) \n(3,453)\nNet increase in cash and cash equivalents\n \n695,722 \n508,643 \n314,674\nCash and cash equivalents, beginning of year\n \n1,113,608 \n604,965 \n290,291\nCash and cash equivalents, end of year\n $\n1,809,330 $\n1,113,608 $\n604,965\nSupplemental disclosure:\n \n \n \nIncome taxes paid\n $\n27,658 $\n50,573 $\n7,465\nInterest paid\n \n111,761 \n41,085 \n19,114\nInvesting activities included in liabilities\n \n18,824 \n23,802 \n11,508\nSee accompanying notes to consolidated financial statements.\n40",
+   "sha256": "251ecf2b2c38b0770f86433681f8831f0e585f6a4d05ea888048d5da98aaecba",
+   "score": 0.025594055652618408,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2015",
+    "source": "NETFLIX_2015_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "Table of Contents\nNETFLIX, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(in thousands, except per share data)\n \n \n \nYear ended December 31,\n \n \n2015\n \n2014\n \n2013\nRevenues\n $\n6,779,511 $\n5,504,656 $\n4,374,562\nCost of revenues\n \n4,591,476 \n3,752,760 \n3,117,203\nMarketing\n \n824,092 \n607,186 \n469,942\nTechnology and development\n \n650,788 \n472,321 \n378,769\nGeneral and administrative\n \n407,329 \n269,741 \n180,301\nOperating income\n \n305,826 \n402,648 \n228,347\nOther income (expense):\n \n \n \nInterest expense\n \n(132,716) \n(50,219) \n(29,142)\nInterest and other income (expense)\n \n(31,225) \n(3,060) \n(3,002)\nLoss on extinguishment of debt\n \n \n \n(25,129)\nIncome before income taxes\n \n141,885 \n349,369 \n171,074\nProvision for income taxes\n \n19,244 \n82,570 \n58,671\nNet income\n $\n122,641 $\n266,799 $\n112,403\nEarnings per share:\n \n \n \nBasic\n $\n0.29 $\n0.63 $\n0.28\nDiluted\n $\n0.28 $\n0.62 $\n0.26\nWeighted-average common shares outstanding:\n \n \n \nBasic\n \n425,889 \n420,544 \n407,385\nDiluted\n \n436,456 \n431,894 \n425,327\nSee accompanying notes to consolidated financial statements.\n38 Table of Contents\nNETFLIX, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(in thousands)\n \n \nYear Ended December 31,\n \n \n2015\n \n2014\n \n2013\nCash flows from operating activities:\n \n \n \nNet income\n $\n122,641 $\n266,799 $\n112,403\nAdjustments to reconcile net income to net cash (used in) provided by operating activities:\n \n \n \nAdditions to streaming content assets\n \n(5,771,652) \n(3,773,019) \n(3,030,701)\nChange in streaming content liabilities\n \n1,162,",
+   "sha256": "b94c07e53cb74feb7cb6d1144ea5e41fedd9103a388f660d944b3adc3c0b0405",
+   "score": -0.12279738485813141,
+   "metadata": {
+    "company": "Netflix",
+    "year": "2015",
+    "source": "NETFLIX_2015_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "c2ab8d38fec5a1b1829a4c64077512e249625be34622a8a81a0c290f1b5ac475"
+}

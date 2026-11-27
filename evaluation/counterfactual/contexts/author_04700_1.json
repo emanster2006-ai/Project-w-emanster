@@ -1,0 +1,121 @@
+{
+ "id": "author_04700_1",
+ "doc_name": "MICROSOFT_2016_10K",
+ "source": "author",
+ "question": "What was Microsoft's FY2016 research and development expense, in USD millions? Answer using the income statement.",
+ "captured_at": "2026-11-26T23:47:36+00:00",
+ "git_rev": "125dfb1",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "What was Microsoft's FY2016 research and development expense, in USD millions? Answer using the income statement.",
+ "pii_masked": false,
+ "sub_questions": [
+  "What was Microsoft's FY2016 research and development expense, in USD millions? Answer using the income statement."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "Table of Contents\n \nPART II\nItem 8\n \nITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA\nINCOME STATEMENTS\n \n(In millions, except per share amounts)\n \n \n \n \n \n \n \nYear Ended June 30,\n \n2016 \n2015 \n2014 \nRevenue:\n \n \n \n \n \n \n \nProduct\n \n$ 61,502 \n$ 75,956 \n$ 72,948 \nService and other\n \n \n23,818 \n \n17,624 \n \n13,885 \n \n \nTotal revenue\n \n \n85,320 \n \n93,580 \n \n86,833 \n \n \nCost of revenue:\n \n \n \n \n \n \n \nProduct\n \n \n17,880 \n \n21,410 \n \n16,681 \nService and other\n \n \n14,900 \n \n11,628 \n \n10,397 \n \n \nTotal cost of revenue\n \n \n32,780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,",
+   "sha256": "850b6a0b83bdfe0d8a968428f4cbfaffbd24c356bf4b574f8a930083e5f448ef",
+   "score": 5.048991918563843,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,713 \n \n15,811 \nGeneral and administrative\n \n \n4,563 \n \n4,611 \n \n4,677 \nImpairment, integration, and restructuring\n \n \n1,110 \n \n10,011 \n \n127 \n \n \nOperating income\n \n \n20,182 \n \n18,161 \n \n27,759 \nOther income (expense), net\n \n \n(431) \n \n346 \n \n61 \n \n \nIncome before income taxes\n \n \n19,751 \n \n18,507 \n \n27,820 \nProvision for income taxes\n \n \n2,953 \n \n6,314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.",
+   "sha256": "d93daa12e809e3f13252196a37a83d0a16b4cc34094e30c4d3c9671c453cda2a",
+   "score": 4.888909459114075,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "Table of Contents\n \nPART II\nItem 8\n \nITEM 8. FINANCIAL STATEMENTS AND SUPPLEMENTARY DATA\nINCOME STATEMENTS\n \n(In millions, except per share amounts)\n \n \n \n \n \n \n \nYear Ended June 30,\n \n2016 \n2015 \n2014 \nRevenue:\n \n \n \n \n \n \n \nProduct\n \n$ 61,502 \n$ 75,956 \n$ 72,948 \nService and other\n \n \n23,818 \n \n17,624 \n \n13,885 \n \n \nTotal revenue\n \n \n85,320 \n \n93,580 \n \n86,833 \n \n \nCost of revenue:\n \n \n \n \n \n \n \nProduct\n \n \n17,880 \n \n21,410 \n \n16,681 \nService and other\n \n \n14,900 \n \n11,628 \n \n10,397 \n \n \nTotal cost of revenue\n \n \n32,780 \n \n33,038 \n \n27,078 \n \n \nGross margin\n \n \n52,540 \n \n60,542 \n \n59,755 \nResearch and development\n \n \n11,988 \n \n12,046 \n \n11,381 \nSales and marketing\n \n \n14,697 \n \n15,713 \n \n15,811 \nGeneral and administrative\n \n \n4,563 \n \n4,611 \n \n4,677 \nImpairment, integration, and restructuring\n \n \n1,110 \n \n10,011 \n \n127 \n \n \nOperating income\n \n \n20,182 \n \n18,161 \n \n27,759 \nOther income (expense), net\n \n \n(431) \n \n346 \n \n61 \n \n \nIncome before income taxes\n \n \n19,751 \n \n18,507 \n \n27,820 \nProvision for income taxes\n \n \n2,953 \n \n6,314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.10 \n$\n1.48 \n$\n2.63 \nWeighted average shares outstanding:\n \n \n \n \n \n \n \nBasic\n \n \n7,925 \n \n8,177 \n \n8,299 \nDiluted\n \n \n8,013 \n \n8,254 \n \n8,399 \nCash dividends declared per common share\n \n$\n1.44 \n$\n1.24 \n$\n1.12 \nSee accompanying notes.\n \n52",
+   "sha256": "9c1e9b567ace374488be738486f47a568243a76d7e3efd6b23d5765ae6efac8a",
+   "score": 4.62872052192688,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "1\nResearch and development expense\n 3,829\n15.0\n \n3,703\n \n15.4\n \n3.4\nInterest (income) expense, net\n(23)\n \n (0.1)\n(26)\n \n (0.1)\n \nOther (income) expense, net*\n(60)\n \n (0.2)\n273\n \n1.1\n \n \nRestructuring\n 145\n0.5\n \n85\n \n0.4\n \n \nEarnings before provision for taxes on income\n 6,762\n26.5\n \n5,840\n \n24.3\n \n15.8\nProvision for taxes on income\n 1,618\n6.4\n \n1,026\n \n4.3\n \n57.7\nNet earnings\n5,144\n$ \n20.1\n \n4,814\n$ \n20.0\n \n6.9",
+   "sha256": "81f48157e2cb9032b11ab11c6a0d65d2bab23f6da8a28cda6cb43232f2654d44",
+   "score": -2.101217269897461,
+   "metadata": {
+    "company": "Johnson & Johnson",
+    "year": "2023",
+    "source": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "314 \n \n5,746 \n \n \nNet income\n \n$ 16,798 \n$ 12,193 \n$ 22,074 \n \n \n \n \nEarnings per share:\n \n \n \n \n \n \n \nBasic\n \n$\n2.12 \n$\n1.49 \n$\n2.66 \nDiluted\n \n$\n2.10 \n$\n1.48 \n$\n2.63 \nWeighted average shares outstanding:\n \n \n \n \n \n \n \nBasic\n \n \n7,925 \n \n8,177 \n \n8,299 \nDiluted\n \n \n8,013 \n \n8,254 \n \n8,399 \nCash dividends declared per common share\n \n$\n1.44 \n$\n1.24 \n$\n1.12 \nSee accompanying notes.\n \n52",
+   "sha256": "0d7e551321492f0ee16bcdd530785c38c306db22838b6798fd52ed94badec449",
+   "score": -2.1973180770874023,
+   "metadata": {
+    "company": "Microsoft",
+    "year": "2016",
+    "source": "MICROSOFT_2016_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "Johnson & Johnson and Subsidiaries\n \nCondensed Consolidated Statement of Earnings \n \n(Unaudited; in Millions Except Per Share Figures)\nPercent\nPercent\nPercent\nIncrease\nAmount\nto Sales\nAmount\nto Sales\n(Decrease)\nSales to customers\n25,530\n$ \n 100.0\n24,020\n$ \n 100.0\n6.3\nCost of products sold\n 8,212\n32.2\n \n7,919\n \n33.0\n \n3.7\nGross Profit\n17,318\n \n67.8\n \n16,101\n \n67.0\n \n7.6\nSelling, marketing and administrative expenses\n 6,665\n26.1\n \n6,226\n \n25.9\n \n7.1\nResearch and development expense\n 3,829\n15.0\n \n3,703\n \n15.4\n \n3.4\nInterest (income) expense, net\n(23)\n \n (0.1)\n(26)\n \n (0.1)\n \nOther (income) expense, net*\n(60)\n \n (0.2)\n273\n \n1.1\n \n \nRestructuring\n 145\n0.5\n \n85\n \n0.4\n \n \nEarnings before provision for taxes on income\n 6,762\n26.5\n \n5,840\n \n24.3\n \n15.8\nProvision for taxes on income\n 1,618\n6.4\n \n1,026\n \n4.3\n \n57.7\nNet earnings\n5,144\n$ \n20.1\n \n4,814\n$ \n20.0\n \n6.9",
+   "sha256": "1c681837abd7ea2e96a8e56edd7c6589d94be7c1e0419d4c922d868fde26c481",
+   "score": -2.8951339721679688,
+   "metadata": {
+    "company": "Johnson & Johnson",
+    "year": "2023",
+    "source": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "Johnson & Johnson and Subsidiaries\n \nCondensed Consolidated Statement of Earnings \n \n(Unaudited; in Millions Except Per Share Figures)\nPercent\nPercent\nPercent\nIncrease\nAmount\nto Sales\nAmount\nto Sales\n(Decrease)\nSales to customers\n25,530\n$ \n 100.0\n24,020\n$ \n 100.0\n6.3\nCost of products sold\n 8,212\n32.2\n \n7,919\n \n33.0\n \n3.7\nGross Profit\n17,318\n \n67.8\n \n16,101\n \n67.0\n \n7.6\nSelling, marketing and administrative expenses\n 6,665\n26.1\n \n6,226\n \n25.9\n \n7.1\nResearch and development expense\n 3,829\n15.0\n \n3,703\n \n15.4\n \n3.4\nInterest (income) expense, net\n(23)\n \n (0.1)\n(26)\n \n (0.1)\n \nOther (income) expense,",
+   "sha256": "28cb257e940e0d986d56fa1d7147f2c0f6d1da28bafe7f04c25a5a3b38fa7703",
+   "score": -2.949587345123291,
+   "metadata": {
+    "company": "Johnson & Johnson",
+    "year": "2023",
+    "source": "JOHNSON_JOHNSON_2023Q2_EARNINGS",
+    "filing_type": "Earnings"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "ADOBE INC.\nCONSOLIDATED STATEMENTS OF INCOME\n(In millions, except per share data)\n \nYears Ended\n \nDecember 2,\n2022\nDecember 3,\n2021\nNovember 27,\n2020\nRevenue:\n \nSubscription\n$ \n16,388 $ \n14,573 $ \n11,626 \nProduct\n \n532 \n555 \n507 \nServices and other\n \n686 \n657 \n735 \nTotal revenue\n \n17,606 \n15,785 \n12,868 \n \nCost of revenue:\nSubscription\n \n1,646 \n1,374 \n1,108 \nProduct\n \n35 \n41 \n36 \nServices and other\n \n484 \n450 \n578 \nTotal cost of revenue\n \n2,165 \n1,865 \n1,722 \n \nGross profit\n \n15,441 \n13,920 \n11,146 \n \nOperating expenses:\nResearch and development\n \n2,987 \n2,540 \n2,188 \nSales and marketing\n \n4,968 \n4,321 \n3,591 \nGeneral and administrative\n \n1,219 \n1,085 \n968 \nAmortization of intangibles\n \n169 \n172 \n162 \nTotal operating expenses\n \n9,343 \n8,118 \n6,909 \n \nOperating income\n \n6,098 \n5,802 \n4,237",
+   "sha256": "d13e61f3cc2bce341c132d0c5fdbe2c3b1bc3f6b68f4e81a2a481035ae111032",
+   "score": -2.990767478942871,
+   "metadata": {
+    "company": "Adobe",
+    "year": "2022",
+    "source": "ADOBE_2022_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "8c5260c74a805230dc62f4f2b53945556254978011ec58a26bf70c7d353a8d90"
+}

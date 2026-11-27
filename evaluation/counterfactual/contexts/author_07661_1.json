@@ -1,0 +1,121 @@
+{
+ "id": "author_07661_1",
+ "doc_name": "BLOCK_2020_10K",
+ "source": "author",
+ "question": "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement.",
+ "captured_at": "2026-11-26T23:47:50+00:00",
+ "git_rev": "125dfb1",
+ "options": {
+  "use_decomposition": true,
+  "use_hyde": false,
+  "top_k": 8
+ },
+ "llm_model": "gpt-oss-120b",
+ "llm_reasoning_effort": "medium",
+ "max_tokens": 1000,
+ "collection": "financebench_eval150_ctx",
+ "question_sent": "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement.",
+ "pii_masked": false,
+ "sub_questions": [
+  "How much did Block (formerly Square) record for transaction and loan losses in FY2020, in USD millions? Answer using the cash flow statement."
+ ],
+ "chunks": [
+  {
+   "rank": 0,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In thousands)\nYear Ended December 31,\n2020\n2019\n2018\nCash flows from operating activities:\nNetincome(loss)\n$\n213,105\n$\n375,446\n$\n(38,453)\nAdjustmentstoreconcilenetlosstonetcashprovidedbyoperatingactivities:\nDepreciationandamortization\n84,212\n75,598\n60,961\nNon-cashinterestandother\n76,129\n33,478\n28,512\nLossonextinguishmentoflong-termdebt\n6,651\n\n5,047\nNon-cashleaseexpense\n70,253\n29,696\n\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n\n\n899\nGainonsaleofassetgroup\n\n(373,445)\n\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,",
+   "sha256": "f23933909c15447f84e39f7eadcf0017e98a6b6eca044b122b09c36efee1468c",
+   "score": 4.646140098571777,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 1,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In thousands)\nYear Ended December 31,\n2020\n2019\n2018\nCash flows from operating activities:\nNetincome(loss)\n$\n213,105\n$\n375,446\n$\n(38,453)\nAdjustmentstoreconcilenetlosstonetcashprovidedbyoperatingactivities:\nDepreciationandamortization\n84,212\n75,598\n60,961\nNon-cashinterestandother\n76,129\n33,478\n28,512\nLossonextinguishmentoflong-termdebt\n6,651\n\n5,047\nNon-cashleaseexpense\n70,253\n29,696\n\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n\n\n899\nGainonsaleofassetgroup\n\n(373,445)\n\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,959\n88,077\nChangeindeferredincometaxes\n(8,016)\n(1,376)\n(646)\nChangesinoperatingassetsandliabilities:\nSettlementsreceivable\n(473,871)\n(248,271)\n245,795\nCustomerfunds\n(1,151,536)\n(204,208)\n(131,004)\nPurchaseofloansheldforsale\n(1,837,137)\n(2,266,738)\n(1,609,611)\nSalesandprincipalpaymentsofloansheldforsale\n1,505,406\n2,168,682\n1,579,834\nCustomerspayable\n1,733,138\n523,795\n15,597\nSettlementspayable\n143,528\n41,697\n(60,651)\nCharge-offstoaccruedtransactionlosses\n(73,613)\n(78,325)\n(58,192)\nOtherassetsandliabilities\n(186,819)\n(47,478)\n(27,624)\nNetcashprovidedbyoperatingactivities\n381,603\n465,699\n295,080\nCash flows from investing activities:\nPurchaseofmarketabledebtsecurities\n(1,322,362)\n(992,583)\n(1,000,346)\nProceedsfrommaturitiesofmarketabledebtsecurities\n607,134\n430,888\n197,454\nProceedsfromsaleofmarketabledebtsecurities\n585,427\n548,619\n171,992\nPurchaseofmarketabledebtsecuritiesfromcustomerfunds\n(642,252)\n(311,499)\n(148,096)\nProceedsfrommaturitiesofmarketabledebtsecuritiesfromcustomerfunds\n382,887\n158,055\n\nProceedsfromsaleofmarketabledebtsecuritiesfromcustomerfunds\n51,430\n17,493\n48,334\nPurchaseofpropertyandequipment\n(138,402)\n(62,498)\n(61,203)\nPurchaseofotherinvestments\n(51,277)\n(15,250)\n\nProceedsfromsaleofequityinvestment\n\n33,016\n\nPurchaseofintangibleassets\n\n\n(1,584)\nProceedsfromsaleofassetgroup\n\n309,324\n\nBusinesscombinations,netofcashacquired\n(79,221)\n(20,372)\n(112,399)\nNetcashprovidedby(usedin)investingactivities:\n(606,636)\n95,193\n(905,848)\nCash flows from financing activities:\nProceedsfromissuanceofconvertibleseniornotes,net\n2,116,544\n\n855,663\nPurchaseofconvertibleseniornotehedges\n(338,145)\n\n(172,586)\nProceedsfromissuanceofwarrants\n232,095\n\n112,125\nPrincipalpaymentonconversionofseniornotes\n\n\n(219,384)\nProceedsfromPPPLiquidityFacilityadvances\n464,094\n\n\nProceedsfromtheexerciseofstockoptionsandpurchasesundertheemployeestockpurchaseplan,net\n161,985\n118,514\n133,850\nPaymentsfortaxwithholdingrelatedtovestingofrestrictedstockunits\n(314,019)\n(212,264)\n(189,124)\nOtherfinancingactivities\n(7,359)\n(5,124)\n(4,789)\nNetcashprovidedby(usedin)financingactivities\n2,315,195\n(98,874)\n515,755\nEffectofforeignexchangerateoncashandcashequivalents\n12,995\n3,841\n(7,221)\nNetincrease(decrease)incash,cashequivalentsandrestrictedcash\n2,103,157\n465,859\n(102,234)\nCash,cashequivalentsandrestrictedcash,beginningoftheyear\n1,098,706\n632,847\n735,081\nCash,cashequivalentsandrestrictedcash,endoftheyear\n$\n3,201,863\n$\n1,098,706\n$\n632,847\nSeeaccompanyingnotestoconsolidatedfinancialstatements.\n89",
+   "sha256": "33c0b6d8e011131c2624405b36c809e75b1e50728a346cc8a87573dbb7a5dc10",
+   "score": 4.181462526321411,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 2,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF CASH FLOWS\n(In thousands)\nYear Ended December 31,\n2020\n2019\n2018\nCash flows from operating activities:\nNetincome(loss)\n$\n213,105\n$\n375,446\n$\n(38,453)\nAdjustmentstoreconcilenetlosstonetcashprovidedbyoperatingactivities:\nDepreciationandamortization\n84,212\n75,598\n60,961\nNon-cashinterestandother\n76,129\n33,478\n28,512\nLossonextinguishmentoflong-termdebt\n6,651\n\n5,047\nNon-cashleaseexpense\n70,253\n29,696\n\nShare-basedcompensation\n397,800\n297,863\n216,881\nReplacementstockawardsissuedinconnectionwithacquisition\n\n\n899\nGainonsaleofassetgroup\n\n(373,445)\n\nLoss(gain)onrevaluationofequityinvestment\n(295,297)\n12,326\n(20,342)\nTransactionandloanlosses\n177,670\n126,959\n88,077\nChangeindeferredincometaxes\n(8,016)\n(1,376)\n(646)\nChangesinoperatingassetsandliabilities:\nSettlementsreceivable\n(473,871)\n(248,271)\n245,795\nCustomerfunds\n(1,151,536)\n(204,208)\n(131,004)\nPurchaseofloansheldforsale\n(1,837,137)\n(2,266,738)\n(1,609,611)\nSalesandprincipalpaymentsofloansheldforsale\n1,505,406\n2,168,682\n1,579,834\nCustomerspayable\n1,733,138\n523,795\n15,597\nSettlementspayable\n143,528\n41,697\n(60,651)\nCharge-offstoaccruedtransactionlosses\n(73,613)\n(78,325)\n(58,192)\nOtherassetsandliabilities\n(186,819)\n(47,478)\n(27,624)\nNetcashprovidedbyoperatingactivities\n381,603\n465,699\n295,",
+   "sha256": "8a6482c17efa51fde0755b9dd8f75c75101f65d29be51a13d90602b3a1bf672b",
+   "score": 4.181462526321411,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 3,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In thousands, except per share data)\nYear Ended December 31,\n2020\n2019\n2018\nRevenue:\nTransaction-basedrevenue\n$\n3,294,978\n$\n3,081,074\n$\n2,471,451\nSubscriptionandservices-basedrevenue\n1,539,403\n1,031,456\n591,706\nHardwarerevenue\n91,654\n84,505\n68,503\nBitcoinrevenue\n4,571,543\n516,465\n166,517\nTotalnetrevenue\n9,497,578\n4,713,500\n3,298,177\nCostofrevenue:\nTransaction-basedcosts\n1,911,848\n1,937,971\n1,558,562\nSubscriptionandservices-basedcosts\n222,712\n234,270\n169,884\nHardwarecosts\n143,901\n136,385\n94,114\nBitcoincosts\n4,474,534\n508,239\n164,827\nAmortizationofacquiredtechnology\n11,174\n6,950\n7,090\nTotalcostofrevenue\n6,764,169\n2,823,815\n1,994,477\nGrossprofit\n2,733,409\n1,889,685\n1,303,700\nOperatingexpenses:\nProductdevelopment\n881,826\n670,606\n497,479\nSalesandmarketing\n1,109,670\n624,832\n411,151\nGeneralandadministrative\n579,203\n436,250\n339,245\nTransactionandloanlosses\n177,670\n126,959\n88,077\nAmortizationofacquiredcustomerassets\n3,855\n4,481\n4,362\nTotaloperatingexpenses\n2,752,224\n1,863,128\n1,340,314\nOperatingincome(loss)\n(18,815)\n26,557\n(36,614)\nGainonsaleofassetgroup\n\n(373,445)\n\nInterestexpense,net\n56,943\n21,516\n17,982\nOtherexpense(income),net\n(291,725)\n273\n(18,",
+   "sha256": "f7b90f6c80b5243a31e97c5ffaededb9c03c0c900746d9b336d27cbd137ada9e",
+   "score": 2.37581866979599,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 4,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In thousands, except per share data)\nYear Ended December 31,\n2020\n2019\n2018\nRevenue:\nTransaction-basedrevenue\n$\n3,294,978\n$\n3,081,074\n$\n2,471,451\nSubscriptionandservices-basedrevenue\n1,539,403\n1,031,456\n591,706\nHardwarerevenue\n91,654\n84,505\n68,503\nBitcoinrevenue\n4,571,543\n516,465\n166,517\nTotalnetrevenue\n9,497,578\n4,713,500\n3,298,177\nCostofrevenue:\nTransaction-basedcosts\n1,911,848\n1,937,971\n1,558,562\nSubscriptionandservices-basedcosts\n222,712\n234,270\n169,884\nHardwarecosts\n143,901\n136,385\n94,114\nBitcoincosts\n4,474,534\n508,239\n164,827\nAmortizationofacquiredtechnology\n11,174\n6,950\n7,090\nTotalcostofrevenue\n6,764,169\n2,823,815\n1,994,477\nGrossprofit\n2,733,409\n1,889,685\n1,303,700\nOperatingexpenses:\nProductdevelopment\n881,826\n670,606\n497,479\nSalesandmarketing\n1,109,670\n624,832\n411,151\nGeneralandadministrative\n579,203\n436,250\n339,245\nTransactionandloanlosses\n177,670\n126,959\n88,077\nAmortizationofacquiredcustomerassets\n3,855\n4,481\n4,362\nTotaloperatingexpenses\n2,752,224\n1,863,128\n1,340,314\nOperatingincome(loss)\n(18,815)\n26,557\n(36,614)\nGainonsaleofassetgroup\n\n(373,445)\n\nInterestexpense,net\n56,943\n21,516\n17,982\nOtherexpense(income),net\n(291,725)\n273\n(18,469)\nIncome(loss)beforeincometax\n215,967\n378,213\n(36,127)\nProvisionforincometaxes\n2,862\n2,767\n2,326\nNetincome(loss)\n$\n213,105\n$\n375,446\n$\n(38,453)\nNetincome(loss)pershare:\nBasic\n$\n0.48\n$\n0.88\n$\n(0.09)\nDiluted\n$\n0.44\n$\n0.81\n$\n(0.09)\nWeighted-averagesharesusedtocomputenetincome(loss)pershare:\nBasic\n443,126\n424,999\n405,731\nDiluted\n482,167\n466,076\n405,731\nSeeaccompanyingnotestoconsolidatedfinancialstatements.\n85",
+   "sha256": "06e8d2eef600a6ee2279319337df517715f3f863c4abd93ca55c2d0bf6db877d",
+   "score": 2.37581866979599,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 5,
+   "text": "SQUARE, INC.\nCONSOLIDATED STATEMENTS OF OPERATIONS\n(In thousands, except per share data)\nYear Ended December 31,\n2020\n2019\n2018\nRevenue:\nTransaction-basedrevenue\n$\n3,294,978\n$\n3,081,074\n$\n2,471,451\nSubscriptionandservices-basedrevenue\n1,539,403\n1,031,456\n591,706\nHardwarerevenue\n91,654\n84,505\n68,503\nBitcoinrevenue\n4,571,543\n516,465\n166,517\nTotalnetrevenue\n9,497,578\n4,713,500\n3,298,177\nCostofrevenue:\nTransaction-basedcosts\n1,911,848\n1,937,971\n1,558,562\nSubscriptionandservices-basedcosts\n222,712\n234,270\n169,884\nHardwarecosts\n143,901\n136,385\n94,114\nBitcoincosts\n4,474,534\n508,239\n164,",
+   "sha256": "390a4e9dd3ee045c96124167db0894a2b3a2d986058cfc3f19350b3558999302",
+   "score": 1.808868646621704,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 6,
+   "text": "cashequivalentsandrestrictedcash\n2,103,157\n465,859\n(102,234)\nCash,cashequivalentsandrestrictedcash,beginningoftheyear\n1,098,706\n632,847\n735,081\nCash,cashequivalentsandrestrictedcash,endoftheyear\n$\n3,201,863\n$\n1,098,706\n$\n632,847\nSeeaccompanyingnotestoconsolidatedfinancialstatements.\n89",
+   "sha256": "44e93f5932b1ab4a73526f59e80e9a891a544b53fdb325dddb6e4123ff5c7e8a",
+   "score": -2.2675766944885254,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  },
+  {
+   "rank": 7,
+   "text": "887\n158,055\n\nProceedsfromsaleofmarketabledebtsecuritiesfromcustomerfunds\n51,430\n17,493\n48,334\nPurchaseofpropertyandequipment\n(138,402)\n(62,498)\n(61,203)\nPurchaseofotherinvestments\n(51,277)\n(15,250)\n\nProceedsfromsaleofequityinvestment\n\n33,016\n\nPurchaseofintangibleassets",
+   "sha256": "ded0bc24bdc9f7c5755ed2fb76c442dc663f566e9c21ca133254f0f7afaddb85",
+   "score": -3.1790213584899902,
+   "metadata": {
+    "company": "Block",
+    "year": "2020",
+    "source": "BLOCK_2020_10K",
+    "filing_type": "10k"
+   }
+  }
+ ],
+ "messages_sha256": "2944501bd236ef22f9c90f822159f90aa85f3801daf102897832061c1d50f30c"
+}

@@ -1,6 +1,6 @@
 # Benchmark status and protocol
 
-Measured results: retrieval (2026-11-20) and end-to-end answer accuracy on all 150 FinanceBench questions (2026-11-27), both below. Each states its sample, setup and limits. The comparative A/B protocol further down has not been run with live providers.
+Measured results: retrieval (2026-11-20, below), end-to-end answer accuracy on all 150 FinanceBench questions (2026-11-27, below), and a counterfactual grounding benchmark ([COUNTERFACTUAL.md](COUNTERFACTUAL.md)). Each states its sample, setup and limits. The comparative A/B protocol further down has not been run with live providers.
 
 Before measuring: validate ingestion and golden-dataset generation against the pinned dependencies; freeze a held-out FinanceBench question set and preserve source document IDs. Ingest only the corresponding evidence, never the expected answers as retrieval documents. Keep synthetic training or tuning questions separate from the held-out set.
 
@@ -104,7 +104,7 @@ On a 38-question subset with the header in place, question-only retrieval, HyDE-
 
 **Hand review.** Every answer the judge labelled incorrect or refused (35) was checked against the reference by hand; 5 were changed to correct, all format or definition differences rather than different facts (for example -1.53% for a reference of -0.02 when rounding to two decimals, and $389 million for a reference of $0.40 billion). Two of those five are yes/no working-capital questions answered correctly with a broader working-capital definition than the reference's. 33 judge labels of correct were also spot-checked, with no false positives. Each review keeps the judge's original label next to the hand label (`reviews.jsonl`).
 
-**What this does and does not show.** The corpus is FinanceBench's evidence excerpts, so this is accuracy when the relevant filing pages are in the index, not over complete filings. The judge is a proxy; the hand review covers every non-correct label but only a sample of correct ones. Most misses are refusals (17), several where the needed figure was retrieved but not used. Latency in the artifacts includes provider rate-limit waits and is not user-facing latency. An earlier partial run on Groq stopped at the free tier's daily limit and is not reported; all 150 answers here come from one provider.
+**What this does and does not show.** The corpus is FinanceBench's evidence excerpts, so this is accuracy when the relevant filing pages are in the index, not over complete filings. The judge is a proxy; the hand review covers every non-correct label but only a sample of correct ones. Most misses are refusals (17), several where the needed figure was retrieved but not used; the counterfactual benchmark shows the opposite failure, answering when the evidence is missing. Latency in the artifacts includes provider rate-limit waits and is not user-facing latency. An earlier partial run on Groq stopped at the free tier's daily limit and is not reported; all 150 answers here come from one provider.
 
 ## Run and preserve the comparison
 
