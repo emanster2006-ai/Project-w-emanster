@@ -168,6 +168,12 @@ function CaseView({ c }: { c: ReplayCase }) {
   );
 }
 
+function caseTag(c: ReplayCase): string {
+  if (casePasses(c, "baseline")) return "";
+  if (systemsIn(c).includes("candidate") && casePasses(c, "candidate")) return " · fixed by the new rule";
+  return " · still fails";
+}
+
 export default function ReplayViewer({ data }: { data: ReplayData }) {
   const [index, setIndex] = useState(0);
   const c = data.cases[index];
@@ -187,7 +193,7 @@ export default function ReplayViewer({ data }: { data: ReplayData }) {
             }}
           >
             {item.metric}
-            {casePasses(item, "baseline") ? "" : " · failed a check"}
+            {caseTag(item)}
           </button>
         ))}
       </nav>
