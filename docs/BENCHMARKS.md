@@ -1,6 +1,6 @@
 # Benchmark status and protocol
 
-No comparative results have been published. Do not use accuracy-improvement percentages in a resume until the run artifacts support them.
+Measured results: retrieval (2026-11-20) and end-to-end answer accuracy on all 150 FinanceBench questions (2026-11-27), both below. Each states its sample, setup and limits. The comparative A/B protocol further down has not been run with live providers.
 
 Before measuring: validate ingestion and golden-dataset generation against the pinned dependencies; freeze a held-out FinanceBench question set and preserve source document IDs. Ingest only the corresponding evidence, never the expected answers as retrieval documents. Keep synthetic training or tuning questions separate from the held-out set.
 
@@ -87,6 +87,25 @@ On a 38-question subset with the header in place, question-only retrieval, HyDE-
 
 **Re-ingest after upgrading.** Vectors in collections built before this change were embedded without the header. Build a fresh collection (see below) to get the full benefit; do not mix old and new points in one collection.
 
+## End-to-end answer accuracy (2026-11-27)
+
+`scripts/answer_accuracy.py` asks every FinanceBench question through the running API with the web UI's options (decomposition on, HyDE off, top 8), with the semantic cache disabled, and has a judge from a different model family label each answer against the FinanceBench reference as correct, incorrect or refused (the paper's three labels).
+
+| | Result |
+| --- | --- |
+| **Correct, after hand review** | **120/150 = 80.0%** (95% Wilson interval 72.9-85.6%) |
+| Incorrect / refused | 13 / 17 |
+| Judge labels before hand review | 115/150 = 76.7% |
+| When a chunk of the evidence passage was retrieved | 118/143 (82.5%) |
+| When it was not | 2/7 |
+| By question type | metrics-generated 45/50, domain-relevant 38/50, novel-generated 37/50 |
+
+**Setup.** `gpt-oss-120b` (medium reasoning) served by Cerebras; judge `qwen/qwen3.8-27b` on Groq with reasoning off and temperature 0; collection `financebench_eval150_ctx`; code at commit `b23eba6`. No answer came from the cache and no request errored (one 500 was retried). Artifacts: [evaluation/results/answer-accuracy-2026-11-26](../evaluation/results/answer-accuracy-2026-11-26) (answers, judge grades with reasons, hand reviews, run metadata, summary).
+
+**Hand review.** Every answer the judge labelled incorrect or refused (35) was checked against the reference by hand; 5 were changed to correct, all format or definition differences rather than different facts (for example -1.53% for a reference of -0.02 when rounding to two decimals, and $389 million for a reference of $0.40 billion). Two of those five are yes/no working-capital questions answered correctly with a broader working-capital definition than the reference's. 33 judge labels of correct were also spot-checked, with no false positives. Each review keeps the judge's original label next to the hand label (`reviews.jsonl`).
+
+**What this does and does not show.** The corpus is FinanceBench's evidence excerpts, so this is accuracy when the relevant filing pages are in the index, not over complete filings. The judge is a proxy; the hand review covers every non-correct label but only a sample of correct ones. Most misses are refusals (17), several where the needed figure was retrieved but not used. Latency in the artifacts includes provider rate-limit waits and is not user-facing latency. An earlier partial run on Groq stopped at the free tier's daily limit and is not reported; all 150 answers here come from one provider.
+
 ## Run and preserve the comparison
 
 From the repo root, after installing `requirements.txt`, configure provider keys privately and set `LLM_MODEL` to a model currently available from that provider. The historical example model may have been retired. Groq generation requires both `GROQ_API_KEY` and `OPENAI_API_KEY` (the latter for the judge); OpenAI generation uses `OPENAI_API_KEY`. `JUDGE_MODEL` defaults to `gpt-4o-mini`.
@@ -115,4 +134,4 @@ Intervals are per configuration, not paired improvement intervals or proof of st
 
 ## Current evidence
 
-The artifact runner is tested locally with controlled evaluators, including failure preservation, invalid scores, duplicate questions, seeded sampling, and overwrite refusal. These tests are not a FinanceBench result. No live provider comparison was run in the portfolio enhancement session: provider keys were not configured in that environment. Accuracy, end-user latency, cost, and relative improvement remain unmeasured.
+The artifact runner is tested locally with controlled evaluators, including failure preservation, invalid scores, duplicate questions, seeded sampling, and overwrite refusal. These tests are not a FinanceBench result. The five-configuration A/B comparison has not been run with live providers; end-to-end accuracy for the shipped configuration is reported above, and end-user latency remains unmeasured.
