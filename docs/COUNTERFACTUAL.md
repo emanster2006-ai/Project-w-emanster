@@ -171,6 +171,62 @@ losses") shares the question's words. It was developed against these 216 answers
 is not a held-out estimate. The API now logs its warning next to the digit check's; neither
 changes the answer.
 
+**It is a review signal, not a gate.** Refusing every flagged answer would be safe only if
+the check also left correct answers to ordinary questions alone. It does not. Rebuilding
+the exact retrieved context for each of the 150 recorded accuracy answers (HyDE is off, so
+retrieval from the recorded sub-questions is local and deterministic; all 150 rebuilt
+contexts matched the recorded sources), the check flags **65 of 120 correct answers** and
+9 of 13 incorrect ones ([scripts/row_gate_eval.py](../scripts/row_gate_eval.py)). Most
+FinanceBench questions ask for ratios, derived figures or yes/no judgments whose figures
+are computed rather than read from one row, which is outside what the check models.
+It is no better on any question type: correct answers flagged were 27/45 on FinanceBench's
+metrics questions, 17/38 on domain questions and 21/37 on novel ones. The check stays a
+logged warning for review.
+
+## Does the rule cost accuracy on ordinary questions?
+
+The rule was chosen to stop substitution on lookup questions. The accuracy benchmark
+([BENCHMARKS.md](BENCHMARKS.md)) asks many other kinds: calculations with a given formula,
+and questions such as "if gross margin is not a useful metric for this company, say why".
+Rerunning those questions with the rule switched on (`LLM_SYSTEM_TEMPLATE=rag_system_candidate.j2`)
+and pairing them with the 80% baseline run, question by question
+(`answer_accuracy.py --compare`), using the same judge and the same hand reviews:
+
+Answers, grades, hand reviews and the paired comparison are in
+[evaluation/results/answer-accuracy-rule-2026-11-27](../evaluation/results/answer-accuracy-rule-2026-11-27/).
+Every changed verdict was checked by hand, and so was every answer the judge called
+incorrect where the rule's answer differs from the baseline's.
+
+| All 150 questions | Baseline prompt | With the rule |
+| --- | --- | --- |
+| Correct | **120 (80.0%)** | **113 (75.3%)** |
+| Incorrect | 13 | 14 |
+| Refused ("Insufficient context") | 17 | 23 |
+
+Paired, the rule lost 11 correct answers and gained 4 (exact McNemar p = 0.12, so not
+statistically established at this size). Eight of the 11 losses follow from the rule's
+wording:
+
+- seven new refusals of questions the baseline answered correctly: two calculations whose
+  formula the question gives (General Mills cash conversion cycle and retention ratio),
+  although the rule exempts calculations; one estimate from a reported figure (JPMorgan's
+  liquidation value per share from tangible book value per share); one plain lookup
+  (whether Pfizer's PP&E grew); and three judgment questions, such as whether gross margin
+  is a useful metric for American Express (also Amcor's restructuring liability and
+  Boeing's gross margin);
+- one answer of "0" for PepsiCo's restructuring costs, because the filing's row is labelled
+  "restructuring and impairment charges", not the exact line item the question names.
+
+The other 3 losses and the 4 gains are answers that changed in ways the rule's wording does
+not touch (for example inventory turnover computed from sales instead of cost of sales).
+Run-to-run variation was not measured, so these may be noise.
+
+So the rule trades one failure for another: on the counterfactual benchmark it fixed 2 of 5
+failing held-out cases; here it costs about 5% of ordinary questions (8 of 150). It is
+therefore **not the default prompt**. `rag_system_candidate.j2` stays selectable for
+evaluation, and narrowing the rule to single-figure lookups is the next thing to test on
+both benchmarks.
+
 ## Limits
 
 - 27 cases (15 reserved) over 9 filings. Results describe this set; at this size the

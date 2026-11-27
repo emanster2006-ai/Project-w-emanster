@@ -1,0 +1,47 @@
+{
+ "graded": 150,
+ "of": 150,
+ "answer_errors": 0,
+ "correct": 113,
+ "incorrect": 14,
+ "refused": 23,
+ "accuracy": 0.7533333333333333,
+ "accuracy_ci95": [
+  0.6785952428848271,
+  0.8154193799480086
+ ],
+ "hand_reviewed": 3,
+ "label_changed_on_review": 3,
+ "by_question_type": {
+  "domain-relevant": {
+   "incorrect": 7,
+   "refused": 8,
+   "correct": 35
+  },
+  "metrics-generated": {
+   "refused": 5,
+   "correct": 44,
+   "incorrect": 1
+  },
+  "novel-generated": {
+   "correct": 34,
+   "refused": 10,
+   "incorrect": 6
+  }
+ },
+ "by_retrieval": {
+  "evidence missed": {
+   "refused": 7,
+   "correct": 2
+  },
+  "evidence retrieved": {
+   "refused": 16,
+   "incorrect": 14,
+   "correct": 111
+  }
+ },
+ "figure_check_agrees_with_label": [
+  74,
+  85
+ ]
+}

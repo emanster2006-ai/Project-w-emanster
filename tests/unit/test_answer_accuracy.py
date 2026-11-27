@@ -138,3 +138,33 @@ def test_hand_reviews_file_overrides_the_judge_but_keeps_its_label(tmp_path):
     assert merged["label"] == "incorrect" and merged["review_label"] == "correct"
     s = aa.summarize(tmp_path, questions)
     assert s["correct"] == 1 and s["label_changed_on_review"] == 1
+
+
+def test_mcnemar_exact_matches_known_values():
+    assert aa.mcnemar_exact(0, 0) == 1.0
+    assert aa.mcnemar_exact(0, 5) == pytest.approx(0.0625)
+    assert aa.mcnemar_exact(3, 3) == 1.0
+
+
+def test_compare_pairs_runs_and_lists_changed_verdicts(tmp_path):
+    questions = [{"id": f"q{i}"} for i in range(3)]
+    for name, labels in (
+        ("base", ["correct", "refused", "correct"]),
+        ("new", ["correct", "correct", "incorrect"]),
+    ):
+        run = tmp_path / name
+        run.mkdir()
+        _write(
+            run / "answers.jsonl", [{"id": f"q{i}", "error": None} for i in range(3)]
+        )
+        _write(
+            run / "grades.jsonl",
+            [{"id": f"q{i}", "label": lab} for i, lab in enumerate(labels)],
+        )
+    c = aa.compare(tmp_path / "base", tmp_path / "new", questions)
+    assert (c["base_correct"], c["new_correct"], c["both_correct"]) == (2, 2, 1)
+    assert c["new_only"] == ["q1"] and c["base_only"] == ["q2"]
+    assert c["changed"] == [
+        ("q1", "refused", "correct"),
+        ("q2", "correct", "incorrect"),
+    ]

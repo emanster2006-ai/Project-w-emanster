@@ -11,6 +11,7 @@ import logging
 from dataclasses import dataclass
 
 from generation.reasoning import reasoning_options
+from generation.templates import default_system_template
 from security.grounding import ungrounded_numbers
 from security.row_grounding import check_answer as check_row_grounding
 
@@ -47,14 +48,16 @@ class Usage:
 
 
 def render_messages(
-    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+    question: str, context_chunks: list[dict], system_template: str | None = None
 ) -> list[dict]:
     """The exact chat messages the generator sends for this question and context."""
     context_text = "\n\n---\n\n".join(
         f"[Source: {c['metadata'].get('company', 'Unknown')} {c['metadata'].get('year', '')}]\n{c['text']}"
         for c in context_chunks
     )
-    system_prompt = _jinja_env.get_template(system_template).render()
+    system_prompt = _jinja_env.get_template(
+        system_template or default_system_template()
+    ).render()
     user_prompt = _jinja_env.get_template("rag_user.j2").render(
         question=question,
         context=context_text,
@@ -66,7 +69,7 @@ def render_messages(
 
 
 async def generate_response(
-    question: str, context_chunks: list[dict], system_template: str = "rag_system.j2"
+    question: str, context_chunks: list[dict], system_template: str | None = None
 ):
     """
     Generate a validated FinancialRAGResponse from retrieved chunks.
