@@ -1,0 +1,18 @@
+{
+ "started": "2026-11-27T00:07:49+00:00",
+ "git_rev": "b23eba6",
+ "dataset": "PatronusAI/financebench (train, 150 questions)",
+ "api_options": {
+  "use_hyde": false,
+  "use_decomposition": true,
+  "top_k": 8
+ },
+ "llm_model": "gpt-oss-120b",
+ "llm_provider": "openai",
+ "llm_base_url": "https://api.cerebras.ai/v1",
+ "llm_reasoning_effort": "medium",
+ "collection": "financebench_eval150_ctx",
+ "top_k_retrieve": "20",
+ "judge_model": "qwen/qwen3.8-27b",
+ "judge_prompt": "You grade answers to questions about company financial filings.\nCompare the CANDIDATE answer with the REFERENCE answer and give one label:\n\n- \"correct\": the candidate's final answer agrees with the reference. Allow rounding\n  (about 1%), different units or scale ($1,577 million = $1.58 billion, 0.25 = 25%),\n  extra explanation, and a missing minor detail. For yes/no and qualitative questions\n  the main conclusion must match the reference.\n- \"incorrect\": a different figure, a wrong conclusion, a contradiction of the\n  reference, or several conflicting answers.\n- \"refused\": the candidate gives no final answer, for example \"Insufficient context\".\n\nJudge only agreement with the reference; do not use your own knowledge of the company.\nReply with JSON only: {\"label\": \"correct\" | \"incorrect\" | \"refused\", \"reason\": \"<one sentence>\"}"
+}

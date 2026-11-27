@@ -1,0 +1,37 @@
+{"id": "financebench_id_10420", "review_label": "correct", "review_note": "-1.53% is -0.0153, which rounds to the reference's -0.02 at two decimals; same figure in a different format."}
+{"id": "financebench_id_05718", "review_label": "correct", "review_note": "The answer gives the reported $389 million ($0.389 billion); the reference rounds the same figure to $0.40 billion."}
+{"id": "financebench_id_01936", "review_label": "correct", "review_note": "The answer's breakdown gives employee costs of $81 million of a $93 million liability, which is the reference's 87%."}
+{"id": "financebench_id_00540", "review_label": "incorrect", "review_note": "Kept: 12.1x uses average inventory; the reference's 9.5x uses year-end inventory. Defensible method, but it does not match the reference."}
+{"id": "financebench_id_00684", "review_label": "correct", "review_note": "Kept: right conclusion (declining) with a 0.9-point drop vs the reference's 0.8; the figure check missed it on formatting."}
+{"id": "financebench_id_01275", "review_label": "correct", "review_note": "Kept: $1,824 million matches the reference's $1.8 bn; the figure check missed it on formatting."}
+{"id": "financebench_id_03029", "review_label": "refused", "review_note": "Kept: the FY2018 capex row was not retrieved (the only 1,577 in context is 2022 inventory), so refusing is right."}
+{"id": "financebench_id_04672", "review_label": "refused", "review_note": "Kept: FY2018 net PP&E is not in the retrieved context."}
+{"id": "financebench_id_00499", "review_label": "incorrect", "review_note": "Kept: concludes 3M is capital-intensive; the reference concludes it is not."}
+{"id": "financebench_id_01226", "review_label": "incorrect", "review_note": "Kept: misses the gross-margin decline and the specific one-off charges; describes the divestiture gain as a loss."}
+{"id": "financebench_id_00807", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_01935", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_00799", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_01079", "review_label": "incorrect", "review_note": "Kept: assigns the Czech Republic acquisition to the wrong fiscal year."}
+{"id": "financebench_id_01930", "review_label": "incorrect", "review_note": "Kept: states about 1% growth; the reference says flat."}
+{"id": "financebench_id_00222", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_00723", "review_label": "refused", "review_note": "Kept: evidence not retrieved; no answer given."}
+{"id": "financebench_id_00685", "review_label": "incorrect", "review_note": "Kept: compares FY2017 with FY2023 instead of year-to-year changes and reaches the opposite conclusion."}
+{"id": "financebench_id_00288", "review_label": "refused", "review_note": "Kept: evidence not retrieved; no answer given."}
+{"id": "financebench_id_00460", "review_label": "incorrect", "review_note": "Kept: 930 to 907 stores (apparently a segment count) instead of the reference's 982 to 969 total."}
+{"id": "financebench_id_00585", "review_label": "refused", "review_note": "Kept: no answer given although the evidence was retrieved."}
+{"id": "financebench_id_00005", "review_label": "correct", "review_note": "The question is yes/no; the answer says yes like the reference. Its $2,278M uses total current assets and liabilities; the reference's $831M uses operating items only, a definition the question does not ask for."}
+{"id": "financebench_id_00839", "review_label": "incorrect", "review_note": "Kept: concludes Ulta is not a similar company; the reference concludes it is (large retailer, stores plus online)."}
+{"id": "financebench_id_00669", "review_label": "refused", "review_note": "Kept: evidence not retrieved; no answer given."}
+{"id": "financebench_id_00651", "review_label": "incorrect", "review_note": "Kept: claims 12.5% growth by mixing reported guidance with adjusted 2022 EPS; the reference shows a slight deceleration."}
+{"id": "financebench_id_00206", "review_label": "refused", "review_note": "Kept: no answer; the reference expects the explanation that gross margin is not relevant for a bank."}
+{"id": "financebench_id_03849", "review_label": "incorrect", "review_note": "Kept: the three-year average is about 7.87%, which rounds to the reference's 7.9%; the answer's 7.8% is a rounding error."}
+{"id": "financebench_id_01911", "review_label": "incorrect", "review_note": "Kept: uses Adjusted EBITDAR instead of Adjusted EBIT, which is negative."}
+{"id": "financebench_id_00080", "review_label": "correct", "review_note": "The question is yes/no; the answer says yes like the reference. Its $12.4B uses total current assets and liabilities; the reference's $1.6B excludes customer funds, a definition the question does not ask for (same treatment as Corning)."}
+{"id": "financebench_id_00702", "review_label": "incorrect", "review_note": "Kept: says there was no such event; the reference identifies the Consumer Healthcare JV gain."}
+{"id": "financebench_id_00283", "review_label": "incorrect", "review_note": "Kept: estimates $70 million; the reference is $77.78 million."}
+{"id": "financebench_id_00521", "review_label": "refused", "review_note": "Kept: refuses where the reference answer is that there were no acquisitions."}
+{"id": "financebench_id_00603", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_00605", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_00606", "review_label": "refused", "review_note": "Kept: no answer given."}
+{"id": "financebench_id_04784", "review_label": "refused", "review_note": "Kept: evidence not retrieved; no answer given."}
+{"id": "financebench_id_03856", "review_label": "refused", "review_note": "Kept: no answer given although the evidence was retrieved."}
